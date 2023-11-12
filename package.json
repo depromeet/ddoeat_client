@@ -9,15 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.8.2",
+    "axios": "^1.6.1",
     "next": "14.0.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "storybook": "^7.5.3"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "chromatic": "^9.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
     "postcss": "^8",
