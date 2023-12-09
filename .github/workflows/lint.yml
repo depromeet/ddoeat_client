@@ -24,7 +24,16 @@ jobs:
         with:
           node-version: "16"
 
+      - name: Check for Cached Dependencies
+        id: cache-check
+        run: |
+          if [ -d .yarn/cache ]; then
+            echo "Cache found!"
+            echo "cache-hit=true" >> $GITHUB_ENV
+          fi
+
       - name: Install Dependencies
+        if: steps.cache-check.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Run Lint
