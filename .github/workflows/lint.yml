@@ -11,6 +11,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ./yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
