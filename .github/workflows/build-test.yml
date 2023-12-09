@@ -11,30 +11,36 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Cache Dependencies
+      - name: Cache .yarn/cache Directory
         uses: actions/cache@v2
         with:
           path: .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "16"
 
-      - name: Check for Cached Dependencies
-        id: cache-check
+      - name: Check for Cached .yarn/cache
+        id: yarn-cache-check
         run: |
           if [ -d .yarn/cache ]; then
-            echo "Cache found!"
-            echo "cache-hit=true" >> $GITHUB_ENV
+            echo "Yarn Cache found!"
+            echo "yarn-cache-hit=true" >> $GITHUB_ENV
           fi
 
       - name: Install Dependencies
-        if: steps.cache-check.outputs.cache-hit != 'true'
-        run: yarn install
+        run: |
+          if [ ${{ env.yarn-cache-hit }} != 'true' ]; then
+            echo "Installing all dependencies..."
+            yarn install
+          else
+            echo "Restoring .yarn/cache from cache..."
+            # .yarn/cache 종속성들은 캐싱
+            # .yarn/unplugged 의존성은 항상 설치
+            yarn install --check-files
+          fi
 
       - name: Run Build
         run: yarn build
