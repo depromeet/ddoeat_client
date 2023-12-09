@@ -9,18 +9,18 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache .yarn/cache Directory
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: Check for Cached .yarn/cache
         id: yarn-cache-check
