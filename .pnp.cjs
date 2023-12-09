@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:e6615eb9ed9827de032bd77176c0331336982ebfba7a1cd02b2afec1c18e9cd5667128ad514b3c700a59d74ee501c0b618894c2560830fab67e91c13263f9240#npm:10.4.16"],\
             ["axios", "npm:1.6.1"],\
             ["chromatic", "npm:9.0.0"],\
+            ["classnames", "npm:2.3.2"],\
             ["eslint", "npm:8.53.0"],\
             ["eslint-config-next", "virtual:e6615eb9ed9827de032bd77176c0331336982ebfba7a1cd02b2afec1c18e9cd5667128ad514b3c700a59d74ee501c0b618894c2560830fab67e91c13263f9240#npm:14.0.2"],\
             ["eslint-config-prettier", "virtual:e6615eb9ed9827de032bd77176c0331336982ebfba7a1cd02b2afec1c18e9cd5667128ad514b3c700a59d74ee501c0b618894c2560830fab67e91c13263f9240#npm:9.0.0"],\
@@ -68,6 +69,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:e6615eb9ed9827de032bd77176c0331336982ebfba7a1cd02b2afec1c18e9cd5667128ad514b3c700a59d74ee501c0b618894c2560830fab67e91c13263f9240#npm:10.4.16"],\
             ["axios", "npm:1.6.1"],\
             ["chromatic", "npm:9.0.0"],\
+            ["classnames", "npm:2.3.2"],\
             ["eslint", "npm:8.53.0"],\
             ["eslint-config-next", "virtual:e6615eb9ed9827de032bd77176c0331336982ebfba7a1cd02b2afec1c18e9cd5667128ad514b3c700a59d74ee501c0b618894c2560830fab67e91c13263f9240#npm:14.0.2"],\
             ["eslint-config-prettier", "virtual:e6615eb9ed9827de032bd77176c0331336982ebfba7a1cd02b2afec1c18e9cd5667128ad514b3c700a59d74ee501c0b618894c2560830fab67e91c13263f9240#npm:9.0.0"],\
@@ -5128,6 +5130,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/chromatic-npm-9.0.0-aa00866eae-4bc3b361e0.zip/node_modules/chromatic/",\
           "packageDependencies": [\
             ["chromatic", "npm:9.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["classnames", [\
+        ["npm:2.3.2", {\
+          "packageLocation": "./.yarn/cache/classnames-npm-2.3.2-d2fdae468d-2c62199789.zip/node_modules/classnames/",\
+          "packageDependencies": [\
+            ["classnames", "npm:2.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\

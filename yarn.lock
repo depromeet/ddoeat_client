@@ -18,6 +18,7 @@ __metadata:
     autoprefixer: ^10.0.1
     axios: ^1.6.1
     chromatic: ^9.0.0
+    classnames: ^2.3.2
     eslint: ^8
     eslint-config-next: 14.0.2
     eslint-config-prettier: ^9.0.0
@@ -3513,6 +3514,13 @@ __metadata:
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
   checksum: 4bc3b361e0761c3b4c4d3e63504fb011b8b752180418959db6be9bdb056aedb8945d7872168442dc5bcd9447e576a354751a82b83455bfd545f275e5e822c8be
+  languageName: node
+  linkType: hard
+
+"classnames@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "classnames@npm:2.3.2"
+  checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
   languageName: node
   linkType: hard
 
