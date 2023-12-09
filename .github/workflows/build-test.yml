@@ -39,7 +39,7 @@ jobs:
             echo "Restoring .yarn/cache from cache..."
             # .yarn/cache 종속성들은 캐싱
             # .yarn/unplugged 의존성은 항상 설치
-            yarn install --check-files
+            yarn install --immutable
           fi
 
       - name: Run Build
