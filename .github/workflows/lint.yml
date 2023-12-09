@@ -14,7 +14,7 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v2
         with:
-          path: ./yarn/cache
+          path: .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
