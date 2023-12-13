@@ -32,7 +32,8 @@
     "eslint-plugin-react": "latest",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vercel": "^32.7.2"
   },
   "packageManager": "yarn@3.7.0"
 }
