@@ -1,0 +1,48 @@
+name: Lint Check
+
+on: pull_request
+
+jobs:
+  lint-check:
+    name: Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Check for Cached .yarn/cache
+        id: yarn-cache-check
+        run: |
+          if [ -d .yarn/cache ]; then
+            echo "Yarn Cache found!"
+            echo "yarn-cache-hit=true" >> $GITHUB_ENV
+          fi
+
+      - name: Install Dependencies
+        run: |
+          if [ ${{ env.yarn-cache-hit }} != 'true' ]; then
+            echo "Installing all dependencies..."
+            yarn install
+          else
+            echo "Restoring .yarn/cache from cache..."
+            # .yarn/cache 종속성들은 캐싱
+            # .yarn/unplugged 의존성은 항상 설치
+            yarn install --immutable
+          fi
+
+      - name: Run Lint
+        run: yarn lint
