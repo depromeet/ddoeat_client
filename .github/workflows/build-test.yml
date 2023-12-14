@@ -20,12 +20,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: '18'
 
-      - name: Check for Cached .yarn/cache
+      - name: Check for Cached .yarn/unplugged
         id: yarn-cache-check
         run: |
-          if [ -d .yarn/cache ]; then
+          if [ -d .yarn/unplugged ]; then
             echo "Yarn Cache found!"
             echo "yarn-cache-hit=true" >> $GITHUB_ENV
           fi
@@ -36,9 +36,8 @@ jobs:
             echo "Installing all dependencies..."
             yarn install
           else
-            echo "Restoring .yarn/cache from cache..."
-            # .yarn/cache 종속성들은 캐싱
-            # .yarn/unplugged 의존성은 항상 설치
+            echo "Restoring .yarn/plugged from cache..."
+            # .yarn/unplugged 종속성들은 캐싱
             yarn install --immutable
           fi
 
