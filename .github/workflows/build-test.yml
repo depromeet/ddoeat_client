@@ -11,10 +11,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Cache .yarn/cache Directory
+      - name: Cache .yarn/unplugged Directory
         uses: actions/cache@v3
         with:
-          path: .yarn/cache
+          path: .yarn/unplugged
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Set up Node.js
@@ -36,7 +36,7 @@ jobs:
             echo "Installing all dependencies..."
             yarn install
           else
-            echo "Restoring .yarn/plugged from cache..."
+            echo "Restoring .yarn/unplugged from cache..."
             # .yarn/unplugged 종속성들은 캐싱
             yarn install --immutable
           fi
