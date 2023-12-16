@@ -2,8 +2,24 @@ import axios from 'axios';
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
+export interface ApiMeta {
+  code: number;
+  message: string;
+}
+export interface ApiResponse<T> {
+  data: T;
+  meta: ApiMeta | null;
+  error?: {
+    code: number;
+    detail: string;
+    title: string;
+    status: number;
+  };
+}
+
+// 테스트를 위해 jsonplaceholder url를 넣었습니다.
 export const axiosInstance = axios.create({
-  baseURL: '',
+  baseURL: 'https://jsonplaceholder.typicode.com',
   withCredentials: true,
   timeout: 3000,
 });
