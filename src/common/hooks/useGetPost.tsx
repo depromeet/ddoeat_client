@@ -8,7 +8,10 @@ const getPost = (postSeq: number): Promise<ApiResponse<PostProps>> => {
   return axiosRequest('get', `${path}${query}`);
 };
 
-export const useGetPost = (postSeq: number): UseQueryResult<PostProps> => {
+// useQuery return 함수
+export const useGetPost = (
+  postSeq: number,
+): UseQueryResult<PostProps, ApiResponse<PostProps>> => {
   return useQuery({
     queryKey: ['get-post', postSeq],
     queryFn: () => getPost(postSeq),
