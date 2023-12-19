@@ -8,19 +8,37 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:@next/next/recommended",
-    "prettier"
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {}
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/external-module-folders": [".yarn"],
     "react": {
       "version": "detect"
     }
   },
-  "plugins": ["@typescript-eslint", "react"],
+  "plugins": ["@typescript-eslint", "react", "import", "prettier"],
   "rules": {
     "react/react-in-jsx-scope": "off"
   }
