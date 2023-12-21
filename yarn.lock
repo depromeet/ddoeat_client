@@ -1474,7 +1474,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.5, @babel/runtime@npm:^7.8.4":
   version: 7.23.6
   resolution: "@babel/runtime@npm:7.23.6"
   dependencies:
@@ -4170,13 +4170,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "classnames@npm:2.3.2"
-  checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
-  languageName: node
-  linkType: hard
-
 "clean-stack@npm:^2.0.0":
   version: 2.2.0
   resolution: "clean-stack@npm:2.2.0"
@@ -4235,6 +4228,13 @@ __metadata:
   version: 1.0.4
   resolution: "clone@npm:1.0.4"
   checksum: d06418b7335897209e77bdd430d04f882189582e67bd1f75a04565f3f07f5b3f119a9d670c943b6697d0afb100f03b866b3b8a1f91d4d02d72c4ecf2bb64b5dd
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "clsx@npm:2.0.0"
+  checksum: a2cfb2351b254611acf92faa0daf15220f4cd648bdf96ce369d729813b85336993871a4bf6978ddea2b81b5a130478339c20d9d0b5c6fc287e5147f0c059276e
   languageName: node
   linkType: hard
 
@@ -4575,7 +4575,7 @@ __metadata:
     "@typescript-eslint/parser": ^6.14.0
     autoprefixer: ^10.0.1
     axios: ^1.6.2
-    classnames: ^2.3.2
+    clsx: ^2.0.0
     eslint: ^8
     eslint-config-next: 14.0.4
     eslint-config-prettier: ^9.1.0
@@ -4589,6 +4589,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     storybook: ^7.6.4
+    tailwind-merge: ^2.1.0
     tailwindcss: ^3.3.0
     typescript: ^5.3.3
     vercel: ^32.7.2
@@ -10330,6 +10331,15 @@ __metadata:
     "@pkgr/utils": ^2.4.2
     tslib: ^2.6.2
   checksum: 7c1f4991d0afd63c090c0537f1cf8619dd5777a40cf83bf46beadbf4eb0f9e400d92044e90a177a305df4bcb56efbaf1b689877f301f2672d865b6eecf1be75a
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "tailwind-merge@npm:2.1.0"
+  dependencies:
+    "@babel/runtime": ^7.23.5
+  checksum: b864935b891274f804ab6cc85b937e4b6288c12cc5d03d11a674ad7c0e7346d700eb9f80fb3cc9b391d2d412032c96435c843d6875980cb111c48e453bfde57d
   languageName: node
   linkType: hard
 
