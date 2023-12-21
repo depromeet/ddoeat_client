@@ -40,6 +40,13 @@
   },
   "plugins": ["@typescript-eslint", "react", "import", "prettier"],
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", ["parent", "sibling"], "index"],
+        "newlines-between": "always"
+      }
+    ]
   }
 }

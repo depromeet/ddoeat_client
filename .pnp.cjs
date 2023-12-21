@@ -7653,7 +7653,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-import-resolver-typescript", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:3.6.1"],\
             ["@types/eslint", null],\
             ["@types/eslint-plugin-import", null],\
-            ["debug", "virtual:1ff4b5f90832ba0a9c93ba1223af226e44ba70c1126a3740d93562b97bc36544e896a5e95908196f7458713e6a6089a34bfc67362fc6df7fa093bd06c878be47#npm:4.3.4"],\
+            ["debug", "virtual:2f4f5d4be0c4271f81a756602d102e02c292a5b30d8b7f5dd19d5368d75df8bb2f1bf516e3f835c2b5501d1663eb437d4f00d6d057bcaee770b46e87267a0fa3#npm:4.3.4"],\
             ["enhanced-resolve", "npm:5.15.0"],\
             ["eslint", "npm:8.55.0"],\
             ["eslint-module-utils", "virtual:e0e01b1adba50dfb21d3425216766307a8886319a74bd2efe3738011f4bf39175963d742f2cec6b9c6d148f7a01336eed43f9cdfbafde414244588e7b39e074d#npm:2.8.0"],\
