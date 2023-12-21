@@ -24,7 +24,7 @@ const config: Config = {
         300: '#FF896F',
         500: '#FF4A22',
       },
-      system: { kakao: '#FAE100' },
+      system: { kakaoYellow: '#FAE100', kakaoBrown: '#371D1E' },
     },
     extend: {
       backgroundImage: {
