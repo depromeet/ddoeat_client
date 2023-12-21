@@ -24,6 +24,7 @@ const config: Config = {
         300: '#FF896F',
         500: '#FF4A22',
       },
+      system: { kakao: '#FAE100' },
     },
     extend: {
       backgroundImage: {
