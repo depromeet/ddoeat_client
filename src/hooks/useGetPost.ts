@@ -2,6 +2,13 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import { ApiResponse, axiosRequest } from '@api/api-config';
 
+interface PostProps {
+  body: string;
+  id: number;
+  title: string;
+  userId: number;
+}
+
 // Promise return 함수
 const getPost = (postSeq: number): Promise<ApiResponse<PostProps>> => {
   const path = '/posts';
@@ -18,10 +25,3 @@ export const useGetPost = (
     queryFn: () => getPost(postSeq),
   });
 };
-
-interface PostProps {
-  body: string;
-  id: number;
-  title: string;
-  userId: number;
-}
