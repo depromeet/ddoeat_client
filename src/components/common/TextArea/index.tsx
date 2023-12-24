@@ -19,7 +19,7 @@ export default function TextArea({
   };
 
   return (
-    <div className="flex flex-col w-full h-[130px] bg-white rounded-[24px] p-[16px]">
+    <div className="body-14-regular flex flex-col w-full h-[130px] bg-white rounded-[24px] p-[16px]">
       <textarea
         {...restProps}
         onChange={handleTextAreaChange}
