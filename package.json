@@ -34,6 +34,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "latest",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8",
     "prettier": "^3.1.1",
     "tailwindcss": "^3.3.0",

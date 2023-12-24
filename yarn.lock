@@ -4583,6 +4583,7 @@ __metadata:
     eslint-plugin-import: ^2.29.1
     eslint-plugin-prettier: ^5.0.1
     eslint-plugin-react: latest
+    eslint-plugin-react-hooks: ^4.6.0
     next: 14.0.4
     postcss: ^8
     prettier: ^3.1.1
@@ -5695,7 +5696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.5.0 || 5.0.0-canary-7118f5dd7-20230705":
+"eslint-plugin-react-hooks@npm:^4.5.0 || 5.0.0-canary-7118f5dd7-20230705, eslint-plugin-react-hooks@npm:^4.6.0":
   version: 4.6.0
   resolution: "eslint-plugin-react-hooks@npm:4.6.0"
   peerDependencies:

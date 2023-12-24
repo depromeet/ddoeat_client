@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .header-22 {
+    @apply text-[22px]/[130%] tracking-[-0.44px] font-extrabold;
+  }
+  .header-20 {
+    @apply text-[20px]/[130%] tracking-[-0.4px] font-extrabold;
+  }
+  .header-18 {
+    @apply text-[18px]/[130%] tracking-[-0.36px] font-extrabold;
+  }
+  .body-16-bold {
+    @apply text-[16px]/[140%] tracking-[-0.48px] font-bold;
+  }
+  .body-16-regular {
+    @apply text-[16px]/[140%] tracking-[-0.48px] font-normal;
+  }
+  .body-14-bold {
+    @apply text-[14px]/[140%] tracking-[-0.42px] font-bold;
+  }
+  .body-14-regular {
+    @apply text-[14px]/[140%] tracking-[-0.42px] font-normal;
+  }
+  .caption-12-extraBold {
+    @apply text-[12px]/[140%] tracking-[-0.36px] font-extrabold;
+  }
+  .caption-12-bold {
+    @apply text-[12px]/[140%] tracking-[-0.36px] font-bold;
+  }
+  .caption-12-regular {
+    @apply text-[12px]/[140%] tracking-[-0.36px] font-normal;
+  }
+  .caption-10-bold {
+    @apply text-[10px]/[140%] tracking-[-0.3px] font-bold;
+  }
+  .caption-10-regular {
+    @apply text-[10px]/[140%] tracking-[-0.3px] font-normal;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
