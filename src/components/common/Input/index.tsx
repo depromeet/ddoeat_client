@@ -9,7 +9,7 @@ const Input = forwardRef(function Input(
   ref: Ref<HTMLInputElement>,
 ) {
   return (
-    <div className="body-14-regular w-full flex bg-white rounded-[24px] p-[16px]">
+    <div className="body-14-regular w-full flex items-center bg-white rounded-[24px] p-[16px]">
       <input
         ref={ref}
         {...restProps}
