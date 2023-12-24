@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, ComponentProps, useState } from 'react';
+import { ChangeEvent, ComponentProps, useCallback, useState } from 'react';
 
 export default function TextArea({
   onChange,
@@ -9,14 +9,17 @@ export default function TextArea({
 }: ComponentProps<'textarea'>) {
   const [textCount, setTextCount] = useState(0);
 
-  const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const currentTextCount = e.target.value.length;
+  const handleTextAreaChange = useCallback(
+    (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const currentTextCount = e.target.value.length;
 
-    if (maxLength && currentTextCount > maxLength) return;
+      if (maxLength && currentTextCount > maxLength) return;
 
-    setTextCount(currentTextCount);
-    onChange?.(e);
-  };
+      setTextCount(currentTextCount);
+      onChange?.(e);
+    },
+    [maxLength, onChange],
+  );
 
   return (
     <div className="body-14-regular flex flex-col w-full h-[130px] bg-white rounded-[24px] p-[16px]">
