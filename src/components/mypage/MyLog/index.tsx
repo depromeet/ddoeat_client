@@ -4,33 +4,29 @@ import Image from 'next/image';
 
 import React, { HTMLAttributes } from 'react';
 
-import LogImage from '../../../../public/LogImage.svg';
-
 import MenuTypeFlag from '../../common/MenuTypeFlag';
 import VisitNumFlag from '../../common/VisitNumFlag';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
-  date?: string;
+  date: string;
   restaurantImgUrl: string;
-  restaurantName?: string;
-  visitNum?: number;
-  menuType?: string;
-  rating?: number;
-  log?: string;
+  restaurantName: string;
+  visitNum: number;
+  menuType: string;
+  rating: number;
+  log: string;
 }
 
 export default function MyLog({
-  date = '2023.03.26',
-  restaurantImgUrl = '',
-  restaurantName = '또잇또잇',
-  visitNum = 4,
-  menuType = '양식',
-  rating = 3.5,
-  log = '맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용맛나용',
+  date,
+  restaurantImgUrl,
+  restaurantName,
+  visitNum,
+  menuType,
+  rating,
+  log,
 }: MyLogProps) {
   return (
-    //전체 > 위/아래 > 위 : 빈 자리 & 날짜 자리, 아래 : 선 & [작은 모달 + 설명]
-    //align items : center?
     <li className="flex flex-col w-full h-[243px] bg-white p-[16px] gap-y-[8px]">
       <div className="flex flex-row w-full h-[20px] gap-x-[8px]">
         <div className="w-[16px] h-[16px]"></div>
@@ -46,8 +42,7 @@ export default function MyLog({
               <span className="mb-[8px] body-16-bold text-gray-900">
                 {restaurantName}
               </span>
-              <div className="flex flex-row items-center mb-[4px]">
-                {/* tag 컴포넌트 만들어서 수정하기 */}
+              <div className="flex flex-row items-center mb-[4px] gap-x-[4px]">
                 <VisitNumFlag visitNum={visitNum} />
                 <MenuTypeFlag menuType={menuType} />
               </div>
@@ -69,7 +64,3 @@ export default function MyLog({
     </li>
   );
 }
-
-// props로 받아야 될 것
-// - 방문 횟수에 따른 별점 채우기
-// - 날짜, 상점 이름, 방문 횟수, menu type, 별점, 작성 내용
