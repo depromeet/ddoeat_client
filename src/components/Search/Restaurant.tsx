@@ -1,3 +1,5 @@
+'use client';
+
 import React, { HTMLAttributes } from 'react';
 import Image from 'next/image';
 
@@ -30,12 +32,17 @@ export default function Restaurant({
         />
         <div className="flex flex-col gap-2">
           <div className="flex gap-1">
-            <p className="font-bold text-[16px] leading-[22px]">
+            <p className="body-16-bold leading-[22px]">
               {restaurantName ?? 'Value'}
             </p>
             <VisitNumberFlag visitNum={visitNum} />
           </div>
-          <div></div>
+          <div className="flex caption-12-bold leading-[17px]">
+            <p className="after:inline-block after:w-[0.5px] after:h-[10px] after:bg-gray-300 after:mx-2">
+              {menuType ?? 'Menu Type'}
+            </p>
+            <p>{location ?? 'Location'}</p>
+          </div>
         </div>
       </div>
     </li>
