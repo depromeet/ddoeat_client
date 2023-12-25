@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { HTMLAttributes } from 'react';
 
 import MenuTypeFlag from '@components/common/MenuTypeFlag';
-import VisitNumFlag from '@components/common/VisitNumFlag';
+// import VisitNumFlag from '@components/common/VisitNumFlag';
 import StarRating from '@components/common/StarRating';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
@@ -21,7 +21,7 @@ export default function MyLog({
   date,
   restaurantImgUrl,
   restaurantName,
-  visitNum,
+  // visitNum,
   menuType,
   rating,
   log,
@@ -43,7 +43,7 @@ export default function MyLog({
                 {restaurantName}
               </span>
               <div className="flex flex-row items-center mb-[4px] gap-x-[4px]">
-                <VisitNumFlag visitNum={visitNum} />
+                {/* <VisitNumFlag visitNum={visitNum} /> */}
                 <MenuTypeFlag menuType={menuType} />
               </div>
               <div className="flex flex-row items-center gap-x-[4px]">
