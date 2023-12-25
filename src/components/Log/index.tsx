@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-
 import React, { HTMLAttributes } from 'react';
 
-import MenuTypeFlag from '../../common/MenuTypeFlag';
-import VisitNumFlag from '../../common/VisitNumFlag';
+import MenuTypeFlag from '@components/common/MenuTypeFlag';
+import VisitNumFlag from '@components/common/VisitNumFlag';
+import StarRating from '@components/common/StarRating';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   date: string;
@@ -36,8 +36,8 @@ export default function MyLog({
         <svg className="w-[16px] h-full stroke-primary-300">
           <line x1="50%" y1="0" x2="50%" y2="100%" strokeWidth="1" />
         </svg>
-        <div className="flex flex-col w-full h-full gap-y-[8px] border-gray-100 border-10">
-          <div className="flex flex-row justify-between items-center w-full h-[126px] px-[16px] py-[12px] gap-x-[8px] rounded-[24px] bg-gray-50">
+        <div className="flex flex-col w-full h-full gap-y-[8px]">
+          <div className="flex flex-row justify-between items-center w-full h-[126px] px-[16px] py-[12px] gap-x-[8px] rounded-[24px] bg-gray-50 border border-gray-100">
             <div className="flex flex-col">
               <span className="mb-[8px] body-16-bold text-gray-900">
                 {restaurantName}
@@ -46,9 +46,9 @@ export default function MyLog({
                 <VisitNumFlag visitNum={visitNum} />
                 <MenuTypeFlag menuType={menuType} />
               </div>
-              <div>
+              <div className="flex flex-row items-center gap-x-[4px]">
                 <span className="body-16-bold text-primary-500">{rating}</span>
-                {/* 별점 별 채우는 컴포넌트 추가 필요 */}
+                <StarRating rating={rating} />
               </div>
             </div>
             <Image
