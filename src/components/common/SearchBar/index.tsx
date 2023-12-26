@@ -4,12 +4,13 @@ import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 
 import SearchIcon from '../../../../public/SearchIcon.svg';
 import DeleteIcon from '../../../../public/DeleteIcon.svg';
+import Input from '../Input';
 
 interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
-export default function SearchBar({ icon, ...props }: SearchBarProps) {
+export default function SearchBar({ icon }: SearchBarProps) {
   const [inputValue, setInputValue] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,16 +37,15 @@ export default function SearchBar({ icon, ...props }: SearchBarProps) {
   }
 
   return (
-    <div className="flex items-center px-4 py-2">
-      <div className="w-[40px] h-[40px]">{icon}</div>
-      <div className="flex w-full h-[52px] px-[12px] py-[16px] bg-white border-none rounded-full items-center">
-        <input
-          {...props}
-          value={inputValue}
+    <div>
+      <div className="flex items-center px-4 py-2 ?">
+        <div className="w-[40px] h-[40px] ?">{icon}</div>
+        <Input
+          rightItem={iconElement}
           onChange={handleChange}
-          className="w-full border-none focus:outline-none caret-primary-500 bg-white"
+          onClick={clearInput}
+          value={inputValue}
         />
-        {iconElement}
       </div>
     </div>
   );
