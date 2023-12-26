@@ -1,21 +1,14 @@
-'use client';
-
-import { useContext } from 'react';
-
-import { ReviewContext } from '..';
-
 import DefaultStar from 'public/assets/icon/default_star_40.svg';
 import FilledStar from 'public/assets/icon/filled_star_40.svg';
 
 const starNum = 5;
 
-export default function StarRating() {
-  const { rating, setRating } = useContext(ReviewContext);
+interface StarRatingProps {
+  rating: number;
+  onClick: (index: number) => void;
+}
 
-  const handleClickStar = (index: number) => {
-    setRating(index + 1);
-  };
-
+export default function StarRating({ rating, onClick }: StarRatingProps) {
   return (
     <div className="rounded-[24px] w-full h-[118px] flex flex-col justify-center items-center">
       <div>
@@ -23,9 +16,9 @@ export default function StarRating() {
         <div className="flex pt-[8px]">
           {Array.from({ length: starNum }).map((_, index) =>
             index < rating ? (
-              <FilledStar key={index} onClick={() => handleClickStar(index)} />
+              <FilledStar key={index} onClick={onClick} />
             ) : (
-              <DefaultStar key={index} onClick={() => handleClickStar(index)} />
+              <DefaultStar key={index} onClick={onClick} />
             ),
           )}
         </div>
