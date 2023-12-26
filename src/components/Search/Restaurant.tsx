@@ -1,17 +1,17 @@
-'use client';
-
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import Image from 'next/image';
 
 import VisitNumberFlag from '@components/common/VisitNumberFlag';
-import restaurant from 'public/assets/img/search/restaurant.png';
+import More from 'public/assets/icon/More.svg';
+import restaurantImg from 'public/assets/img/search/restaurant.png';
 
 interface RestaurantProps extends HTMLAttributes<HTMLLIElement> {
-  restaurantImgUrl: string;
+  restaurantImgUrl?: string;
   restaurantName: string;
   menuType: string;
   location: string;
   visitNum: number;
+  hasMoreOption: boolean;
 }
 
 export default function Restaurant({
@@ -20,30 +20,36 @@ export default function Restaurant({
   menuType,
   location,
   visitNum,
+  hasMoreOption,
 }: RestaurantProps) {
   return (
-    <li className="w-full px-4 pt-2">
-      <div className="flex gap-3 pt-2 pb-4 border-b-gray-100 border-b-[1px]">
-        <Image
-          src={restaurantImgUrl ?? restaurant}
-          alt="식당 이미지"
-          width={60}
-          height={60}
-        />
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-1">
-            <p className="body-16-bold leading-[22px]">
-              {restaurantName ?? 'Value'}
-            </p>
-            <VisitNumberFlag visitNum={visitNum} />
-          </div>
-          <div className="flex caption-12-bold leading-[17px]">
-            <p className="after:inline-block after:w-[0.5px] after:h-[10px] after:bg-gray-300 after:mx-2">
-              {menuType ?? 'Menu Type'}
-            </p>
-            <p>{location ?? 'Location'}</p>
+    <li className="w-full px-4 pt-2 flex justify-between items-center">
+      <div className="flex justify-between items-center pt-2 pb-4 w-full border-b-gray-100 border-b-[1px]">
+        <div className="flex gap-2">
+          <Image
+            src={restaurantImgUrl ?? restaurantImg}
+            alt={restaurantName}
+            width={60}
+            height={60}
+          />
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-1">
+              <p className="body-16-bold">{restaurantName}</p>
+              <VisitNumberFlag visitNum={visitNum} />
+            </div>
+            <div className="flex caption-12-bold">
+              <p className="after:inline-block after:w-[0.5px] after:h-[10px] after:bg-gray-300 after:mx-2">
+                {menuType}
+              </p>
+              <p>{location}</p>
+            </div>
           </div>
         </div>
+        {hasMoreOption && (
+          <button>
+            <More />
+          </button>
+        )}
       </div>
     </li>
   );

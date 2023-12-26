@@ -16,6 +16,8 @@
   }
 }
 
-li {
-  list-style: none;
+@layer base {
+  li {
+    @apply list-none;
+  }
 }
