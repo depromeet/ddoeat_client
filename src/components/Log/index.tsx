@@ -7,9 +7,11 @@ import MenuTypeFlag from '@components/common/MenuTypeFlag';
 // import VisitNumFlag from '@components/common/VisitNumFlag';
 import StarRating from '@components/common/StarRating';
 
+import LogImage from '/public/assets/img/LogImage.svg';
+
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   date: string;
-  restaurantImgUrl: string;
+  restaurantImgUrl?: string;
   restaurantName: string;
   visitNum: number;
   menuType: string;
@@ -33,13 +35,13 @@ export default function MyLog({
         <p className="text-gray-700 body-14-bold">{date}</p>
       </div>
       <div className="flex flex-row items-center w-full h-full gap-x-[8px]">
-        <svg className="w-[16px] h-full stroke-primary-300">
+        {/* <svg className="w-[16px] h-full stroke-primary-300">
           <line x1="50%" y1="0" x2="50%" y2="100%" strokeWidth="1" />
-        </svg>
-        <div className="flex flex-col w-full h-full gap-y-[8px]">
+        </svg> */}
+        <div className="flex flex-col w-full h-full gap-y-[8px] pl-[16px] border-l-[2px] border-primary-300">
           <div className="flex flex-row justify-between items-center w-full h-[126px] px-[16px] py-[12px] gap-x-[8px] rounded-[24px] bg-gray-50 border border-gray-100">
             <div className="flex flex-col">
-              <span className="mb-[8px] body-16-bold text-gray-900">
+              <span className="mb-[8px] w-full h-full body-16-bold text-gray-900">
                 {restaurantName}
               </span>
               <div className="flex flex-row items-center mb-[4px] gap-x-[4px]">
@@ -51,14 +53,18 @@ export default function MyLog({
                 <StarRating rating={rating} />
               </div>
             </div>
-            <Image
-              src={restaurantImgUrl}
-              alt={restaurantName}
-              width={100}
-              height={100}
-            />
+            {restaurantImgUrl ? (
+              <Image
+                src={restaurantImgUrl}
+                alt={restaurantName}
+                width={100}
+                height={100}
+              />
+            ) : (
+              <LogImage />
+            )}
           </div>
-          <span className="body-14-regular text-gray-700">{log}</span>
+          <span className="body-14-regular text-gray-700 break-all">{log}</span>
         </div>
       </div>
     </li>
