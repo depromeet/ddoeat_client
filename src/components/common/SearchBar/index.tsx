@@ -2,8 +2,9 @@
 
 import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 
-import SearchIcon from '../../../../public/SearchIcon.svg';
-import DeleteIcon from '../../../../public/DeleteIcon.svg';
+import SearchIcon from '/public/SearchIcon.svg';
+import DeleteIcon from '/public/DeleteIcon.svg';
+
 import Input from '../Input';
 
 interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -38,8 +39,8 @@ export default function SearchBar({ icon }: SearchBarProps) {
 
   return (
     <div>
-      <div className="flex items-center px-4 py-2 ?">
-        <div className="w-[40px] h-[40px] ?">{icon}</div>
+      <div className="flex items-center px-4 py-2">
+        <div className="w-[40px] h-[40px]">{icon}</div>
         <Input
           rightItem={iconElement}
           onChange={handleChange}
