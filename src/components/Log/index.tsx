@@ -27,12 +27,12 @@ export default function MyLog({
   log,
 }: MyLogProps) {
   return (
-    <li className="flex flex-col w-full h-[243px] bg-white p-[16px] gap-y-[8px]">
+    <li className="flex flex-col w-full h-full bg-white p-[16px] gap-y-[8px]">
       <div className="flex flex-row w-full h-[20px] gap-x-[8px]">
         <div className="w-[16px] h-[16px]"></div>
         <p className="text-gray-700 body-14-bold">{date}</p>
       </div>
-      <div className="flex flex-row items-center w-full h-[183px] gap-x-[8px]">
+      <div className="flex flex-row items-center w-full h-full gap-x-[8px]">
         <svg className="w-[16px] h-full stroke-primary-300">
           <line x1="50%" y1="0" x2="50%" y2="100%" strokeWidth="1" />
         </svg>
@@ -58,7 +58,7 @@ export default function MyLog({
               height={100}
             />
           </div>
-          <span className="caption-12-regular text-gray-700">{log}</span>
+          <span className="body-14-regular text-gray-700">{log}</span>
         </div>
       </div>
     </li>
