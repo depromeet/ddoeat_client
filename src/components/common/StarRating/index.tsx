@@ -6,21 +6,14 @@ interface StarRatingProps {
 }
 
 export default function StarRating({ rating }: StarRatingProps) {
+  // 별점 불러올 때 소수점 반올림할 지 버릴지 논의 필요
   const filledStars = Math.round(rating); // Filled Star 개수 결정
-  const emptyStars = 5 - filledStars; // 전체 별의 개수에서 Filled Star 개수를 뺀 나머지는 Empty Star 개수
 
-  const getStarNum = (count: number, type: 'filled' | 'empty') =>
-    Array.from({ length: count }).map((_, index) => (
-      <div key={index}>
-        {type === 'filled' ? <FilledStarSmall /> : <EmptyStarSmall />}
-      </div>
-    ));
-
-  return (
-    <div className="flex flex-row items-center">
-      {getStarNum(filledStars, 'filled').concat(
-        getStarNum(emptyStars, 'empty'),
-      )}
+  const getStarsNum = Array.from({ length: 5 }).map((_, index) => (
+    <div key={index}>
+      {index < filledStars ? <FilledStarSmall /> : <EmptyStarSmall />}
     </div>
-  );
+  ));
+
+  return <div className="flex flex-row items-center">{getStarsNum}</div>;
 }
