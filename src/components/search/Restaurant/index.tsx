@@ -10,7 +10,6 @@ interface RestaurantProps extends HTMLAttributes<HTMLLIElement> {
   restaurantImgUrl?: string;
   restaurantName: string;
   menuType: string;
-  location: string;
   visitNum: number;
   hasMoreOption: boolean;
   isLast: boolean;
@@ -20,7 +19,6 @@ export default function Restaurant({
   restaurantImgUrl,
   restaurantName,
   menuType,
-  location,
   visitNum,
   hasMoreOption,
   isLast,
@@ -34,6 +32,7 @@ export default function Restaurant({
       >
         <div className="flex gap-2">
           <Image
+            // TODO: 추후 맛집 이미지 없을 시, 제공하는 기본 이미지로 변경 (현재는 mock image)
             src={restaurantImgUrl ?? restaurantImg}
             alt={restaurantName}
             width={60}
@@ -48,7 +47,7 @@ export default function Restaurant({
               <p className="after:inline-block after:w-[0.5px] after:h-[10px] after:bg-gray-300 after:mx-2">
                 {menuType}
               </p>
-              <p>{location}</p>
+              {/* TODO: 예린님 별점 컴포넌트 삽입 */}
             </div>
           </div>
         </div>
