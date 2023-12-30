@@ -1,32 +1,33 @@
-'use client';
+import { createContext, useState, useContext, ReactNode } from 'react';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
-
-interface TabContextType {
-  activeValue: string;
+interface TabContextProps {
+  activeValue: string | null;
   setActiveValue: (value: string) => void;
 }
 
+const TabContext = createContext<TabContextProps | null>(null);
+
 interface TabGroupProps {
   children: ReactNode;
+  initialTab?: string | null;
 }
 
-const TabContext = createContext<TabContextType | undefined>(undefined);
-
-export function useTab(): TabContextType {
-  const context = useContext(TabContext);
-
-  if (!context) throw new Error('TabContext not found');
-
-  return context;
-}
-
-export function TabGroup({ children }: TabGroupProps) {
-  const [activeValue, setActiveValue] = useState('');
+export function TabGroup({ children, initialTab = null }: TabGroupProps) {
+  const [activeValue, setActiveValue] = useState(initialTab);
 
   return (
     <TabContext.Provider value={{ activeValue, setActiveValue }}>
       {children}
     </TabContext.Provider>
   );
+}
+
+export function useTab() {
+  const context = useContext(TabContext);
+
+  if (!context) {
+    throw new Error('useTab must be used within a TabGroup');
+  }
+
+  return context;
 }

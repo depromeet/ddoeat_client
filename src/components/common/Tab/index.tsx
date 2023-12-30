@@ -1,8 +1,6 @@
-'use client';
-
 import { TabGroup } from './TabGroup';
 import TabHeader from './TabHeader';
-import { TabItem } from './TabItem';
+import TabItem from './TabItem';
 import TabContent from './TabContent';
 
 const Tab = {
