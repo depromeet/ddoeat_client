@@ -1,0 +1,12 @@
+<svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Plus" clip-path="url(#clip0_70_3761)">
+<circle id="Ellipse 3270" cx="20.5" cy="20" r="20" fill="#FFEDE9"/>
+<path id="Line 14" d="M11.5 20H29.5" stroke="#FF4A22" stroke-width="2" stroke-linecap="round"/>
+<path id="Line 15" d="M20.4997 11L20.4997 29" stroke="#FF4A22" stroke-width="2" stroke-linecap="round"/>
+</g>
+<defs>
+<clipPath id="clip0_70_3761">
+<rect width="40" height="40" fill="white" transform="translate(0.5)"/>
+</clipPath>
+</defs>
+</svg>
