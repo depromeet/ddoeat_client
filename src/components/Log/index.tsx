@@ -5,7 +5,7 @@ import React, { HTMLAttributes } from 'react';
 
 import MenuTypeFlag from '@components/common/MenuTypeFlag';
 // import VisitNumFlag from '@components/common/VisitNumFlag';
-import StarRating from '@components/common/StarRating';
+import StarRating from '@components/common/StarScore';
 
 import LogImage from '/public/assets/img/LogImage.svg';
 
@@ -42,6 +42,7 @@ export default function MyLog({
                 {restaurantName}
               </span>
               <div className="flex flex-row items-center mb-[4px] gap-x-[4px]">
+                {/* TODO: TAG 컴포넌트 만들어지면 수정하기 */}
                 {/* <VisitNumFlag visitNum={visitNum} /> */}
                 <MenuTypeFlag menuType={menuType} />
               </div>

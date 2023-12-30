@@ -1,11 +1,11 @@
 import FilledStarSmall from 'public/assets/img/filled_star_24.svg';
 import DefaultStarSmall from 'public/assets/img/default_star_24.svg';
 
-interface StarRatingProps {
+interface StarScoreProps {
   rating: number;
 }
 
-export default function StarRating({ rating }: StarRatingProps) {
+export default function StarScore({ rating }: StarScoreProps) {
   // TODO: 별점 불러올 때 소수점 반올림할 지 버릴지 논의 필요
   const filledStars = Math.round(rating); // Filled Star 개수 결정
 
