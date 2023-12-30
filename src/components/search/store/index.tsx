@@ -15,7 +15,7 @@ interface RestaurantProps extends HTMLAttributes<HTMLLIElement> {
   isLast: boolean;
 }
 
-export default function Restaurant({
+export default function Store({
   restaurantImgUrl,
   restaurantName,
   menuType,
