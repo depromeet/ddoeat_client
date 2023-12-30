@@ -1,5 +1,7 @@
 'use client';
 
+import Button from '../Button';
+
 import usePatchBookmark from '@hooks/api/usePatchBookmark';
 
 interface BookmarkButtonProps {
@@ -7,7 +9,10 @@ interface BookmarkButtonProps {
   isBookmarked: boolean;
 }
 
-function BookmarkButton({ storeId, isBookmarked }: BookmarkButtonProps) {
+export default function BookmarkButton({
+  storeId,
+  isBookmarked,
+}: BookmarkButtonProps) {
   const { mutate: toggleBookmark } = usePatchBookmark();
 
   const handleBookmarkButtonClick = () => {
@@ -16,9 +21,9 @@ function BookmarkButton({ storeId, isBookmarked }: BookmarkButtonProps) {
   };
 
   return (
-    <button
+    <Button
       onClick={handleBookmarkButtonClick}
-      className="flex justify-center items-center w-[84px] bg-gray-100 rounded-[24px]"
+      className="w-[84px] bg-gray-100 shrink-0"
     >
       {isBookmarked ? (
         //   TODO:아이콘이 확정되지 않아 더미 div로 대체. 아이콘 확정시 변경하기
@@ -27,8 +32,6 @@ function BookmarkButton({ storeId, isBookmarked }: BookmarkButtonProps) {
         //   TODO:아이콘이 확정되지 않아 더미 div로 대체. 아이콘 확정시 변경하기
         <div className="w-[24px] h-[24px] bg-primary-100" />
       )}
-    </button>
+    </Button>
   );
 }
-
-export default BookmarkButton;
