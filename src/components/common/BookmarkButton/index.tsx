@@ -18,7 +18,7 @@ function BookmarkButton({ storeId, isBookmarked }: BookmarkButtonProps) {
   return (
     <button
       onClick={handleBookmarkButtonClick}
-      className="flex justify-center items-center w-[84px] bg-gray-900 border-gray-500 border-l-[1px]"
+      className="flex justify-center items-center w-[84px] bg-gray-100 rounded-[24px]"
     >
       {isBookmarked ? (
         //   TODO:아이콘이 확정되지 않아 더미 div로 대체. 아이콘 확정시 변경하기
