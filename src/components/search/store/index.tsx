@@ -1,14 +1,14 @@
 import { HTMLAttributes } from 'react';
 import Image from 'next/image';
 
+import storeImg from 'public/assets/img/search/store.png';
 import VisitNumberFlag from '@components/common/VisitNumberFlag';
 import More from 'public/assets/icon/More.svg';
-import restaurantImg from 'public/assets/img/search/restaurant.png';
 import cn from '@utils/cn';
 
-interface RestaurantProps extends HTMLAttributes<HTMLLIElement> {
-  restaurantImgUrl?: string;
-  restaurantName: string;
+interface StoreProps extends HTMLAttributes<HTMLLIElement> {
+  storeImgUrl?: string;
+  storeName: string;
   menuType: string;
   visitNum: number;
   hasMoreOption: boolean;
@@ -16,13 +16,13 @@ interface RestaurantProps extends HTMLAttributes<HTMLLIElement> {
 }
 
 export default function Store({
-  restaurantImgUrl,
-  restaurantName,
+  storeImgUrl,
+  storeName,
   menuType,
   visitNum,
   hasMoreOption,
   isLast,
-}: RestaurantProps) {
+}: StoreProps) {
   return (
     <li className="w-full px-4 pt-2 flex justify-between items-center">
       <div
@@ -33,14 +33,14 @@ export default function Store({
         <div className="flex gap-2">
           <Image
             // TODO: 추후 맛집 이미지 없을 시, 제공하는 기본 이미지로 변경 (현재는 mock image)
-            src={restaurantImgUrl ?? restaurantImg}
-            alt={restaurantName}
+            src={storeImgUrl ?? storeImg}
+            alt={storeName}
             width={60}
             height={60}
           />
           <div className="flex flex-col gap-2">
             <div className="flex gap-1">
-              <p className="body-16-bold">{restaurantName}</p>
+              <p className="body-16-bold">{storeName}</p>
               {visitNum && <VisitNumberFlag visitNum={visitNum} />}
             </div>
             <div className="flex caption-12-bold">
