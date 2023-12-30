@@ -9,11 +9,11 @@ import Input from '../Input';
 
 import useInput from '@hooks/useInput';
 
-interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SearchTopBarProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
 }
 
-export default function SearchBar({ icon }: SearchBarProps) {
+export default function SearchTopBar({ icon }: SearchTopBarProps) {
   const [text, onTextChange, resetText] = useInput('');
 
   return (
