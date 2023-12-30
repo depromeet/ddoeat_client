@@ -4,27 +4,27 @@ import Image from 'next/image';
 
 interface StoreDetailLogProps {
   date: string;
-  restaurantImgUrl?: string;
-  restaurantName: string;
+  storeImgUrl?: string;
+  storeName: string;
   log: string;
 }
 
 export default function StoreDetailLog({
   date,
   log,
-  restaurantImgUrl,
-  restaurantName,
+  storeImgUrl,
+  storeName,
 }: StoreDetailLogProps) {
   return (
     <div className="flex flex-col">
       <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
-      {/* TODO: 준상님 restaurant 컴포넌트 삽입 예정*/}
+      {/* TODO: 준상님 store 컴포넌트 삽입 예정*/}
       <div className="flex flex-col justify-center">
         <div className="px-[16px] py-[8px]">
-          {restaurantImgUrl && (
+          {storeImgUrl && (
             <Image
-              src={restaurantImgUrl}
-              alt={restaurantName}
+              src={storeImgUrl}
+              alt={storeName}
               width={343}
               height={150}
               layout="responsive"
