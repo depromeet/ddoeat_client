@@ -18,6 +18,9 @@
   .body-16-regular {
     @apply text-[16px]/[140%] tracking-[-0.48px] font-normal;
   }
+  .body-14-extraBold {
+    @apply text-[14px]/[140%] tracking-[-0.42px] font-extrabold;
+  }
   .body-14-bold {
     @apply text-[14px]/[140%] tracking-[-0.42px] font-bold;
   }
