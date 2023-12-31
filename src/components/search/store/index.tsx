@@ -3,26 +3,34 @@ import Image from 'next/image';
 
 import storeImg from 'public/assets/img/search/store.png';
 import VisitNumberFlag from '@components/common/VisitNumberFlag';
-import More from 'public/assets/icon/More.svg';
 import cn from '@utils/cn';
+import Trash from 'public/assets/icon24/trash_24.svg';
+import { useDeleteLog } from '@api/useDeleteLog';
 
 interface StoreProps extends HTMLAttributes<HTMLLIElement> {
+  storeId: string;
   storeImgUrl?: string;
   storeName: string;
   menuType: string;
   visitNum: number;
-  hasMoreOption: boolean;
+  hasDeleteOption: boolean;
   isLast: boolean;
 }
 
 export default function Store({
+  storeId,
   storeImgUrl,
   storeName,
   menuType,
   visitNum,
-  hasMoreOption,
+  hasDeleteOption,
   isLast,
 }: StoreProps) {
+  const { mutate: deleteLog } = useDeleteLog();
+  const handleClickDeleteButton = () => {
+    // TODO: 추후 로그 삭제 로직 확정
+    deleteLog(storeId);
+  };
   return (
     <li className="w-full px-4 pt-2 flex justify-between items-center">
       <div
@@ -51,9 +59,9 @@ export default function Store({
             </div>
           </div>
         </div>
-        {hasMoreOption && (
-          <button>
-            <More />
+        {hasDeleteOption && (
+          <button onClick={handleClickDeleteButton}>
+            <Trash />
           </button>
         )}
       </div>
