@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import Image from 'next/image';
 
-import storeImg from 'public/assets/img/search/store.png';
+import storeImg from 'public/assets/image/search/store.png';
 import VisitNumberFlag from '@components/common/VisitNumberFlag';
 import cn from '@utils/cn';
 import Trash from 'public/assets/icon24/trash_24.svg';
