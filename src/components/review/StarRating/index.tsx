@@ -1,5 +1,5 @@
-import DefaultStar from 'public/assets/icon/default_star_40.svg';
-import FilledStar from 'public/assets/icon/filled_star_40.svg';
+import DefaultStar from 'public/assets/icon40/star_default_40.svg';
+import FilledStar from 'public/assets/icon40/star_filled_40.svg';
 
 const starNum = 5;
 

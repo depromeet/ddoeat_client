@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-import Plus from 'public/assets/icon/plus.svg';
+import Plus from 'public/assets/icon40/plus_40.svg';
 
 export default function ImageUploader() {
   const imageUploadButtonRef = useRef<HTMLInputElement>(null);
