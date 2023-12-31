@@ -2,11 +2,17 @@
 
 import Image from 'next/image';
 
+import Store from '@components/search/store';
+
 interface StoreDetailLogProps {
   date: string;
   storeImgUrl?: string;
   storeName: string;
+  menuType: string;
+  visitNum: number;
   log: string;
+  hasMoreOption: boolean;
+  isLast: boolean;
 }
 
 export default function StoreDetailLog({
@@ -14,11 +20,21 @@ export default function StoreDetailLog({
   log,
   storeImgUrl,
   storeName,
+  menuType,
+  visitNum,
+  hasMoreOption,
+  isLast,
 }: StoreDetailLogProps) {
   return (
     <div className="flex flex-col">
       <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
-      {/* TODO: 준상님 store 컴포넌트 삽입 예정*/}
+      <Store
+        storeName={storeName}
+        menuType={menuType}
+        visitNum={visitNum}
+        hasMoreOption={hasMoreOption}
+        isLast={isLast}
+      />
       <div className="flex flex-col justify-center">
         <div className="px-[16px] py-[8px]">
           {storeImgUrl && (
