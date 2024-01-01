@@ -9,7 +9,12 @@ export default function NavigationButton({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <div className={cn('w-full px-[16px] pt-[24px] pb-[32px]', className)}>
+    <div
+      className={cn(
+        'w-full px-[16px] pt-[24px] pb-[32px] bg-white-gradient',
+        className,
+      )}
+    >
       <CTAButton {...props}>{children}</CTAButton>
     </div>
   );
