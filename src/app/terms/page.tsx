@@ -1,28 +1,41 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import TermsCheckBox from '@components/terms/TermsCheckBox';
+import TermsCheckBoxButton from '@components/terms/TermsCheckBoxButton';
 import NavigationButton from '@components/terms/NavigationButton';
 import TermsItem from '@components/terms/TermsItem';
 
 type TermsItem = 'terms1' | 'terms2' | 'terms3';
 
 export default function Page() {
+  const { push } = useRouter();
+
   const [termsChecked, setTermsChecked] = useState({
     terms1: false,
     terms2: false,
     terms3: false,
   });
 
-  const handleClickCheckButton = () => {
-    setTermsChecked((prev) => ({
-      terms1: !prev.terms1,
-      terms2: !prev.terms2,
-      terms3: !prev.terms3,
-    }));
+  // NOTE: 전체 약관 클릭 여부 변경 함수
+  const handleClickTermsCheckBoxButton = () => {
+    if (termsChecked.terms1 && termsChecked.terms2 && termsChecked.terms3) {
+      setTermsChecked({
+        terms1: false,
+        terms2: false,
+        terms3: false,
+      });
+    } else {
+      setTermsChecked({
+        terms1: true,
+        terms2: true,
+        terms3: true,
+      });
+    }
   };
 
+  // NOTE: 개별 약관 클릭 여부 변경 함수
   const handleClickTermsItem = (termItem: TermsItem) => {
     setTermsChecked((prev) => ({
       ...prev,
@@ -31,7 +44,7 @@ export default function Page() {
   };
 
   const handleClickConfirmButton = () => {
-    // TODO: 확인 버튼 클릭 로직 작성
+    push('/');
   };
 
   return (
@@ -41,11 +54,11 @@ export default function Page() {
         <strong className="text-primary-500">약관 내용</strong>에 동의해주세요
       </h1>
       <div className="px-[16px] py-[12px]">
-        <TermsCheckBox
+        <TermsCheckBoxButton
           isCheckAllRequiredTerms={
             termsChecked.terms1 && termsChecked.terms2 && termsChecked.terms3
           }
-          onClick={handleClickCheckButton}
+          onClick={handleClickTermsCheckBoxButton}
         />
       </div>
       <ul>
