@@ -4,7 +4,7 @@ import Image from 'next/image';
 import storeImg from 'public/assets/image/search/store.png';
 import VisitNumberFlag from '@components/common/VisitNumberFlag';
 import cn from '@utils/cn';
-import Trash from 'public/assets/icon24/trash_24.svg';
+import TrashIcon from 'public/assets/icon24/trash_24.svg';
 import { useDeleteLog } from '@api/useDeleteLog';
 
 interface StoreProps extends HTMLAttributes<HTMLLIElement> {
@@ -41,6 +41,7 @@ export default function Store({
         <div className="flex gap-2">
           <Image
             // TODO: 추후 맛집 이미지 없을 시, 제공하는 기본 이미지로 변경 (현재는 mock image)
+            // NOTE: 가게 기본 이미지 서버 response로 내려줄지 논의 후 변경 예정
             src={storeImgUrl ?? storeImg}
             alt={storeName}
             width={60}
@@ -61,7 +62,7 @@ export default function Store({
         </div>
         {hasDeleteOption && (
           <button onClick={handleClickDeleteButton}>
-            <Trash />
+            <TrashIcon />
           </button>
         )}
       </div>
