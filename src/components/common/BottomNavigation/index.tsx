@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import BottomNaviagtionButton from './button';
+import BottomNaviagtionButton from './Button';
 
 import AddRoundButton from 'public/assets/icon56/add_round_btn_56.svg';
 import ProfileDefault from 'public/assets/icon24/profile_default_24.svg';
