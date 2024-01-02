@@ -9,7 +9,7 @@ interface PinBubbleProps {
 
 export default function PinBubble({ totalVisitCount }: PinBubbleProps) {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="animate-bounce flex flex-col justify-center items-center">
       <div className="w-[167px] h-[36px] flex justify-center items-center bg-primary-500 px-[12px] py-[8px] rounded-[16px] mb-[-8px]">
         <PinVisitor />
         <span className="body-14-extraBold text-white">
