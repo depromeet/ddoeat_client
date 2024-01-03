@@ -9,11 +9,11 @@ const TabContext = createContext<TabContextProps | null>(null);
 
 interface TabGroupProps {
   children: ReactNode;
-  initialTab?: string | null;
+  initialTab: string;
 }
 
-export function TabGroup({ children, initialTab = null }: TabGroupProps) {
-  const [activeValue, setActiveValue] = useState(initialTab);
+export function TabGroup({ children, initialTab }: TabGroupProps) {
+  const [activeValue, setActiveValue] = useState(initialTab ?? null);
 
   return (
     <TabContext.Provider value={{ activeValue, setActiveValue }}>
