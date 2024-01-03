@@ -8,16 +8,14 @@ interface TagProps extends ComponentProps<'div'> {
 
 export default function Tag({ children, className, leftItem }: TagProps) {
   return (
-    <div className="flex">
-      <div
-        className={cn(
-          'flex justify-items items-center justify-between gap-[4px] h-[32px] rounded-[32px] px-[12px] py-[4px] caption-12-bold text-white bg-primary-300',
-          className,
-        )}
-      >
-        {leftItem}
-        {children}
-      </div>
+    <div
+      className={cn(
+        'flex justify-items items-center justify-between gap-[4px] h-[32px] w-[53px] rounded-[32px] px-[12px] py-[4px] caption-12-bold text-white bg-primary-300',
+        className,
+      )}
+    >
+      {leftItem}
+      {children}
     </div>
   );
 }
