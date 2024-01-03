@@ -1,9 +1,9 @@
 'use client';
 
-import PinBowl1 from '/public/assets/icon56/pin_bowl1_56.svg';
-import PinBowl2 from '/public/assets/icon56/pin_bowl2_56.svg';
-import PinBowl3 from '/public/assets/icon56/pin_bowl3_56.svg';
-import Bookmark from '/public/assets/icon56/bookmark_56.svg';
+import PinBowlOneIcon from '/public/assets/icon56/pin_bowl1_56.svg';
+import PinBowlTwoIcon from '/public/assets/icon56/pin_bowl2_56.svg';
+import PinBowlThreeIcon from '/public/assets/icon56/pin_bowl3_56.svg';
+import BookmarkIcon from '/public/assets/icon56/bookmark_56.svg';
 
 import { ButtonHTMLAttributes } from 'react';
 
@@ -36,12 +36,12 @@ export default function Marker({
         <p className="caption-10-bold text-white">방문</p>
       </div>
     ) : isBookmarked ? (
-      <Bookmark />
+      <BookmarkIcon />
     ) : (
       <div>
-        {totalVisitCount >= 15 && <PinBowl3 />}
-        {totalVisitCount >= 5 && totalVisitCount < 15 && <PinBowl2 />}
-        {totalVisitCount < 5 && <PinBowl1 />}
+        {totalVisitCount >= 15 && <PinBowlThreeIcon />}
+        {totalVisitCount >= 5 && totalVisitCount < 15 && <PinBowlTwoIcon />}
+        {totalVisitCount < 5 && <PinBowlOneIcon />}
       </div>
     );
   };
