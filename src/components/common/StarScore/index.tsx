@@ -1,23 +1,36 @@
-import FilledStarSmall from 'public/assets/img/filled_star_24.svg';
-import DefaultStarSmall from 'public/assets/img/default_star_24.svg';
-
+import FilledStar20Icon from '/public/assets/icon24/star20_24.svg';
+import FilledStar40Icon from '/public/assets/icon24/star40_24.svg';
+import FilledStar60Icon from '/public/assets/icon24/star60_24.svg';
+import FilledStar80Icon from '/public/assets/icon24/star80_24.svg';
+import DefaultStarSmallIcon from '/public/assets/img/default_star_24.svg';
+import FilledStarSmallIcon from '/public/assets/img/filled_star_24.svg';
 interface StarScoreProps {
   rating: number;
 }
 
 export default function StarScore({ rating }: StarScoreProps) {
-  // TODO: 별점 불러올 때 소수점 반올림할 지 버릴지 논의 필요
-  const filledStars = Math.round(rating); // Filled Star 개수 결정
-
   const formattedRating = rating.toFixed(1);
+  const filledStars = Math.floor(rating);
+  const decimalRating = rating - Math.floor(rating);
 
-  // TODO: 별점 구간별로 별 ui 어떻게 보여줄 지 디자인과 논의 후 수정 필요
-  const getStarsNum = Array.from({ length: 5 }).map((_, index) => (
-    <div key={index}>
-      {index < filledStars ? <FilledStarSmall /> : <DefaultStarSmall />}
-    </div>
-  ));
+  const getStarsNum = Array.from({ length: 5 }).map((_, index) => {
+    const StarIcon =
+      index < filledStars ? (
+        <FilledStarSmallIcon />
+      ) : index === filledStars && decimalRating >= 0.8 ? (
+        <FilledStar80Icon />
+      ) : index === filledStars && decimalRating >= 0.6 ? (
+        <FilledStar60Icon />
+      ) : index === filledStars && decimalRating >= 0.4 ? (
+        <FilledStar40Icon />
+      ) : index === filledStars && decimalRating <= 0.4 ? (
+        <FilledStar20Icon />
+      ) : (
+        <DefaultStarSmallIcon />
+      );
 
+    return <div key={index}>{StarIcon}</div>;
+  });
   return (
     <div className="flex flex-row gap-x-[4px] items-center body-16-bold text-primary-500">
       <span> {formattedRating} </span>
