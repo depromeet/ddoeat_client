@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 
 type ImageType = 'profile' | 'small' | 'medium' | 'full';
 
@@ -7,9 +7,7 @@ interface ImageContainerProps {
   src: string;
 }
 
-interface ImageAttributes {
-  width: number;
-  height: number;
+interface ImageAttributes extends Pick<ImageProps, 'width' | 'height'> {
   radius: string;
 }
 
@@ -26,7 +24,11 @@ const getImageAttributes = (type: ImageType): ImageAttributes => {
   }
 };
 
-export default function ImageContainer({ type, src }: ImageContainerProps) {
+export default function ImageContainer({
+  type,
+  src,
+  ...restProps
+}: ImageContainerProps) {
   const { width, height, radius } = getImageAttributes(type);
 
   return (
@@ -36,6 +38,7 @@ export default function ImageContainer({ type, src }: ImageContainerProps) {
       height={height}
       alt="image"
       className={radius}
+      {...restProps}
     />
   );
 }
