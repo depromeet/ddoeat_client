@@ -1,5 +1,5 @@
-import FilledStarSmall from 'public/assets/img/filled_star_24.svg';
-import DefaultStarSmall from 'public/assets/img/default_star_24.svg';
+import FilledStarSmall from 'public/assets/icon24/star_filled_24.svg';
+import DefaultStarSmall from 'public/assets/icon24/star_default_24.svg';
 
 interface StarScoreProps {
   rating: number;
