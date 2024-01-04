@@ -7,7 +7,7 @@ interface TermsCheckBoxProps extends HTMLAttributes<HTMLButtonElement> {
   isCheckAllRequiredTerms: boolean;
 }
 
-export default function TermsCheckBoxButton({
+export default function AllTermsCheckBox({
   isCheckAllRequiredTerms,
   onClick,
 }: TermsCheckBoxProps) {

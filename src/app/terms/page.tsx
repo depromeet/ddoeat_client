@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import TermsCheckBoxButton from '@components/terms/TermsCheckBoxButton';
+import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
 import NavigationButton from '@components/terms/NavigationButton';
 import TermsItem from '@components/terms/TermsItem';
 import { TERMS } from 'src/constants/terms';
@@ -48,7 +48,7 @@ export default function Page() {
         <strong className="text-primary-500">약관 내용</strong>에 동의해주세요
       </h1>
       <div className="px-[16px] py-[12px]">
-        <TermsCheckBoxButton
+        <AllTermsCheckBox
           isCheckAllRequiredTerms={isTermsAllChecked}
           onClick={handleCheckAll}
         />
