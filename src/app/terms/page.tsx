@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { TERMS } from '@constants/terms';
 import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
 import NavigationButton from '@components/terms/NavigationButton';
 import TermsItem from '@components/terms/TermsItem';
-import { TERMS } from 'src/constants/terms';
 
 export default function Page() {
   const { push } = useRouter();
