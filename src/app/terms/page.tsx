@@ -50,7 +50,7 @@ export default function Page() {
       <div className="px-[16px] py-[12px]">
         <AllTermsCheckBox
           isCheckAllRequiredTerms={isTermsAllChecked}
-          onClick={handleCheckAll}
+          onChange={handleCheckAll}
         />
       </div>
       <ul>
