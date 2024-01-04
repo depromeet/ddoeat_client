@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import PlusIcon from 'public/assets/icon16/plus_16.svg';
 
