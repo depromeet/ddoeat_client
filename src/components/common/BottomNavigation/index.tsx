@@ -14,7 +14,7 @@ export default function BottomNavigation() {
   // };
 
   return (
-    <div className="flex justify-between gap-[16px] w-full px-[24px] py-[16px]">
+    <div className="flex justify-between gap-[16px] w-full h-[128px] px-[24px] py-[16px]">
       {/* NOTE: 은지님 FloatingButton 삽입 */}
       <AddStoreButton />
     </div>
