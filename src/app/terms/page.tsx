@@ -58,8 +58,8 @@ export default function Page() {
           <TermsItem
             key={term.id}
             title={term.title}
-            isChecked={termsState[index].isChecked}
-            onChangeCheckState={handleClickTermsItem(term.id)}
+            checked={termsState[index].isChecked}
+            onChange={handleClickTermsItem(term.id)}
           />
         ))}
       </ul>
