@@ -39,11 +39,6 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'bottom-navigation-button':
-          'linear-gradient(rgba(37, 37, 37, 1), rgba(112, 112, 112, 0.48))',
-      },
-      boxShadow: {
-        'bottom-navigation-button': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       },
     },
   },
