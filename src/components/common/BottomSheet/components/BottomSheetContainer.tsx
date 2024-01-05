@@ -121,14 +121,14 @@ export default function BottomSheetContainer({
         exit="hidden"
         custom={deviceHeight - showStatusChildrenHeight}
         className={cn(
-          'absolute left-0 top-0 overflow-hidden h-[100dvh] w-[100dvw] bg-gray-700 rounded-t-[24px]',
+          'absolute left-0 top-0 overflow-hidden h-[100dvh] w-[100dvw] bg-white rounded-t-[24px]',
           {
             'rounded-none h-fit': isFull,
           },
         )}
       >
         {hasHandleBar && isShow && (
-          <div className="flex items-center justify-center h-[24px] opacity-100">
+          <div className="flex items-center justify-center h-[24px]">
             <div className="w-[56px] h-[6px] rounded-[32px] shrink-0 bg-gray-300" />
           </div>
         )}
