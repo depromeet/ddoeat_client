@@ -23,7 +23,7 @@ export default function BookmarkButton({
   return (
     <Button
       onClick={handleBookmarkButtonClick}
-      className="w-[84px] bg-gray-100 shrink-0"
+      className="w-[84px] bg-gray-100 shrink-0 active:bg-gray-300"
     >
       {isBookmarked ? (
         //   TODO:아이콘이 확정되지 않아 더미 div로 대체. 아이콘 확정시 변경하기
