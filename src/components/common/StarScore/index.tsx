@@ -1,7 +1,4 @@
-import FilledStar20Icon from '/public/assets/icon24/star20_24.svg';
-import FilledStar40Icon from '/public/assets/icon24/star40_24.svg';
-import FilledStar60Icon from '/public/assets/icon24/star60_24.svg';
-import FilledStar80Icon from '/public/assets/icon24/star80_24.svg';
+import FilledStar50Icon from '/public/assets/icon24/star50_24.svg';
 import DefaultStarSmallIcon from '/public/assets/img/default_star_24.svg';
 import FilledStarSmallIcon from '/public/assets/img/filled_star_24.svg';
 interface StarScoreProps {
@@ -13,18 +10,12 @@ export default function StarScore({ rating }: StarScoreProps) {
   const filledStars = Math.floor(rating);
   const decimalRating = rating - Math.floor(rating);
 
-  const getStarsNum = Array.from({ length: 5 }).map((_, index) => {
+  const renderStars = Array.from({ length: 5 }).map((_, index) => {
     const StarIcon =
       index < filledStars ? (
         <FilledStarSmallIcon />
-      ) : index === filledStars && decimalRating >= 0.8 ? (
-        <FilledStar80Icon />
-      ) : index === filledStars && decimalRating >= 0.6 ? (
-        <FilledStar60Icon />
-      ) : index === filledStars && decimalRating >= 0.4 ? (
-        <FilledStar40Icon />
-      ) : index === filledStars && decimalRating <= 0.4 ? (
-        <FilledStar20Icon />
+      ) : index === filledStars && decimalRating >= 0.5 ? (
+        <FilledStar50Icon />
       ) : (
         <DefaultStarSmallIcon />
       );
@@ -34,7 +25,7 @@ export default function StarScore({ rating }: StarScoreProps) {
   return (
     <div className="flex flex-row gap-x-[4px] items-center body-16-bold text-primary-500">
       <span> {formattedRating} </span>
-      <div className="flex flex-row"> {getStarsNum}</div>
+      <div className="flex flex-row"> {renderStars}</div>
     </div>
   );
 }
