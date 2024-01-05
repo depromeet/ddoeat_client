@@ -2,19 +2,47 @@ import { ComponentProps, ReactNode } from 'react';
 
 import cn from '@utils/cn';
 
+type TagSizeType = 'small' | 'large';
 interface TagProps extends ComponentProps<'div'> {
-  leftItem?: ReactNode;
+  children: ReactNode;
+  size: TagSizeType;
+}
+interface TagStylesAttributes {
+  height: string;
+  width: string;
+  px: string;
+  textFont: string;
 }
 
-export default function Tag({ children, className, leftItem }: TagProps) {
+const getTagAttributes = (type: TagSizeType): TagStylesAttributes => {
+  switch (type) {
+    case 'small':
+      return {
+        height: 'h-[24px]',
+        width: 'w-[43px]',
+        px: 'px-[8px]',
+        textFont: 'caption-10-bold',
+      };
+    case 'large':
+      return {
+        height: 'h-[32px]',
+        width: 'w-[53px]',
+        px: 'px-[12px]',
+        textFont: 'caption-12-bold',
+      };
+  }
+};
+
+export default function Tag({ children, className, size }: TagProps) {
+  const { height, width, px, textFont } = getTagAttributes(size);
+  console.log(height, width, px, textFont);
   return (
     <div
       className={cn(
-        'flex justify-items items-center justify-between gap-[4px] h-[32px] w-[53px] rounded-[32px] px-[12px] py-[4px] caption-12-bold text-white bg-primary-300',
+        `flex justify-items items-center justify-between gap-[4px] rounded-[32px] py-[4px] ${px} ${height} ${width} ${textFont}`,
         className,
       )}
     >
-      {leftItem}
       {children}
     </div>
   );
