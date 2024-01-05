@@ -1,14 +1,22 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { ButtonHTMLAttributes } from 'react';
 
 import Button from '../Button';
 
-interface WriteLogButtonProps {
+import PenIcon from 'public/assets/icon20/pen_20.svg';
+import cn from '@utils/cn';
+
+interface WriteLogButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   storeId: string;
 }
 
-export default function WriteLogButton({ storeId }: WriteLogButtonProps) {
+export default function WriteLogButton({
+  storeId,
+  className,
+  ...restProps
+}: WriteLogButtonProps) {
   const router = useRouter();
 
   const handleWriteLogButtonClick = () => {
@@ -19,11 +27,14 @@ export default function WriteLogButton({ storeId }: WriteLogButtonProps) {
   return (
     <Button
       onClick={handleWriteLogButtonClick}
-      className="w-full gap-[6px] bg-gray-900 active:bg-gray-700"
+      className={cn(
+        'w-full gap-[6px] bg-gray-900 active:bg-gray-700 disabled:bg-gray-100 group',
+        className,
+      )}
+      {...restProps}
     >
-      <span>로그 작성</span>
-      {/* TODO:아이콘이 확정되지 않아 더미 div로 대체. 아이콘 확정시 변경하기 */}
-      <div className="w-[24px] h-[24px] bg-primary-500" />
+      <span className="group-disabled:text-gray-500">로그 작성</span>
+      <PenIcon />
     </Button>
   );
 }
