@@ -8,7 +8,7 @@ import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
 import { bottomSheetAnimationVariants } from 'src/constants/motions';
 
-export default function BottomSheetContainer({
+export default function BottomSheetWrapper({
   isShowing,
   handleCloseBottomSheet,
 
@@ -121,7 +121,7 @@ export default function BottomSheetContainer({
         exit="hidden"
         custom={deviceHeight - showStatusChildrenHeight}
         className={cn(
-          'absolute left-0 top-0 overflow-hidden h-[100dvh] w-full bg-white rounded-t-[24px]',
+          ' pointer-events-auto absolute left-0 top-0 overflow-hidden h-[100dvh] w-full bg-white rounded-t-[24px]',
           {
             'rounded-none h-fit': isFull,
           },

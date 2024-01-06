@@ -39,13 +39,20 @@ export function BottomSheetProvider({
   const [fullStatusChildrenHeight, setFullStatusChildrenHeight] = useState(0);
 
   const [deviceHeight, setDeviceHeight] = useState(0);
+  const [bottomSheetContainer, setBottomSheetContainer] =
+    useState<Element | null>(null);
 
   useEffect(() => {
     isShowing && setDeviceHeight(document.documentElement.clientHeight);
+    setBottomSheetContainer(document.querySelector('#bottomSheetContainer'));
   }, [isShowing]);
 
   return (
-    <AnimatePortal isShowing={isShowing} mode={mode}>
+    <AnimatePortal
+      isShowing={isShowing}
+      mode={mode}
+      customContainer={bottomSheetContainer}
+    >
       <BottomSheetContext.Provider
         value={{
           isShowing,
