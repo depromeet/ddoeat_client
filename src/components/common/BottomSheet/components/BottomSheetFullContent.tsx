@@ -14,7 +14,13 @@ export default function BottonSheetFullContent({
         fullStatusChildrenRef.current.getBoundingClientRect().height,
       );
     }
-  }, [status, fullStatusChildrenRef, fullStatusChildrenRef.current]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    status,
+    fullStatusChildrenRef,
+    fullStatusChildrenRef.current,
+    setFullStatusChildrenHeight,
+  ]);
 
   const isFull = status === 'full';
 

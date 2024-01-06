@@ -43,7 +43,7 @@ export default function BottomSheetContainer({
       setStatus(willChange);
       await controls.start(willChange);
     },
-    [controls],
+    [controls, setStatus],
   );
 
   useEffect(() => {

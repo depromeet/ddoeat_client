@@ -14,7 +14,13 @@ export default function BottonSheetShowContent({
         showStatusChildrenRef.current.getBoundingClientRect().height,
       );
     }
-  }, [status, showStatusChildrenRef, showStatusChildrenRef.current]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    status,
+    showStatusChildrenRef,
+    showStatusChildrenRef.current,
+    setShowStatusChildrenHeight,
+  ]);
 
   const isShow = status === 'show';
 
