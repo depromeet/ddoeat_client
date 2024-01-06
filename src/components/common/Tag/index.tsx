@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react';
 import cn from '@utils/cn';
 
 type TagSizeType = 'small' | 'large';
+
 interface TagProps extends HTMLAttributes<HTMLDivElement> {
   size: TagSizeType;
 }
@@ -12,7 +13,12 @@ const tagStyleAttributes = {
   large: 'h-[32px] px-[12px] caption-12-bold',
 };
 
-export default function Tag({ children, className, size }: TagProps) {
+export default function Tag({
+  children,
+  className,
+  size,
+  ...restProps
+}: TagProps) {
   const tagStyles = tagStyleAttributes[size];
 
   return (
@@ -21,6 +27,7 @@ export default function Tag({ children, className, size }: TagProps) {
         `inline-flex justify-items items-center justify-between gap-[4px] rounded-[32px] py-[4px] ${tagStyles}`,
         className,
       )}
+      {...restProps}
     >
       {children}
     </div>
