@@ -39,7 +39,9 @@ export default function RootLayout({
   return (
     <QueryClientProviders>
       <html lang="en" className={`${nanumSquareRound.variable}`}>
-        <body>{children}</body>
+        <body className="overscroll-y-none h-[100dvh] overflow-hidden">
+          {children}
+        </body>
       </html>
     </QueryClientProviders>
   );
