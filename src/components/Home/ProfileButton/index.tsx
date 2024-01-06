@@ -17,7 +17,7 @@ export default function ProfileButton({
     <CTAButton
       {...props}
       onClick={handleClickProfileButton}
-      className="w-[50px] h-[50px] rounded-[16px] p-0 bg-white shadow-[0_4px_15.4px_0_rgba(0,0,0,0.25)] active:bg-white"
+      className="w-[50px] h-[50px] rounded-[16px] p-0 bg-white shadow-floating active:bg-white"
     >
       <ProfileIcon />
     </CTAButton>
