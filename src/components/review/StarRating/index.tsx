@@ -1,5 +1,5 @@
-import DefaultStar from 'public/assets/icon40/star_default_40.svg';
-import FilledStar from 'public/assets/icon40/star_filled_40.svg';
+import DefaultStarIcon from 'public/assets/icon40/star_default_40.svg';
+import FilledStarIcon from 'public/assets/icon40/star_filled_40.svg';
 
 const starNum = 5;
 
@@ -16,9 +16,9 @@ export default function StarRating({ rating, onClick }: StarRatingProps) {
         <div className="flex pt-[8px]">
           {Array.from({ length: starNum }).map((_, index) =>
             index < rating ? (
-              <FilledStar key={index} onClick={onClick} />
+              <FilledStarIcon key={index} onClick={onClick} />
             ) : (
-              <DefaultStar key={index} onClick={onClick} />
+              <DefaultStarIcon key={index} onClick={onClick} />
             ),
           )}
         </div>

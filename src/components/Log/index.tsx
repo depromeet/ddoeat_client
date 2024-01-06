@@ -7,7 +7,7 @@ import MenuTypeFlag from '@components/common/MenuTypeFlag';
 // import VisitNumFlag from '@components/common/VisitNumFlag';
 import StarRating from '@components/common/StarScore';
 
-import LogImage from '/public/assets/img/LogImage.svg';
+import LogImage from '/public/assets/image/LogImage.svg';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   date: string;
