@@ -16,7 +16,7 @@ export default function Header({ children }: HeaderProps) {
   };
 
   return (
-    <div className="flex items-center px-[16px] py-[8px] w-full h-[56px]">
+    <div className="flex items-center px-[16px] py-[8px] w-full">
       <button className="w-[40px] h-[40px]" onClick={handleClickBackButton}>
         <LeftArrow />
       </button>
