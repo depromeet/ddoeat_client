@@ -121,7 +121,7 @@ export default function BottomSheetContainer({
         exit="hidden"
         custom={deviceHeight - showStatusChildrenHeight}
         className={cn(
-          'absolute left-0 top-0 overflow-hidden h-[100dvh] w-[100dvw] bg-white rounded-t-[24px]',
+          'absolute left-0 top-0 overflow-hidden h-[100dvh] w-full bg-white rounded-t-[24px]',
           {
             'rounded-none h-fit': isFull,
           },

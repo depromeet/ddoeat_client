@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <QueryClientProviders>
       <html lang="en" className={`${nanumSquareRound.variable}`}>
-        <body className="overscroll-y-none h-[100dvh] overflow-hidden">
+        <body className="relative overscroll-y-none h-[100dvh] w-full max-w-[480px] mx-auto">
           {children}
         </body>
       </html>
