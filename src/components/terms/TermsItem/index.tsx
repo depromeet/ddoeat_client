@@ -24,18 +24,17 @@ export default function TermsItem({
   return (
     <li className="pl-[32px] pr-[16px]">
       <div className="flex justify-between py-[12px]">
-        <label htmlFor={title} className="flex gap-[4px] items-center pl-[8px]">
+        <label className="flex gap-[4px] items-center pl-[8px]">
+          <input
+            type="checkbox"
+            defaultChecked={checked}
+            onChange={onChange}
+            className="hidden"
+            {...restProps}
+          />
           {checked ? <CheckFill /> : <CheckDefault />}
           <p className="body-14-extraBold">{title}</p>
         </label>
-        <input
-          type="checkbox"
-          id={title}
-          defaultChecked={checked}
-          onChange={onChange}
-          className="hidden"
-          {...restProps}
-        />
         <button onClick={handleClickArrowButton}>
           {isOpenTermsItem ? <UpArrow /> : <DownArrow />}
         </button>

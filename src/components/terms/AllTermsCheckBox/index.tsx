@@ -9,22 +9,16 @@ export default function AllTermsCheckBox({
   ...restProps
 }: InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div>
-      <label
-        htmlFor="all_check"
-        className="flex gap-[4px] items-center w-full h-[56px] bg-gray-100 p-[16px] rounded-[32px]"
-      >
-        {checked ? <CheckBoxFill /> : <CheckboxDefault />}
-        <p className="text-gray-900 body-16-bold">약관 전체 동의</p>
-      </label>
+    <label className="flex gap-[4px] items-center w-full h-[56px] bg-gray-100 p-[16px] rounded-[32px]">
       <input
         type="checkbox"
-        id="all_check"
         defaultChecked={checked}
         onChange={onChange}
         className="hidden"
         {...restProps}
       />
-    </div>
+      {checked ? <CheckBoxFill /> : <CheckboxDefault />}
+      <p className="text-gray-900 body-16-bold">약관 전체 동의</p>
+    </label>
   );
 }
