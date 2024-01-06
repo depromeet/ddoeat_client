@@ -34,7 +34,7 @@ export default function StoreDetailLog({
         storeId={storeId}
         storeName={storeName}
         menuType={menuType}
-        visitNum={visitNum}
+        revisitNum={visitNum}
         hasDeleteOption={hasDeleteOption}
         isLast={isLast}
       />

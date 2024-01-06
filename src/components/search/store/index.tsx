@@ -9,7 +9,7 @@ interface StoreProps extends HTMLAttributes<HTMLLIElement> {
   storeId: string;
   storeName: string;
   menuType: string;
-  location: string;
+  location?: string;
   revisitNum: number;
   hasDeleteOption: boolean;
   isLast: boolean;
@@ -45,7 +45,7 @@ export default function Store({
             <p className="after:inline-block after:w-[0.5px] after:h-[10px] after:bg-gray-300 after:mx-2">
               {menuType}
             </p>
-            <p>{location}</p>
+            {location && <p>{location}</p>}
           </div>
         </div>
         {hasDeleteOption && (
