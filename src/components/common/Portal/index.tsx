@@ -7,7 +7,7 @@ export default function Portal({ children }: PropsWithChildren) {
   const [container, setContainer] = useState<Element | null>(null);
 
   useEffect(() => {
-    if (document) {
+    if (document?.body) {
       setContainer(document.body);
     }
   }, []);
