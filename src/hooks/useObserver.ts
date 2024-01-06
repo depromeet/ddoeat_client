@@ -8,7 +8,7 @@ interface UseObserverParams {
 }
 
 interface UseObserverReturns {
-  setTarget: Dispatch<SetStateAction<HTMLElement | null | undefined>>;
+  setTarget: Dispatch<SetStateAction<HTMLElement | null>>;
 }
 
 const useObserver = ({
@@ -17,7 +17,7 @@ const useObserver = ({
   rootMargin = '0px',
   threshold = 0,
 }: UseObserverParams): UseObserverReturns => {
-  const [target, setTarget] = useState<HTMLElement | null | undefined>(null);
+  const [target, setTarget] = useState<HTMLElement | null>(null);
   useEffect(() => {
     if (!target) return;
 
