@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 
-import CheckBoxFill from 'public/assets/icon24/checkbox_fill_24.svg';
 import CheckboxDefault from 'public/assets/icon24/checkbox_default_24.svg';
+import cn from '@utils/cn';
 
 export default function AllTermsCheckBox({
   checked,
@@ -17,7 +17,12 @@ export default function AllTermsCheckBox({
         className="hidden"
         {...restProps}
       />
-      {checked ? <CheckBoxFill /> : <CheckboxDefault />}
+      <CheckboxDefault
+        className={cn({
+          'fill-gray-300': !checked,
+          'fill-primary-500': checked,
+        })}
+      />
       <p className="text-gray-900 body-16-bold">약관 전체 동의</p>
     </label>
   );
