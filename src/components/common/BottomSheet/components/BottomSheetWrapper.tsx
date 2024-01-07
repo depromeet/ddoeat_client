@@ -108,33 +108,35 @@ export default function BottomSheetWrapper({
   return (
     isShowing &&
     deviceHeight && (
-      <motion.div
-        variants={bottomSheetAnimationVariants}
-        drag={'y'}
-        onDragEnd={handleDragEnd}
-        dragConstraints={{
-          top: isFull ? -fullStatusChildrenHeight + deviceHeight : 0,
-          bottom: isOverScrolled ? 0 : deviceHeight,
-        }}
-        animate={controls}
-        initial="hidden"
-        exit="hidden"
-        custom={deviceHeight - showStatusChildrenHeight}
-        className={cn(
-          ' pointer-events-auto absolute left-0 top-0 overflow-hidden h-[100dvh] w-full bg-white rounded-t-[24px]',
-          {
-            'rounded-none h-fit': isFull,
-          },
-        )}
-      >
-        {hasHandleBar && isShow && (
-          <div className="flex items-center justify-center h-[24px]">
-            <div className="w-[56px] h-[6px] rounded-[32px] shrink-0 bg-gray-300" />
-          </div>
-        )}
-        {isFull && <div ref={setTarget} className="w-full h-[0px]" />}
-        {children}
-      </motion.div>
+      <div className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none">
+        <motion.div
+          variants={bottomSheetAnimationVariants}
+          drag={'y'}
+          onDragEnd={handleDragEnd}
+          dragConstraints={{
+            top: isFull ? -fullStatusChildrenHeight + deviceHeight : 0,
+            bottom: isOverScrolled ? 0 : deviceHeight,
+          }}
+          animate={controls}
+          initial="hidden"
+          exit="hidden"
+          custom={deviceHeight - showStatusChildrenHeight}
+          className={cn(
+            'pointer-events-auto absolute left-0 top-0 overflow-hidden h-[100dvh] w-full bg-white rounded-t-[24px]',
+            {
+              'rounded-none h-fit': isFull,
+            },
+          )}
+        >
+          {hasHandleBar && isShow && (
+            <div className="flex items-center justify-center h-[24px]">
+              <div className="w-[56px] h-[6px] rounded-[32px] shrink-0 bg-gray-300" />
+            </div>
+          )}
+          {isFull && <div ref={setTarget} className="w-full h-[0px]" />}
+          {children}
+        </motion.div>
+      </div>
     )
   );
 }

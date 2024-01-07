@@ -41,10 +41,6 @@ export default function RootLayout({
       <html lang="en" className={`${nanumSquareRound.variable}`}>
         <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto">
           {children}
-          <div
-            id="bottomSheetContainer"
-            className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none"
-          />
         </body>
       </html>
     </QueryClientProviders>
