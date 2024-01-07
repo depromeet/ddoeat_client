@@ -1,26 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk';
 
 import BottomSheet from '@components/common/BottomSheet';
+import useLocation from '@hooks/useLocation';
+import CurrentLocationIcon from 'public/assets/icon24/current_location_24.svg';
 
 export default function Home() {
-  //TODO: 리뷰 후 원복
-  const [isShowing, setIsShowing] = useState(false);
+  const mapRef = useRef<kakao.maps.Map>(null);
+  const { center, setCurrentUserLocation } = useLocation();
+  const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
+
+  useEffect(() => {
+    setCurrentUserLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center justify-between overflow-hidden">
-      <button
-        onClick={() => {
-          setIsShowing(!isShowing);
-        }}
+    <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center overflow-hidden">
+      <Map
+        ref={mapRef}
+        center={center}
+        className="w-full h-full"
+        isPanto={true}
       >
-        click
-      </button>
+        <CustomOverlayMap position={center}>
+          <CurrentLocationIcon />
+        </CustomOverlayMap>
+      </Map>
+
       <BottomSheet
         handleCloseBottomSheet={() => {
-          setIsShowing(false);
+          setIsBottomSheetShowing(false);
         }}
-        isShowing={isShowing}
+        isShowing={isBottomSheetShowing}
       >
         <BottomSheet.ShowContent>
           <div className="w-full h-[3000px] bg-primary-50 break-words">
