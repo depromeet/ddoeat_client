@@ -22,5 +22,6 @@ export const useGetStoreList = (
   return useQuery({
     queryKey: ['get-store-list', keyword],
     queryFn: () => getStoreList(keyword),
+    enabled: !!keyword,
   });
 };

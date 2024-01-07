@@ -33,7 +33,7 @@ export default function Store({
     <li className="w-full pl-[24px] pr-[16px] pt-[8px] flex justify-between items-center">
       <div
         className={`${cn('flex justify-between items-center pt-2 pb-4 w-full', {
-          'border-b-gray-100 border-b-[1px]': isLast,
+          'border-b-gray-100 border-b-[1px]': !isLast,
         })}`}
       >
         <div className="flex flex-col gap-2">

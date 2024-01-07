@@ -9,12 +9,16 @@ import Header from '@components/common/Header';
 import { useGetStoreList } from '@api/useGetStoreList';
 import useInput from '@hooks/useInput';
 import Store from '@components/search/store';
+import cn from '@utils/cn';
+import NoSearchResult from '@components/common/NoSearchResult';
 
 export default function Page() {
   const [text, onTextChange, resetText] = useInput('');
   const debouncedText = useDebounce(text, 500);
 
   const { data: storeList } = useGetStoreList(debouncedText);
+
+  const isStoreListExists = storeList?.length !== 0;
 
   const type = useSearchParams().get('type');
 
@@ -33,22 +37,31 @@ export default function Page() {
           resetText={resetText}
         />
       </Header>
-      <ul>
-        {storeList?.map((store, index) => {
-          const { storeId } = store;
-
-          return (
-            // TODO: 클릭 시 이동 url 확정되면 수정
-            // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
-            <Link href={`/map/${storeId}`} key={storeId}>
-              <Store
-                {...store}
-                hasDeleteOption={false}
-                isLast={index === storeList.length - 1}
-              />
-            </Link>
-          );
+      <ul
+        className={cn('h-[calc(100dvh-68px)] overflow-y-scroll', {
+          'bg-white': isStoreListExists,
+          'bg-gray-100 flex justify-center items-center': !isStoreListExists,
         })}
+      >
+        {isStoreListExists ? (
+          storeList?.map((store, index) => {
+            const { storeId } = store;
+
+            return (
+              // TODO: 클릭 시 이동 url 확정되면 수정
+              // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
+              <Link href={`/map/${storeId}`} key={storeId}>
+                <Store
+                  {...store}
+                  hasDeleteOption={false}
+                  isLast={index === storeList.length - 1}
+                />
+              </Link>
+            );
+          })
+        ) : (
+          <NoSearchResult />
+        )}
       </ul>
     </div>
   );
