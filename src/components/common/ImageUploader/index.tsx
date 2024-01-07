@@ -13,7 +13,7 @@ export default function ImageUploader() {
 
   return (
     <div
-      className="rounded-[24px] text-center w-full h-[160px] flex flex-col justify-center items-center gap-[8px]"
+      className="bg-white rounded-[24px] text-center w-full h-[160px] flex flex-col justify-center items-center gap-[8px]"
       onClick={handleClickUploadButton}
     >
       <p className="body-16-bold">사진을 추가해주세요.</p>
