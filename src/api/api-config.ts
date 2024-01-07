@@ -21,7 +21,7 @@ export interface ApiResponse<T> {
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   withCredentials: true,
-  timeout: 3000,
+  timeout: 10000,
 });
 
 axiosInstance.interceptors.request.use(
