@@ -1,4 +1,4 @@
-import BottomSheetContainer from './components/BottomSheetContainer';
+import BottomSheetWrapper from './components/BottomSheetWrapper';
 import BottonSheetFullContent from './components/BottomSheetFullContent';
 import BottonSheetShowContent from './components/BottomSheetShowContent';
 import { BottomSheetProvider } from './contexts/BottomSheetContext';
@@ -13,7 +13,7 @@ function BottomSheet({ children, ...restProps }: BottomSheetProps) {
       mode={mode}
       defaultShowHeight={defaultShowHeight}
     >
-      <BottomSheetContainer {...restProps}>{children}</BottomSheetContainer>
+      <BottomSheetWrapper {...restProps}>{children}</BottomSheetWrapper>
     </BottomSheetProvider>
   );
 }
