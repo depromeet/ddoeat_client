@@ -9,7 +9,7 @@ interface TagProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const tagStyleAttributes = {
-  small: 'h-[24px] w-[43px] px-[8px] caption-10-bold',
+  small: 'h-[24px] px-[8px] caption-10-bold',
   large: 'h-[32px] px-[12px] caption-12-bold',
 };
 
