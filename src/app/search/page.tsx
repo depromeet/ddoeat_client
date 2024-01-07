@@ -32,18 +32,14 @@ export default function Page() {
       </Header>
       <ul>
         {storeList?.map((store, index) => {
-          const { storeId, storeName, menuType, location, revisitNum } = store;
+          const { storeId } = store;
 
           return (
             // TODO: 클릭 시 이동 url 확정되면 수정
             // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
             <Link href={`/map/${storeId}`} key={storeId}>
               <Store
-                storeId={storeId}
-                storeName={storeName}
-                menuType={menuType}
-                location={location}
-                revisitNum={revisitNum}
+                {...store}
                 hasDeleteOption={false}
                 isLast={index === storeList.length - 1}
               />
