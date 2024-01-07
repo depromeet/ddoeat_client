@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
+import useDebounce from '@hooks/useDebounce';
 import SearchTopBar from '@components/common/SearchTopBar';
 import Header from '@components/common/Header';
 import { useGetStoreList } from '@api/useGetStoreList';
@@ -11,7 +12,9 @@ import Store from '@components/search/store';
 
 export default function Page() {
   const [text, onTextChange, resetText] = useInput('');
-  const { data: storeList } = useGetStoreList(text);
+  const debouncedText = useDebounce(text, 500);
+
+  const { data: storeList } = useGetStoreList(debouncedText);
 
   const type = useSearchParams().get('type');
 
