@@ -9,7 +9,7 @@ import cn from '@utils/cn';
 export default function Header({
   className,
   children,
-}: HTMLAttributes<HTMLDivElement>) {
+}: HTMLAttributes<HTMLHeadElement>) {
   const { back } = useRouter();
 
   const handleClickBackButton = () => {
@@ -17,7 +17,7 @@ export default function Header({
   };
 
   return (
-    <div
+    <header
       className={cn(
         'flex items-center px-[16px] py-[8px] w-full h-[56px]',
         className,
@@ -28,6 +28,6 @@ export default function Header({
       </button>
       {/* NOTE: 저희 서비스에서는 텍스트 혹은 search input이 들어갑니다. Header 컴포넌트 내부에 넣어주시면 됩니다. */}
       {children}
-    </div>
+    </header>
   );
 }
