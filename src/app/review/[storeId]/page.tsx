@@ -2,14 +2,18 @@
 
 import { useState, useCallback, ChangeEvent } from 'react';
 
+import { usePostLog } from '@api/usePostLog';
 import ImageUploader from '@components/common/ImageUploader';
 import StarRating from '@components/review/StarRating';
 import TextArea from '@components/common/TextArea';
 import NavigationButton from '@components/terms/NavigationButton';
 
-export default function Page() {
+export default function Page({ params }: { params: { slug: string } }) {
+  const { mutate: postLog } = usePostLog();
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
+
+  const storeId = params.slug;
 
   const handleRating = useCallback(
     (index: number) => () => {
@@ -23,7 +27,8 @@ export default function Page() {
   };
 
   const handleClickSubmitButton = () => {
-    // TODO: 로그 등록 기능 작성
+    // TODO: 이미지 기능 구현
+    postLog({ storeId, rating, storeImgUrl: '', description });
   };
 
   return (
