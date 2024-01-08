@@ -22,7 +22,7 @@ const postLog = ({ ...props }: Log): Promise<void> => {
 export const usePostLog = (): UseMutationResult<void, AxiosError, Log> => {
   const { push } = useRouter();
   return useMutation({
-    mutationKey: ['delete-log'],
+    mutationKey: ['post-log'],
     mutationFn: ({ ...props }) => postLog({ ...props }),
     onSuccess: () => {
       // TODO: 확정되면 변경
