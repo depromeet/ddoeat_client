@@ -6,7 +6,7 @@ interface TopVisitCountProps {
   topVisitCount: number;
 }
 
-export default function TopVisitCount({ topVisitCount }: TopVisitCountProps) {
+export default function TopVisit({ topVisitCount }: TopVisitCountProps) {
   return (
     <ReportContainer>
       <p className="caption-12-regular">이 맛집 최고 단골은</p>

@@ -6,7 +6,7 @@ interface ReVisitCountProps {
   reVisitCount: number;
 }
 
-export default function ReVisitCount({ reVisitCount }: ReVisitCountProps) {
+export default function ReVisit({ reVisitCount }: ReVisitCountProps) {
   return (
     <ReportContainer>
       <p className="caption-12-regular">재방문한 단골은</p>
