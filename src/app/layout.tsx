@@ -32,6 +32,8 @@ const nanumSquareRound = localFont({
   variable: '--font-nanum-square-round',
 });
 
+const KAKAO_APP_KEY = process.env.NEXT_PUBLIC_KAKAO_APP_KEY;
+
 export default function RootLayout({
   children,
 }: {
@@ -43,7 +45,7 @@ export default function RootLayout({
         <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto">
           {children}
           <Script
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
             strategy="beforeInteractive"
           />
         </body>
