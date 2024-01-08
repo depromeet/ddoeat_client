@@ -1,19 +1,18 @@
-import { HTMLAttributes } from 'react';
+import ReVisitCount from './ReVisitCount';
+import TopVisitCount from './TopVisitCount';
 
-import cn from '@utils/cn';
+interface ReportProps {
+  topVisitCount: number;
+  reVisitCount: number;
+}
 
-export default function Report({
-  className,
-  children,
-}: HTMLAttributes<HTMLDivElement>) {
+export default function Report({ topVisitCount, reVisitCount }: ReportProps) {
   return (
-    <div
-      className={cn(
-        'w-[168px] h-[130px] bg-primary-300 rounded-[24px] text-white flex flex-col justify-end items-center ',
-        className,
-      )}
-    >
-      {children}
+    <div className="w-full">
+      <div className="flex gap-[8px] mx-[16px] my-[4px]">
+        <TopVisitCount topVisitCount={topVisitCount} />
+        <ReVisitCount reVisitCount={reVisitCount} />
+      </div>
     </div>
   );
 }
