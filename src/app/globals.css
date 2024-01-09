@@ -42,33 +42,13 @@
   .caption-10-regular {
     @apply text-[10px]/[140%] tracking-[-0.3px] font-normal;
   }
-  .text-stroke {
-    text-shadow: 0.5px 0.5px 0 white,
-                 -0.5px 0.5px 0 white,
-                 -0.5px -0.5px 0 white,
-                 0.5px -0.5px 0 white
-  }
+
 }
 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-
-.animation-bounce {
-  animation: bounce 1s 10;
 }
 
 @media (prefers-color-scheme: dark) {
