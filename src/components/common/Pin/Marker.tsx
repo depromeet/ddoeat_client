@@ -14,7 +14,7 @@ interface MarkerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Marker({ isBookmarked, totalVisitCount }: MarkerProps) {
   return (
     <div
-      className={`flex flex-col justify-center items-center w-[56px] h-[56px] rounded-[50%] bg-white shadow-pin-shadow`}
+      className={`flex flex-col justify-center items-center w-[56px] h-[56px] rounded-[50%] bg-white shadow-pin`}
     >
       <div
         className={cn(
