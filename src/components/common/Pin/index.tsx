@@ -1,6 +1,13 @@
 'use client';
 
+import { useState } from 'react';
+
+import PinBubble from './PinBubble';
+import Tag from '../Tag';
+
 import Marker from '@components/common/Pin/Marker';
+
+import PinVisitorIcon from '/public/assets/icon20/pin_visitor_20.svg';
 
 interface PinProps {
   storeName: string;
@@ -13,14 +20,36 @@ export default function Pin({
   isBookmarked,
   totalVisitCount,
 }: PinProps) {
+  const [isActive, setIsActive] = useState(false);
+
+  const handlePinClick = () => {
+    setIsActive((prev) => !prev);
+  };
+
   return (
-    <div className="w-[72px] h-[100px] flex flex-col justify-center items-center">
-      <Marker isBookmarked={isBookmarked} totalVisitCount={totalVisitCount} />
-      <p className="body-14-extraBold text-gray-900 text-stroke mt-[4px]">
-        {storeName}
-      </p>
-      {/* TODO: 총 방문자 수 TAG 넣기 */}
-      <div className="w-[46px] h-[20px] color-grey-700"></div>
+    <div className="relative w-full flex flex-col justify-center items-center">
+      {isActive && <PinBubble totalVisitCount={totalVisitCount} />}
+      <button
+        onClick={handlePinClick}
+        className="w-full flex flex-col items-center"
+      >
+        <Marker isBookmarked={isBookmarked} totalVisitCount={totalVisitCount} />
+        <p className="body-14-extraBold text-gray-900 text-stroke mt-[4px]">
+          {storeName}
+        </p>
+        {!isActive && (
+          <Tag
+            size={'small'}
+            className="caption-12-bold px-[4px] rounded-[20px] bg-gray-700 text-gray-50 gap-0"
+          >
+            <PinVisitorIcon />
+            <span className="caption-12-extraBold text-gray-50">
+              {totalVisitCount}
+            </span>
+            명
+          </Tag>
+        )}
+      </button>
     </div>
   );
 }
