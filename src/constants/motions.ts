@@ -13,7 +13,7 @@ export const bottomSheetAnimationVariants: Variants = {
 };
 
 export const bounceAnimationVariants: Variants = {
-  initial: { opacity: 1 },
+  initial: { opacity: 0 },
   exit: { opacity: 0 },
   animate: {
     y: ['20%', '0%', '20%'],
@@ -23,4 +23,5 @@ export const bounceAnimationVariants: Variants = {
       repeat: Infinity,
     },
   },
+  opacity: { opacity: 1, transition: { duration: 0.2 } },
 };

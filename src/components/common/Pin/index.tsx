@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 import PinBubble from './PinBubble';
 import Tag from '../Tag';
@@ -28,10 +29,12 @@ export default function Pin({
 
   return (
     <div className="relative w-full flex flex-col justify-center items-center">
-      {isActive && <PinBubble totalVisitCount={totalVisitCount} />}
+      <AnimatePresence mode="wait">
+        {isActive && <PinBubble totalVisitCount={totalVisitCount} />}
+      </AnimatePresence>
       <button onClick={handlePinClick} className="flex flex-col items-center">
         <Marker isBookmarked={isBookmarked} totalVisitCount={totalVisitCount} />
-        <p className="body-14-extraBold text-gray-900 text-stroke mt-[4px]">
+        <p className="body-14-extraBold text-gray-900 text-shadow-stroke mt-[4px]">
           {storeName}
         </p>
         {!isActive && (
