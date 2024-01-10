@@ -2,13 +2,15 @@
 
 import { useRouter } from 'next/navigation';
 
+import cn from '@utils/cn';
 import LeftArrow from 'public/assets/icon24/left_arrow_24.svg';
 
 interface HeaderProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-export default function Header({ children }: HeaderProps) {
+export default function Header({ children, className }: HeaderProps) {
   const { back } = useRouter();
 
   const handleClickBackButton = () => {
@@ -16,7 +18,12 @@ export default function Header({ children }: HeaderProps) {
   };
 
   return (
-    <div className="flex items-center px-[16px] py-[8px] w-full h-[56px]">
+    <div
+      className={cn(
+        'flex items-center px-[16px] py-[8px] w-full h-[56px]',
+        className,
+      )}
+    >
       <button className="w-[40px] h-[40px]" onClick={handleClickBackButton}>
         <LeftArrow />
       </button>
