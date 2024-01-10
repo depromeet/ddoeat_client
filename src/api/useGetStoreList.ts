@@ -10,6 +10,7 @@ interface Store {
   revisitNum: number;
   menuType: string;
   location: string;
+  distance: string;
 }
 
 const getStoreList = (keyword: string): Promise<Store[]> => {

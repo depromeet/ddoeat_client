@@ -18,7 +18,7 @@ export default function Page() {
 
   const { data: storeList } = useGetStoreList(debouncedText);
 
-  const isStoreListExists = storeList?.length !== 0;
+  const isStoreListNone = storeList?.length === 0;
 
   const type = useSearchParams().get('type');
 
@@ -38,29 +38,33 @@ export default function Page() {
         />
       </Header>
       <ul
-        className={cn('h-[calc(100dvh-68px)] overflow-y-scroll', {
-          'bg-white': isStoreListExists,
-          'bg-gray-100 flex justify-center items-center': !isStoreListExists,
+        className={cn('h-[100dvh] pt-[68px] overflow-y-scroll', {
+          'bg-white': !isStoreListNone,
+          'bg-gray-100 flex justify-center items-center': isStoreListNone,
         })}
       >
-        {isStoreListExists ? (
+        {isStoreListNone ? (
+          <NoSearchResult />
+        ) : (
           storeList?.map((store, index) => {
-            const { storeId } = store;
+            const { storeId, storeName } = store;
+
+            if (storeList.length === 0) return <NoSearchResult />;
 
             return (
               // TODO: 클릭 시 이동 url 확정되면 수정
               // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
               <Link href={`/map/${storeId}`} key={storeId}>
                 <Store
+                  name={storeName}
                   {...store}
                   hasDeleteOption={false}
                   isLast={index === storeList.length - 1}
+                  listType="storeDetail"
                 />
               </Link>
             );
           })
-        ) : (
-          <NoSearchResult />
         )}
       </ul>
     </div>
