@@ -3,8 +3,8 @@
 import { ButtonHTMLAttributes } from 'react';
 import { useRouter } from 'next/navigation';
 
-import CTAButton from '@components/common/CTAButton';
 import ProfileIcon from 'public/assets/icon24/profile_default_24.svg';
+import Button from '@components/common/Button';
 
 export default function ProfileButton({
   ...props
@@ -14,12 +14,12 @@ export default function ProfileButton({
     push('/mypage');
   };
   return (
-    <CTAButton
+    <Button
       {...props}
       onClick={handleClickProfileButton}
-      className="w-[50px] h-[50px] rounded-[16px] p-0 bg-white shadow-floating active:bg-white"
+      className="w-[50px] h-[50px] rounded-[16px] p-0 bg-white shadow-floating active:bg-white flex items-center justify-center"
     >
       <ProfileIcon />
-    </CTAButton>
+    </Button>
   );
 }
