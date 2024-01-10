@@ -5,7 +5,7 @@ import { ButtonHTMLAttributes, useEffect, useRef, useState } from 'react';
 import LocationDefaultIcon from 'public/assets/icon24/loction_default_24.svg';
 import cn from '@utils/cn';
 
-export default function CurrentLocation({
+export default function CurrentLocationButton({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   const [isActive, setIsActive] = useState(false);

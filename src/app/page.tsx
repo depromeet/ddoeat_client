@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk';
+import { Map } from 'react-kakao-maps-sdk';
 
 import BottomSheet from '@components/main/BottomSheet';
+import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 import useCoordinate from '@hooks/useCoordinate';
-import CurrentLocationIcon from 'public/assets/icon24/current_location_24.svg';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -26,9 +26,7 @@ export default function Home() {
         className="w-full h-full"
         isPanto={true}
       >
-        <CustomOverlayMap position={currentUserCoordinate}>
-          <CurrentLocationIcon />
-        </CustomOverlayMap>
+        <CurrentLocationMarker currentUserCoordinate={currentUserCoordinate} />
       </Map>
 
       <BottomSheet
