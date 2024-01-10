@@ -8,7 +8,7 @@ interface StoreDetailLogProps {
   storeId: string;
   date: string;
   storeImgUrl?: string;
-  storeName: string;
+  name: string;
   menuType: string;
   visitNum: number;
   log: string;
@@ -21,7 +21,7 @@ export default function StoreDetailLog({
   date,
   log,
   storeImgUrl,
-  storeName,
+  name,
   menuType,
   visitNum,
   hasDeleteOption,
@@ -32,18 +32,19 @@ export default function StoreDetailLog({
       <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
       <Store
         storeId={storeId}
-        storeName={storeName}
+        name={name}
         menuType={menuType}
         revisitNum={visitNum}
         hasDeleteOption={hasDeleteOption}
         isLast={isLast}
+        listType="storeDetail"
       />
       <div className="flex flex-col justify-center">
         <div className="px-[16px] py-[8px]">
           {storeImgUrl && (
             <Image
               src={storeImgUrl}
-              alt={storeName}
+              alt={name}
               width={343}
               height={150}
               layout="responsive"

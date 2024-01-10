@@ -56,11 +56,11 @@ export default function Page() {
               // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
               <Link href={`/map/${storeId}`} key={storeId}>
                 <Store
-                  name={storeName}
                   {...store}
+                  name={storeName}
                   hasDeleteOption={false}
                   isLast={index === storeList.length - 1}
-                  listType="storeDetail"
+                  listType="search"
                 />
               </Link>
             );
