@@ -5,7 +5,7 @@ import storeImg from 'public/assets/image/search/store.png';
 import VisitNumberFlag from '@components/common/VisitNumberFlag';
 import cn from '@utils/cn';
 import TrashIcon from 'public/assets/icon24/trash_24.svg';
-import { useDeleteLog } from '@api/useDeleteLog';
+import { useDeleteLog } from '@hooks/api/useDeleteLog';
 
 interface StoreProps extends HTMLAttributes<HTMLLIElement> {
   storeId: string;

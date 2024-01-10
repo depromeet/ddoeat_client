@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-import { axiosRequest } from './api-config';
+import { axiosRequest } from '../../api/api-config';
 
 const deleteLog = (storeId: string): Promise<void> => {
   return axiosRequest('delete', `endpoint/${storeId}`);

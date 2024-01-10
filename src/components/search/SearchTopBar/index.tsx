@@ -2,11 +2,10 @@
 
 import { InputHTMLAttributes } from 'react';
 
-import Input from '../Input';
-
 import SearchIcon from 'public/assets/icon24/search_24.svg';
 import DeleteIcon from 'public/assets/icon24/close_solid_24.svg';
 import useInput from '@hooks/useInput';
+import Input from '@components/common/Input';
 
 interface SearchTopBarProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
