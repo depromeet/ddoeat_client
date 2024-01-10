@@ -1,22 +1,22 @@
 import { useState } from 'react';
 
-export interface Location {
-  lat: number;
-  lng: number;
-}
+import { Coordinate } from 'src/types/map';
 
-const GANGNAM_STATION: Location = {
+const GANGNAM_STATION: Coordinate = {
   lat: 37.498095,
   lng: 127.02761,
 };
 
-const useLocation = () => {
-  const [center, setCenter] = useState<Location>(GANGNAM_STATION);
+const useCoordinate = () => {
+  const [center, setCenter] = useState<Coordinate>(GANGNAM_STATION);
+  const [currentUserCoordinate, setCurrentUserCoordinate] =
+    useState<Coordinate>(GANGNAM_STATION);
 
-  const setCurrentUserLocation = () => {
+  const getCurrentUserCoordinate = () => {
     const onSuccess = (pos: GeolocationPosition) => {
       const { latitude: lat, longitude: lng } = pos.coords;
       setCenter({ lat, lng });
+      setCurrentUserCoordinate({ lat, lng });
     };
 
     const onError = () => {
@@ -26,7 +26,7 @@ const useLocation = () => {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   };
 
-  return { center, setCurrentUserLocation };
+  return { center, currentUserCoordinate, getCurrentUserCoordinate };
 };
 
-export default useLocation;
+export default useCoordinate;

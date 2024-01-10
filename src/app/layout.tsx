@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import Script from 'next/script';
+
 import './globals.css';
 
 import QueryClientProviders from '@components/common/QueryClientProvider';
+import NaverMapProvider from '@components/common/NaverMap/NaverMapProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -32,8 +33,6 @@ const nanumSquareRound = localFont({
   variable: '--font-nanum-square-round',
 });
 
-const KAKAO_APP_KEY = process.env.NEXT_PUBLIC_KAKAO_APP_KEY;
-
 export default function RootLayout({
   children,
 }: {
@@ -42,13 +41,11 @@ export default function RootLayout({
   return (
     <QueryClientProviders>
       <html lang="en" className={`${nanumSquareRound.variable}`}>
-        <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto">
-          {children}
-          <Script
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
-            strategy="beforeInteractive"
-          />
-        </body>
+        <NaverMapProvider>
+          <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto">
+            {children}
+          </body>
+        </NaverMapProvider>
       </html>
     </QueryClientProviders>
   );

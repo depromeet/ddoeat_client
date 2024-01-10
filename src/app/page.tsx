@@ -1,34 +1,29 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk';
+import { useEffect, useState } from 'react';
+import { Container as MapDiv, NaverMap } from 'react-naver-maps';
 
 import BottomSheet from '@components/common/BottomSheet';
 import useLocation from '@hooks/useLocation';
-import CurrentLocationIcon from 'public/assets/icon24/current_location_24.svg';
+import CurrentUserMarker from '@components/common/NaverMap/CurrentUserLocationMarker';
 
 export default function Home() {
-  const mapRef = useRef<kakao.maps.Map>(null);
-  const { center, setCurrentUserLocation } = useLocation();
+  const { center, currentUserCoordinate, getCurrentUserCoordinate } =
+    useLocation();
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
 
   useEffect(() => {
-    setCurrentUserLocation();
+    getCurrentUserCoordinate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center overflow-hidden">
-      <Map
-        ref={mapRef}
-        center={center}
-        className="w-full h-full"
-        isPanto={true}
-      >
-        <CustomOverlayMap position={center}>
-          <CurrentLocationIcon />
-        </CustomOverlayMap>
-      </Map>
+      <MapDiv className="w-full h-full">
+        <NaverMap center={center}>
+          <CurrentUserMarker currentUserCoordinate={currentUserCoordinate} />
+        </NaverMap>
+      </MapDiv>
 
       <BottomSheet
         handleCloseBottomSheet={() => {
