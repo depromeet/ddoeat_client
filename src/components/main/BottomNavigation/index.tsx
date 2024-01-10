@@ -1,7 +1,7 @@
 import AddStoreButton from '../AddStoreButton';
+import CurrentLocation from '../CurrentLocation';
 
-import CurrentLocation from '@components/Home/CurrentLocation';
-import ProfileButton from '@components/Home/ProfileButton';
+import ProfileButton from '@components/main/ProfileButton';
 
 export default function BottomNavigation() {
   const handleClickLocationButton = () => {

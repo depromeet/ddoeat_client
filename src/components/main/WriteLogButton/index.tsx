@@ -3,10 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { ButtonHTMLAttributes } from 'react';
 
-import Button from '../Button';
-
 import PenIcon from 'public/assets/icon20/pen_20.svg';
 import cn from '@utils/cn';
+import Button from '@components/common/Button';
 
 interface WriteLogButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   storeId: string;

@@ -2,8 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import CTAButton from '../CTAButton';
-
+import CTAButton from '@components/common/CTAButton';
 import SearchIcon from 'public/assets/icon24/search_24.svg';
 
 export default function SearchField() {
