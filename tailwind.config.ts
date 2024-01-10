@@ -45,6 +45,11 @@ const config: Config = {
       },
       boxShadow: {
         floating: '0px 4px 15.4px 0px rgba(0, 0, 0, 0.25);',
+        pin: '0px 4px 4px rgba(0, 0, 0, 0.25);',
+      },
+      textShadow: {
+        stroke:
+          '0.5px 0.5px 0 white, -0.5px 0.5px 0 white, -0.5px -0.5px 0 white, 0.5px -0.5px 0 white',
       },
     },
   },
@@ -65,6 +70,16 @@ const config: Config = {
           },
         },
       });
+    }),
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') },
+      );
     }),
   ],
 };
