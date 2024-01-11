@@ -3,9 +3,9 @@
 import { useState, useCallback, ChangeEvent } from 'react';
 
 import { usePostLog } from '@api/usePostLog';
-import ImageUploader from '@components/common/ImageUploader';
+import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
-import TextArea from '@components/common/TextArea';
+import TextArea from '@components/review/TextArea';
 import NavigationButton from '@components/terms/NavigationButton';
 
 export default function Page({ params }: { params: { slug: string } }) {
