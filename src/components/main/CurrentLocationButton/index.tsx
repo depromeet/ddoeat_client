@@ -4,8 +4,10 @@ import { ButtonHTMLAttributes, useEffect, useRef, useState } from 'react';
 
 import LocationDefaultIcon from 'public/assets/icon24/loction_default_24.svg';
 import cn from '@utils/cn';
+import Button from '@components/common/Button';
 
 export default function CurrentLocationButton({
+  onClick,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   const [isActive, setIsActive] = useState(false);
@@ -23,15 +25,16 @@ export default function CurrentLocationButton({
     return () => window.removeEventListener('click', handleWindowClick);
   }, []);
 
-  const handleClick = () => {
+  const handleClick = (e: React.PointerEvent<HTMLButtonElement>) => {
+    onClick?.(e);
     setIsActive(true);
   };
 
   return (
-    <button
+    <Button
       ref={buttonRef}
       {...props}
-      className="w-[50px] h-[50px] rounded-[16px] p-0 bg-white shadow-floating active:bg-white flex items-center justify-center"
+      className="w-[50px] h-[50px] shrink-0 rounded-[16px] p-0 bg-white shadow-floating active:bg-white"
       onClick={handleClick}
     >
       <LocationDefaultIcon
@@ -40,6 +43,6 @@ export default function CurrentLocationButton({
           'fill-gray-900': !isActive,
         })}
       />
-    </button>
+    </Button>
   );
 }
