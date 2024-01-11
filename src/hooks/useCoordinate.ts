@@ -54,8 +54,9 @@ const useCoordinate = () => {
     center,
     setCenter,
     currentUserCoordinate,
-    getCurrentUserCoordinate: () =>
-      getCurrentUserCoordinate(onSuccess(), onError),
+    getCurrentUserCoordinate: (
+      addtionalCallback: (pos: GeolocationPosition) => void,
+    ) => getCurrentUserCoordinate(onSuccess(addtionalCallback), onError),
     getCurrentUserCoordinateInterval,
   };
 };

@@ -40,7 +40,7 @@ export default function Home() {
     setCenter(newCenter);
   };
 
-  const throttledCenterChanged = useThrottle(handleCenterChanged, 10000);
+  const throttledCenterChanged = useThrottle(handleCenterChanged, 1000);
 
   return (
     <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center overflow-hidden">
