@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 
-import Store from '@components/search/store';
+import LogItem from '@components/main/LogItem';
 
 interface StoreDetailLogProps {
   storeId: string;
   date: string;
+  score: number;
   storeImgUrl?: string;
-  storeName: string;
-  menuType: string;
+  name: string;
   visitNum: number;
   log: string;
   hasDeleteOption: boolean;
@@ -19,10 +19,10 @@ interface StoreDetailLogProps {
 export default function StoreDetailLog({
   storeId,
   date,
+  score,
   log,
   storeImgUrl,
-  storeName,
-  menuType,
+  name,
   visitNum,
   hasDeleteOption,
   isLast,
@@ -30,20 +30,21 @@ export default function StoreDetailLog({
   return (
     <div className="flex flex-col">
       <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
-      <Store
-        storeId={storeId}
-        storeName={storeName}
-        menuType={menuType}
+      <LogItem
+        listId={storeId}
+        userName={name}
         visitNum={visitNum}
-        hasDeleteOption={hasDeleteOption}
+        score={score}
         isLast={isLast}
+        hasDeleteOption={hasDeleteOption}
+        date={date}
       />
       <div className="flex flex-col justify-center">
         <div className="px-[16px] py-[8px]">
           {storeImgUrl && (
             <Image
               src={storeImgUrl}
-              alt={storeName}
+              alt={name}
               width={343}
               height={150}
               layout="responsive"

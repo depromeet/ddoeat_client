@@ -1,32 +1,63 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Coordinate } from 'src/types/map';
 
 const GANGNAM_STATION: Coordinate = {
   lat: 37.498095,
   lng: 127.02761,
-};
+} as const;
 
 const useCoordinate = () => {
   const [center, setCenter] = useState<Coordinate>(GANGNAM_STATION);
   const [currentUserCoordinate, setCurrentUserCoordinate] =
     useState<Coordinate>(GANGNAM_STATION);
 
-  const getCurrentUserCoordinate = () => {
-    const onSuccess = (pos: GeolocationPosition) => {
-      const { latitude: lat, longitude: lng } = pos.coords;
-      setCenter({ lat, lng });
-      setCurrentUserCoordinate({ lat, lng });
-    };
+  const onSuccess = useCallback(
+    (addtionalCallback?: (pos: GeolocationPosition) => void) =>
+      (pos: GeolocationPosition) => {
+        const { latitude: lat, longitude: lng } = pos.coords;
+        setCurrentUserCoordinate({ lat, lng });
+        addtionalCallback?.(pos);
+      },
+    [],
+  );
 
-    const onError = () => {
-      throw new Error('현재 위치를 가져올 수 없습니다.');
-    };
+  const onSuccessInit = useCallback((pos: GeolocationPosition) => {
+    const { latitude: lat, longitude: lng } = pos.coords;
+    setCenter({ lat, lng });
+  }, []);
 
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  const onError = () => {
+    throw new Error('현재 위치를 가져올 수 없습니다.');
   };
 
-  return { center, currentUserCoordinate, getCurrentUserCoordinate };
+  const getCurrentUserCoordinate = useCallback(
+    (onSuccess: PositionCallback, onError: PositionErrorCallback) =>
+      navigator.geolocation.getCurrentPosition(onSuccess, onError),
+    [],
+  );
+
+  const getCurrentUserCoordinateInterval = useCallback(
+    (ms = 5000) => {
+      getCurrentUserCoordinate(onSuccess(onSuccessInit), onError);
+      const intervalId = setInterval(
+        () => getCurrentUserCoordinate(onSuccess(), onError),
+        ms,
+      );
+
+      return () => clearInterval(intervalId);
+    },
+    [getCurrentUserCoordinate, onSuccess, onSuccessInit],
+  );
+
+  return {
+    center,
+    setCenter,
+    currentUserCoordinate,
+    getCurrentUserCoordinate: () =>
+      getCurrentUserCoordinate(onSuccess(), onError),
+    getCurrentUserCoordinateInterval,
+  };
 };
 
 export default useCoordinate;
