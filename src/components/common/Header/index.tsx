@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { HTMLAttributes } from 'react';
 
-import LeftArrow from 'public/assets/icon24/left_arrow_24.svg';
 import cn from '@utils/cn';
+import LeftArrow from 'public/assets/icon24/left_arrow_24.svg';
 
 export default function Header({
   className,

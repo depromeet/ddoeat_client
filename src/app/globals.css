@@ -42,6 +42,7 @@
   .caption-10-regular {
     @apply text-[10px]/[140%] tracking-[-0.3px] font-normal;
   }
+
 }
 
 :root {

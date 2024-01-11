@@ -1474,6 +1474,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.22.15":
+  version: 7.23.7
+  resolution: "@babel/runtime@npm:7.23.7"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: eba85bd24d250abb5ae19b16cffc15a54d3894d8228ace40fa4c0e2f1938f28b38ad3e3430ebff9a1ef511eeb8c527e36044ac19076d6deafa52cef35d8624b9
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.5, @babel/runtime@npm:^7.8.4":
   version: 7.23.6
   resolution: "@babel/runtime@npm:7.23.6"
@@ -4601,11 +4610,13 @@ __metadata:
     eslint-plugin-react: latest
     eslint-plugin-react-hooks: ^4.6.0
     framer-motion: ^10.16.16
+    kakao.maps.d.ts: ^0.1.39
     next: 14.0.4
     postcss: ^8
     prettier: ^3.1.1
     react: ^18
     react-dom: ^18
+    react-kakao-maps-sdk: ^1.1.24
     storybook: ^7.6.4
     tailwind-merge: ^2.1.0
     tailwindcss: ^3.3.0
@@ -7634,6 +7645,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kakao.maps.d.ts@npm:^0.1.39":
+  version: 0.1.39
+  resolution: "kakao.maps.d.ts@npm:0.1.39"
+  checksum: b89c3ee7d6e2e86b1f53fa43060097f7cfc11b5a1e6c3862ab0e4126aa17483c6642d24c2a67deaa1c36de3fb604ec3fc7c049e6e4ddb0689782b040fa341526
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -9377,6 +9395,19 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-kakao-maps-sdk@npm:^1.1.24":
+  version: 1.1.24
+  resolution: "react-kakao-maps-sdk@npm:1.1.24"
+  dependencies:
+    "@babel/runtime": ^7.22.15
+    kakao.maps.d.ts: ^0.1.39
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: 2a555a76affdeb4adeb68d9943eccacc08dae7c3ac433f969795e9fbc32f3e8b5d7dde5ab7f96b0d4dd613e5255dc4a02df26e9900636ce80ee8d9a7f635566d
   languageName: node
   linkType: hard
 

@@ -29,6 +29,13 @@
       "@constants/*": ["src/constants/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "env.d.ts"
+  ],
+  "exclude": ["node_modules"],
+  "types": ["kakao.maps.d.ts"]
 }

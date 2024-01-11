@@ -1,37 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Map } from 'react-kakao-maps-sdk';
 
-import BottomSheet from '@components/common/BottomSheet';
+import BottomSheet from '@components/main/BottomSheet';
+import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
+import useCoordinate from '@hooks/useCoordinate';
 
 export default function Home() {
-  //TODO: 리뷰 후 원복
-  const [isShowing, setIsShowing] = useState(false);
+  const mapRef = useRef<kakao.maps.Map>(null);
+  const { center, currentUserCoordinate, getCurrentUserCoordinate } =
+    useCoordinate();
+  const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
+
+  useEffect(() => {
+    getCurrentUserCoordinate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center justify-between overflow-hidden">
-      <button
-        onClick={() => {
-          setIsShowing(!isShowing);
-        }}
+    <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center overflow-hidden">
+      <Map
+        ref={mapRef}
+        center={center}
+        className="w-full h-full"
+        isPanto={true}
       >
-        click
-      </button>
+        <CurrentLocationMarker currentUserCoordinate={currentUserCoordinate} />
+      </Map>
+
       <BottomSheet
         handleCloseBottomSheet={() => {
-          setIsShowing(false);
+          setIsBottomSheetShowing(false);
         }}
-        isShowing={isShowing}
+        isShowing={isBottomSheetShowing}
       >
         <BottomSheet.ShowContent>
           <div className="w-full h-[3000px] bg-primary-50 break-words">
             중간까지 올라온 바텀싯 내용
           </div>
         </BottomSheet.ShowContent>
-        <BottomSheet.FullContent>
-          <div className="w-full h-[2000px] bg-primary-300 break-words">
-            풀페이지 바텀싯 내용
-          </div>
-        </BottomSheet.FullContent>
+        <BottomSheet.FullContent></BottomSheet.FullContent>
       </BottomSheet>
     </main>
   );
