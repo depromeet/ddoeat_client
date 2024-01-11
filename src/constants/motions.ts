@@ -25,3 +25,18 @@ export const bounceAnimationVariants: Variants = {
   },
   opacity: { opacity: 1, transition: { duration: 0.2 } },
 };
+
+export const pageTransitionVariant: Variants = {
+  initial: {
+    x: '100%',
+  },
+  animate: {
+    x: 0,
+    transition: { duration: 0.5 },
+  },
+  opacity: { opacity: 1, transition: { duration: 0.2 } },
+  exit: {
+    x: '-100%',
+    opacity: '0',
+  },
+};

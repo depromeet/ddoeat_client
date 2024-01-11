@@ -29,7 +29,6 @@ export default function OnboardingModal({
 
   const handleClickNextButton = () => {
     const nextStepNumber = Number(step) + 1;
-    console.log('hello');
     if (nextStepNumber == 4) return router.push('/');
     router.push(`/onboarding/${nextStepNumber}`);
   };
