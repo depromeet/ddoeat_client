@@ -1,7 +1,7 @@
 'use client';
 
-import OnboardingModal from '@components/Onboarding/modal';
-import StepIcon from '@components/Onboarding/stepIcon';
+import OnboardingModal from '@components/onboarding/Modal';
+import StepIcon from '@components/onboarding/StepIcon';
 import { ONBOARDING_CONTENT } from '@constants/onboarding';
 
 export default function page({ params }: { params: { step: number } }) {
