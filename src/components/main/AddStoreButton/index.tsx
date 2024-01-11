@@ -11,7 +11,7 @@ export default function AddStoreButton() {
 
   return (
     <button
-      className="flex gap-[8px] items-center h-[56px] rounded-[99px] px-[32px] py-[16px] bg-gray-900"
+      className="flex gap-[8px] items-center justify-center w-[181px] h-[56px] rounded-[99px] px-[32px] py-[16px] bg-gray-900"
       onClick={handleClickAddStoreButton}
     >
       <PlusIcon />

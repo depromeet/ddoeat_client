@@ -7,12 +7,18 @@ import ProfileIcon from 'public/assets/icon24/profile_default_24.svg';
 import Button from '@components/common/Button';
 
 export default function ProfileButton({
+  onClick,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   const { push } = useRouter();
-  const handleClickProfileButton = () => {
+
+  const handleClickProfileButton = (
+    e: React.PointerEvent<HTMLButtonElement>,
+  ) => {
+    onClick?.(e);
     push('/mypage');
   };
+
   return (
     <Button
       {...props}
