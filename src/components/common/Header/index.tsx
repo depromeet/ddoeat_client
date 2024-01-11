@@ -1,16 +1,15 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { HTMLAttributes } from 'react';
 
 import cn from '@utils/cn';
 import LeftArrow from 'public/assets/icon24/left_arrow_24.svg';
 
-interface HeaderProps {
-  children?: React.ReactNode;
-  className?: string;
-}
-
-export default function Header({ children, className }: HeaderProps) {
+export default function Header({
+  className,
+  children,
+}: HTMLAttributes<HTMLHeadElement>) {
   const { back } = useRouter();
 
   const handleClickBackButton = () => {
@@ -18,7 +17,7 @@ export default function Header({ children, className }: HeaderProps) {
   };
 
   return (
-    <div
+    <header
       className={cn(
         'flex items-center px-[16px] py-[8px] w-full h-[56px]',
         className,
@@ -29,6 +28,6 @@ export default function Header({ children, className }: HeaderProps) {
       </button>
       {/* NOTE: 저희 서비스에서는 텍스트 혹은 search input이 들어갑니다. Header 컴포넌트 내부에 넣어주시면 됩니다. */}
       {children}
-    </div>
+    </header>
   );
 }
