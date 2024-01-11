@@ -1,31 +1,54 @@
 'use client';
 
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import StepButton from '../stepButton';
+
+import { OnboardingContentProps } from '@constants/onboarding';
 
 interface OnboardingModalProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
-  content: string;
+  onboardingData: OnboardingContentProps[];
+  step: number;
 }
 
 export default function OnboardingModal({
-  title,
-  content,
+  onboardingData,
+  step,
   children,
 }: OnboardingModalProps) {
+  const [buttonActive, setButtonActive] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // TODO: 영상 총 길이만큼 delay 수정
+    setTimeout(() => {
+      setButtonActive(true);
+    }, 2000);
+  }, [router, step]);
+
+  const handleClickNextButton = () => {
+    const nextStepNumber = Number(step) + 1;
+    if (nextStepNumber == 4) return router.push('/');
+    router.push(`/onboarding/${nextStepNumber}`);
+  };
+
   return (
-    // 스타일 수정되면 반영하기..
-    <div className="w-full h-[268px] flex flex-col justify-item items-center py-[20px] bg-white absolute z-10 inset-x-0 bottom-0">
+    <div className="h-[288px] flex flex-col justify-item items-center py-[20px] bg-white absolute z-10 inset-x-0 bottom-0">
       {children}
       <div className="w-full h-[132px] flex flex-col justify-item items-center place-content-center px-[24px] py-[37px] gap-[8px]">
         <p className="text-gray-900 header-22 whitespace-pre-line text-center">
-          {title}
+          {onboardingData[step - 1].title}
         </p>
         <p className="text-gray-700 body-14-regular whitespace-pre-line text-center">
-          {content}
+          {onboardingData[step - 1].content}
         </p>
       </div>
-      {/* TODO: 버튼 어떻게 넣을지? */}
-      <div className="w-full h-[112px]">호잇</div>
+      <div className="w-full h-[112px] flex justify-center items-center">
+        {buttonActive && (
+          <StepButton onClick={handleClickNextButton} step={step} />
+        )}
+      </div>
     </div>
   );
 }
