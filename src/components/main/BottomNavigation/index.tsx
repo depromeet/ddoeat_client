@@ -18,7 +18,7 @@ export default function BottomNavigation({
   return (
     <div
       className={cn(
-        'flex justify-between gap-[16px] w-full h-[128px] px-[24px] py-[16px]',
+        'flex justify-center gap-[16px] w-full h-[128px] px-[24px] py-[16px]',
         className,
       )}
       {...restProps}
