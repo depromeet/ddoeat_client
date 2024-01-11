@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { Coordinate } from 'src/types/map';
 
-export const GANGNAM_STATION: Coordinate = {
+const GANGNAM_STATION: Coordinate = {
   lat: 37.498095,
   lng: 127.02761,
 } as const;
