@@ -52,12 +52,12 @@ export default function Home() {
         onCenterChanged={throttledCenterChanged}
       >
         <CurrentLocationMarker currentUserCoordinate={currentUserCoordinate} />
-        <div className="absolute top-[54px] z-10 w-full px-[16px]">
+        <div className="absolute top-[54px] z-above w-full px-[16px]">
           <SearchField />
         </div>
         <BottomNavigation
           onCurrentLocationButtonClick={onCurrentLocationButtonClick}
-          className="absolute bottom-[56px] z-10"
+          className="absolute bottom-[56px] z-above"
         />
       </Map>
 

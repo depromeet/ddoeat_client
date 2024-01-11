@@ -32,6 +32,16 @@ const config: Config = {
         error: '#FF2A2A',
       },
     },
+    zIndex: {
+      body: '0',
+      above: '10',
+      fixedBody: '50',
+      header: '900',
+      nav: '1000',
+      floating: '9000',
+      overlay: '10000',
+      toast: '30000',
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-nanum-square-round)'],

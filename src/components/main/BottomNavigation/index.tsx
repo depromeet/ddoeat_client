@@ -17,10 +17,7 @@ export default function BottomNavigation({
 }: BottomNavigationProps) {
   return (
     <div
-      className={cn(
-        'flex justify-center gap-[16px] w-full h-[128px] px-[24px] py-[16px]',
-        className,
-      )}
+      className={cn('flex justify-center gap-[16px] w-full', className)}
       {...restProps}
     >
       <CurrentLocationButton onClick={onCurrentLocationButtonClick} />
