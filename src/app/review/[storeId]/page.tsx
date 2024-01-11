@@ -2,7 +2,7 @@
 
 import { useState, useCallback, ChangeEvent } from 'react';
 
-import { usePostLog } from '@api/usePostLog';
+import { usePostLog } from '@hooks/api/usePostLog';
 import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
 import TextArea from '@components/review/TextArea';

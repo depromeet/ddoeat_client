@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-import { axiosRequest } from './api-config';
+import { axiosRequest } from '../../api/api-config';
 
 interface Store {
   // TODO: spec 확정 시 수정

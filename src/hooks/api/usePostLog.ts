@@ -2,7 +2,7 @@ import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
-import { axiosRequest } from './api-config';
+import { axiosRequest } from '../../api/api-config';
 
 // TODO: api spec 확정되면 변경
 interface Log {
