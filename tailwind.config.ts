@@ -46,6 +46,7 @@ const config: Config = {
       boxShadow: {
         floating: '0px 4px 15.4px 0px rgba(0, 0, 0, 0.25);',
         pin: '0px 4px 4px rgba(0, 0, 0, 0.25);',
+        search: '0px 4px 8px 0px rgba(0, 0, 0, 0.10);',
       },
       textShadow: {
         stroke:

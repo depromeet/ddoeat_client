@@ -6,6 +6,7 @@ import { Map } from 'react-kakao-maps-sdk';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 import useCoordinate from '@hooks/useCoordinate';
+import SearchField from '@components/main/SearchField';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -27,6 +28,9 @@ export default function Home() {
         isPanto={true}
       >
         <CurrentLocationMarker currentUserCoordinate={currentUserCoordinate} />
+        <div className="absolute top-[54px] z-10 w-full px-[16px]">
+          <SearchField />
+        </div>
       </Map>
 
       <BottomSheet
