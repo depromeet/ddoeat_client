@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 import useDebounce from '@hooks/useDebounce';
-import SearchTopBar from '@components/common/SearchTopBar';
+import SearchTopBar from '@components/search/SearchTopBar';
 import Header from '@components/common/Header';
 import { useGetStoreList } from '@api/useGetStoreList';
 import useInput from '@hooks/useInput';

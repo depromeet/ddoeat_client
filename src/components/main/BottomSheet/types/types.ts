@@ -1,4 +1,4 @@
-import { AnimatePortalProps } from '../../AnimatePortal';
+import { AnimatePortalProps } from '../../../common/AnimatePortal';
 
 export type BottomSheetStatus = 'full' | 'show';
 

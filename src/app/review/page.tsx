@@ -2,8 +2,8 @@
 
 import { useState, useCallback } from 'react';
 
-import ImageUploader from '@components/common/ImageUploader';
 import StarRating from '@components/review/StarRating';
+import ImageUploader from '@components/review/ImageUploader';
 
 export default function Page() {
   const [rating, setRating] = useState(0);

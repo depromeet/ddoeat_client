@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import cn from '@utils/cn';
 import TrashIcon from 'public/assets/icon24/trash_24.svg';
-import { useDeleteLog } from '@api/useDeleteLog';
+import { useDeleteLog } from '@hooks/api/useDeleteLog';
 
 export interface BasicListItem {
   listId: string;

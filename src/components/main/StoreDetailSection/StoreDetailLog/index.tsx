@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import LogItem from '../LogItem';
+import LogItem from '@components/main/LogItem';
 
 interface StoreDetailLogProps {
   storeId: string;
