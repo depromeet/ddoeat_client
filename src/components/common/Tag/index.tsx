@@ -24,7 +24,7 @@ export default function Tag({
   return (
     <div
       className={cn(
-        `inline-flex justify-items items-center justify-between gap-[4px] rounded-[32px] py-[4px] ${tagStyles}`,
+        `inline-flex items-center justify-between gap-[4px] rounded-[32px] py-[4px] ${tagStyles}`,
         className,
       )}
       {...restProps}

@@ -11,6 +11,7 @@ import useInput from '@hooks/useInput';
 import cn from '@utils/cn';
 import NoSearchResult from '@components/common/NoSearchResult';
 import SearchItem from '@components/search/SearchItem';
+import RecentSearchKeyword from '@components/search/RecentSearchKeyword';
 
 export default function Page() {
   const [text, onTextChange, resetText] = useInput('');
@@ -24,7 +25,7 @@ export default function Page() {
 
   return (
     <div>
-      <Header>
+      <Header className="bg-white">
         <SearchTopBar
           className="bg-gray-100 py-[12px] has-[input:placeholder]:gray-300"
           placeholder={
@@ -37,34 +38,37 @@ export default function Page() {
           resetText={resetText}
         />
       </Header>
-      <ul
-        className={cn('h-[100dvh] pt-[68px] overflow-y-scroll', {
-          'bg-white': !isStoreListNone,
-          'bg-gray-100 flex justify-center items-center': isStoreListNone,
-        })}
-      >
-        {isStoreListNone ? (
-          <NoSearchResult />
-        ) : (
-          storeList?.map((store, index) => {
-            const { storeId } = store;
+      <div className="h-[100dvh] pt-[68px] overflow-y-scroll">
+        {!storeList && <RecentSearchKeyword />}
+        <ul
+          className={cn({
+            'bg-white': !isStoreListNone,
+            'bg-gray-100 flex justify-center items-center': isStoreListNone,
+          })}
+        >
+          {isStoreListNone ? (
+            <NoSearchResult />
+          ) : (
+            storeList?.map((store, index) => {
+              const { storeId } = store;
 
-            if (storeList.length === 0) return <NoSearchResult />;
+              if (storeList.length === 0) return <NoSearchResult />;
 
-            return (
-              // TODO: 클릭 시 이동 url 확정되면 수정
-              // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
-              <Link href={`/map/${storeId}`} key={storeId}>
-                <SearchItem
-                  {...store}
-                  isLast={index === storeList.length - 1}
-                  listId={storeId}
-                />
-              </Link>
-            );
-          })
-        )}
-      </ul>
+              return (
+                // TODO: 클릭 시 이동 url 확정되면 수정
+                // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
+                <Link href={`/map/${storeId}`} key={storeId}>
+                  <SearchItem
+                    {...store}
+                    isLast={index === storeList.length - 1}
+                    listId={storeId}
+                  />
+                </Link>
+              );
+            })
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
