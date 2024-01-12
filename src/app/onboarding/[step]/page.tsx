@@ -6,6 +6,9 @@ import OnboardingModal from '@components/onboarding/Modal';
 import StepIcon from '@components/onboarding/StepIcon';
 import { ONBOARDING_CONTENT } from '@constants/onboarding';
 import { pageTransitionVariant } from '@constants/motions';
+// import BackgroundVideo, {
+//   BackgroundType,
+// } from '@components/onboarding/BackgroundVideo';
 
 export default function Page({ params }: { params: { step: number } }) {
   const onboardingData = ONBOARDING_CONTENT;
@@ -21,7 +24,6 @@ export default function Page({ params }: { params: { step: number } }) {
         animate={['animate', 'opacity']}
         exit="exit"
       >
-        {/* TODO: 영상 넣기 */}
         <OnboardingModal step={params.step} onboardingData={onboardingData}>
           <StepIcon step={params.step} />
         </OnboardingModal>
