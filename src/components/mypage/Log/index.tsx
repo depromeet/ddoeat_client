@@ -9,9 +9,11 @@ import Tag from '@components/common/Tag';
 import DotIcon from '/public/assets/icon20/dot_20.svg';
 
 import TrashIcon from 'public/assets/icon24/trash_24.svg';
+import { useDeleteLog } from '@hooks/api/useDeleteLog';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   date: string;
+  logId: string;
   storeImgUrl?: string;
   storeName: string;
   myVisitNum: number;
@@ -22,6 +24,7 @@ interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
 
 export default function MyLog({
   date,
+  logId,
   storeImgUrl,
   storeName,
   myVisitNum,
@@ -29,6 +32,13 @@ export default function MyLog({
   rating,
   log,
 }: MyLogProps) {
+  const { mutate: deleteLog } = useDeleteLog();
+
+  const handleClickDeleteButton = () => {
+    // TODO: 추후 로그 삭제 로직 확정
+    deleteLog(logId);
+  };
+
   return (
     <li className="flex flex-col w-full h-full bg-white p-[16px] gap-y-[8px]">
       <div className="flex items-center">
@@ -36,8 +46,7 @@ export default function MyLog({
           <DotIcon />
           <p className="text-gray-700 body-14-bold">{date}</p>
         </div>
-        {/* TODO: 버튼 누르면 삭제되는 onclick 이벤트 추가 필요 */}
-        <button>
+        <button onClick={handleClickDeleteButton}>
           <TrashIcon />
         </button>
       </div>
