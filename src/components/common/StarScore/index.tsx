@@ -18,12 +18,12 @@ interface StarScoreProps {
 }
 
 export default function StarScore({ rating }: StarScoreProps) {
-  const formattedRating = Number(rating.toFixed(1));
+  const formattedRating = rating.toFixed(1);
 
   return (
     <div className="flex gap-[4px] items-center body-16-bold text-primary-500">
       <span>{formattedRating}</span>
-      <div className="flex">{renderStars(formattedRating)}</div>
+      <div className="flex">{renderStars(rating)}</div>
     </div>
   );
 }
