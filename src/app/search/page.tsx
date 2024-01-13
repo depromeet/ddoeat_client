@@ -13,8 +13,10 @@ import NoSearchResult from '@components/common/NoSearchResult';
 import SearchItem from '@components/search/SearchItem';
 import RecentSearchKeyword from '@components/search/RecentSearchKeyword';
 import useStorageState from '@utils/useStorageState';
+import useIsMounted from '@hooks/useIsMounted';
 
 export default function Page() {
+  const isMounted = useIsMounted();
   const [text, onTextChange, resetText] = useInput('');
   const debouncedText = useDebounce(text, 500);
 
@@ -35,6 +37,10 @@ export default function Page() {
     }
   };
 
+  const handleClickDeleteButton = (keyword: string) => () => {
+    setRecentSearchKeywords((prev) => prev.filter((item) => item !== keyword));
+  };
+
   return (
     <div>
       <Header className="bg-white">
@@ -52,8 +58,11 @@ export default function Page() {
         />
       </Header>
       <div className="h-[100dvh] pt-[68px] overflow-y-scroll">
-        {!storeList && (
-          <RecentSearchKeyword recentSearchKeywords={recentSearchKeywords} />
+        {!storeList && isMounted && (
+          <RecentSearchKeyword
+            recentSearchKeywords={recentSearchKeywords}
+            onDelete={handleClickDeleteButton}
+          />
         )}
         <ul
           className={cn({

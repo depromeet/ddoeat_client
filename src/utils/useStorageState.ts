@@ -24,8 +24,7 @@ const useStorageState = <T>({
 
   const setStorageState = (value: T | ((arg: T) => T)) => {
     if (value instanceof Function) {
-      const newValue = value;
-      setState(newValue(state));
+      setState(() => value(state));
       localStorage.setItem(key, JSON.stringify(value(state)));
 
       return;
