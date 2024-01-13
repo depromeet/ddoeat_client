@@ -12,16 +12,28 @@ import cn from '@utils/cn';
 import NoSearchResult from '@components/common/NoSearchResult';
 import SearchItem from '@components/search/SearchItem';
 import RecentSearchKeyword from '@components/search/RecentSearchKeyword';
+import useStorageState from '@utils/useStorageState';
 
 export default function Page() {
   const [text, onTextChange, resetText] = useInput('');
   const debouncedText = useDebounce(text, 500);
 
-  const { data: storeList } = useGetStoreList(debouncedText);
+  const [recentSearchKeywords, setRecentSearchKeywords] = useStorageState<
+    string[]
+  >({ key: 'recentSearchKeywords', initialValue: [] });
+
+  const { data: storeList, refetch } = useGetStoreList(debouncedText);
 
   const isStoreListNone = storeList?.length === 0;
 
   const type = useSearchParams().get('type');
+
+  const handleClickSearchButton = () => {
+    setRecentSearchKeywords((prev) => [text, ...prev]);
+    if (text) {
+      refetch();
+    }
+  };
 
   return (
     <div>
@@ -33,13 +45,16 @@ export default function Page() {
               ? '작성할 맛집을 검색해보세요'
               : '맛집 이름을 검색하세요.'
           }
+          onClick={handleClickSearchButton}
           value={text}
           onChange={onTextChange}
           resetText={resetText}
         />
       </Header>
       <div className="h-[100dvh] pt-[68px] overflow-y-scroll">
-        {!storeList && <RecentSearchKeyword />}
+        {!storeList && (
+          <RecentSearchKeyword recentSearchKeywords={recentSearchKeywords} />
+        )}
         <ul
           className={cn({
             'bg-white': !isStoreListNone,

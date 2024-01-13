@@ -1,28 +1,18 @@
-import { useState, useEffect } from 'react';
-
 import Tag from '@components/common/Tag';
 import CloseIcon from 'public/assets/icon12/close_12.svg';
+import useStorageState from '@utils/useStorageState';
 
-export default function RecentSearchKeyword() {
-  const [isComponentMounted, setIsComponentMounted] = useState(false);
-  const [recentSearchKeywords, setRecentSearchKeywords] = useState<string[]>(
-    [],
-  );
+interface RecentSearchKeywordProps {
+  recentSearchKeywords: string[];
+}
 
-  useEffect(() => {
-    const storedKeywords = localStorage.getItem('recentSearchKeywords') || '[]';
-    setRecentSearchKeywords(JSON.parse(storedKeywords));
-    setIsComponentMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (isComponentMounted) {
-      localStorage.setItem(
-        'recentSearchKeywords',
-        JSON.stringify(recentSearchKeywords),
-      );
-    }
-  }, [recentSearchKeywords, isComponentMounted]);
+export default function RecentSearchKeyword({
+  recentSearchKeywords,
+}: RecentSearchKeywordProps) {
+  const [, setRecentSearchKeywords] = useStorageState<string[]>({
+    key: 'recentSearchKeywords',
+    initialValue: recentSearchKeywords,
+  });
 
   const handleClickDeleteButton = (keyword: string) => () => {
     setRecentSearchKeywords((prev) => prev.filter((item) => item !== keyword));
