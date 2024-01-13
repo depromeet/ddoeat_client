@@ -10,7 +10,7 @@ const BackgroundAttributes: {
   // TODO: 비디오 주소 업데이트
   1: '/video/video.mp4',
   2: '/video/video.mp4',
-  3: '/video/video.mp4',
+  3: '/video/onboarding_3.mp4',
 };
 
 export default function BackgroundVideo({ step }: BackgroundVideoProps) {

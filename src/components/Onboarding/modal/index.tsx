@@ -3,8 +3,7 @@
 import { HTMLAttributes, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import StepButton from '../StepButton';
-
+import StepButton from '@components/Onboarding/stepButton';
 import { OnboardingContentProps } from '@constants/onboarding';
 
 interface OnboardingModalProps extends HTMLAttributes<HTMLDivElement> {
@@ -28,9 +27,8 @@ export default function OnboardingModal({
   }, [router, step]);
 
   const handleClickNextButton = () => {
-    const nextStepNumber = Number(step) + 1;
+    const nextStepNumber = step + 1;
     if (nextStepNumber == 4) return router.push('/');
-    router.push(`/onboarding/${nextStepNumber}`);
   };
 
   return (
