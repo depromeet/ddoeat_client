@@ -24,14 +24,23 @@ export default function Page() {
     string[]
   >({ key: 'recentSearchKeywords', initialValue: [] });
 
-  const { data: storeList, refetch } = useGetStoreList(debouncedText);
+  // TODO: 추후 위, 경도 추가
+  const { data: storeList, refetch } = useGetStoreList({
+    keyword: debouncedText,
+  });
 
   const isStoreListNone = storeList?.length === 0;
 
   const type = useSearchParams().get('type');
 
   const handleClickSearchButton = () => {
-    setRecentSearchKeywords((prev) => [text, ...prev]);
+    setRecentSearchKeywords((prev) => {
+      if (prev.includes(text)) {
+        return prev;
+      } else {
+        return [text, ...prev];
+      }
+    });
     if (text) {
       refetch();
     }
@@ -80,7 +89,6 @@ export default function Page() {
 
               return (
                 // TODO: 클릭 시 이동 url 확정되면 수정
-                // TODO: 검색결과가 없는 케이스에 노출할 컴포넌트 논의 후 적용
                 <Link href={`/map/${storeId}`} key={storeId}>
                   <SearchItem
                     {...store}

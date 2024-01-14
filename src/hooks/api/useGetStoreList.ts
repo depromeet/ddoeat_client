@@ -3,6 +3,12 @@ import { AxiosError } from 'axios';
 
 import { axiosRequest } from '../../api/api-config';
 
+interface StoreListQueries {
+  keyword: string;
+  longitude?: string;
+  latitude?: string;
+}
+
 interface Store {
   // TODO: spec 확정 시 수정
   storeId: string;
@@ -13,16 +19,25 @@ interface Store {
   distance: string;
 }
 
-const getStoreList = (keyword: string): Promise<Store[]> => {
-  return axiosRequest('get', `endpoint/${keyword}`);
+const getStoreList = ({
+  keyword,
+  longitude,
+  latitude,
+}: StoreListQueries): Promise<Store[]> => {
+  return axiosRequest(
+    'get',
+    `/api/v1/stores/search?query=${keyword}&x=${longitude}&y=${latitude}`,
+  );
 };
 
-export const useGetStoreList = (
-  keyword: string,
-): UseQueryResult<Store[], AxiosError> => {
+export const useGetStoreList = ({
+  keyword,
+  longitude,
+  latitude,
+}: StoreListQueries): UseQueryResult<Store[], AxiosError> => {
   return useQuery({
-    queryKey: ['get-store-list', keyword],
-    queryFn: () => getStoreList(keyword),
+    queryKey: ['get-store-list', keyword, longitude, latitude],
+    queryFn: () => getStoreList({ keyword, longitude, latitude }),
     enabled: false,
   });
 };
