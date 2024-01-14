@@ -50,7 +50,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["framer-motion", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:10.16.16"],\
             ["kakao.maps.d.ts", "npm:0.1.39"],\
             ["next", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:14.0.4"],\
-            ["next-videos", "npm:1.5.0"],\
             ["postcss", "npm:8.4.32"],\
             ["prettier", "npm:3.1.1"],\
             ["react", "npm:18.2.0"],\
@@ -5168,28 +5167,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["ajv-keywords", [\
-        ["npm:3.5.2", {\
-          "packageLocation": "./.yarn/cache/ajv-keywords-npm-3.5.2-0e391b70e2-7dc5e59316.zip/node_modules/ajv-keywords/",\
-          "packageDependencies": [\
-            ["ajv-keywords", "npm:3.5.2"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:f84d18c473fad3c01e1cf352f81ad13de804ca40da5bf6e752464a2e78dcb097ad579b06da5ff33a55ba9957fb9c74909b99fc5e215420a3f9b5dc87ad71363b#npm:3.5.2", {\
-          "packageLocation": "./.yarn/__virtual__/ajv-keywords-virtual-11d24a6cf1/0/cache/ajv-keywords-npm-3.5.2-0e391b70e2-7dc5e59316.zip/node_modules/ajv-keywords/",\
-          "packageDependencies": [\
-            ["ajv-keywords", "virtual:f84d18c473fad3c01e1cf352f81ad13de804ca40da5bf6e752464a2e78dcb097ad579b06da5ff33a55ba9957fb9c74909b99fc5e215420a3f9b5dc87ad71363b#npm:3.5.2"],\
-            ["@types/ajv", null],\
-            ["ajv", "npm:6.12.6"]\
-          ],\
-          "packagePeers": [\
-            "@types/ajv",\
-            "ajv"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["ansi-regex", [\
         ["npm:5.0.1", {\
           "packageLocation": "./.yarn/cache/ansi-regex-npm-5.0.1-c963a48615-2aa4bb54ca.zip/node_modules/ansi-regex/",\
@@ -5732,15 +5709,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/big-integer-npm-1.6.52-4bec75720c-6e86885787.zip/node_modules/big-integer/",\
           "packageDependencies": [\
             ["big-integer", "npm:1.6.52"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["big.js", [\
-        ["npm:5.2.2", {\
-          "packageLocation": "./.yarn/cache/big.js-npm-5.2.2-e147c30820-b89b6e8419.zip/node_modules/big.js/",\
-          "packageDependencies": [\
-            ["big.js", "npm:5.2.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6569,7 +6537,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["framer-motion", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:10.16.16"],\
             ["kakao.maps.d.ts", "npm:0.1.39"],\
             ["next", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:14.0.4"],\
-            ["next-videos", "npm:1.5.0"],\
             ["postcss", "npm:8.4.32"],\
             ["prettier", "npm:3.1.1"],\
             ["react", "npm:18.2.0"],\
@@ -7086,15 +7053,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/emoji-regex-npm-9.2.2-e6fac8d058-8487182da7.zip/node_modules/emoji-regex/",\
           "packageDependencies": [\
             ["emoji-regex", "npm:9.2.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["emojis-list", [\
-        ["npm:3.0.0", {\
-          "packageLocation": "./.yarn/cache/emojis-list-npm-3.0.0-7faa48e6fd-ddaaa02542.zip/node_modules/emojis-list/",\
-          "packageDependencies": [\
-            ["emojis-list", "npm:3.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8401,30 +8359,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["file-entry-cache", "npm:6.0.1"],\
             ["flat-cache", "npm:3.2.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["file-loader", [\
-        ["npm:4.3.0", {\
-          "packageLocation": "./.yarn/cache/file-loader-npm-4.3.0-048fd1e003-a005ac5599.zip/node_modules/file-loader/",\
-          "packageDependencies": [\
-            ["file-loader", "npm:4.3.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:73e32070ad108c64964015de9500735eebd1e1aafb31f84d7dead78dc4bf25e6676d55bf5edf5505fbcaba66ca57aa7ae69befef16811c654fb7579851fb97bb#npm:4.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/file-loader-virtual-18f8025692/0/cache/file-loader-npm-4.3.0-048fd1e003-a005ac5599.zip/node_modules/file-loader/",\
-          "packageDependencies": [\
-            ["file-loader", "virtual:73e32070ad108c64964015de9500735eebd1e1aafb31f84d7dead78dc4bf25e6676d55bf5edf5505fbcaba66ca57aa7ae69befef16811c654fb7579851fb97bb#npm:4.3.0"],\
-            ["@types/webpack", null],\
-            ["loader-utils", "npm:1.4.2"],\
-            ["schema-utils", "npm:2.7.1"],\
-            ["webpack", null]\
-          ],\
-          "packagePeers": [\
-            "@types/webpack",\
-            "webpack"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10231,18 +10165,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["loader-utils", [\
-        ["npm:1.4.2", {\
-          "packageLocation": "./.yarn/cache/loader-utils-npm-1.4.2-b4537b2f88-eb6fb622ef.zip/node_modules/loader-utils/",\
-          "packageDependencies": [\
-            ["loader-utils", "npm:1.4.2"],\
-            ["big.js", "npm:5.2.2"],\
-            ["emojis-list", "npm:3.0.0"],\
-            ["json5", "npm:1.0.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["locate-path", [\
         ["npm:3.0.0", {\
           "packageLocation": "./.yarn/cache/locate-path-npm-3.0.0-991671ae9f-53db399667.zip/node_modules/locate-path/",\
@@ -10855,16 +10777,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "react-dom",\
             "react",\
             "sass"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["next-videos", [\
-        ["npm:1.5.0", {\
-          "packageLocation": "./.yarn/cache/next-videos-npm-1.5.0-73e32070ad-c9c6cbac8d.zip/node_modules/next-videos/",\
-          "packageDependencies": [\
-            ["next-videos", "npm:1.5.0"],\
-            ["file-loader", "virtual:73e32070ad108c64964015de9500735eebd1e1aafb31f84d7dead78dc4bf25e6676d55bf5edf5505fbcaba66ca57aa7ae69befef16811c654fb7579851fb97bb#npm:4.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12537,18 +12449,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["scheduler", "npm:0.23.0"],\
             ["loose-envify", "npm:1.4.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["schema-utils", [\
-        ["npm:2.7.1", {\
-          "packageLocation": "./.yarn/cache/schema-utils-npm-2.7.1-f84d18c473-32c62fc9e2.zip/node_modules/schema-utils/",\
-          "packageDependencies": [\
-            ["schema-utils", "npm:2.7.1"],\
-            ["@types/json-schema", "npm:7.0.15"],\
-            ["ajv", "npm:6.12.6"],\
-            ["ajv-keywords", "virtual:f84d18c473fad3c01e1cf352f81ad13de804ca40da5bf6e752464a2e78dcb097ad579b06da5ff33a55ba9957fb9c74909b99fc5e215420a3f9b5dc87ad71363b#npm:3.5.2"]\
           ],\
           "linkType": "HARD"\
         }]\
