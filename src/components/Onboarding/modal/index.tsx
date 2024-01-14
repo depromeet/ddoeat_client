@@ -1,20 +1,20 @@
-'use client';
-
-import { HTMLAttributes, useEffect, useState } from 'react';
+import { useState, HTMLAttributes, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import StepIcon from '@components/Onboarding/stepIcon';
 import StepButton from '@components/Onboarding/stepButton';
 import { OnboardingContentProps } from '@constants/onboarding';
 
 interface OnboardingModalProps extends HTMLAttributes<HTMLDivElement> {
   onboardingData: OnboardingContentProps[];
   step: number;
+  onNextStep: () => void;
 }
 
 export default function OnboardingModal({
   onboardingData,
   step,
-  children,
+  onNextStep,
 }: OnboardingModalProps) {
   const [buttonActive, setButtonActive] = useState(false);
   const router = useRouter();
@@ -27,13 +27,15 @@ export default function OnboardingModal({
   }, [router, step]);
 
   const handleClickNextButton = () => {
-    const nextStepNumber = step + 1;
-    if (nextStepNumber == 4) return router.push('/');
+    onNextStep();
+    setButtonActive(false);
+    const nextStep = step + 1;
+    if (nextStep === 4) return router.push('/');
   };
 
   return (
     <div className="h-[288px] flex flex-col justify-item items-center py-[20px] bg-white absolute z-10 inset-x-0 bottom-0">
-      {children}
+      <StepIcon step={step} />
       <div className="w-full h-[132px] flex flex-col justify-item items-center place-content-center px-[24px] py-[37px] gap-[8px]">
         <p className="text-gray-900 header-22 whitespace-pre-line text-center">
           {onboardingData[step - 1].title}

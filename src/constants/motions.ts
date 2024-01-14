@@ -35,8 +35,4 @@ export const pageTransitionVariant: Variants = {
     transition: { duration: 0.5 },
   },
   opacity: { opacity: 1, transition: { duration: 0.2 } },
-  exit: {
-    x: '-100%',
-    opacity: '0',
-  },
 };
