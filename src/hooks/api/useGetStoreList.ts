@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-import { axiosRequest } from '../../api/api-config';
+import { ApiResponse, axiosRequest } from '../../api/api-config';
 
 interface StoreListQueries {
   keyword: string;
@@ -9,21 +9,28 @@ interface StoreListQueries {
   latitude?: string;
 }
 
-interface Store {
-  // TODO: spec 확정 시 수정
-  storeId: string;
+interface StoreSearch {
+  storeId: number;
   storeName: string;
-  revisitNum: number;
-  menuType: string;
-  location: string;
-  distance: string;
+  categoryName: string;
+  address: string;
+  distance: number;
+  revisitedCount: number;
+  latitude: number;
+  longitude: number;
+}
+
+interface StoreListResponse {
+  storeSearchResult: StoreSearch[];
+  storeIsEnd: boolean;
+  cafeIsEnd: boolean;
 }
 
 const getStoreList = ({
   keyword,
   longitude,
   latitude,
-}: StoreListQueries): Promise<Store[]> => {
+}: StoreListQueries): Promise<ApiResponse<StoreListResponse>> => {
   return axiosRequest(
     'get',
     `/api/v1/stores/search?query=${keyword}&x=${longitude}&y=${latitude}`,
@@ -34,10 +41,11 @@ export const useGetStoreList = ({
   keyword,
   longitude,
   latitude,
-}: StoreListQueries): UseQueryResult<Store[], AxiosError> => {
+}: StoreListQueries): UseQueryResult<StoreListResponse, AxiosError> => {
   return useQuery({
     queryKey: ['get-store-list', keyword, longitude, latitude],
     queryFn: () => getStoreList({ keyword, longitude, latitude }),
     enabled: false,
+    select: (data) => data.data,
   });
 };

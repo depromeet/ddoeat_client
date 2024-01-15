@@ -17,7 +17,7 @@ import useIsMounted from '@hooks/useIsMounted';
 
 export default function Page() {
   const isMounted = useIsMounted();
-  const [text, onTextChange, resetText] = useInput('');
+  const [text, onTextChange, setValue, resetText] = useInput('');
   const debouncedText = useDebounce(text, 500);
 
   const [recentSearchKeywords, setRecentSearchKeywords] = useStorageState<
@@ -25,9 +25,13 @@ export default function Page() {
   >({ key: 'recentSearchKeywords', initialValue: [] });
 
   // TODO: 추후 위, 경도 추가
-  const { data: storeList, refetch } = useGetStoreList({
+  const { data, refetch } = useGetStoreList({
     keyword: debouncedText,
+    longitude: '127.0628310',
+    latitude: '37.51432257',
   });
+
+  const storeList = data?.storeSearchResult;
 
   const isStoreListNone = storeList?.length === 0;
 
@@ -44,6 +48,10 @@ export default function Page() {
     if (text) {
       refetch();
     }
+  };
+
+  const handleClickRecentSearchKeyword = (keyword: string) => () => {
+    setValue(keyword);
   };
 
   const handleClickDeleteButton = (keyword: string) => () => {
@@ -70,28 +78,29 @@ export default function Page() {
         {!storeList && isMounted && (
           <RecentSearchKeyword
             recentSearchKeywords={recentSearchKeywords}
+            onClick={handleClickRecentSearchKeyword}
             onDelete={handleClickDeleteButton}
           />
         )}
         <ul
           className={cn({
             'bg-white': !isStoreListNone,
-            'bg-gray-100 flex justify-center items-center': isStoreListNone,
+            'bg-gray-100 h-full flex justify-center items-center':
+              isStoreListNone,
           })}
         >
           {isStoreListNone ? (
             <NoSearchResult />
           ) : (
             storeList?.map((store, index) => {
-              const { storeId } = store;
-
-              if (storeList.length === 0) return <NoSearchResult />;
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { storeId, latitude, longitude, ...rest } = store;
 
               return (
                 // TODO: 클릭 시 이동 url 확정되면 수정
                 <Link href={`/map/${storeId}`} key={storeId}>
                   <SearchItem
-                    {...store}
+                    {...rest}
                     isLast={index === storeList.length - 1}
                     listId={storeId}
                   />
