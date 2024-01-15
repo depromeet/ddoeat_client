@@ -3,10 +3,12 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { axiosRequest } from '@api/api-config';
 
 interface ReportProps {
-  storeId: string;
-  storeMainImageUrl: string;
-  mostVisitedCount: number;
-  totalRevisitedCount: number;
+  data: {
+    storeId: string;
+    storeMainImageUrl: string;
+    mostVisitedCount: number;
+    totalRevisitedCount: number;
+  };
 }
 
 const getReport = (storeId: string): Promise<ReportProps> => {
