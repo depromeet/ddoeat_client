@@ -31,25 +31,25 @@ export default function StoreDetailContent() {
       <div ref={setTarget}>
         <Header
           className={`fixed bg-white ${
-            data?.data.storeMainImageUrl && '[&>*>*]:fill-white'
+            data?.storeMainImageUrl && '[&>*>*]:fill-white'
           }`}
         >
           {isScrollDown && <span>{'음식점 이름 들어가는 자리입니다.'}</span>}
         </Header>
       </div>
 
-      {data?.data.storeMainImageUrl && (
+      {data?.storeMainImageUrl && (
         <ImageContainer
           type="full"
-          src={data.data.storeMainImageUrl}
+          src={data.storeMainImageUrl}
           alt="음식점 이미지"
           className="w-full"
         />
       )}
       <div
         className={`w-full bg-white h-[${
-          data?.data.storeMainImageUrl ? 24 : 56
-        }px]  ${data?.data.storeMainImageUrl ? 'rounded-t-[24px]' : ''}`}
+          data?.storeMainImageUrl ? 24 : 56
+        }px]  ${data?.storeMainImageUrl ? 'rounded-t-[24px]' : ''}`}
       />
 
       {/* TODO: 상조님 음식점 정보 컴포넌트 넣기 */}
