@@ -23,7 +23,7 @@ export default function ListItem({
     deleteLog(listId);
   };
   return (
-    <li className="w-full pl-[24px] pr-[16px] pt-[8px] flex justify-between items-center">
+    <li className="w-full pl-[24px] pr-[16px] flex justify-between items-center">
       <div
         className={`${cn('flex justify-between items-center pt-2 pb-4 w-full', {
           'border-b-gray-100 border-b-[1px]': !isLast,

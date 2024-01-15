@@ -32,6 +32,16 @@ const config: Config = {
         error: '#FF2A2A',
       },
     },
+    zIndex: {
+      body: '0',
+      above: '10',
+      fixedBody: '50',
+      header: '900',
+      nav: '1000',
+      floating: '9000',
+      overlay: '10000',
+      toast: '30000',
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-nanum-square-round)'],
@@ -46,6 +56,7 @@ const config: Config = {
       boxShadow: {
         floating: '0px 4px 15.4px 0px rgba(0, 0, 0, 0.25);',
         pin: '0px 4px 4px rgba(0, 0, 0, 0.25);',
+        search: '0px 4px 8px 0px rgba(0, 0, 0, 0.10);',
       },
       textShadow: {
         stroke:

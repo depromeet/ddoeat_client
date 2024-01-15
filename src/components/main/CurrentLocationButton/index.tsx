@@ -14,15 +14,15 @@ export default function CurrentLocationButton({
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleWindowClick = (event: MouseEvent) => {
+    const handleOutsidePoint = (event: PointerEvent) => {
       if (!buttonRef.current?.contains(event.target as Node)) {
         setIsActive(false);
       }
     };
 
-    window.addEventListener('click', handleWindowClick);
+    window.addEventListener('pointerdown', handleOutsidePoint);
 
-    return () => window.removeEventListener('click', handleWindowClick);
+    return () => window.removeEventListener('pointerdown', handleOutsidePoint);
   }, []);
 
   const handleClick = (e: React.PointerEvent<HTMLButtonElement>) => {

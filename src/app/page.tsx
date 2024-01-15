@@ -6,6 +6,7 @@ import { Map } from 'react-kakao-maps-sdk';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 import useCoordinate from '@hooks/useCoordinate';
+import SearchField from '@components/main/SearchField';
 import BottomNavigation from '@components/main/BottomNavigation';
 import useThrottle from '@hooks/useThrottle';
 
@@ -39,7 +40,7 @@ export default function Home() {
     setCenter(newCenter);
   };
 
-  const throttledCenterChanged = useThrottle(handleCenterChanged, 10000);
+  const throttledCenterChanged = useThrottle(handleCenterChanged, 1000);
 
   return (
     <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center overflow-hidden">
@@ -51,9 +52,12 @@ export default function Home() {
         onCenterChanged={throttledCenterChanged}
       >
         <CurrentLocationMarker currentUserCoordinate={currentUserCoordinate} />
+        <div className="absolute top-[54px] z-above w-full px-[16px]">
+          <SearchField />
+        </div>
         <BottomNavigation
           onCurrentLocationButtonClick={onCurrentLocationButtonClick}
-          className="absolute bottom-[56px] z-10"
+          className="absolute bottom-[56px] z-above"
         />
       </Map>
 
