@@ -38,6 +38,7 @@ export default function Page() {
   };
 
   const handleClickConfirmButton = () => {
+    // TODO: 약관 동의 api 호출 코드 추가
     push('/');
   };
 

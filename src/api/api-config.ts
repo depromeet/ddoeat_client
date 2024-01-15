@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
@@ -26,6 +27,17 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
+    if (!config.headers) {
+      return config;
+    }
+
+    const accessToken = Cookies.get('accessToken');
+
+    // NOTE: 브라우저 쿠키에 accessToken이 있고, 요청 헤더에 토큰이 없다면 헤더에 accessToken 추가
+    if (accessToken && !config.headers['Authorization']) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
     return config;
   },
   function (error) {
