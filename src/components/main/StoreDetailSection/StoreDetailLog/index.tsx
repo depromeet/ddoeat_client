@@ -27,7 +27,6 @@ export default function StoreDetailLog({
 }: StoreDetailLogProps) {
   return (
     <div className="flex flex-col">
-      <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
       <LogItem
         userName={name}
         visitNum={visitNum}
