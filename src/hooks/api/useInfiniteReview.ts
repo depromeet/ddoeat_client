@@ -1,6 +1,9 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import {
+  UseInfiniteQueryResult,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 
-import { axiosRequest } from '@api/api-config';
+import { ApiResponse, axiosRequest } from '@api/api-config';
 
 interface ContentData {
   userId: number;
@@ -15,21 +18,19 @@ interface ContentData {
 }
 
 interface ReviewProps {
-  data: {
-    content: ContentData[];
-    pageable: string;
-    size: number;
-    number: number;
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    first: boolean;
-    last: boolean;
-    numberOfElements: number;
+  content: ContentData[];
+  pageable: string;
+  size: number;
+  number: number;
+  sort: {
     empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
   };
+  first: boolean;
+  last: boolean;
+  numberOfElements: number;
+  empty: boolean;
 }
 
 export interface GetReviewParams {
@@ -44,7 +45,7 @@ const getReview = ({
   page,
   size,
   type,
-}: GetReviewParams): Promise<ReviewProps> => {
+}: GetReviewParams): Promise<ApiResponse<ReviewProps>> => {
   let queryString = `page=${page}&size=${size}`;
 
   if (type) queryString += `&type=${type}`;
@@ -55,17 +56,12 @@ const getReview = ({
   );
 };
 
-export const getReviewData = async (params: GetReviewParams) => {
-  const res = await getReview(params);
-
-  return res;
-};
-
-export const useInfiniteReview = (params: GetReviewParams) => {
+export const useInfiniteReview = (
+  params: GetReviewParams,
+): UseInfiniteQueryResult<ApiResponse<ReviewProps>[], Error> => {
   return useInfiniteQuery({
     queryKey: ['get-review', params],
-    queryFn: ({ pageParam = 1 }) =>
-      getReviewData({ ...params, page: pageParam }),
+    queryFn: ({ pageParam = 1 }) => getReview({ ...params, page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage.data.last) {
@@ -73,5 +69,6 @@ export const useInfiniteReview = (params: GetReviewParams) => {
       }
       return undefined;
     },
+    select: (data) => data.pages,
   });
 };

@@ -76,8 +76,8 @@ export default function Reviews() {
       </div>
 
       <div className="mx-[16px]">
-        {data && !data.pages[0].data.empty ? (
-          data.pages.map((page, pageIndex) => (
+        {data && !data[0].data.empty ? (
+          data.map((page, pageIndex) => (
             <div key={pageIndex}>
               {page.data.content.map((item, index, arr) => (
                 <div
