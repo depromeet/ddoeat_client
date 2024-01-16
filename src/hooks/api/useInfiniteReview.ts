@@ -36,7 +36,7 @@ export interface GetReviewParams {
   storeId: string;
   page?: number;
   size?: number;
-  type: 'revisited' | 'photo' | null;
+  type: 'REVISITED' | 'PHOTO' | null;
 }
 
 const getReview = ({

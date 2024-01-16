@@ -16,7 +16,7 @@ import useObserver from '@hooks/useObserver';
 const DEFAULT_REVIEW_COUNT = 10;
 
 export default function Reviews() {
-  const [activeTag, setActiveTag] = useState<'revisited' | 'photo' | null>(
+  const [activeTag, setActiveTag] = useState<'REVISITED' | 'PHOTO' | null>(
     null,
   );
 
@@ -32,7 +32,7 @@ export default function Reviews() {
 
   const { data, fetchNextPage, refetch } = useInfiniteReview(params);
 
-  const handleTagClick = (tag: 'revisited' | 'photo' | null): void => {
+  const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null): void => {
     setActiveTag((prevTag) => (prevTag === tag ? null : tag));
     refetch();
   };
@@ -46,7 +46,7 @@ export default function Reviews() {
     threshold: 1,
   });
 
-  const formatTagClassName = (tag: 'revisited' | 'photo') => {
+  const formatTagClassName = (tag: 'REVISITED' | 'PHOTO') => {
     return cn({
       'bg-gray-500 text-white': activeTag === tag,
       'bg-gray-100 text-gray-500': activeTag !== tag,
@@ -60,15 +60,15 @@ export default function Reviews() {
         <div className="flex gap-[8px]">
           <Tag
             size="large"
-            className={formatTagClassName('revisited')}
-            onClick={() => handleTagClick('revisited')}
+            className={formatTagClassName('REVISITED')}
+            onClick={() => handleTagClick('REVISITED')}
           >
             재방문만
           </Tag>
           <Tag
             size="large"
-            className={formatTagClassName('photo')}
-            onClick={() => handleTagClick('photo')}
+            className={formatTagClassName('PHOTO')}
+            onClick={() => handleTagClick('PHOTO')}
           >
             사진 리뷰만
           </Tag>
