@@ -23,5 +23,6 @@ export const useGetPresignedUrl = (
     queryKey: ['get-presigned-url', fileName],
     queryFn: () => getPresignedUrl(fileName),
     enabled: false,
+    select: (data) => data.data,
   });
 };

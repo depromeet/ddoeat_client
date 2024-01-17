@@ -9,16 +9,19 @@ import StarRating from '@components/review/StarRating';
 import TextArea from '@components/review/TextArea';
 import NavigationButton from '@components/terms/NavigationButton';
 import VisitDate from '@components/review/VisitDate';
+import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
 
 export default function Page({ params }: { params: { storeId: string[] } }) {
   const { mutate: postLog } = usePostLog();
+  const { mutate: uploadImageToNCloud } = useUploadImageToNCloud();
   const [visitedAt, setVisitedAt] = useState('');
   const [rating, setRating] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
+  const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
 
   // Presigned URL
-  const { data: presignedUrl, refetch } = useGetPresignedUrl('screenShot');
+  const { data: presignedUrl, refetch } = useGetPresignedUrl(imageUrl);
 
   // 주소 변경 시 presigned url 주소 요청
   useEffect(
@@ -44,6 +47,7 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
   );
 
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    setFile((e.target.files as FileList)[0]);
     setImageUrl(URL.createObjectURL((e.target.files as FileList)[0]));
   };
 
@@ -56,6 +60,10 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
   };
 
   const handleClickSubmitButton = () => {
+    uploadImageToNCloud({
+      presignedUrl: presignedUrl?.presignedUrl as string,
+      file,
+    });
     // TODO: 이미지 기능 구현
     postLog({
       storeId,
