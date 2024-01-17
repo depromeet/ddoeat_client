@@ -15,7 +15,11 @@ interface FilterTagListProps {
   setSelectedTag: Dispatch<SetStateAction<string | null>>;
 }
 
-const FilterTagContext = createContext<FilterTagListProps | null>(null);
+interface FilterTagState extends FilterTagListProps {
+  onSelectedTagChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const FilterTagContext = createContext<FilterTagState | null>(null);
 
 function FilterTagList({
   selectedTag,
@@ -23,8 +27,14 @@ function FilterTagList({
   className,
   children,
 }: HTMLAttributes<HTMLDivElement> & FilterTagListProps) {
+  const onSelectedTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedTag((prev) => (prev === e.target.value ? null : e.target.value));
+  };
+
   return (
-    <FilterTagContext.Provider value={{ selectedTag, setSelectedTag }}>
+    <FilterTagContext.Provider
+      value={{ selectedTag, setSelectedTag, onSelectedTagChange }}
+    >
       <div className={cn('flex w-full overflow-x-scroll', className)}>
         <div className=" min-w-max flex gap-[8px] pb-[12px]">{children}</div>
       </div>

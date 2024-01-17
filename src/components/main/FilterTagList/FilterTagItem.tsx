@@ -7,16 +7,22 @@ import Tag from '@components/common/Tag';
 
 export default function FilterTagItem({
   value,
+  onChange,
   onClick,
   children,
   className,
   ...restProps
 }: Omit<ComponentProps<'input'>, 'value'> & { value: string }) {
-  const { selectedTag, setSelectedTag } = useFilterTag();
+  const { selectedTag, setSelectedTag, onSelectedTagChange } = useFilterTag();
   const isSelected = selectedTag === value;
 
-  const handleSelect = (e: React.PointerEvent<HTMLInputElement>) => {
-    setSelectedTag(value);
+  const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onSelectedTagChange(e);
+    onChange?.(e);
+  };
+
+  const handleSelectedTagClick = (e: React.PointerEvent<HTMLInputElement>) => {
+    if (isSelected) setSelectedTag(null);
     onClick?.(e);
   };
 
@@ -25,10 +31,11 @@ export default function FilterTagItem({
       <input
         type="radio"
         value={value}
-        onClick={handleSelect}
         className="hidden"
-        {...restProps}
         checked={isSelected}
+        onChange={handleTagChange}
+        onClick={handleSelectedTagClick}
+        {...restProps}
       />
       <Tag
         size="large"
