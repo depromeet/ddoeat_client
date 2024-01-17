@@ -9,16 +9,18 @@ import TextArea from '@components/review/TextArea';
 import NavigationButton from '@components/terms/NavigationButton';
 import VisitDate from '@components/review/VisitDate';
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: { storeId: string[] } }) {
   const { mutate: postLog } = usePostLog();
-  const [date, setDate] = useState('');
+  const [visitedAt, setVisitedAt] = useState('');
   const [rating, setRating] = useState(0);
+  const [imageUrl, setImageUrl] = useState('');
   const [description, setDescription] = useState('');
 
-  const storeId = params.slug;
+  const storeId = params?.storeId ? params.storeId[0] : null;
+  console.log(storeId);
 
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(e.target.value);
+    setVisitedAt(e.target.value);
   };
 
   const handleRating = useCallback(
@@ -34,7 +36,14 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const handleClickSubmitButton = () => {
     // TODO: 이미지 기능 구현
-    postLog({ storeId, rating, storeImgUrl: '', description });
+    postLog({
+      storeId,
+      newStore: null,
+      rating,
+      visitedAt,
+      imageUrl,
+      description,
+    });
   };
 
   return (
