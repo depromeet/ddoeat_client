@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, ChangeEvent, useEffect } from 'react';
+import { useState, useCallback, ChangeEvent, useEffect } from 'react';
 
 import { usePostLog } from '@hooks/api/usePostLog';
 import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
@@ -44,7 +44,6 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
   );
 
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
     setImageUrl(URL.createObjectURL((e.target.files as FileList)[0]));
   };
 

@@ -28,7 +28,12 @@ export default function ImageUploader({
     >
       {imageUrl ? (
         <div>
-          <Image src={imageUrl} alt="리뷰 업로드 사진" fill />
+          <Image
+            className="object-cover"
+            src={imageUrl}
+            alt="리뷰 업로드 사진"
+            fill
+          />
           <button
             onClick={deleteImage}
             className="absolute top-[8px] right-[8px]"
