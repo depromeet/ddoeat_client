@@ -22,6 +22,6 @@ export const useGetPresignedUrl = (
   return useQuery({
     queryKey: ['get-presigned-url', fileName],
     queryFn: () => getPresignedUrl(fileName),
-    enabled: !!fileName,
+    enabled: false,
   });
 };

@@ -26,6 +26,8 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
+    config.headers['Authorization'] =
+      `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInVzZXJJZCI6NiwiZXhwIjoxNzA2NTQ2NjI1fQ.GxidCTKWLPA31CsTHaVfA--RMeYoFRk-iNBzYDQxsqke6NJLDJAgbeoXY5YPeT_1vR2uvZnMQ3V-2iEhw5grpA`;
     return config;
   },
   function (error) {

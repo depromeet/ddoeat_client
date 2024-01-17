@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useCallback, ChangeEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent, useEffect } from 'react';
 
 import { usePostLog } from '@hooks/api/usePostLog';
+import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
 import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
 import TextArea from '@components/review/TextArea';
@@ -16,8 +17,20 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
   const [imageUrl, setImageUrl] = useState('');
   const [description, setDescription] = useState('');
 
+  // Presigned URL
+  const { data: presignedUrl, refetch } = useGetPresignedUrl('screenShot');
+
+  // 주소 변경 시 presigned url 주소 요청
+  useEffect(
+    function requestPresignedUrl() {
+      if (imageUrl) {
+        refetch();
+      }
+    },
+    [imageUrl, refetch],
+  );
+
   const storeId = params?.storeId ? params.storeId[0] : null;
-  console.log(storeId);
 
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVisitedAt(e.target.value);
@@ -29,6 +42,15 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
     },
     [],
   );
+
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+    setImageUrl(URL.createObjectURL((e.target.files as FileList)[0]));
+  };
+
+  const handleDeleteImage = () => {
+    setImageUrl('');
+  };
 
   const handleChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
@@ -55,13 +77,16 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
       <div className="flex flex-col py-[8px] gap-[16px]">
         <VisitDate onChange={handleChangeDate} />
         <StarRating rating={rating} onClick={handleRating} />
-        <ImageUploader />
+        <ImageUploader
+          onChange={handleChangeImage}
+          imageUrl={imageUrl}
+          deleteImage={handleDeleteImage}
+        />
         <TextArea value={description} onChange={handleChangeDescription} />
       </div>
       <NavigationButton
         className="bg-transparent fixed bottom-0 left-[50%] -translate-x-[50%]"
-        // TODO: 추후 storeImgUrl 조건 추가
-        disabled={!rating || !description}
+        disabled={!rating || !description || !imageUrl}
         onClick={handleClickSubmitButton}
       >
         작성완료
