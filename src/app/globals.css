@@ -43,6 +43,8 @@
     @apply text-[10px]/[140%] tracking-[-0.3px] font-normal;
   }
 
+  .custom-date-icon {
+  }
 }
 
 :root {

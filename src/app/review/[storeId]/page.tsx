@@ -1,19 +1,25 @@
 'use client';
 
-import { useState, useCallback, ChangeEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent } from 'react';
 
 import { usePostLog } from '@hooks/api/usePostLog';
 import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
 import TextArea from '@components/review/TextArea';
 import NavigationButton from '@components/terms/NavigationButton';
+import VisitDate from '@components/review/VisitDate';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const { mutate: postLog } = usePostLog();
+  const [date, setDate] = useState('');
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
 
   const storeId = params.slug;
+
+  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDate(e.target.value);
+  };
 
   const handleRating = useCallback(
     (index: number) => () => {
@@ -38,6 +44,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <strong className="text-primary-500">NN번째</strong> 방문이에요!
       </h1>
       <div className="flex flex-col py-[8px] gap-[16px]">
+        <VisitDate onChange={handleChangeDate} />
         <StarRating rating={rating} onClick={handleRating} />
         <ImageUploader />
         <TextArea value={description} onChange={handleChangeDescription} />
