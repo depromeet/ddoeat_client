@@ -46,6 +46,8 @@ export const useGetStoreList = ({
     queryKey: ['get-store-list', keyword, longitude, latitude],
     queryFn: () => getStoreList({ keyword, longitude, latitude }),
     enabled: false,
+    staleTime: 0,
+    gcTime: 0,
     select: (data) => data.data,
   });
 };
