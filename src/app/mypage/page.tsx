@@ -91,7 +91,7 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="w-full h-full bg-white rounded-t-[24px]">
+      <div className="w-full h-[100dvh] bg-white rounded-t-[24px]">
         <Tab.Group initialTab="mylog">
           <div className="h-[76px] flex px-[24px]">
             <Tab.Header>
