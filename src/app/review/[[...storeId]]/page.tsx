@@ -23,7 +23,9 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
   const [description, setDescription] = useState('');
 
   // NOTE: Presigned URL
-  const { data: presignedUrl, refetch } = useGetPresignedUrl(imageUrl);
+  const { data: presignedUrl, refetch } = useGetPresignedUrl(
+    imageUrl.slice(26),
+  );
 
   // NOTE: 이미지 로드 시 presigned URL 권한 요청
   useEffect(
@@ -74,7 +76,7 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
       newStore: null,
       rating,
       visitedAt,
-      imageUrl,
+      imageUrl: presignedUrl?.presignedUrl as string,
       description,
     });
   };

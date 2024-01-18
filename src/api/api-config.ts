@@ -26,6 +26,11 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
+    if (!config.url?.includes('https://ddoeatimg.kr')) {
+      config.headers['Authorization'] =
+        `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInVzZXJJZCI6NCwiZXhwIjoxNzA2ODAxMTczfQ.Ad5ZVzUQLjHnCaiZ7b0KYZ1Sezjp4_CuiDubZCay82KegsGgoWfN3uUKG6wkAPL0_vgLwxgSJodjaOKnC6vlCQ`;
+    }
+
     return config;
   },
   function (error) {
@@ -45,20 +50,16 @@ axiosInstance.interceptors.response.use(
 export const axiosRequest = async <T>(
   method: Method,
   url: string,
-  data?: Record<string, unknown>,
+  data?: FormData | File | Blob | ArrayBuffer | Record<string, unknown>, // FormData 또는 일반 객체를 허용
   headers?: Record<string, string>,
   params?: Record<string, unknown>,
 ): Promise<T> => {
   const instance = await axiosInstance.request<T>({
     method,
     url,
-    ...(data && { data }),
-    ...(headers && {
-      headers: {
-        ...headers,
-      },
-    }),
-    ...(params && { params }),
+    data, // data 객체를 그대로 전달
+    headers,
+    params,
   });
 
   return instance.data;
