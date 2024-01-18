@@ -93,6 +93,7 @@ export default function Page() {
             <NoSearchResult />
           ) : (
             storeList?.map((store, index) => {
+              // NOTE: 위, 경도는 추후 페이지 간 넘겨주는 데이터에 사용될 예정
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const { storeId, latitude, longitude, ...rest } = store;
 
