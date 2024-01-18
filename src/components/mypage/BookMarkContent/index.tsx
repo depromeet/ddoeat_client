@@ -1,0 +1,117 @@
+import { useState } from 'react';
+
+import BookmarkItem from '../BookmarkItem';
+
+import useObserver from '@hooks/useObserver';
+import { DEFAULT_CONTENTS_SIZE } from '@constants/mypage';
+import {
+  ContentData,
+  useInfiniteGetBookMark,
+} from '@hooks/api/useInfiniteBookMark';
+import Tag from '@components/common/Tag';
+import cn from '@utils/cn';
+
+interface TagType {
+  id: 'total' | 'after' | 'before';
+  label: string;
+}
+
+const tags: TagType[] = [
+  { id: 'total', label: '전체' },
+  { id: 'after', label: '방문후' },
+  { id: 'before', label: '방문전' },
+];
+
+const filterByTag = (item: ContentData, tag: TagType['id']) => {
+  if (tag === 'total') return true;
+  if (tag === 'after') return item.isVisited;
+  if (tag === 'before') return !item.isVisited;
+};
+
+export default function BookMarkContent() {
+  const [selectedTag, setSelectedTag] =
+    useState<(typeof tags)[number]['id']>('total');
+
+  const { data: bookMark, fetchNextPage } = useInfiniteGetBookMark({
+    size: DEFAULT_CONTENTS_SIZE,
+  });
+
+  const onIntersect: IntersectionObserverCallback = ([entry]) => {
+    if (entry.isIntersecting) fetchNextPage();
+  };
+
+  const { setTarget } = useObserver({
+    onIntersect,
+    threshold: 1,
+  });
+
+  const handleTagClick = (tagId: (typeof tags)[number]['id']): void => {
+    setSelectedTag(tagId);
+  };
+
+  const calculateTagDataCount = (tag: TagType['id']): number => {
+    if (!bookMark) return 0;
+
+    return bookMark.reduce((acc, page) => {
+      return (
+        acc + page.data.content.filter((item) => filterByTag(item, tag)).length
+      );
+    }, 0);
+  };
+
+  return (
+    <>
+      <div className="flex gap-[8px] pl-[16px]">
+        {tags.map((tag) => (
+          <Tag
+            key={tag.id}
+            size="large"
+            className={cn({
+              'bg-gray-500 text-white': selectedTag === tag.id,
+              'bg-gray-100 text-gray-500': selectedTag !== tag.id,
+            })}
+            onClick={() => handleTagClick(tag.id)}
+          >
+            {tag.label} {calculateTagDataCount(tag.id)}
+          </Tag>
+        ))}
+      </div>
+
+      <div className="mx-[16px]">
+        {/* 예시 데이터(테스트용) */}
+        <BookmarkItem
+          listId={'1'}
+          isLast={false}
+          location="서울시 어딘가"
+          menuType="한식"
+          revisitNum={4}
+          storeName="여수수산"
+        />
+        {bookMark &&
+          !bookMark[0].data.empty &&
+          bookMark.map((page, pageIndex) => (
+            <div key={pageIndex}>
+              {page.data.content
+                .filter((item) => filterByTag(item, selectedTag))
+                .map((item, index, arr) => (
+                  <div
+                    key={index}
+                    ref={index === arr.length - 1 ? setTarget : null}
+                  >
+                    <BookmarkItem
+                      //  TODO: 각 북마크 id 받아오기
+                      listId={index.toString()}
+                      isLast={false}
+                      location={item.address}
+                      menuType={item.categoryName}
+                      revisitNum={item.totalRevisitedCount}
+                      storeName={item.storeName}
+                    />
+                  </div>
+                ))}
+            </div>
+          ))}
+      </div>
+    </>
+  );
+}
