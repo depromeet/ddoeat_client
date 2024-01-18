@@ -1,13 +1,20 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import CTAButton from '@components/common/CTAButton';
 import DdoeatLogo from 'public/assets/ddoeat_logo.svg';
 import AppleLogo from 'public/assets/icon24/apple_logo_24.svg';
 import KakaoLogo from 'public/assets/icon24/kakao_logo_24.svg';
 
-export default function page() {
+export default function Page() {
+  const { push } = useRouter();
   const handleClickKakaoLoginButton = () => {
-    // TODO: 카카오 로그인 구현
+    // TODO: 추후에 env=development, env=production으로 변경 요청
+    const env = process.env.NODE_ENV === 'development' ? 'local' : 'dev';
+    push(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/oauth2/authorization/kakao?env=${env}`,
+    );
   };
 
   const handleClickAppleLoginButton = () => {
