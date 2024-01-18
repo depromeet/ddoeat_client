@@ -14,16 +14,18 @@ import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
 export default function Page({ params }: { params: { storeId: string[] } }) {
   const { mutate: postLog } = usePostLog();
   const { mutate: uploadImageToNCloud } = useUploadImageToNCloud();
-  const [visitedAt, setVisitedAt] = useState('');
+  const [visitedAt, setVisitedAt] = useState(
+    new Date().toISOString().substring(0, 10).replaceAll('-', '.'),
+  );
   const [rating, setRating] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
 
-  // Presigned URL
+  // NOTE: Presigned URL
   const { data: presignedUrl, refetch } = useGetPresignedUrl(imageUrl);
 
-  // 주소 변경 시 presigned url 주소 요청
+  // NOTE: 이미지 로드 시 presigned URL 권한 요청
   useEffect(
     function requestPresignedUrl() {
       if (imageUrl) {
@@ -33,10 +35,11 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
     [imageUrl, refetch],
   );
 
+  // NOTE: 첫 방문 가게면 null
   const storeId = params?.storeId ? params.storeId[0] : null;
 
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setVisitedAt(e.target.value);
+    setVisitedAt(e.target.value.replaceAll('-', '.'));
   };
 
   const handleRating = useCallback(
@@ -60,11 +63,12 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
   };
 
   const handleClickSubmitButton = () => {
+    // NOTE:
     uploadImageToNCloud({
       presignedUrl: presignedUrl?.presignedUrl as string,
       file,
     });
-    // TODO: 이미지 기능 구현
+    // TODO: storeId 유무에 따른 분기 처리
     postLog({
       storeId,
       newStore: null,
