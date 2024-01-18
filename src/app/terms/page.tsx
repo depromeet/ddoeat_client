@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import useStoreToken from '@hooks/useStoreToken';
 import { TERMS } from '@constants/terms';
 import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
 import NavigationButton from '@components/terms/NavigationButton';
@@ -10,6 +11,12 @@ import TermsItem from '@components/terms/TermsItem';
 
 export default function Page() {
   const { push } = useRouter();
+
+  const { storeTokenToCookie } = useStoreToken('/terms');
+
+  useEffect(() => {
+    storeTokenToCookie();
+  }, []);
 
   const [termsState, setTermsState] = useState(
     TERMS.map((term) => ({ ...term, isChecked: false })),
