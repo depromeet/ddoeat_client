@@ -78,7 +78,6 @@ export default function Home() {
                     height={20}
                     alt={value}
                     src={selectedTag === value ? selectedIcon : defaultIcon}
-                    className="w-[20px] h-[20px]"
                   />
                 )}
                 {text}
