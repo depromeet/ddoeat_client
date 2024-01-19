@@ -1,19 +1,41 @@
 import { motion } from 'framer-motion';
-
 // TODO: 컴포넌트 폴더 & 파일 대소문자 통일
-import BackgroundVideo from '@components/Onboarding/BackgroundVideo';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import OnboardingModal from '@components/Onboarding/modal';
 import { pageTransitionVariant } from '@constants/motions';
-import { ONBOARDING_CONTENT } from '@constants/onboarding';
 
 interface SceneProps {
   step: number;
+  title: string;
+  content: string;
+  videoUrl: string;
+  icon: string;
   onNextStep: () => void;
 }
 
-const onboardingData = ONBOARDING_CONTENT;
+export default function Scene({
+  step,
+  title,
+  content,
+  videoUrl,
+  icon,
+  onNextStep,
+}: SceneProps) {
+  const router = useRouter();
+  const [buttonActive, setButtonActive] = useState(false);
 
-export default function Scene({ step, onNextStep }: SceneProps) {
+  const handleVideoEnd = () => {
+    setButtonActive(true);
+  };
+
+  const handleClickNext = () => {
+    onNextStep();
+    setButtonActive(false);
+    if (step + 1 === 4) return router.push('/');
+  };
+
   return (
     <motion.div
       className="absolute w-full h-full flex justify-center items-center"
@@ -22,11 +44,21 @@ export default function Scene({ step, onNextStep }: SceneProps) {
       initial="initial"
       animate={['animate', 'opacity']}
     >
-      <BackgroundVideo step={step} />
+      <video
+        src={videoUrl}
+        autoPlay
+        className="absolute top-0 object-cover h-full w-full"
+        muted
+        key={videoUrl}
+        onEnded={handleVideoEnd}
+      />
       <OnboardingModal
+        title={title}
+        content={content}
+        icon={icon}
         step={step}
-        onboardingData={onboardingData}
-        onNextStep={onNextStep}
+        isButtonActive={buttonActive}
+        onNextStep={handleClickNext}
       />
     </motion.div>
   );

@@ -4,21 +4,24 @@ import { useState } from 'react';
 
 // TODO: 폴더 & 파일 대소문자 통일
 import Scene from '@components/Onboarding/Scene';
-
-const steps = [1, 2, 3];
+import { ONBOARDING_CONTENT } from '@constants/onboarding';
 
 export default function Page() {
-  const [step, setStep] = useState(steps[0]);
+  const [step, setStep] = useState(ONBOARDING_CONTENT[0].step);
 
   return (
     <div>
-      {steps.map(
-        (value) =>
-          step >= value && (
+      {ONBOARDING_CONTENT.map(
+        (content) =>
+          step >= content.step && (
             <Scene
-              step={value}
+              step={content.step}
+              title={content.title}
+              content={content.content}
+              videoUrl={content.videoUrl}
+              icon={content.icon}
               onNextStep={() => setStep((prev) => prev + 1)}
-              key={value}
+              key={content.step}
             />
           ),
       )}
