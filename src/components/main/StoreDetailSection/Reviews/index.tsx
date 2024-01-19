@@ -30,7 +30,8 @@ export default function Reviews() {
     type: activeTag,
   };
 
-  const { data, fetchNextPage, refetch } = useInfiniteReview(params);
+  const { data, fetchNextPage, refetch, isLoading, hasNextPage } =
+    useInfiniteReview(params);
 
   const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null): void => {
     setActiveTag((prevTag) => (prevTag === tag ? null : tag));
@@ -77,32 +78,24 @@ export default function Reviews() {
 
       <div className="mx-[16px]">
         {data && !data[0].data.empty ? (
-          data.map((page, pageIndex) => (
-            <div key={pageIndex}>
-              {page.data.content.map((item, index, arr) => (
-                <div
+          data?.map((page) => {
+            return page.data.content.map((item) => {
+              return (
+                <StoreDetailLog
                   key={item.reviewId}
-                  ref={
-                    page.data.last && index === arr.length - 1
-                      ? setTarget
-                      : null
-                  }
-                >
-                  <StoreDetailLog
-                    reviewId={item.reviewId}
-                    date={item.visitedAt}
-                    score={item.rating}
-                    log={item.description}
-                    storeImgUrl={item.imageUrl}
-                    name={item.nickName}
-                    visitNum={item.visitTimes}
-                    hasDeleteOption={item.isMine}
-                    isLast={true}
-                  />
-                </div>
-              ))}
-            </div>
-          ))
+                  reviewId={item.reviewId}
+                  date={item.visitedAt}
+                  score={item.rating}
+                  log={item.description}
+                  storeImgUrl={item.imageUrl}
+                  name={item.nickName}
+                  visitNum={item.visitTimes}
+                  hasDeleteOption={item.isMine}
+                  isLast={true}
+                />
+              );
+            });
+          })
         ) : (
           <div className="w-full h-[160px] flex flex-col gap-[8px] items-center justify-center  bg-gray-100 text-gray-900 rounded-[24px] mb-[8px]">
             <p className="body-16-bold">아직 기록이 없어요!</p>
@@ -111,6 +104,7 @@ export default function Reviews() {
             </p>
           </div>
         )}
+        {!isLoading && hasNextPage && <div ref={setTarget} />}
       </div>
     </div>
   );
