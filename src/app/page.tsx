@@ -9,6 +9,7 @@ import useCoordinate from '@hooks/useCoordinate';
 import SearchField from '@components/main/SearchField';
 import BottomNavigation from '@components/main/BottomNavigation';
 import useThrottle from '@hooks/useThrottle';
+import useStoreToken from '@hooks/useStoreToken';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -20,7 +21,10 @@ export default function Home() {
   } = useCoordinate();
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
 
+  const { storeTokenToCookie } = useStoreToken('/');
+
   useEffect(() => {
+    storeTokenToCookie();
     getCurrentUserCoordinateInterval();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

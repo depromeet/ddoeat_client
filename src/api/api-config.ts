@@ -32,7 +32,6 @@ axiosInstance.interceptors.request.use(
     }
 
     const accessToken = Cookies.get('accessToken');
-    const refreshToken = Cookies.get('refreshToken');
 
     // NOTE: 브라우저 쿠키에 accessToken이 있고, 요청 헤더에 토큰이 없다면 헤더에 accessToken 추가
     if (accessToken && !config.headers['Authorization']) {
