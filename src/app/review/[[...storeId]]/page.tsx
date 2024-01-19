@@ -58,6 +58,7 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
 
   const handleDeleteImage = () => {
     setImageUrl('');
+    setFile(null);
   };
 
   const handleChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
