@@ -99,8 +99,7 @@ export default function BookMarkContent() {
                     ref={index === arr.length - 1 ? setTarget : null}
                   >
                     <BookmarkItem
-                      //  TODO: 각 북마크 id 받아오기
-                      listId={index.toString()}
+                      listId={item.bookmarkId}
                       isLast={false}
                       location={item.address}
                       menuType={item.categoryName}
