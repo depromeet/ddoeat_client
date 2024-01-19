@@ -15,6 +15,7 @@ export default function Page() {
 
   useEffect(() => {
     storeTokenToCookie();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [termsState, setTermsState] = useState(
