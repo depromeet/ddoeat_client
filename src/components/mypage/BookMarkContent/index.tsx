@@ -78,15 +78,6 @@ export default function BookMarkContent() {
       </div>
 
       <div className="mx-[16px]">
-        {/* 예시 데이터(테스트용) */}
-        <BookmarkItem
-          listId={'1'}
-          isLast={false}
-          location="서울시 어딘가"
-          menuType="한식"
-          revisitNum={4}
-          storeName="여수수산"
-        />
         {bookMark &&
           !bookMark[0].data.empty &&
           bookMark.map((page, pageIndex) => (

@@ -20,16 +20,6 @@ export default function MyLogContent() {
 
   return (
     <div className="mx-[16px]">
-      {/* 예시 데이터(테스트용) */}
-      <MyLog
-        logId="1"
-        date="2023. 01. 01"
-        log="너무 맛있어요"
-        menuType="중식"
-        rating={3}
-        storeName="무궁화 반점"
-        myVisitNum={4}
-      />
       {myLog &&
         !myLog[0].data.empty &&
         myLog.map((page, pageIndex) => (
