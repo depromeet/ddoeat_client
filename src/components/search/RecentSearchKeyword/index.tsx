@@ -1,10 +1,14 @@
+import React from 'react';
+
 import Tag from '@components/common/Tag';
 import CloseIcon from 'public/assets/icon12/close_12.svg';
 
 interface RecentSearchKeywordProps {
   recentSearchKeywords: string[];
   onClick: (keyword: string) => () => void;
-  onDelete: (keyword: string) => () => void;
+  onDelete: (
+    keyword: string,
+  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function RecentSearchKeyword({
@@ -21,8 +25,9 @@ export default function RecentSearchKeyword({
             key={index}
             size="large"
             className="py-[8px] bg-gray-100 cursor-pointer"
+            onClick={onClick(recentSearchKeyword)}
           >
-            <p onClick={onClick(recentSearchKeyword)}>{recentSearchKeyword}</p>
+            <p>{recentSearchKeyword}</p>
             <button onClick={onDelete(recentSearchKeyword)}>
               <CloseIcon />
             </button>

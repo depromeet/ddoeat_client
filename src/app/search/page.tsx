@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import React from 'react';
 
 import useDebounce from '@hooks/useDebounce';
 import SearchTopBar from '@components/search/SearchTopBar';
@@ -39,11 +40,13 @@ export default function Page() {
 
   const handleClickSearchButton = () => {
     setRecentSearchKeywords((prev) => {
-      if (prev.includes(text)) {
-        return prev;
-      } else {
-        return [text, ...prev];
+      const updatedKeywords = prev.includes(text) ? prev : [text, ...prev];
+
+      if (updatedKeywords.length > 10) {
+        updatedKeywords.pop();
       }
+
+      return updatedKeywords;
     });
     if (text) {
       refetch();
@@ -54,9 +57,13 @@ export default function Page() {
     setValue(keyword);
   };
 
-  const handleClickDeleteButton = (keyword: string) => () => {
-    setRecentSearchKeywords((prev) => prev.filter((item) => item !== keyword));
-  };
+  const handleClickDeleteButton =
+    (keyword: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      setRecentSearchKeywords((prev) =>
+        prev.filter((item) => item !== keyword),
+      );
+    };
 
   return (
     <div>
