@@ -1,18 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 import useStoreToken from '@hooks/useStoreToken';
+import { usePostSignUp } from '@hooks/api/usePostSignUp';
 import { TERMS } from '@constants/terms';
 import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
 import NavigationButton from '@components/terms/NavigationButton';
 import TermsItem from '@components/terms/TermsItem';
 
 export default function Page() {
-  const { push } = useRouter();
-
   const { storeTokenToCookie } = useStoreToken('/terms');
+  const { mutate: postSignUp } = usePostSignUp();
 
   useEffect(() => {
     storeTokenToCookie();
@@ -45,8 +44,7 @@ export default function Page() {
   };
 
   const handleClickConfirmButton = () => {
-    // TODO: 약관 동의 api 호출 코드 추가
-    push('/');
+    postSignUp();
   };
 
   return (
