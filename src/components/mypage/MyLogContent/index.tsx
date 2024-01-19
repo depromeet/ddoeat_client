@@ -40,8 +40,7 @@ export default function MyLogContent() {
                 ref={index === arr.length - 1 ? setTarget : null}
               >
                 <MyLog
-                  // TODO: 각 내 로그 id 받아오기
-                  logId={index.toString()}
+                  logId={item.reviewId}
                   date={item.visitedAt}
                   log={item.description}
                   menuType={item.visitedAt}
