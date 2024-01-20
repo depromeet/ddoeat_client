@@ -4,7 +4,7 @@ interface OnboardingLayout {
   children: ReactNode;
 }
 
-export default function layout({ children }: OnboardingLayout) {
+export default function Layout({ children }: OnboardingLayout) {
   return (
     <div className="h-screen w-screen bg-gray-100 relative">{children}</div>
   );
