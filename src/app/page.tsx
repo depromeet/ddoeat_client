@@ -117,11 +117,9 @@ export default function Home() {
         }}
         isShowing={isBottomSheetShowing}
       >
-        <BottomSheet.ShowContent>
-          <div className="w-full h-[2500px] bg-primary-50 break-words">
-            중간까지 올라온 바텀싯 내용
-          </div>
-        </BottomSheet.ShowContent>
+        <BottomSheet.ShowContent
+          onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
+        ></BottomSheet.ShowContent>
         <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent>
       </BottomSheet>
     </main>
