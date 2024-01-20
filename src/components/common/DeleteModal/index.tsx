@@ -15,10 +15,10 @@ export default function DeleteModal({
 }: DeleteModal) {
   return (
     <AnimatePortal isShowing={isShowing}>
-      <div className="absolute top-0">
-        <div className="w-screen h-screen bg-black opacity-50 absolute top-0" />
-        <div className="w-screen h-screen flex items-center justify-center z-overlay">
-          <div className="w-[300px] h-[188px] bg-white flex items-center justify-center flex-col p-[24px] rounded-[24px] z-toast">
+      <div className="absolute top-0 z-overlay">
+        <div className="w-[100dvw] h-[100dvh] bg-black opacity-50 absolute top-0" />
+        <div className="w-screen h-screen flex items-center justify-center ">
+          <div className="w-[300px] h-[188px] bg-white flex items-center justify-center flex-col p-[24px] rounded-[24px]">
             <div className="mb-[32px]">
               <p className="body-16-bold mb-[12px]"> 정말 기록을 삭제할까요?</p>
               <p className="caption-12-regular text-center">
