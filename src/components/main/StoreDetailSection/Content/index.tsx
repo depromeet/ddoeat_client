@@ -8,13 +8,14 @@ import Header from '@components/common/Header';
 import ImageContainer from '@components/common/ImageContainer';
 import { useGetReport } from '@hooks/api/useGetReport';
 import useObserver from '@hooks/useObserver';
+import cn from '@utils/cn';
 
 export default function StoreDetailContent() {
   const searchParams = useSearchParams();
 
   const storeId = searchParams.get('storeId');
 
-  const { data } = useGetReport(storeId ?? '');
+  const { data: reportData } = useGetReport(storeId ?? '');
 
   const [isScrollDown, setIsScrollDown] = useState(false);
 
@@ -30,26 +31,26 @@ export default function StoreDetailContent() {
     <div>
       <div ref={setTarget}>
         <Header
-          className={`fixed bg-white ${
-            data?.data.storeMainImageUrl && '[&>*>*]:fill-white'
-          }`}
+          className={cn('fixed bg-white', {
+            '[&>*>*]:fill-white': reportData?.storeMainImageUrl,
+          })}
         >
           {isScrollDown && <span>{'음식점 이름 들어가는 자리입니다.'}</span>}
         </Header>
       </div>
 
-      {data?.data.storeMainImageUrl && (
+      {reportData?.storeMainImageUrl && (
         <ImageContainer
           type="full"
-          src={data.data.storeMainImageUrl}
+          src={reportData.storeMainImageUrl}
           alt="음식점 이미지"
           className="w-full"
         />
       )}
       <div
         className={`w-full bg-white h-[${
-          data?.data.storeMainImageUrl ? 24 : 56
-        }px]  ${data?.data.storeMainImageUrl ? 'rounded-t-[24px]' : ''}`}
+          reportData?.storeMainImageUrl ? 24 : 56
+        }px]  ${reportData?.storeMainImageUrl ? 'rounded-t-[24px]' : ''}`}
       />
 
       {/* TODO: 상조님 음식점 정보 컴포넌트 넣기 */}
