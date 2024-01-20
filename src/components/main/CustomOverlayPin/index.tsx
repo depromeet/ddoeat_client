@@ -16,7 +16,11 @@ function CustomOverlayPin({
   onClick,
 }: CustomOverlayPinProps) {
   return (
-    <CustomOverlayMap position={position} zIndex={isActive ? 10 : 0}>
+    <CustomOverlayMap
+      position={position}
+      zIndex={isActive ? 10 : 0}
+      key={String(position.id) + String(position.kakaoId) + isActive}
+    >
       <Pin
         isActive={isActive}
         storeName={storeName}
