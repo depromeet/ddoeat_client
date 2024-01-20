@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 
-// TODO: 폴더 & 파일 대소문자 통일
-import Scene from '@components/Onboarding/Scene';
+import Scene from '@components/onboarding/Scene';
 import { ONBOARDING_CONTENT } from '@constants/onboarding';
 
 export default function Page() {
