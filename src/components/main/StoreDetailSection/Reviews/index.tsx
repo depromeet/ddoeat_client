@@ -12,9 +12,6 @@ import {
 } from '@hooks/api/useInfiniteReview';
 import useObserver from '@hooks/useObserver';
 
-// NOTE: 한 번에 불러오는 리뷰 갯수
-const DEFAULT_REVIEW_COUNT = 10;
-
 export default function Reviews() {
   const [activeTag, setActiveTag] = useState<'REVISITED' | 'PHOTO' | null>(
     null,
@@ -26,7 +23,6 @@ export default function Reviews() {
 
   const params: GetReviewParams = {
     storeId: storeId ?? '',
-    size: DEFAULT_REVIEW_COUNT,
     type: activeTag,
   };
 

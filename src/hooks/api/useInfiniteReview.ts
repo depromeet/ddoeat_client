@@ -36,17 +36,15 @@ interface ReviewProps {
 export interface GetReviewParams {
   storeId: string;
   page?: number;
-  size?: number;
   type: 'REVISITED' | 'PHOTO' | null;
 }
 
 const getReview = ({
   storeId,
   page,
-  size,
   type,
 }: GetReviewParams): Promise<ApiResponse<ReviewProps>> => {
-  let queryString = `page=${page}&size=${size}`;
+  let queryString = `page=${page}`;
 
   if (type) queryString += `&type=${type}`;
 
