@@ -44,6 +44,7 @@ export default function BottomSheetWrapper({
   const changeStatus = useCallback(
     async (willChange: BottomSheetStatus) => {
       setStatus(willChange);
+      //TODO: shallow route
       await controls.start(willChange);
     },
     [controls, setStatus],
