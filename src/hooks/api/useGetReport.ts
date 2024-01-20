@@ -1,6 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
-import { axiosRequest } from '@api/api-config';
+import { ApiResponse, axiosRequest } from '@api/api-config';
 
 interface ReportData {
   storeId: string;
@@ -9,17 +10,16 @@ interface ReportData {
   totalRevisitedCount: number;
 }
 
-const getReport = (storeId: string): Promise<{ data: ReportData }> => {
+const getReport = (storeId: string): Promise<ApiResponse<ReportData>> => {
   return axiosRequest('get', `/api/v1/stores/${storeId}/reports`);
 };
 
 export const useGetReport = (
   storeId: string,
-): UseQueryResult<ReportData, Promise<{ data: ReportData }>> => {
+): UseQueryResult<ReportData, AxiosError> => {
   return useQuery({
     queryKey: ['get-report', storeId],
     queryFn: () => getReport(storeId),
     enabled: !!storeId,
-    select: (data) => data.data,
   });
 };
