@@ -15,7 +15,7 @@ export default function TopVisit() {
   return (
     <ReportContainer>
       <p className="caption-12-regular">이 맛집 최고 단골은</p>
-      <p className="header-20">{data?.data.mostVisitedCount}번 방문</p>
+      <p className="header-20">{data?.mostVisitedCount}번 방문</p>
       <DdobabReportOneIcon />
     </ReportContainer>
   );
