@@ -6,7 +6,7 @@ interface SearchItemProps extends Omit<BasicListItem, 'hasDeleteOption'> {
   storeName: string;
   categoryName: string;
   revisitedCount: number;
-  distance: number;
+  distance: string;
   address: string;
 }
 

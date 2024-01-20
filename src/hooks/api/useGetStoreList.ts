@@ -33,7 +33,7 @@ const getStoreList = ({
 }: StoreListQueries): Promise<ApiResponse<StoreListResponse>> => {
   return axiosRequest(
     'get',
-    `/api/v1/stores/search?query=${keyword}&x=${longitude}&y=${latitude}`,
+    `/api/v1/stores/search?query=${keyword}&x=${longitude}&y=${latitude}&storePage=1&cafePage=1`,
   );
 };
 

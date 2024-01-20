@@ -65,6 +65,13 @@ export default function Page() {
       );
     };
 
+  // 숫자를 km로 변환
+  const changeDistanceToKm = (distance: number): string => {
+    let distanceToKm = distance / 1000;
+    distanceToKm = Math.round(distanceToKm * 10) / 10;
+    return `${distanceToKm}km`;
+  };
+
   return (
     <div>
       <Header className="bg-white">
@@ -102,13 +109,14 @@ export default function Page() {
             storeList?.map((store, index) => {
               // NOTE: 위, 경도는 추후 페이지 간 넘겨주는 데이터에 사용될 예정
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const { storeId, latitude, longitude, ...rest } = store;
+              const { storeId, latitude, longitude, distance, ...rest } = store;
 
               return (
                 // TODO: 클릭 시 이동 url 확정되면 수정
                 <Link href={`/map/${storeId}`} key={storeId}>
                   <SearchItem
                     {...rest}
+                    distance={changeDistanceToKm(distance)}
                     isLast={index === storeList.length - 1}
                     listId={storeId}
                   />
