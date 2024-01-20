@@ -1,14 +1,18 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { Coordinate } from 'src/types/map';
+import useThrottle from './useThrottle';
 
-const GANGNAM_STATION: Coordinate = {
+import { Coordinate, CoordinateWithIds } from 'src/types/map';
+
+const GANGNAM_STATION: CoordinateWithIds = {
+  id: '1',
+  kakaoId: '1',
   lat: 37.498095,
   lng: 127.02761,
 } as const;
 
 const useCoordinate = () => {
-  const [center, setCenter] = useState<Coordinate>(GANGNAM_STATION);
+  const [center, setCenter] = useState<CoordinateWithIds>(GANGNAM_STATION);
   const [currentUserCoordinate, setCurrentUserCoordinate] =
     useState<Coordinate>(GANGNAM_STATION);
 
@@ -50,6 +54,24 @@ const useCoordinate = () => {
     [getCurrentUserCoordinate, onSuccess, onSuccessInit],
   );
 
+  const handleCenterChanged = (map?: kakao.maps.Map) => {
+    if (!map) return;
+
+    const newCenter = {
+      lat: map.getCenter().getLat(),
+      lng: map.getCenter().getLng(),
+    };
+
+    setCenter((prev) => ({ ...prev, ...newCenter }));
+  };
+
+  const throttledCenterChanged = useThrottle(handleCenterChanged, 1000);
+
+  useEffect(() => {
+    getCurrentUserCoordinateInterval();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return {
     center,
     setCenter,
@@ -58,6 +80,7 @@ const useCoordinate = () => {
       addtionalCallback: (pos: GeolocationPosition) => void,
     ) => getCurrentUserCoordinate(onSuccess(addtionalCallback), onError),
     getCurrentUserCoordinateInterval,
+    throttledCenterChanged,
   };
 };
 

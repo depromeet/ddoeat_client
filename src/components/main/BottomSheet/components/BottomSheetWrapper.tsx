@@ -108,7 +108,7 @@ export default function BottomSheetWrapper({
   return (
     isShowing &&
     deviceHeight && (
-      <div className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none">
+      <div className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none z-overlay">
         <motion.div
           variants={bottomSheetAnimationVariants}
           drag={'y'}

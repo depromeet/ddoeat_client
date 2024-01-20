@@ -18,7 +18,7 @@ export default function PinBubble({ totalVisitCount }: PinBubbleProps) {
       animate={['animate', 'opacity']}
       initial="initial"
       exit="exit"
-      className="absolute top-[-60px] flex flex-col justify-center items-center"
+      className="absolute top-[-60px] flex flex-col justify-center items-center z-floating"
     >
       <div className="h-[36px] flex justify-center items-center bg-primary-500 px-[12px] py-[8px] rounded-[16px] mb-[-8px]">
         <PinVisitorIcon />
