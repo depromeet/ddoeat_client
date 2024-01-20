@@ -1,7 +1,7 @@
-import PinBowlOneIcon from '/public/assets/icon56/pin_bowl1_56.svg';
-import PinBowlTwoIcon from '/public/assets/icon56/pin_bowl2_56.svg';
-import PinBowlThreeIcon from '/public/assets/icon56/pin_bowl3_56.svg';
-import BookmarkIcon from '/public/assets/icon56/bookmark_56.svg';
+import PinBowlOneIcon from '/public/assets/icon44/pin_bowl1_44.svg';
+import PinBowlTwoIcon from '/public/assets/icon44/pin_bowl2_44.svg';
+import PinBowlThreeIcon from '/public/assets/icon44/pin_bowl3_44.svg';
+import BookmarkIcon from '/public/assets/icon44/bookmark_44.svg';
 
 interface PinIconProps {
   isBookmarked: boolean;
