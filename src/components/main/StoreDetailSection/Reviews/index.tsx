@@ -30,12 +30,11 @@ export default function Reviews() {
     type: activeTag,
   };
 
-  const { data, fetchNextPage, refetch, isLoading, hasNextPage } =
+  const { data, fetchNextPage, isLoading, hasNextPage } =
     useInfiniteReview(params);
 
   const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null): void => {
     setActiveTag((prevTag) => (prevTag === tag ? null : tag));
-    refetch();
   };
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
