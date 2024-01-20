@@ -41,10 +41,9 @@ export default function StoreDetailContent() {
 
       {reportData?.storeMainImageUrl && (
         <ImageContainer
-          type="full"
+          type="medium"
           src={reportData.storeMainImageUrl}
           alt="음식점 이미지"
-          className="w-full"
         />
       )}
       <div
