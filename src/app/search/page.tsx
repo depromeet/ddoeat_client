@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
+import { convertMeterToKm } from '@utils/parser';
 import useDebounce from '@hooks/useDebounce';
 import SearchTopBar from '@components/search/SearchTopBar';
 import Header from '@components/common/Header';
@@ -65,13 +66,6 @@ export default function Page() {
       );
     };
 
-  // 숫자를 km로 변환
-  const changeDistanceToKm = (distance: number): string => {
-    let distanceToKm = distance / 1000;
-    distanceToKm = Math.round(distanceToKm * 10) / 10;
-    return `${distanceToKm}km`;
-  };
-
   return (
     <div>
       <Header className="bg-white">
@@ -116,7 +110,7 @@ export default function Page() {
                 <Link href={`/map/${storeId}`} key={storeId}>
                   <SearchItem
                     {...rest}
-                    distance={changeDistanceToKm(distance)}
+                    distance={convertMeterToKm(distance)}
                     isLast={index === storeList.length - 1}
                     listId={storeId}
                   />
