@@ -5,7 +5,12 @@ import { useInfiniteGetMyLog } from '@hooks/api/useInfiniteMyLog';
 import useObserver from '@hooks/useObserver';
 
 export default function MyLogContent() {
-  const { data: myLog, fetchNextPage } = useInfiniteGetMyLog({
+  const {
+    data: myLog,
+    fetchNextPage,
+    isLoading,
+    hasNextPage,
+  } = useInfiniteGetMyLog({
     size: DEFAULT_CONTENTS_SIZE,
   });
 
@@ -43,6 +48,7 @@ export default function MyLogContent() {
             ))}
           </div>
         ))}
+      {!isLoading && hasNextPage && <div ref={setTarget} />}
     </div>
   );
 }
