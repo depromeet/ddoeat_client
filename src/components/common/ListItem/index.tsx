@@ -55,11 +55,13 @@ export default function ListItem({
           )}
         </div>
       </li>
-      <DeleteModal
-        isShowing={isModalShowing}
-        onClick={handleDeleteConfirm}
-        onCancel={handleCancel}
-      />
+      {hasDeleteOption && (
+        <DeleteModal
+          isShowing={isModalShowing}
+          onClick={handleDeleteConfirm}
+          onCancel={handleCancel}
+        />
+      )}
     </>
   );
 }
