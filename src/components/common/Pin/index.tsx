@@ -27,7 +27,10 @@ export default function Pin({
       <AnimatePresence mode="wait">
         {isActive && <PinBubble totalVisitCount={totalVisitCount} />}
       </AnimatePresence>
-      <button onClick={onClick} className="flex flex-col items-center">
+      <button
+        onClick={onClick}
+        className="relative h-fit flex flex-col items-center"
+      >
         <Marker isBookmarked={isBookmarked} totalVisitCount={totalVisitCount} />
         <p className="body-14-extraBold text-gray-900 text-shadow-stroke mt-[4px]">
           {storeName}
@@ -35,7 +38,7 @@ export default function Pin({
         {!isActive && (
           <Tag
             size={'small'}
-            className="caption-12-bold px-[4px] rounded-[20px] bg-gray-700 text-gray-50 gap-0"
+            className="absolute top-[100%] caption-12-bold px-[4px] rounded-[20px] bg-gray-700 text-gray-50 gap-0"
           >
             <PinVisitorIcon />
             <span className="caption-12-extraBold text-gray-50">
