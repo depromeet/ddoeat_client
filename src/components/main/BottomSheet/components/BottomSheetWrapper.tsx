@@ -9,6 +9,7 @@ import cn from '@utils/cn';
 import { bottomSheetAnimationVariants } from 'src/constants/motions';
 
 export const HANDLE_HEIGHT = 24;
+const DRAG_SAFE_DISTANCE = -50;
 
 export default function BottomSheetWrapper({
   isShowing,
@@ -70,8 +71,8 @@ export default function BottomSheetWrapper({
     const dragDown = velocityY > 0;
     const dragUp = velocityY < 0;
 
-    const lowerThanStartY = distanceFromStartY > 0;
-    const higherThanStartY = distanceFromStartY < 0;
+    const lowerThanStartY = distanceFromStartY > DRAG_SAFE_DISTANCE;
+    const higherThanStartY = distanceFromStartY < DRAG_SAFE_DISTANCE;
 
     const shouldDown = dragDown && lowerThanStartY;
     const shouldUp = dragUp && higherThanStartY;
