@@ -1,10 +1,7 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { ChangeEvent, RefCallback, useEffect, useState } from 'react';
 
-import Header from '@components/common/Header';
-import SettingIcon from 'public/assets/icon24/setting_24.svg';
 import PenIcon from 'public/assets/icon24/pen_24.svg';
 import Tab from '@components/mypage/Tab';
 import {
@@ -18,7 +15,6 @@ import MyLogContent from '@components/mypage/MyLogContent';
 import BookMarkContent from '@components/mypage/BookMarkContent';
 
 export default function Page() {
-  const router = useRouter();
   const [nickName, setNickName] = useState<string | undefined>('');
   const [isInputActive, setIsInputActive] = useState(false);
 
@@ -27,9 +23,6 @@ export default function Page() {
 
   const userLevel = userProfile?.level || DEFAULT_DDOBAP_LEVEL;
   const StatusImage = DDOBAP_LEVEL_IMAGE[userLevel];
-
-  // TODO: 설정 페이지로 이동하기
-  const handleSettingButtonClick = () => router.push('/setting');
 
   useEffect(() => {
     const userNickName = userProfile?.nickname;
@@ -56,10 +49,6 @@ export default function Page() {
 
   return (
     <div>
-      <Header className=" [&>*>*]:fill-white justify-between">
-        <SettingIcon onClick={handleSettingButtonClick} />
-      </Header>
-
       <div className="h-[164px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
