@@ -8,6 +8,8 @@ import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
 import { bottomSheetAnimationVariants } from 'src/constants/motions';
 
+export const HANDLE_HEIGHT = 24;
+
 export default function BottomSheetWrapper({
   isShowing,
   handleCloseBottomSheet,
@@ -114,7 +116,7 @@ export default function BottomSheetWrapper({
           drag={'y'}
           onDragEnd={handleDragEnd}
           dragConstraints={{
-            top: isFull ? -fullStatusChildrenHeight + deviceHeight : 0,
+            top: isFull ? deviceHeight - fullStatusChildrenHeight : 0,
             bottom: isOverScrolled ? 0 : deviceHeight,
           }}
           animate={controls}
@@ -129,7 +131,9 @@ export default function BottomSheetWrapper({
           )}
         >
           {hasHandleBar && isShow && (
-            <div className="flex items-center justify-center h-[24px]">
+            <div
+              className={`flex items-center justify-center h-[${HANDLE_HEIGHT}px]`}
+            >
               <div className="w-[56px] h-[6px] rounded-[32px] shrink-0 bg-gray-300" />
             </div>
           )}

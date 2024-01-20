@@ -10,9 +10,7 @@ export default function BottonSheetShowContent({
 
   useEffect(() => {
     if (showStatusChildrenRef.current) {
-      setShowStatusChildrenHeight(
-        showStatusChildrenRef.current.getBoundingClientRect().height,
-      );
+      setShowStatusChildrenHeight(showStatusChildrenRef.current.offsetHeight);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
