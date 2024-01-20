@@ -72,7 +72,8 @@ export default function BottomSheetWrapper({
     const dragDown = velocityY > 0;
     const dragUp = velocityY < 0;
 
-    const lowerThanStartY = distanceFromStartY > DRAG_SAFE_DISTANCE;
+    const lowerThanStartY =
+      distanceFromStartY > (isFull ? 0 : DRAG_SAFE_DISTANCE);
     const higherThanStartY = distanceFromStartY < -DRAG_SAFE_DISTANCE;
 
     const shouldDown = dragDown && lowerThanStartY;
