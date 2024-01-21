@@ -41,7 +41,9 @@ export default function Page() {
 
   const handleClickSearchButton = () => {
     setRecentSearchKeywords((prev) => {
-      const updatedKeywords = prev.includes(text) ? prev : [text, ...prev];
+      const updatedKeywords = prev.includes(text)
+        ? [text, ...prev.filter((item) => item !== text)]
+        : [text, ...prev];
 
       if (updatedKeywords.length > 10) {
         updatedKeywords.pop();
@@ -107,7 +109,14 @@ export default function Page() {
 
               return (
                 // TODO: 클릭 시 이동 url 확정되면 수정
-                <Link href={`/map/${storeId}`} key={storeId}>
+                <Link
+                  href={{
+                    pathname: `/?storeId=${storeId}`,
+                    query: { ...store },
+                  }}
+                  as={`/?storeId=${storeId}`}
+                  key={storeId}
+                >
                   <SearchItem
                     {...rest}
                     distance={convertMeterToKm(distance)}
