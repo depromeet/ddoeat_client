@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import useStoreToken from '@hooks/useStoreToken';
 import { usePostSignUp } from '@hooks/api/usePostSignUp';
 import { TERMS } from '@constants/terms';
 import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
@@ -10,13 +9,7 @@ import NavigationButton from '@components/terms/NavigationButton';
 import TermsItem from '@components/terms/TermsItem';
 
 export default function Page() {
-  const { storeTokenToCookie } = useStoreToken('/terms');
   const { mutate: postSignUp } = usePostSignUp();
-
-  useEffect(() => {
-    storeTokenToCookie();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const [termsState, setTermsState] = useState(
     TERMS.map((term) => ({ ...term, isChecked: false })),

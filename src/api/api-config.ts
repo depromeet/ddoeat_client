@@ -50,6 +50,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function (error) {
+    const refreshToken = Cookies.get('refreshToken');
+    // NOTE: 토큰 재발급 요청
+    if (error.response.data.code === 401 && refreshToken) {
+      console.error(error);
+    }
     return Promise.reject(error);
   },
 );
