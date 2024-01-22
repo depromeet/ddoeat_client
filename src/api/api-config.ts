@@ -1,6 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+import { TOKEN_REFRESH_URL } from '@constants/endpoint';
+import { getTokenRefresh } from '@utils/getTokenRefresh';
+
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
 export interface ApiMeta {
@@ -32,9 +35,20 @@ axiosInstance.interceptors.request.use(
     }
 
     const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
+
+    // 토큰 재발급 요청 시 헤더 세팅
+    if (config.url === TOKEN_REFRESH_URL && refreshToken) {
+      config.headers['Authorization-refresh'] = refreshToken;
+      config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    }
 
     // NOTE: 브라우저 쿠키에 accessToken이 있고, 요청 헤더에 토큰이 없다면 헤더에 accessToken 추가
-    if (accessToken && !config.headers['Authorization']) {
+    if (
+      accessToken &&
+      !config.headers['Authorization'] &&
+      config.url !== TOKEN_REFRESH_URL
+    ) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
 
@@ -49,13 +63,27 @@ axiosInstance.interceptors.response.use(
   function (response) {
     return response;
   },
-  function (error) {
-    const refreshToken = Cookies.get('refreshToken');
-    // NOTE: 토큰 재발급 요청
-    if (error.response.data.code === 401 && refreshToken) {
-      console.error(error);
+  async function (error) {
+    const { config, response } = error;
+    // NOTE: 토큰 재발급 요청이 아니고, 401에러가 아니면 에러 던지기
+    if (
+      config.url === TOKEN_REFRESH_URL ||
+      response.data.code !== 401 ||
+      config.sent
+    ) {
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
+
+    config.sent = true;
+    const refreshToken = Cookies.get('refreshToken');
+
+    // NOTE: 토큰 재발급 요청
+    if (response.data.code === 401 && refreshToken) {
+      const { data } = await getTokenRefresh();
+      Cookies.set('accessToken', data.accessToken);
+      config.headers['Authorization'] = data.accessToken;
+    }
+    return axios(config);
   },
 );
 
@@ -69,13 +97,9 @@ export const axiosRequest = async <T>(
   const instance = await axiosInstance.request<T>({
     method,
     url,
-    ...(data && { data }),
-    ...(headers && {
-      headers: {
-        ...headers,
-      },
-    }),
-    ...(params && { params }),
+    data,
+    headers,
+    params,
   });
 
   return instance.data;
