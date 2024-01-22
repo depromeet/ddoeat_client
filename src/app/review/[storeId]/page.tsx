@@ -43,7 +43,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <TextArea value={description} onChange={handleChangeDescription} />
       </div>
       <NavigationButton
-        className="bg-transparent fixed bottom-0 left-[50%] -translate-x-[50%]"
+        className="bg-transparent fixed bottom-0 left-[50%] -translate-x-[50%] w-full max-w-[480px]"
         // TODO: 추후 storeImgUrl 조건 추가
         disabled={!rating || !description}
         onClick={handleClickSubmitButton}

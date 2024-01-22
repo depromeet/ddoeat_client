@@ -7,11 +7,11 @@ import { AxiosError } from 'axios';
 
 import { axiosRequest } from '../../api/api-config';
 
-const deleteLog = (storeId: string): Promise<void> => {
+const deleteLog = (storeId: number): Promise<void> => {
   return axiosRequest('delete', `endpoint/${storeId}`);
 };
 
-export const useDeleteLog = (): UseMutationResult<void, AxiosError, string> => {
+export const useDeleteLog = (): UseMutationResult<void, AxiosError, number> => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['delete-log'],

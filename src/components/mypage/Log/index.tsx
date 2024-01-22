@@ -13,7 +13,7 @@ import { useDeleteLog } from '@hooks/api/useDeleteLog';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   date: string;
-  logId: string;
+  logId: number;
   storeImgUrl?: string;
   storeName: string;
   myVisitNum: number;
