@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { TERMS } from '@constants/terms';
 import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
-import NavigationButton from '@components/terms/NavigationButton';
+import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
 import TermsItem from '@components/terms/TermsItem';
 
 export default function Page() {
@@ -42,7 +42,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full pt-[56px]">
       <h1 className="header-22 text-gray-900 px-[16px] py-[16px]">
         또잇또잇이 처음이시군요! <br />
         <strong className="text-primary-500">약관 내용</strong>에 동의해주세요
@@ -63,13 +63,12 @@ export default function Page() {
           />
         ))}
       </ul>
-      <NavigationButton
+      <FixedBottomCTAButton
         disabled={!isRequiredTermsAllChecked}
-        className="absolute bottom-0 left-0"
         onClick={handleClickConfirmButton}
       >
         확인
-      </NavigationButton>
+      </FixedBottomCTAButton>
     </div>
   );
 }

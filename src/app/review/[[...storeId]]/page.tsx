@@ -7,7 +7,7 @@ import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
 import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
 import TextArea from '@components/review/TextArea';
-import NavigationButton from '@components/terms/NavigationButton';
+import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
 import VisitDate from '@components/review/VisitDate';
 import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
 
@@ -98,13 +98,12 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
         />
         <TextArea value={description} onChange={handleChangeDescription} />
       </div>
-      <NavigationButton
-        className="bg-transparent fixed bottom-0 left-[50%] -translate-x-[50%]"
+      <FixedBottomCTAButton
         disabled={!rating || !description || !imageUrl}
         onClick={handleClickSubmitButton}
       >
         작성완료
-      </NavigationButton>
+      </FixedBottomCTAButton>
     </div>
   );
 }
