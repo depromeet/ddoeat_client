@@ -29,8 +29,7 @@ const filterByTag = (item: ContentData, tag: TagType['id']) => {
 };
 
 export default function BookMarkContent() {
-  const [selectedTag, setSelectedTag] =
-    useState<(typeof tags)[number]['id']>('total');
+  const [selectedTag, setSelectedTag] = useState<TagType['id']>('total');
 
   const {
     data: bookMark,
@@ -41,8 +40,6 @@ export default function BookMarkContent() {
     size: DEFAULT_CONTENTS_SIZE,
   });
 
-  console.log(bookMark);
-
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
     if (entry.isIntersecting) fetchNextPage();
   };
@@ -52,7 +49,7 @@ export default function BookMarkContent() {
     threshold: 1,
   });
 
-  const handleTagClick = (tagId: (typeof tags)[number]['id']): void => {
+  const handleTagClick = (tagId: TagType['id']): void => {
     setSelectedTag(tagId);
   };
 
