@@ -32,9 +32,16 @@ export default function BookMarkContent() {
   const [selectedTag, setSelectedTag] =
     useState<(typeof tags)[number]['id']>('total');
 
-  const { data: bookMark, fetchNextPage } = useInfiniteGetBookMark({
+  const {
+    data: bookMark,
+    fetchNextPage,
+    isLoading,
+    hasNextPage,
+  } = useInfiniteGetBookMark({
     size: DEFAULT_CONTENTS_SIZE,
   });
+
+  console.log(bookMark);
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
     if (entry.isIntersecting) fetchNextPage();
@@ -80,27 +87,24 @@ export default function BookMarkContent() {
       <div className="mx-[16px]">
         {bookMark &&
           !bookMark[0].data.empty &&
-          bookMark.map((page, pageIndex) => (
-            <div key={pageIndex}>
-              {page.data.content
-                .filter((item) => filterByTag(item, selectedTag))
-                .map((item, index, arr) => (
-                  <div
-                    key={index}
-                    ref={index === arr.length - 1 ? setTarget : null}
-                  >
-                    <BookmarkItem
-                      listId={item.bookmarkId}
-                      isLast={false}
-                      location={item.address}
-                      menuType={item.categoryName}
-                      revisitNum={item.totalRevisitedCount}
-                      storeName={item.storeName}
-                    />
-                  </div>
-                ))}
-            </div>
-          ))}
+          bookMark.map((page) => {
+            return page.data.content
+              .filter((item) => filterByTag(item, selectedTag))
+              .map((item) => {
+                return (
+                  <BookmarkItem
+                    key={item.bookmarkId}
+                    listId={item.bookmarkId}
+                    isLast={false}
+                    location={item.address}
+                    menuType={item.categoryName}
+                    revisitNum={item.totalRevisitedCount}
+                    storeName={item.storeName}
+                  />
+                );
+              });
+          })}
+        {!isLoading && hasNextPage && <div ref={setTarget} />}
       </div>
     </>
   );
