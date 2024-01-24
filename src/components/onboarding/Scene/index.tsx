@@ -19,7 +19,6 @@ export default function Scene({
   title,
   content,
   videoUrl,
-  icon,
   onNextStep,
 }: SceneProps) {
   const router = useRouter();
@@ -54,7 +53,6 @@ export default function Scene({
       <OnboardingModal
         title={title}
         content={content}
-        icon={icon}
         step={step}
         isButtonActive={buttonActive}
         onNextStep={handleClickNext}

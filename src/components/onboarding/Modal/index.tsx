@@ -1,12 +1,11 @@
 import { HTMLAttributes } from 'react';
-import Image from 'next/image';
 
 import StepButton from '@components/onboarding/StepButton';
+import StepIcon from '@components/onboarding/StepIcon';
 
 interface OnboardingModalProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   content: string;
-  icon: string;
   step: number;
   isButtonActive: boolean;
   onNextStep: () => void;
@@ -15,14 +14,13 @@ interface OnboardingModalProps extends HTMLAttributes<HTMLDivElement> {
 export default function OnboardingModal({
   title,
   content,
-  icon,
   step,
   isButtonActive,
   onNextStep,
 }: OnboardingModalProps) {
   return (
     <div className="h-[288px] flex flex-col justify-item items-center py-[20px] bg-white absolute z-above inset-x-0 bottom-0">
-      <Image width={'40'} height={'4'} src={icon} alt={'stepIcon'} priority />
+      <StepIcon step={step} />
       <div className="w-full h-[132px] flex flex-col justify-item items-center place-content-center px-[24px] py-[32px] gap-[8px]">
         <p className="text-gray-900 header-22 whitespace-pre-line text-center">
           {title}
