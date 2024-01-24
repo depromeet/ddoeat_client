@@ -26,7 +26,9 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    if (config.url?.includes('https://ddoeatimg.kr')) {
+    if (
+      config.url?.includes(process.env.NEXT_PUBLIC_NCLOUD_STORAGE_URL as string)
+    ) {
       delete config.baseURL;
       delete config.headers['Authorization'];
     }
