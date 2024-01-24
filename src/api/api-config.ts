@@ -26,6 +26,13 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
+    if (
+      config.url?.includes(process.env.NEXT_PUBLIC_NCLOUD_STORAGE_URL as string)
+    ) {
+      delete config.baseURL;
+      delete config.headers['Authorization'];
+    }
+
     return config;
   },
   function (error) {
@@ -45,20 +52,16 @@ axiosInstance.interceptors.response.use(
 export const axiosRequest = async <T>(
   method: Method,
   url: string,
-  data?: Record<string, unknown>,
+  data?: FormData | File | Blob | ArrayBuffer | Record<string, unknown>, // FormData 또는 일반 객체를 허용
   headers?: Record<string, string>,
   params?: Record<string, unknown>,
 ): Promise<T> => {
   const instance = await axiosInstance.request<T>({
     method,
     url,
-    ...(data && { data }),
-    ...(headers && {
-      headers: {
-        ...headers,
-      },
-    }),
-    ...(params && { params }),
+    data, // data 객체를 그대로 전달
+    headers,
+    params,
   });
 
   return instance.data;

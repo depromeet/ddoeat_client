@@ -5,7 +5,7 @@ import Image from 'next/image';
 import LogItem from '@components/main/LogItem';
 
 interface StoreDetailLogProps {
-  storeId: string;
+  storeId: number;
   date: string;
   score: number;
   storeImgUrl?: string;
