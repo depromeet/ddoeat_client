@@ -24,7 +24,7 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
 
   // NOTE: Presigned URL
   const { data: presignedUrl, refetch } = useGetPresignedUrl(
-    imageUrl.slice(26),
+    imageUrl.slice(27),
   );
 
   // NOTE: 이미지 로드 시 presigned URL 권한 요청

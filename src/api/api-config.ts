@@ -26,9 +26,9 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    if (!config.url?.includes('https://ddoeatimg.kr')) {
-      config.headers['Authorization'] =
-        `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInVzZXJJZCI6NCwiZXhwIjoxNzA2ODAxMTczfQ.Ad5ZVzUQLjHnCaiZ7b0KYZ1Sezjp4_CuiDubZCay82KegsGgoWfN3uUKG6wkAPL0_vgLwxgSJodjaOKnC6vlCQ`;
+    if (config.url?.includes('https://ddoeatimg.kr')) {
+      delete config.baseURL;
+      delete config.headers['Authorization'];
     }
 
     return config;
