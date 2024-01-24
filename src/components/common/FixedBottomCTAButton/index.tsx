@@ -12,7 +12,7 @@ export default function index({
   return (
     <div
       className={cn(
-        'bg-transparent px-[16px] pt-[24px] pb-[32px] fixed bottom-0 left-[50%] -translate-x-[50%] w-full max-w-[480px]',
+        'bg-transparent px-[16px] pt-[24px] pb-[32px] fixed bottom-0 left-[50%] -translate-x-[50%] w-full max-w-[480px] z-fixedBody',
         className,
       )}
     >
