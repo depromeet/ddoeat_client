@@ -1,9 +1,10 @@
 import { ButtonHTMLAttributes } from 'react';
 
-import CTAButton from '@components/common/CTAButton';
+import CTAButton from '../CTAButton';
+
 import cn from '@utils/cn';
 
-export default function NavigationButton({
+export default function index({
   children,
   className,
   ...props
@@ -11,7 +12,7 @@ export default function NavigationButton({
   return (
     <div
       className={cn(
-        'w-full px-[16px] pt-[24px] pb-[32px] bg-white-gradient',
+        'bg-transparent px-[16px] pt-[24px] pb-[32px] fixed bottom-0 left-[50%] -translate-x-[50%] w-full max-w-[480px] z-fixedBody',
         className,
       )}
     >
