@@ -5,5 +5,5 @@ interface OnboardingLayout {
 }
 
 export default function Layout({ children }: OnboardingLayout) {
-  return <div className="h-dvh w-dvw bg-gray-100">{children}</div>;
+  return <div className="h-screen w-dvw bg-gray-100 relative">{children}</div>;
 }

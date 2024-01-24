@@ -14,7 +14,7 @@ interface StepButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function StepButton({ step, ...restProps }: StepButtonProps) {
-  if (step == 3)
+  if (step === 3)
     return (
       <motion.div
         variants={defaultFadeInUpVariants}
@@ -30,20 +30,19 @@ export default function StepButton({ step, ...restProps }: StepButtonProps) {
         </Button>
       </motion.div>
     );
-  else
-    return (
-      <motion.div
-        variants={defaultFadeInUpVariants}
-        initial="initial"
-        animate="animate"
-        key={step}
+  return (
+    <motion.div
+      variants={defaultFadeInUpVariants}
+      initial="initial"
+      animate="animate"
+      key={step}
+    >
+      <Button
+        className="bg-gray-100 active:bg-gray-100 pl-[24px] pr-[12px] body-16-bold gap-[4px] text-gray-700"
+        {...restProps}
       >
-        <Button
-          className="bg-gray-100 active:bg-gray-100 pl-[24px] pr-[12px] body-16-bold gap-[4px] text-gray-700"
-          {...restProps}
-        >
-          다음 <RightArrowIcon />
-        </Button>
-      </motion.div>
-    );
+        다음 <RightArrowIcon />
+      </Button>
+    </motion.div>
+  );
 }
