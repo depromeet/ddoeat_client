@@ -14,8 +14,6 @@ export default function MyLogContent() {
     size: DEFAULT_CONTENTS_SIZE,
   });
 
-  console.log(myLog);
-
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
     if (entry.isIntersecting) fetchNextPage();
   };
@@ -31,19 +29,7 @@ export default function MyLogContent() {
         !myLog[0].data.empty &&
         myLog?.map((page) => {
           return page.data.content.map((item) => {
-            return (
-              <MyLog
-                key={item.reviewId}
-                logId={item.reviewId}
-                date={item.visitedAt}
-                log={item.description}
-                menuType={item.visitedAt}
-                rating={item.rating}
-                storeName={item.storeName}
-                myVisitNum={item.visitTimes}
-                storeImgUrl={item.imageUrl}
-              />
-            );
+            return <MyLog key={item.reviewId} {...item} />;
           });
         })}
       {!isLoading && hasNextPage && <div ref={setTarget} />}
