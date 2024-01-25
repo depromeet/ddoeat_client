@@ -13,25 +13,25 @@ import { useDeleteLog } from '@hooks/api/useDeleteLog';
 import DeleteModal from '@components/common/DeleteModal';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
-  date: string;
-  logId: number;
-  storeImgUrl?: string;
+  visitedAt: string;
+  reviewId: number;
+  imageUrl?: string;
   storeName: string;
-  myVisitNum: number;
-  menuType: string;
+  visitTimes: number;
+  categoryName: string;
   rating: number;
-  log: string;
+  description: string;
 }
 
 export default function MyLog({
-  date,
-  logId,
-  storeImgUrl,
+  visitedAt,
+  reviewId,
+  imageUrl,
   storeName,
-  myVisitNum,
-  menuType,
+  visitTimes,
+  categoryName,
   rating,
-  log,
+  description,
 }: MyLogProps) {
   const { mutate: deleteLog } = useDeleteLog();
   const [isModalShowing, setModalShowing] = useState(false);
@@ -42,7 +42,7 @@ export default function MyLog({
 
   const handleDeleteConfirm = () => {
     // TODO: 추후 로그 삭제 로직 확정
-    deleteLog(logId);
+    deleteLog(reviewId);
     setModalShowing(false);
   };
 
@@ -56,7 +56,7 @@ export default function MyLog({
         <div className="flex items-center">
           <div className="flex w-full h-[20px] gap-x-[8px] items-center">
             <DotIcon />
-            <p className="text-gray-700 body-14-bold">{date}</p>
+            <p className="text-gray-700 body-14-bold">{visitedAt}</p>
           </div>
           <button onClick={handleClickDeleteButton}>
             <TrashIcon />
@@ -74,19 +74,19 @@ export default function MyLog({
                     size={'small'}
                     className="text-primary-500 bg-primary-100"
                   >
-                    내 방문 {myVisitNum}번
+                    내 방문 {visitTimes}번
                   </Tag>
                   <Tag size={'small'} className="text-gray-500 bg-gray-50">
-                    {menuType}
+                    {categoryName}
                   </Tag>
                 </div>
                 <div className="flex items-center gap-x-[4px]">
                   <StarRating rating={rating} />
                 </div>
               </div>
-              {storeImgUrl && (
+              {imageUrl && (
                 <Image
-                  src={storeImgUrl}
+                  src={imageUrl}
                   alt={storeName}
                   width={100}
                   height={100}
@@ -95,7 +95,7 @@ export default function MyLog({
               )}
             </div>
             <span className="body-14-regular text-gray-700 break-all">
-              {log}
+              {description}
             </span>
           </div>
         </div>
