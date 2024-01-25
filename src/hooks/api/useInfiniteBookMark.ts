@@ -6,7 +6,7 @@ import {
 import { ApiResponse, axiosRequest } from '@api/api-config';
 
 export interface ContentData {
-  bookmarkId: string;
+  bookmarkId: number;
   storeId: string;
   storeName: string;
   address: string;
