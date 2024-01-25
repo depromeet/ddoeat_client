@@ -15,7 +15,7 @@ const getUserProfile = (): Promise<ApiResponse<UserInfo>> => {
 export const useGetUserProfile = (): UseQueryResult<UserInfo, AxiosError> => {
   return useQuery({
     queryKey: ['get-userProfile'],
-    queryFn: () => getUserProfile(),
+    queryFn: getUserProfile,
     select: (data) => data.data,
   });
 };
