@@ -6,7 +6,7 @@ import {
 import { ApiResponse, axiosRequest } from '@api/api-config';
 
 interface ContentData {
-  reviewId: string;
+  reviewId: number;
   storeId: string;
   storeName: string;
   visitTimes: number;
