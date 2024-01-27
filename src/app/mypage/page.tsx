@@ -31,7 +31,7 @@ export default function Page() {
   const userLevel = userProfile?.level || DEFAULT_DDOBAP_LEVEL;
   const StatusImage = DDOBAP_LEVEL_IMAGE[userLevel];
 
-  const [nickName, , setNickName] = useInput(userProfile?.nickname || '');
+  const [nickName, , setNickName] = useInput(userProfile?.nickname ?? '');
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -42,10 +42,6 @@ export default function Page() {
     }
     return () => clearTimeout(timer);
   }, [showtoast]);
-
-  useEffect(() => {
-    setNickName(userProfile?.nickname || '');
-  }, [setNickName, userProfile?.nickname]);
 
   const handleUserNameClick = () => setIsInputActive(true);
 
@@ -76,25 +72,27 @@ export default function Page() {
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
           <div className={`flex pb-[32px]`}>
-            <div className="flex">
+            <div>
               {isInputActive ? (
-                <input
-                  ref={handleInputRefCallback}
-                  type="text"
-                  value={nickName}
-                  onChange={handleInputValue}
-                  onBlur={handleInputBlur}
-                  className={`w-[170px] h-[29px] bg-transparent text-white header-22 outline-none border-b-[1px] border-b-transparent focus:outline-none focus:border-b-[1px] focus:border-b-white `}
-                />
+                <div className="flex">
+                  <input
+                    ref={handleInputRefCallback}
+                    type="text"
+                    defaultValue={userProfile?.nickname}
+                    onChange={handleInputValue}
+                    onBlur={handleInputBlur}
+                    className={`w-[170px] h-[29px] bg-transparent text-white header-22 outline-none border-b-[1px] border-b-transparent focus:outline-none focus:border-b-[1px] focus:border-b-white `}
+                  />
+                  <PenIcon />
+                </div>
               ) : (
-                <button
-                  className="flex h-[29px] text-white header-22 gap-[4px]"
-                  onClick={handleUserNameClick}
-                >
-                  {userProfile?.nickname}
-                </button>
+                <div onClick={handleUserNameClick} className="flex">
+                  <button className="flex h-[29px] text-white header-22 gap-[4px]">
+                    {userProfile?.nickname}
+                  </button>
+                  <PenIcon />
+                </div>
               )}
-              <PenIcon />
             </div>
           </div>
         </div>
