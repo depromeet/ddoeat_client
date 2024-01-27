@@ -27,7 +27,6 @@ export default function Page() {
   >({ key: 'recentSearchKeywords', initialValue: [] });
 
   const queries = useSearchParams().values();
-  console.log(queries);
 
   // TODO: 추후 위, 경도 추가
   const { data, refetch } = useGetStoreList({
