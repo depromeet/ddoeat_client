@@ -23,7 +23,7 @@ export default function DeleteModal({
     <AnimatePortal isShowing={isShowing}>
       <div className="absolute top-0 z-overlay">
         <div
-          className="w-[100dvw] h-[100dvh] bg-black opacity-50 absolute top-0"
+          className="w-[100dvw] h-[100dvh] bg-black bg-opacity-50 absolute top-0"
           onClick={handleOutsideClick}
         />
         <div className="w-screen h-screen flex items-center justify-center">
