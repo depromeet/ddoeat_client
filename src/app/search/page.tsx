@@ -121,7 +121,6 @@ export default function Page() {
                     {...rest}
                     distance={convertMeterToKm(distance)}
                     isLast={index === storeList.length - 1}
-                    listId={storeId}
                   />
                 </Link>
               );

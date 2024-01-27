@@ -5,7 +5,6 @@ import Image from 'next/image';
 import LogItem from '@components/main/LogItem';
 
 interface StoreDetailLogProps {
-  storeId: number;
   date: string;
   score: number;
   storeImgUrl?: string;
@@ -17,7 +16,6 @@ interface StoreDetailLogProps {
 }
 
 export default function StoreDetailLog({
-  storeId,
   date,
   score,
   log,
@@ -31,7 +29,6 @@ export default function StoreDetailLog({
     <div className="flex flex-col">
       <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
       <LogItem
-        listId={storeId}
         userName={name}
         visitNum={visitNum}
         score={score}

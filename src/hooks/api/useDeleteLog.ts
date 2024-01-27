@@ -8,7 +8,7 @@ import { AxiosError } from 'axios';
 import { axiosRequest } from '../../api/api-config';
 
 const deleteLog = (storeId: number): Promise<void> => {
-  return axiosRequest('delete', `endpoint/${storeId}`);
+  return axiosRequest('delete', `/api/v1/reviews/${storeId}`);
 };
 
 export const useDeleteLog = (): UseMutationResult<void, AxiosError, number> => {
@@ -17,7 +17,7 @@ export const useDeleteLog = (): UseMutationResult<void, AxiosError, number> => {
     mutationKey: ['delete-log'],
     mutationFn: (storeId) => deleteLog(storeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['temp-log-list'] });
+      queryClient.invalidateQueries({ queryKey: ['get-myLog'] });
     },
   });
 };

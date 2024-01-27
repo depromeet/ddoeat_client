@@ -89,17 +89,21 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
         <strong className="text-primary-500">NN번째</strong> 방문이에요!
       </h1>
       <div className="flex flex-col py-[8px] gap-[16px]">
-        <VisitDate onChange={handleChangeDate} />
-        <StarRating rating={rating} onClick={handleRating} />
         <ImageUploader
           onChange={handleChangeImage}
           imageUrl={imageUrl}
           deleteImage={handleDeleteImage}
         />
-        <TextArea value={description} onChange={handleChangeDescription} />
+        <VisitDate onChange={handleChangeDate} />
+        <StarRating rating={rating} onClick={handleRating} />
+        <TextArea
+          value={description}
+          onChange={handleChangeDescription}
+          placeholder="방문한 맛집에 대한 기록을 남겨주세요. 음식의 맛, 매장의 분위기, 서비스 등 어떤 내용이든 좋아요! (최소 10자)"
+        />
       </div>
       <FixedBottomCTAButton
-        disabled={!rating || !description || !imageUrl}
+        disabled={!rating || !description || description.length < 10}
         onClick={handleClickSubmitButton}
       >
         작성완료
