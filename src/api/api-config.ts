@@ -21,7 +21,6 @@ export interface ApiResponse<T> {
   };
 }
 
-// 테스트를 위해 jsonplaceholder url를 넣었습니다.
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   withCredentials: true,
