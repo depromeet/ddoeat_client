@@ -50,8 +50,8 @@ export default function Home() {
         position: {
           lat: Number(searchParams.get('lat')),
           lng: Number(searchParams.get('lng')),
-          storeId: Number(searchParams.get('storeId')) || undefined,
-          kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || undefined,
+          storeId: Number(searchParams.get('storeId')) || null,
+          kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
         } as CoordinateWithIds,
         storeName: searchParams.get('storeName') || '',
         isBookmarked: Boolean(searchParams.get('isBookmarked')),
@@ -131,6 +131,19 @@ export default function Home() {
     setIsBottomSheetShowing(true);
   };
 
+  const handleLoadPinListButtonClick = () => {
+    getPinList();
+    setShowLoadPinListButton(false);
+  };
+
+  const onCloseBottomSheet = () => {
+    setSelectedPin(null);
+    setIsBottomSheetShowing(false);
+    if (isSearchType) {
+      switchUrl('/');
+    }
+  };
+
   return (
     <main className="flex h-[100dvh] flex-col items-center overflow-hidden">
       <motion.div
@@ -202,22 +215,13 @@ export default function Home() {
           <LoadPinListButton
             isShowing={showLoadPinListButton}
             className="absolute top-[calc(100%+60px)] left-[50%] -translate-x-[50%] z-floating"
-            onClick={() => {
-              getPinList();
-              setShowLoadPinListButton(false);
-            }}
+            onClick={handleLoadPinListButtonClick}
           />
         )}
       </div>
 
       <BottomSheet
-        onCloseBottomSheet={() => {
-          setSelectedPin(null);
-          setIsBottomSheetShowing(false);
-          if (isSearchType) {
-            switchUrl('/');
-          }
-        }}
+        onCloseBottomSheet={onCloseBottomSheet}
         isShowing={isBottomSheetShowing || Boolean(searchedPinFromSearchParams)}
       >
         <BottomSheet.ShowContent
