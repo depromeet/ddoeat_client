@@ -27,7 +27,6 @@ export interface Pin {
   storeName: string;
   categoryId: number;
   categoryName: string;
-  categoryType: string;
   address: string;
   longitude: number;
   latitude: number;
