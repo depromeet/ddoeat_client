@@ -10,14 +10,15 @@ interface StoreListQueries {
 }
 
 interface StoreSearch {
-  storeId: number;
-  storeName: string;
-  categoryName: string;
   address: string;
+  categoryType: string;
   distance: number;
-  revisitedCount: number;
+  kakaoStoreId: number;
   latitude: number;
   longitude: number;
+  storeId: number | null;
+  storeName: string;
+  totalRevisitedCount: number;
 }
 
 interface StoreListResponse {
