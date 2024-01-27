@@ -10,6 +10,7 @@ import {
 } from '@hooks/api/useInfiniteBookMark';
 import Tag from '@components/common/Tag';
 import cn from '@utils/cn';
+import { useDeleteBookMark } from '@hooks/api/useDeleteBookMark';
 
 interface TagType {
   id: 'total' | 'after' | 'before';
@@ -39,6 +40,7 @@ export default function BookMarkContent() {
   } = useInfiniteGetBookMark({
     size: DEFAULT_CONTENTS_SIZE,
   });
+  const { mutate: deleteBookmark } = useDeleteBookMark();
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
     if (entry.isIntersecting) fetchNextPage();
@@ -63,9 +65,13 @@ export default function BookMarkContent() {
     }, 0);
   };
 
+  const handleDeleteItem = (id: number) => {
+    deleteBookmark(id);
+  };
+
   return (
     <>
-      <div className="flex gap-[8px] pl-[16px]">
+      <div className="flex gap-[8px] px-[16px] py-[12px]">
         {tags.map((tag) => (
           <Tag
             key={tag.id}
@@ -81,7 +87,7 @@ export default function BookMarkContent() {
         ))}
       </div>
 
-      <div className="mx-[16px]">
+      <div className="mx-[16px]  overflow-y-auto h-[calc(100dvh-418px)]">
         {bookMark &&
           !bookMark[0].data.empty &&
           bookMark.map((page) => {
@@ -91,12 +97,12 @@ export default function BookMarkContent() {
                 return (
                   <BookmarkItem
                     key={item.bookmarkId}
-                    listId={item.bookmarkId}
                     isLast={false}
                     location={item.address}
                     menuType={item.categoryName}
                     revisitNum={item.totalRevisitedCount}
                     storeName={item.storeName}
+                    onClick={() => handleDeleteItem(item.bookmarkId)}
                   />
                 );
               });
