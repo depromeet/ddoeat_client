@@ -7,11 +7,11 @@ import { AxiosError } from 'axios';
 
 import { axiosRequest } from '@api/api-config';
 
-const patchBookmark = (bookmarkId: string): Promise<void> => {
+const patchBookmark = (bookmarkId: number): Promise<void> => {
   return axiosRequest('delete', `/api/v1/bookmarks/${bookmarkId}`);
 };
 
-const usePatchBookmark = (): UseMutationResult<void, AxiosError, string> => {
+const usePatchBookmark = (): UseMutationResult<void, AxiosError, number> => {
   const queryClient = useQueryClient();
 
   return useMutation({
