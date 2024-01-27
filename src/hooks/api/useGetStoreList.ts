@@ -13,6 +13,7 @@ interface StoreSearch {
   address: string;
   categoryType: string;
   distance: number;
+  kakaoCategoryName: string;
   kakaoStoreId: number;
   latitude: number;
   longitude: number;
