@@ -33,6 +33,9 @@ axiosInstance.interceptors.request.use(
       delete config.headers['Authorization'];
     }
 
+    config.headers['Authorization'] =
+      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInVzZXJJZCI6NiwiZXhwIjoxNzA3NDA2ODgzfQ.gCKKwQUUOaZ_orSuQ3qo9HEhr0ZalFXUpyOfwUAYRJEHrnNvmoAEcjR-68WCU3P1WgeKNKq18LXFKN1afmwhuQ';
+
     return config;
   },
   function (error) {

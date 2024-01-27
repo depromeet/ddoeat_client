@@ -26,6 +26,9 @@ export default function Page() {
     string[]
   >({ key: 'recentSearchKeywords', initialValue: [] });
 
+  const queries = useSearchParams().values();
+  console.log(queries);
+
   // TODO: 추후 위, 경도 추가
   const { data, refetch } = useGetStoreList({
     keyword: debouncedText,
@@ -111,10 +114,9 @@ export default function Page() {
                 // TODO: 클릭 시 이동 url 확정되면 수정
                 <Link
                   href={{
-                    pathname: `/?storeId=${storeId}`,
-                    query: { ...store },
+                    pathname: '/',
+                    query: { type: 'search', ...store },
                   }}
-                  as={`/?storeId=${storeId}`}
                   key={storeId}
                 >
                   <SearchItem
