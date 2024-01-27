@@ -5,7 +5,7 @@ import DeleteModal from '../DeleteModal';
 import TrashIcon from 'public/assets/icon24/trash_24.svg';
 
 interface TrashButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function DeleteTrashButton({ onClick }: TrashButtonProps) {
@@ -16,7 +16,7 @@ export default function DeleteTrashButton({ onClick }: TrashButtonProps) {
   };
 
   const handleDeleteConfirm = () => {
-    onClick();
+    onClick?.();
     setModalShowing(false);
   };
 

@@ -7,7 +7,7 @@ import cn from '@utils/cn';
 export interface BasicListItem {
   isLast: boolean;
   hasDeleteOption: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function ListItem({
