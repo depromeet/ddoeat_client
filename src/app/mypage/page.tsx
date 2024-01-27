@@ -17,9 +17,32 @@ import useInput from '@hooks/useInput';
 
 export default function Page() {
   const [isInputActive, setIsInputActive] = useState(false);
+  const [toast, setToast] = useState({
+    show: true,
+    message: '중복된 이름입니다',
+  });
 
   const { data: userProfile } = useGetUserProfile();
-  const { mutate: putUserName } = usePutUserName();
+  const { mutate: putUserName, isError, error } = usePutUserName();
+
+  useEffect(() => {
+    if (isError && error?.response?.status === 400) {
+      setToast({
+        show: true,
+        message: '중복된 이름입니다.',
+      });
+    }
+  }, [isError, error]);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (toast.show) {
+      timer = setTimeout(() => {
+        setToast({ show: false, message: '' });
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [toast.show]);
 
   const userLevel = userProfile?.level || DEFAULT_DDOBAP_LEVEL;
   const StatusImage = DDOBAP_LEVEL_IMAGE[userLevel];
@@ -50,6 +73,11 @@ export default function Page() {
 
   return (
     <div className="overflow-hidden">
+      {toast.show && (
+        <div className="fixed bottom-[61px] left-1/2 transform -translate-x-1/2 z-toast w-[343px] h-[56px]  flex items-center justify-center rounded-[16px] text-white bg-black bg-opacity-60">
+          {toast.message}
+        </div>
+      )}
       <div className="h-[282px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
