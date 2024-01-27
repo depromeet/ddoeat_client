@@ -31,6 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@next/eslint-plugin-next", "npm:14.0.4"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:5.13.4"],\
+            ["@types/js-cookie", "npm:3.0.6"],\
             ["@types/node", "npm:20.10.4"],\
             ["@types/react", "npm:18.2.43"],\
             ["@types/react-dom", "npm:18.2.17"],\
@@ -48,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:7.33.2"],\
             ["eslint-plugin-react-hooks", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:4.6.0"],\
             ["framer-motion", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:10.16.16"],\
+            ["js-cookie", "npm:3.0.5"],\
             ["kakao.maps.d.ts", "npm:0.1.39"],\
             ["next", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:14.0.4"],\
             ["postcss", "npm:8.4.32"],\
@@ -4374,6 +4376,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/js-cookie", [\
+        ["npm:3.0.6", {\
+          "packageLocation": "./.yarn/cache/@types-js-cookie-npm-3.0.6-c9126e5b48-272d551687.zip/node_modules/@types/js-cookie/",\
+          "packageDependencies": [\
+            ["@types/js-cookie", "npm:3.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/json-schema", [\
         ["npm:7.0.15", {\
           "packageLocation": "./.yarn/cache/@types-json-schema-npm-7.0.15-fd16381786-97ed0cb44d.zip/node_modules/@types/json-schema/",\
@@ -6541,6 +6552,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@next/eslint-plugin-next", "npm:14.0.4"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:5.13.4"],\
+            ["@types/js-cookie", "npm:3.0.6"],\
             ["@types/node", "npm:20.10.4"],\
             ["@types/react", "npm:18.2.43"],\
             ["@types/react-dom", "npm:18.2.17"],\
@@ -6558,6 +6570,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:7.33.2"],\
             ["eslint-plugin-react-hooks", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:4.6.0"],\
             ["framer-motion", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:10.16.16"],\
+            ["js-cookie", "npm:3.0.5"],\
             ["kakao.maps.d.ts", "npm:0.1.39"],\
             ["next", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:14.0.4"],\
             ["postcss", "npm:8.4.32"],\
@@ -9892,6 +9905,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/jiti-npm-1.21.0-baebd5985a-a7bd5d6392.zip/node_modules/jiti/",\
           "packageDependencies": [\
             ["jiti", "npm:1.21.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["js-cookie", [\
+        ["npm:3.0.5", {\
+          "packageLocation": "./.yarn/cache/js-cookie-npm-3.0.5-8fc8fcc9b4-2dbd2809c6.zip/node_modules/js-cookie/",\
+          "packageDependencies": [\
+            ["js-cookie", "npm:3.0.5"]\
           ],\
           "linkType": "HARD"\
         }]\
