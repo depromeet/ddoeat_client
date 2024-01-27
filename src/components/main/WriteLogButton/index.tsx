@@ -8,7 +8,7 @@ import cn from '@utils/cn';
 import Button from '@components/common/Button';
 
 interface WriteLogButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  storeId: string;
+  storeId: number;
 }
 
 export default function WriteLogButton({

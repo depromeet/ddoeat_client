@@ -165,7 +165,11 @@ export default function Home() {
         <BottomSheet.ShowContent
           onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
         >
-          <StorePreviewSection />
+          {selectedPin && (
+            <StorePreviewSection
+              storeId={selectedPin.storeId ?? selectedPin.kakaoStoreId}
+            />
+          )}
         </BottomSheet.ShowContent>
         <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent>
       </BottomSheet>

@@ -9,7 +9,7 @@ import usePatchBookmark from '@hooks/api/usePatchBookmark';
 import cn from '@utils/cn';
 
 interface BookmarkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  storeId: string;
+  storeId: number;
   isBookmarked: boolean;
 }
 
