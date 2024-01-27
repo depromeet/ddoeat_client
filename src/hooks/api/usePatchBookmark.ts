@@ -18,7 +18,9 @@ const usePatchBookmark = (): UseMutationResult<void, AxiosError, string> => {
     mutationKey: ['delete-bookMark'],
     mutationFn: (storeId) => patchBookmark(storeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['get-bookMark'] });
+      queryClient.invalidateQueries({
+        queryKey: ['get-bookMark', 'get-pin-list', 'get-store'],
+      });
     },
   });
 };
