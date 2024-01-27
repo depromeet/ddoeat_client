@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
   const handleClickSettingButton = () => router.push('/setting');
 
   return (
-    <main className='bg-[url("/assets/image/mypage/background.png")] bg-cover'>
+    <main className='bg-[url("/assets/image/mypage/background.png")] bg-cover w-full max-w-[480px] h-[100dvh]'>
       <Header className=" [&>*>*]:fill-white justify-between">
         <SettingIcon onClick={handleClickSettingButton} />
       </Header>
