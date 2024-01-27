@@ -64,7 +64,7 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const { config, response } = error;
-    // NOTE: 토큰 재발급 요청이 아니고, 401에러가 아니면 에러 던지기
+    // NOTE: 토큰 재발급 요청이고, 401에러가 아니면 에러 던지기
     if (
       config.url === TOKEN_REFRESH_URL ||
       response.data.code !== 401 ||
