@@ -1,4 +1,5 @@
 import {
+  UseMutationOptions,
   UseMutationResult,
   useMutation,
   useQueryClient,
@@ -11,11 +12,9 @@ const putUserName = (nickname: string): Promise<void> => {
   return axiosRequest('put', '/api/v1/users/nickname', { nickname });
 };
 
-export const usePutUserName = (): UseMutationResult<
-  void,
-  AxiosError,
-  string
-> => {
+export const usePutUserName = (
+  options?: UseMutationOptions<void, AxiosError, string>,
+): UseMutationResult<void, AxiosError, string> => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -24,5 +23,6 @@ export const usePutUserName = (): UseMutationResult<
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['get-userProfile'] });
     },
+    ...options,
   });
 };
