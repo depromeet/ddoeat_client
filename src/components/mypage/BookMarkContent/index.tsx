@@ -10,7 +10,7 @@ import {
 } from '@hooks/api/useInfiniteBookMark';
 import Tag from '@components/common/Tag';
 import cn from '@utils/cn';
-import { useDeleteBookMark } from '@hooks/api/useDeleteBookMark';
+import usePatchBookmark from '@hooks/api/usePatchBookmark';
 
 interface TagType {
   id: 'total' | 'after' | 'before';
@@ -40,7 +40,7 @@ export default function BookMarkContent() {
   } = useInfiniteGetBookMark({
     size: DEFAULT_CONTENTS_SIZE,
   });
-  const { mutate: deleteBookmark } = useDeleteBookMark();
+  const { mutate: deleteBookmark } = usePatchBookmark();
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
     if (entry.isIntersecting) fetchNextPage();
