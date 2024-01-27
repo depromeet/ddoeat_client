@@ -30,7 +30,7 @@ function StorePreviewSection({
   useEffect(() => {
     if (searchParams.get('type') === 'search') return;
 
-    const url = new URL('http://localhost:3000');
+    const url = new URL(window.location.origin);
     url.searchParams.set('storeId', String(storeId));
     url.searchParams.set('kakaoStoreId', String(kakaoStoreId));
     url.searchParams.set('lat', String(lat));
