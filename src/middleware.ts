@@ -1,6 +1,5 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import Cookies from 'js-cookie';
 
 export function middleware(request: NextRequest) {
   // NOTE: splash 화면으로 넘어왔을 때 쿠키 내의 토큰 여부에 따른 리다이렉트 로직
