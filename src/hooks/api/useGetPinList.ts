@@ -1,0 +1,72 @@
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import { AxiosError, AxiosResponse } from 'axios';
+
+import { axiosRequest } from '../../api/api-config';
+
+import { Categories } from 'src/types/tag';
+
+export interface ScreenCoordinate {
+  leftTopLatitude: number;
+  leftTopLongitude: number;
+  rightBottomLatitude: number;
+  rightBottomLongitude: number;
+}
+
+interface PinListRequest {
+  type: Categories | null;
+  screenCoordinate: ScreenCoordinate | null;
+  level: number;
+}
+
+export interface Pin {
+  storeId: number;
+  kakaoStoreId: number;
+  storeName: string;
+  categoryId: number;
+  categoryName: string;
+  categoryType: string;
+  address: string;
+  longitude: number;
+  latitude: number;
+  totalRevisitedCount: number;
+  totalReviewCount: number;
+}
+
+interface PinListResponse {
+  bookMarkList: Pin[];
+  locationStoreList: Pin[];
+}
+
+const getPinList = async ({
+  type,
+  screenCoordinate,
+  level,
+}: PinListRequest) => {
+  const response = await axiosRequest<AxiosResponse<PinListResponse>>(
+    'get',
+    '/api/v1/stores/location-range',
+    undefined,
+    undefined,
+    {
+      type: type ?? undefined,
+      ...screenCoordinate,
+      level,
+    },
+  );
+
+  return response.data;
+};
+
+const useGetPinList = ({
+  type,
+  screenCoordinate,
+  level,
+}: PinListRequest): UseQueryResult<PinListResponse, AxiosError> => {
+  return useQuery({
+    queryKey: ['get-pin-list', type],
+    queryFn: () => getPinList({ type, screenCoordinate, level }),
+    enabled: false,
+  });
+};
+
+export default useGetPinList;

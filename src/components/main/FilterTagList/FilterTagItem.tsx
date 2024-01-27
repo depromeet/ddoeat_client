@@ -4,6 +4,7 @@ import { useFilterTag } from '.';
 
 import cn from '@utils/cn';
 import Tag from '@components/common/Tag';
+import { Categories } from 'src/types/tag';
 
 export default function FilterTagItem({
   value,
@@ -12,7 +13,7 @@ export default function FilterTagItem({
   children,
   className,
   ...restProps
-}: Omit<ComponentProps<'input'>, 'value'> & { value: string }) {
+}: Omit<ComponentProps<'input'>, 'value'> & { value: Categories }) {
   const { selectedTag, setSelectedTag, onSelectedTagChange } = useFilterTag();
   const isSelected = selectedTag === value;
 

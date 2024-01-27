@@ -1,21 +1,21 @@
 interface GetIsSameIdParams {
-  centerId: string | undefined;
-  centerKakaoId: string | undefined;
-  pinId: string | undefined;
-  pinKakaoId: string | undefined;
+  centerId: number | undefined;
+  centerkakaoStoreId: number | undefined;
+  pinId: number | undefined;
+  pinkakaoStoreId: number | undefined;
 }
 
 const getIsSameId = ({
   centerId,
-  centerKakaoId,
+  centerkakaoStoreId,
   pinId,
-  pinKakaoId,
+  pinkakaoStoreId,
 }: GetIsSameIdParams) => {
   return (
     (centerId !== undefined && pinId !== undefined && centerId === pinId) ||
-    (centerKakaoId !== undefined &&
-      pinKakaoId !== undefined &&
-      centerKakaoId === pinKakaoId)
+    (centerkakaoStoreId !== undefined &&
+      pinkakaoStoreId !== undefined &&
+      centerkakaoStoreId === pinkakaoStoreId)
   );
 };
 

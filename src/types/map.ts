@@ -4,8 +4,8 @@ export interface Coordinate {
 }
 
 export interface StoreIds {
-  id?: string;
-  kakaoId?: string;
+  storeId?: number;
+  kakaoStoreId?: number;
 }
 
 export type CoordinateWithIds = Coordinate & StoreIds;

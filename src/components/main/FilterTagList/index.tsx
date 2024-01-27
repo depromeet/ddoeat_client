@@ -9,10 +9,11 @@ import {
 import FilterTagItem from './FilterTagItem';
 
 import cn from '@utils/cn';
+import { Categories } from 'src/types/tag';
 
 interface FilterTagListProps {
-  selectedTag: string | null;
-  setSelectedTag: Dispatch<SetStateAction<string | null>>;
+  selectedTag: Categories | null;
+  setSelectedTag: Dispatch<SetStateAction<Categories | null>>;
 }
 
 interface FilterTagState extends FilterTagListProps {
@@ -28,7 +29,9 @@ function FilterTagList({
   children,
 }: HTMLAttributes<HTMLDivElement> & FilterTagListProps) {
   const onSelectedTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedTag((prev) => (prev === e.target.value ? null : e.target.value));
+    setSelectedTag((prev) =>
+      prev === e.target.value ? null : (e.target.value as Categories),
+    );
   };
 
   return (

@@ -8,10 +8,10 @@ import ArrowIcon from '/public/assets/icon30/polygon_30.svg';
 import { bounceAnimationVariants } from '@constants/motions';
 
 interface PinBubbleProps {
-  totalVisitCount: number;
+  totalRevisitedCount: number;
 }
 
-export default function PinBubble({ totalVisitCount }: PinBubbleProps) {
+export default function PinBubble({ totalRevisitedCount }: PinBubbleProps) {
   return (
     <motion.div
       variants={bounceAnimationVariants}
@@ -23,7 +23,7 @@ export default function PinBubble({ totalVisitCount }: PinBubbleProps) {
       <div className="h-[36px] flex justify-center items-center bg-primary-500 px-[12px] py-[8px] rounded-[16px] mb-[-8px]">
         <PinVisitorIcon />
         <p className="body-14-extraBold text-white">
-          {totalVisitCount}명이 재방문했어요!
+          {totalRevisitedCount}명이 재방문했어요!
         </p>
       </div>
       <ArrowIcon />

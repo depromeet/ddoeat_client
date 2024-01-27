@@ -11,7 +11,7 @@ export interface PinProps {
   isActive: boolean;
   storeName: string;
   isBookmarked: boolean;
-  totalVisitCount: number;
+  totalRevisitedCount: number;
   onClick: (e: React.PointerEvent<HTMLButtonElement>) => void;
 }
 
@@ -19,19 +19,22 @@ export default function Pin({
   isActive,
   storeName,
   isBookmarked,
-  totalVisitCount,
+  totalRevisitedCount,
   onClick,
 }: PinProps) {
   return (
     <div className="relative w-full flex flex-col justify-center items-center">
       <AnimatePresence mode="wait">
-        {isActive && <PinBubble totalVisitCount={totalVisitCount} />}
+        {isActive && <PinBubble totalRevisitedCount={totalRevisitedCount} />}
       </AnimatePresence>
       <button
         onClick={onClick}
         className="relative h-fit flex flex-col items-center"
       >
-        <Marker isBookmarked={isBookmarked} totalVisitCount={totalVisitCount} />
+        <Marker
+          isBookmarked={isBookmarked}
+          totalRevisitedCount={totalRevisitedCount}
+        />
         <p className="body-14-extraBold text-gray-900 text-shadow-stroke mt-[4px]">
           {storeName}
         </p>
@@ -42,7 +45,7 @@ export default function Pin({
           >
             <PinVisitorIcon />
             <span className="caption-12-extraBold text-gray-50">
-              {totalVisitCount}
+              {totalRevisitedCount}
             </span>
             명
           </Tag>

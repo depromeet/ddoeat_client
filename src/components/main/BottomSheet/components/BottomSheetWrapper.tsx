@@ -13,7 +13,7 @@ const DRAG_SAFE_DISTANCE = 50;
 
 export default function BottomSheetWrapper({
   isShowing,
-  handleCloseBottomSheet,
+  onCloseBottomSheet,
 
   hasHandleBar = true,
   children,
@@ -102,7 +102,7 @@ export default function BottomSheetWrapper({
       }
 
       if (shouldDown) {
-        handleCloseBottomSheet();
+        onCloseBottomSheet();
         return;
       }
     }

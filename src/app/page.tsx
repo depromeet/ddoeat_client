@@ -2,40 +2,88 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
+import BookMarkPinList from '@components/main/BookMarkPinList';
 import BottomNavigation from '@components/main/BottomNavigation';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
-import CustomOverlayPin from '@components/main/CustomOverlayPin';
 import FilterTagList from '@components/main/FilterTagList';
+import LoadPinListButton from '@components/main/LoadPinListButton';
+import LocationStorePinList from '@components/main/LocationStorePinList';
 import SearchField from '@components/main/SearchField';
+import StorePreviewSection from '@components/main/StorePreviewSection';
 import { mapTranslateYAnimationVariants } from '@constants/motions';
 import { TAGS } from '@constants/tags';
+import useGetPinList from '@hooks/api/useGetPinList';
 import useCoordinate from '@hooks/useCoordinate';
-import getIsSameId from '@utils/getIsSameId';
-
-const MOCK = [
-  { id: '1', lat: 37.498095, lng: 127.02761 },
-  { kakaoId: '3', lat: 37.498095, lng: 127.127661 },
-  { kakaoId: '65', lat: 37.498095, lng: 127.132761 },
-  { kakaoId: '35', lat: 37.478095, lng: 127.152761 },
-  { kakaoId: '38', lat: 37.458095, lng: 127.122761 },
-  { kakaoId: '39', lat: 37.488095, lng: 127.112761 },
-  { kakaoId: '31', lat: 37.443595, lng: 127.1273631 },
-  { kakaoId: '3123', lat: 37.598095, lng: 127.123441 },
-];
+import { CoordinateWithIds } from 'src/types/map';
+import { Categories } from 'src/types/tag';
+import useDidUpdate from '@hooks/api/useDidUpdate';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
-  const { center, setCenter, currentUserCoordinate, throttledCenterChanged } =
-    useCoordinate();
+  const {
+    center,
+    setCenter,
+    currentUserCoordinate,
+    throttledCenterChanged,
+    throttledBoundChanged,
+    showLoadPinListButton,
+    setShowLoadPinListButton,
+    screenCoordinate,
+    setScreenCoordinate,
+  } = useCoordinate({
+    runInit: true,
+    onInitSuccess: () => getPinList(),
+  });
+  //TODO: runinit을 검색에서 넘어오는 경우에만 false로 만들기
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTag, setSelectedTag] = useState<Categories | null>(null);
+  const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
+    null,
+  );
+
+  const { refetch: getPinList, data: PinList } = useGetPinList({
+    type: selectedTag,
+    screenCoordinate,
+    level: mapRef.current?.getLevel() ?? 1,
+  });
+
+  useDidUpdate(() => {
+    if (!currentUserCoordinate || !screenCoordinate) return;
+    getPinList();
+  }, [selectedTag]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (currentUserCoordinate && map) {
+      console.log('?', {
+        leftTopLatitude: map.getBounds().getNorthEast().getLat(),
+        leftTopLongitude: map.getBounds().getNorthEast().getLng(),
+        rightBottomLatitude: map.getBounds().getSouthWest().getLat(),
+        rightBottomLongitude: map.getBounds().getSouthWest().getLat(),
+      });
+      setScreenCoordinate({
+        leftTopLatitude: map.getBounds().getNorthEast().getLat(),
+        leftTopLongitude: map.getBounds().getNorthEast().getLng(),
+        rightBottomLatitude: map.getBounds().getSouthWest().getLat(),
+        rightBottomLongitude: map.getBounds().getSouthWest().getLat(),
+      });
+    }
+  }, [currentUserCoordinate, setScreenCoordinate]);
 
   const handleCurrentLocationButtonClick = () => {
-    setCenter({ ...currentUserCoordinate });
+    currentUserCoordinate && setCenter({ ...currentUserCoordinate });
+  };
+
+  const onPinClick = (props: CoordinateWithIds) => {
+    //TODO: 클릭시 지도 확대할지 협의 후 결정
+    // mapRef.current?.setLevel(3);
+    setSelectedPin(props);
+    setCenter(props);
+    setIsBottomSheetShowing(true);
   };
 
   return (
@@ -51,35 +99,27 @@ export default function Home() {
           className="w-full h-full"
           isPanto={true}
           onCenterChanged={throttledCenterChanged}
+          onBoundsChanged={throttledBoundChanged}
         >
           <CurrentLocationMarker
             currentUserCoordinate={currentUserCoordinate}
           />
-          {MOCK.map((item, idx) => (
-            <CustomOverlayPin
-              key={idx}
-              isActive={
-                isBottomSheetShowing &&
-                getIsSameId({
-                  centerId: center.id,
-                  centerKakaoId: center.kakaoId,
-                  pinId: item.id,
-                  pinKakaoId: item.kakaoId,
-                })
-              }
-              position={{ lat: item.lat, lng: item.lng }}
-              storeName="test"
-              isBookmarked={idx === 1}
-              totalVisitCount={1}
-              onClick={() => {
-                //TODO: 클릭시 지도 확대할지 협의 후 결정
-                // mapRef.current?.setLevel(3);
-                setCenter(item);
-                setIsBottomSheetShowing(true);
-              }}
-            />
-          ))}
-
+          {PinList && (
+            <>
+              <LocationStorePinList
+                locationStoreList={PinList.locationStoreList}
+                isBottomSheetShowing={isBottomSheetShowing}
+                onPinClick={onPinClick}
+                selectedPin={selectedPin}
+              />
+              <BookMarkPinList
+                BookmarkList={PinList.bookMarkList}
+                isBottomSheetShowing={isBottomSheetShowing}
+                onPinClick={onPinClick}
+                selectedPin={selectedPin}
+              />
+            </>
+          )}
           <BottomNavigation
             onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
             className="absolute bottom-[56px] z-above"
@@ -109,17 +149,28 @@ export default function Home() {
             );
           })}
         </FilterTagList>
+        <LoadPinListButton
+          isShowing={showLoadPinListButton}
+          className="absolute top-[calc(100%+60px)] left-[50%] -translate-x-[50%] z-floating"
+          onClick={() => {
+            getPinList();
+            setShowLoadPinListButton(false);
+          }}
+        />
       </div>
 
       <BottomSheet
-        handleCloseBottomSheet={() => {
+        onCloseBottomSheet={() => {
+          setSelectedPin(null);
           setIsBottomSheetShowing(false);
         }}
         isShowing={isBottomSheetShowing}
       >
         <BottomSheet.ShowContent
           onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
-        ></BottomSheet.ShowContent>
+        >
+          <StorePreviewSection />
+        </BottomSheet.ShowContent>
         <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent>
       </BottomSheet>
     </main>

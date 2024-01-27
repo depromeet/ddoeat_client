@@ -8,10 +8,13 @@ import cn from '@utils/cn';
 
 interface MarkerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isBookmarked: boolean;
-  totalVisitCount: number;
+  totalRevisitedCount: number;
 }
 
-export default function Marker({ isBookmarked, totalVisitCount }: MarkerProps) {
+export default function Marker({
+  isBookmarked,
+  totalRevisitedCount,
+}: MarkerProps) {
   return (
     <div
       className={cn(
@@ -19,7 +22,10 @@ export default function Marker({ isBookmarked, totalVisitCount }: MarkerProps) {
         { 'bg-primary-300 ring-inset ring-[2px] ring-white': isBookmarked },
       )}
     >
-      <PinIcon isBookmarked={isBookmarked} totalVisitCount={totalVisitCount} />
+      <PinIcon
+        isBookmarked={isBookmarked}
+        totalRevisitedCount={totalRevisitedCount}
+      />
     </div>
   );
 }

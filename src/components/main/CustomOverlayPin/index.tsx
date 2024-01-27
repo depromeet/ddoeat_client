@@ -11,7 +11,7 @@ function CustomOverlayPin({
   storeName,
   position,
   isBookmarked,
-  totalVisitCount,
+  totalRevisitedCount,
   isActive,
   onClick,
 }: CustomOverlayPinProps) {
@@ -19,13 +19,13 @@ function CustomOverlayPin({
     <CustomOverlayMap
       position={position}
       zIndex={isActive ? 10 : 0}
-      key={String(position.id) + String(position.kakaoId) + isActive}
+      key={String(position.storeId) + String(position.kakaoStoreId) + isActive}
     >
       <Pin
         isActive={isActive}
         storeName={storeName}
         isBookmarked={isBookmarked}
-        totalVisitCount={totalVisitCount}
+        totalRevisitedCount={totalRevisitedCount}
         onClick={onClick}
       />
     </CustomOverlayMap>
