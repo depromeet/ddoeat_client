@@ -46,10 +46,12 @@ export default function StoreDetailContent() {
           alt="음식점 이미지"
         />
       )}
+
       <div
-        className={`w-full bg-white h-[${
-          reportData?.storeMainImageUrl ? 24 : 56
-        }px]  ${reportData?.storeMainImageUrl ? 'rounded-t-[24px]' : ''}`}
+        className={cn('w-full', {
+          'h-[24px] rounded-t-[24px]': reportData?.storeMainImageUrl,
+          'h-[56px]': !reportData?.storeMainImageUrl,
+        })}
       />
 
       {/* TODO: 상조님 음식점 정보 컴포넌트 넣기 */}
