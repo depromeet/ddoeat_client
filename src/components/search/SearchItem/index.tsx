@@ -11,7 +11,6 @@ interface SearchItemProps extends Omit<BasicListItem, 'hasDeleteOption'> {
 }
 
 export default function SearchItem({
-  listId,
   isLast,
   storeName,
   categoryName,
@@ -20,7 +19,7 @@ export default function SearchItem({
   address,
 }: SearchItemProps) {
   return (
-    <ListItem listId={listId} isLast={isLast} hasDeleteOption={false}>
+    <ListItem isLast={isLast} hasDeleteOption={false}>
       <div className="flex items-center gap-[4px]">
         <p className="body-16-bold">{storeName}</p>
         <p className="caption-12-bold text-gray-500">{categoryName}</p>

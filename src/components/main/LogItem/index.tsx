@@ -11,7 +11,6 @@ interface LogItemProps extends BasicListItem {
 }
 
 export default function LogItem({
-  listId,
   isLast,
   hasDeleteOption,
   userName,
@@ -22,11 +21,7 @@ export default function LogItem({
   return (
     <div>
       <p className="body-14-extraBold px-[16px] py-[10px]">{date}</p>
-      <ListItem
-        listId={listId}
-        isLast={isLast}
-        hasDeleteOption={hasDeleteOption}
-      >
+      <ListItem isLast={isLast} hasDeleteOption={hasDeleteOption}>
         <div className="flex items-center gap-[4px]">
           <p className="body-16-bold">{userName}</p>
           {visitNum > 0 && (

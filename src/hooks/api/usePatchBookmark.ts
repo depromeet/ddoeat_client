@@ -1,5 +1,4 @@
 import {
-  UseMutationOptions,
   UseMutationResult,
   useMutation,
   useQueryClient,
@@ -8,48 +7,19 @@ import { AxiosError } from 'axios';
 
 import { axiosRequest } from '@api/api-config';
 
-const patchBookmark = (storeId: string): Promise<void> => {
-  return axiosRequest('patch', `endpoint=${storeId}`);
+const patchBookmark = (bookmarkId: string): Promise<void> => {
+  return axiosRequest('delete', `/api/v1/bookmarks/${bookmarkId}`);
 };
 
-//TODO: 인터페이스 나오면 타입 수정
-const usePatchBookmark = (
-  options?: UseMutationOptions<void, AxiosError, string, { markers: string[] }>,
-): UseMutationResult<void, AxiosError, string, { markers: string[] }> => {
+const usePatchBookmark = (): UseMutationResult<void, AxiosError, string> => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['patch-bookmark'],
+    mutationKey: ['delete-bookMark'],
     mutationFn: (storeId) => patchBookmark(storeId),
-    onMutate: async (storeId) => {
-      //TODO: 낙관적 업데이트
-      await queryClient.cancelQueries({ queryKey: ['temp-markers'] });
-      const previousMarkers = queryClient.getQueryData<{ markers: string[] }>([
-        'temp-markers',
-      ]);
-
-      if (previousMarkers) {
-        queryClient.setQueryData<{ markers: string[] }>(['temp-markers'], {
-          markers: previousMarkers.markers.map((marker) =>
-            // TODO: 로직 수정
-            marker === storeId ? marker : marker,
-          ),
-        });
-      }
-
-      return previousMarkers;
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-bookMark'] });
     },
-    onError: (_, __, context) => {
-      if (context?.markers) {
-        queryClient.setQueryData(['temp-markers'], {
-          markers: context.markers,
-        });
-      }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['temp-markers'] });
-    },
-    ...options,
   });
 };
 
