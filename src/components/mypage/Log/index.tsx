@@ -32,7 +32,7 @@ export default function MyLog({
 }: MyLogProps) {
   return (
     <>
-      <li className="flex flex-col w-full h-full bg-white p-[16px] gap-y-[8px]">
+      <li className="flex flex-col w-full bg-white p-[16px] gap-y-[8px]">
         <div className="flex items-center">
           <div className="flex w-full h-[20px] gap-x-[8px] items-center">
             <DotIcon />
