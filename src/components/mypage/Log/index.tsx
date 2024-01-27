@@ -1,16 +1,12 @@
-'use client';
-
 import Image from 'next/image';
-import React, { HTMLAttributes, useState } from 'react';
+import React, { HTMLAttributes } from 'react';
 
 import StarRating from '@components/common/StarScore';
 import Tag from '@components/common/Tag';
 
 import DotIcon from '/public/assets/icon20/dot_20.svg';
 
-import TrashIcon from 'public/assets/icon24/trash_24.svg';
-import { useDeleteLog } from '@hooks/api/useDeleteLog';
-import DeleteModal from '@components/common/DeleteModal';
+import DeleteTrashButton from '@components/common/DeleteTrashButton';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   visitedAt: string;
@@ -21,35 +17,19 @@ interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   categoryName: string;
   rating: number;
   description: string;
+  onClick: () => void;
 }
 
 export default function MyLog({
   visitedAt,
-  reviewId,
   imageUrl,
   storeName,
   visitTimes,
   categoryName,
   rating,
   description,
+  onClick,
 }: MyLogProps) {
-  const { mutate: deleteLog } = useDeleteLog();
-  const [isModalShowing, setModalShowing] = useState(false);
-
-  const handleClickDeleteButton = () => {
-    setModalShowing(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    // TODO: 추후 로그 삭제 로직 확정
-    deleteLog(reviewId);
-    setModalShowing(false);
-  };
-
-  const handleCancel = () => {
-    setModalShowing(false);
-  };
-
   return (
     <>
       <li className="flex flex-col w-full h-full bg-white p-[16px] gap-y-[8px]">
@@ -58,9 +38,7 @@ export default function MyLog({
             <DotIcon />
             <p className="text-gray-700 body-14-bold">{visitedAt}</p>
           </div>
-          <button onClick={handleClickDeleteButton}>
-            <TrashIcon />
-          </button>
+          <DeleteTrashButton onClick={onClick} />
         </div>
         <div className="flex items-center w-full h-full gap-x-[8px] justify-end">
           <div className="flex flex-col w-[calc(100%-8px)] h-full gap-y-[8px] pl-[16px] border-l-[1px] border-primary-300">
@@ -100,11 +78,6 @@ export default function MyLog({
           </div>
         </div>
       </li>
-      <DeleteModal
-        isShowing={isModalShowing}
-        onClick={handleDeleteConfirm}
-        onCancel={handleCancel}
-      />
     </>
   );
 }

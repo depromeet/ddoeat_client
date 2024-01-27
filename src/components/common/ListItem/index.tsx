@@ -1,41 +1,21 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren } from 'react';
 
-import DeleteModal from '../DeleteModal';
+import DeleteTrashButton from '../DeleteTrashButton';
 
 import cn from '@utils/cn';
-import TrashIcon from 'public/assets/icon24/trash_24.svg';
-import { useDeleteLog } from '@hooks/api/useDeleteLog';
 
 export interface BasicListItem {
-  listId: number;
   isLast: boolean;
   hasDeleteOption: boolean;
+  onClick: () => void;
 }
 
 export default function ListItem({
-  listId,
   isLast,
   hasDeleteOption,
+  onClick,
   children,
 }: PropsWithChildren<BasicListItem>) {
-  const { mutate: deleteLog } = useDeleteLog();
-
-  const [isModalShowing, setModalShowing] = useState(false);
-
-  const handleClickDeleteButton = () => {
-    setModalShowing(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    // TODO: 추후 로그 삭제 로직 확정
-    deleteLog(listId);
-    setModalShowing(false);
-  };
-
-  const handleCancel = () => {
-    setModalShowing(false);
-  };
-
   return (
     <>
       <li className="w-full pl-[24px] pr-[16px] flex justify-between items-center">
@@ -48,20 +28,9 @@ export default function ListItem({
           )}`}
         >
           <div className="flex flex-col gap-[9px]">{children}</div>
-          {hasDeleteOption && (
-            <button onClick={handleClickDeleteButton}>
-              <TrashIcon />
-            </button>
-          )}
+          {hasDeleteOption && <DeleteTrashButton onClick={onClick} />}
         </div>
       </li>
-      {hasDeleteOption && (
-        <DeleteModal
-          isShowing={isModalShowing}
-          onClick={handleDeleteConfirm}
-          onCancel={handleCancel}
-        />
-      )}
     </>
   );
 }

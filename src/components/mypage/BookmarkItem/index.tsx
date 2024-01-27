@@ -10,15 +10,15 @@ interface BookmarkListProps extends Omit<BasicListItem, 'hasDeleteOption'> {
 }
 
 export default function BookmarkItem({
-  listId,
   isLast,
   storeName,
   revisitNum,
   menuType,
   location,
+  onClick,
 }: BookmarkListProps) {
   return (
-    <ListItem listId={listId} isLast={isLast} hasDeleteOption={true}>
+    <ListItem isLast={isLast} hasDeleteOption={true} onClick={onClick}>
       <div className="flex items-center gap-[4px]">
         <p className="body-16-bold">{storeName}</p>
         {revisitNum > 0 && (
