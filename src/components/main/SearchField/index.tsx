@@ -1,25 +1,20 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { ButtonHTMLAttributes } from 'react';
 
 import CTAButton from '@components/common/CTAButton';
-import SearchIcon from 'public/assets/icon24/search_24.svg';
 import cn from '@utils/cn';
+import SearchIcon from 'public/assets/icon24/search_24.svg';
 
 export default function SearchField({
   onClick,
   className,
   ...restProps
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
-  const router = useRouter();
-
   const handleSearchButtonClick = (
     e: React.PointerEvent<HTMLButtonElement>,
   ) => {
     onClick?.(e);
-    // TODO: 검색 페이지로 이동 시키기
-    router.push('/search');
   };
 
   return (

@@ -1,16 +1,46 @@
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+
 import StoreInformation from '../StoreInformation';
 import WriteLogButton from '../WriteLogButton';
 import StoreLogPhotoPreview from './StoreLogPhotoPreview';
 
-import useGetStore from '@hooks/api/useGetStore';
 import BookmarkButton from '@components/common/BookmarkButton';
+import useGetStore from '@hooks/api/useGetStore';
+import switchUrl from '@utils/switchUrl';
 
 interface StorePreviewSectionProps {
   storeId?: number;
+  kakaoStoreId?: number;
+  lat: number;
+  lng: number;
 }
 
-function StorePreviewSection({ storeId }: StorePreviewSectionProps) {
-  const { data: storeData } = useGetStore({ storeId });
+function StorePreviewSection({
+  storeId,
+  kakaoStoreId,
+  lat,
+  lng,
+}: StorePreviewSectionProps) {
+  const searchParams = useSearchParams();
+  const { data: storeData } = useGetStore({
+    storeId: storeId ?? (Number(searchParams.get('storeId')) || undefined),
+  });
+
+  useEffect(() => {
+    if (searchParams.get('type') === 'search') return;
+
+    const url = new URL('http://localhost:3000');
+    url.searchParams.set('storeId', String(storeId));
+    url.searchParams.set('kakaoStoreId', String(kakaoStoreId));
+    url.searchParams.set('lat', String(lat));
+    url.searchParams.set('lng', String(lng));
+    switchUrl(url);
+
+    return () => {
+      switchUrl('/');
+    };
+  }, []);
 
   return (
     <>

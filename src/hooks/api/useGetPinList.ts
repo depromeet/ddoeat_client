@@ -12,6 +12,9 @@ export interface ScreenCoordinate {
   rightBottomLongitude: number;
 }
 
+interface UseGetPinListParams extends PinListRequest {
+  isSearchType: boolean;
+}
 interface PinListRequest {
   type: Categories | null;
   screenCoordinate: ScreenCoordinate | null;
@@ -61,11 +64,12 @@ const useGetPinList = ({
   type,
   screenCoordinate,
   level,
-}: PinListRequest): UseQueryResult<PinListResponse, AxiosError> => {
+  isSearchType,
+}: UseGetPinListParams): UseQueryResult<PinListResponse, AxiosError> => {
   return useQuery({
     queryKey: ['get-pin-list', type],
     queryFn: () => getPinList({ type, screenCoordinate, level }),
-    enabled: !!screenCoordinate && !!level,
+    enabled: !!screenCoordinate && !!level && !isSearchType,
   });
 };
 

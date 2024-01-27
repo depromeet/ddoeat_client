@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react';
 
-import { BottomSheetProps, BottomSheetStatus } from '../types/types';
 import { HANDLE_HEIGHT } from '../components/BottomSheetWrapper';
+import { BottomSheetProps, BottomSheetStatus } from '../types/types';
 
 import AnimatePortal from '@components/common/AnimatePortal';
 

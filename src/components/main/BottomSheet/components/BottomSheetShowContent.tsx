@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useRef } from 'react';
 
 import { useBottomSheet } from '../contexts/BottomSheetContext';
 
 import CurrentLocationButton from '@components/main/CurrentLocationButton';
 import { currentLocationButtonFadeInOutVariants } from '@constants/motions';
+import useResizeObserver from '@hooks/useResizeObserver';
+import mergeRefs from '@utils/mergeRefs';
 
 interface BottonSheetShowContent {
   onCurrentLocationButtonClick: () => void;
@@ -16,6 +18,15 @@ export default function BottonSheetShowContent({
 }: PropsWithChildren<BottonSheetShowContent>) {
   const showStatusChildrenRef = useRef<HTMLDivElement>(null);
   const { status, setShowStatusChildrenHeight } = useBottomSheet();
+
+  const onResize = useCallback(
+    (target: HTMLDivElement) => {
+      setShowStatusChildrenHeight(target.offsetHeight);
+    },
+    [setShowStatusChildrenHeight],
+  );
+
+  const resizeRef = useResizeObserver(onResize);
 
   useEffect(() => {
     if (showStatusChildrenRef.current) {
@@ -32,7 +43,7 @@ export default function BottonSheetShowContent({
   const isShow = status === 'show';
 
   return isShow ? (
-    <div className="relative" ref={showStatusChildrenRef}>
+    <div className="relative" ref={mergeRefs(showStatusChildrenRef, resizeRef)}>
       <motion.div
         className="absolute top-[-98px] left-[16px]"
         variants={currentLocationButtonFadeInOutVariants}

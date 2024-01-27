@@ -12,7 +12,7 @@ export interface PinProps {
   storeName: string;
   isBookmarked: boolean;
   totalRevisitedCount: number;
-  onClick: (e: React.PointerEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.PointerEvent<HTMLButtonElement>) => void;
 }
 
 export default function Pin({

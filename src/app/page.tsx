@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
@@ -16,11 +17,13 @@ import SearchField from '@components/main/SearchField';
 import StorePreviewSection from '@components/main/StorePreviewSection';
 import { mapTranslateYAnimationVariants } from '@constants/motions';
 import { TAGS } from '@constants/tags';
+import useDidUpdate from '@hooks/useDidUpdate';
 import useGetPinList from '@hooks/api/useGetPinList';
 import useCoordinate from '@hooks/useCoordinate';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
-import useDidUpdate from '@hooks/api/useDidUpdate';
+import CustomOverlayPin from '@components/main/CustomOverlayPin';
+import switchUrl from '@utils/switchUrl';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -35,26 +38,67 @@ export default function Home() {
     screenCoordinate,
     setScreenCoordinate,
   } = useCoordinate({
-    runInit: true,
+    runInit: false,
   });
   //TODO: runinit을 검색에서 넘어오는 경우에만 false로 만들기
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isSearchType = searchParams.get('type') === 'search';
+  const searchedPinFromSearchParams = isSearchType
+    ? {
+        position: {
+          lat: Number(searchParams.get('lat')),
+          lng: Number(searchParams.get('lng')),
+          storeId: Number(searchParams.get('storeId')) || undefined,
+          kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || undefined,
+        } as CoordinateWithIds,
+        storeName: searchParams.get('storeName') || '',
+        isBookmarked: Boolean(searchParams.get('isBookmarked')),
+        totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
+      }
+    : null;
+
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
   const [selectedTag, setSelectedTag] = useState<Categories | null>(null);
+
   const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
     null,
   );
+
   const [currentLevel, setCurrentLevel] = useState<number | null>(null);
 
   const { refetch: getPinList, data: PinList } = useGetPinList({
     type: selectedTag,
     screenCoordinate,
     level: currentLevel,
+    isSearchType,
   });
 
   useDidUpdate(() => {
     if (!currentUserCoordinate || !screenCoordinate || !currentLevel) return;
     getPinList();
+    setIsBottomSheetShowing(false);
+    setSelectedPin(null);
   }, [selectedTag]);
+
+  useDidUpdate(() => {
+    if (selectedPin) {
+      setCenter(selectedPin);
+      setIsBottomSheetShowing(true);
+    }
+  }, [selectedPin]);
+
+  useEffect(() => {
+    if (searchedPinFromSearchParams) {
+      setCenter({
+        lat: searchedPinFromSearchParams.position.lat,
+        lng: searchedPinFromSearchParams.position.lng,
+        storeId: searchedPinFromSearchParams.position.storeId,
+        kakaoStoreId: searchedPinFromSearchParams.position.kakaoStoreId,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -72,6 +116,10 @@ export default function Home() {
 
   const handleCurrentLocationButtonClick = () => {
     currentUserCoordinate && setCenter({ ...currentUserCoordinate });
+  };
+
+  const handleSearchFieldClick = () => {
+    router.push(`/search?longitude=${center.lng}&latitude=${center.lat}`);
   };
 
   const onPinClick = (props: CoordinateWithIds) => {
@@ -100,7 +148,11 @@ export default function Home() {
           <CurrentLocationMarker
             currentUserCoordinate={currentUserCoordinate}
           />
-          {PinList && (
+          {isSearchType && searchedPinFromSearchParams && (
+            <CustomOverlayPin isActive {...searchedPinFromSearchParams} />
+          )}
+
+          {!isSearchType && PinList && (
             <>
               <LocationStorePinList
                 locationStoreList={PinList.locationStoreList}
@@ -123,7 +175,7 @@ export default function Home() {
         </Map>
       </motion.div>
       <div className="absolute top-[54px] z-above w-full px-[16px]">
-        <SearchField />
+        <SearchField onClick={handleSearchFieldClick} />
         <FilterTagList
           selectedTag={selectedTag}
           setSelectedTag={setSelectedTag}
@@ -145,32 +197,48 @@ export default function Home() {
             );
           })}
         </FilterTagList>
-        <LoadPinListButton
-          isShowing={showLoadPinListButton}
-          className="absolute top-[calc(100%+60px)] left-[50%] -translate-x-[50%] z-floating"
-          onClick={() => {
-            getPinList();
-            setShowLoadPinListButton(false);
-          }}
-        />
+        {!selectedPin && !searchedPinFromSearchParams && (
+          <LoadPinListButton
+            isShowing={showLoadPinListButton}
+            className="absolute top-[calc(100%+60px)] left-[50%] -translate-x-[50%] z-floating"
+            onClick={() => {
+              getPinList();
+              setShowLoadPinListButton(false);
+            }}
+          />
+        )}
       </div>
 
       <BottomSheet
         onCloseBottomSheet={() => {
           setSelectedPin(null);
           setIsBottomSheetShowing(false);
+          if (isSearchType) {
+            switchUrl('/');
+          }
         }}
-        isShowing={isBottomSheetShowing}
+        isShowing={isBottomSheetShowing || Boolean(searchedPinFromSearchParams)}
       >
         <BottomSheet.ShowContent
           onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
         >
-          {selectedPin && (
+          {selectedPin ? (
             <StorePreviewSection
-              storeId={selectedPin.storeId ?? selectedPin.kakaoStoreId}
+              lat={selectedPin.lat}
+              lng={selectedPin.lng}
+              storeId={selectedPin.storeId}
+              kakaoStoreId={selectedPin.kakaoStoreId}
             />
-          )}
+          ) : searchedPinFromSearchParams ? (
+            <StorePreviewSection
+              lat={searchedPinFromSearchParams.position.lat}
+              lng={searchedPinFromSearchParams.position.lng}
+              storeId={searchedPinFromSearchParams.position.storeId}
+              kakaoStoreId={searchedPinFromSearchParams.position.kakaoStoreId}
+            />
+          ) : null}
         </BottomSheet.ShowContent>
+
         <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent>
       </BottomSheet>
     </main>
