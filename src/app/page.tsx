@@ -27,6 +27,8 @@ import switchUrl from '@utils/switchUrl';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
+  const searchParams = useSearchParams();
+  const isSearchType = searchParams.get('type') === 'search';
   const {
     center,
     setCenter,
@@ -38,12 +40,11 @@ export default function Home() {
     screenCoordinate,
     setScreenCoordinate,
   } = useCoordinate({
-    runInit: false,
+    runInit: !isSearchType,
   });
-  //TODO: runinit을 검색에서 넘어오는 경우에만 false로 만들기
+
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const isSearchType = searchParams.get('type') === 'search';
+
   const searchedPinFromSearchParams = isSearchType
     ? {
         position: {
