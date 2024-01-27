@@ -36,10 +36,13 @@ axiosInstance.interceptors.request.use(
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
-    // 토큰 재발급 요청 시 헤더 세팅
+    // NOTE: 토큰 재발급 요청 시 accessToken 헤더 삭제, refreshToken 헤더 추가
     if (config.url === TOKEN_REFRESH_URL && refreshToken) {
+      delete config.headers['Authorization'];
       config.headers['Authorization-refresh'] = refreshToken;
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+      return config;
     }
 
     // NOTE: 브라우저 쿠키에 accessToken이 있고, 요청 헤더에 토큰이 없다면 헤더에 accessToken 추가
@@ -49,6 +52,14 @@ axiosInstance.interceptors.request.use(
       config.url !== TOKEN_REFRESH_URL
     ) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
+    // NOTE: 네이버 클라우드 이미지 업로드 요청 시 baseURL, accessToken 헤더 삭제
+    if (
+      config.url?.includes(process.env.NEXT_PUBLIC_NCLOUD_STORAGE_URL as string)
+    ) {
+      delete config.baseURL;
+      delete config.headers['Authorization'];
     }
 
     return config;
@@ -89,7 +100,7 @@ axiosInstance.interceptors.response.use(
 export const axiosRequest = async <T>(
   method: Method,
   url: string,
-  data?: Record<string, unknown>,
+  data?: FormData | File | Blob | ArrayBuffer | Record<string, unknown>, // FormData 또는 일반 객체를 허용
   headers?: Record<string, string>,
   params?: Record<string, unknown>,
 ): Promise<T> => {

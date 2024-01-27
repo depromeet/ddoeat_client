@@ -6,6 +6,7 @@ import Input from '@components/common/Input';
 
 interface SearchTopBarProps extends InputHTMLAttributes<HTMLInputElement> {
   resetText: () => void;
+  onClick: () => void;
 }
 
 export default function SearchTopBar({
@@ -14,6 +15,7 @@ export default function SearchTopBar({
   value,
   onChange,
   resetText,
+  onClick,
 }: SearchTopBarProps) {
   return (
     <div className="flex items-center w-full">
@@ -21,13 +23,16 @@ export default function SearchTopBar({
         placeholder={placeholder}
         className={className}
         rightItem={
-          value ? (
-            <button onClick={resetText}>
-              <DeleteIcon />
+          <div className="flex gap-[4px]">
+            {value && (
+              <button onClick={resetText}>
+                <DeleteIcon />
+              </button>
+            )}
+            <button onClick={onClick}>
+              <SearchIcon />
             </button>
-          ) : (
-            <SearchIcon />
-          )
+          </div>
         }
         value={value}
         onChange={onChange}

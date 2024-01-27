@@ -1,13 +1,16 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
+import BottomNavigation from '@components/main/BottomNavigation';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
-import useCoordinate from '@hooks/useCoordinate';
+import FilterTagList from '@components/main/FilterTagList';
 import SearchField from '@components/main/SearchField';
-import BottomNavigation from '@components/main/BottomNavigation';
+import { TAGS } from '@constants/tags';
+import useCoordinate from '@hooks/useCoordinate';
 import useThrottle from '@hooks/useThrottle';
 
 export default function Home() {
@@ -41,6 +44,7 @@ export default function Home() {
   };
 
   const throttledCenterChanged = useThrottle(handleCenterChanged, 1000);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   return (
     <main className="flex h-[100dvh] max-h-[100dvh] flex-col items-center overflow-hidden">
@@ -52,14 +56,36 @@ export default function Home() {
         onCenterChanged={throttledCenterChanged}
       >
         <CurrentLocationMarker currentUserCoordinate={currentUserCoordinate} />
-        <div className="absolute top-[54px] z-above w-full px-[16px]">
-          <SearchField />
-        </div>
+
         <BottomNavigation
           onCurrentLocationButtonClick={onCurrentLocationButtonClick}
           className="absolute bottom-[56px] z-above"
         />
       </Map>
+      <div className="absolute top-[54px] z-above w-full px-[16px]">
+        <SearchField />
+        <FilterTagList
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+          className="absolute left-0 px-[16px] top-[calc(100%+12px)]"
+        >
+          {TAGS.map(({ value, text, defaultIcon, selectedIcon }) => {
+            return (
+              <FilterTagList.Item value={value} key={value}>
+                {defaultIcon && selectedIcon && (
+                  <Image
+                    width={20}
+                    height={20}
+                    alt={value}
+                    src={selectedTag === value ? selectedIcon : defaultIcon}
+                  />
+                )}
+                {text}
+              </FilterTagList.Item>
+            );
+          })}
+        </FilterTagList>
+      </div>
 
       <BottomSheet
         handleCloseBottomSheet={() => {
