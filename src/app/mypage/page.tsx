@@ -13,9 +13,9 @@ import { useGetUserProfile } from '@hooks/api/useGetUserProfile';
 import { usePutUserName } from '@hooks/api/usePutUserName';
 import MyLogContent from '@components/mypage/MyLogContent';
 import BookMarkContent from '@components/mypage/BookMarkContent';
+import useInput from '@hooks/useInput';
 
 export default function Page() {
-  const [nickName, setNickName] = useState<string | undefined>('');
   const [isInputActive, setIsInputActive] = useState(false);
 
   const { data: userProfile } = useGetUserProfile();
@@ -24,14 +24,15 @@ export default function Page() {
   const userLevel = userProfile?.level || DEFAULT_DDOBAP_LEVEL;
   const StatusImage = DDOBAP_LEVEL_IMAGE[userLevel];
 
+  const [nickName, , setNickName] = useInput(userProfile?.nickname || '');
+
   useEffect(() => {
-    const userNickName = userProfile?.nickname;
-    setNickName(userNickName);
-  }, [userProfile]);
+    setNickName(userProfile?.nickname || '');
+  }, [setNickName, userProfile?.nickname]);
 
   const handleUserNameClick = () => setIsInputActive(true);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
 
     if (newValue.length <= MAX_INPUT_SIZE) setNickName(newValue);
@@ -43,13 +44,13 @@ export default function Page() {
 
   const handleInputBlur = () => {
     setIsInputActive(false);
-    if (nickName?.trim.length) setNickName(userProfile?.nickname);
+    if (!nickName.trim().length) setNickName(userProfile?.nickname || '');
     else putUserName(nickName || '');
   };
 
   return (
-    <div>
-      <div className="h-[164px] flex justify-between items-end px-[32px]">
+    <div className="overflow-hidden">
+      <div className="h-[282px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
           <div className={`flex pb-[32px]`}>
@@ -59,7 +60,7 @@ export default function Page() {
                   ref={handleInputRefCallback}
                   type="text"
                   value={nickName}
-                  onChange={handleInputChange}
+                  onChange={handleInputValue}
                   onBlur={handleInputBlur}
                   className={`w-[170px] h-[29px] bg-transparent text-white header-22 outline-none border-b-[1px] border-b-transparent focus:outline-none focus:border-b-[1px] focus:border-b-white `}
                 />
@@ -80,7 +81,7 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="w-full h-[100dvh] bg-white rounded-t-[24px]">
+      <div className="w-full bg-white rounded-t-[24px]">
         <Tab.Group initialTab="mylog">
           <div className="h-[76px] flex px-[24px]">
             <Tab.Header>
