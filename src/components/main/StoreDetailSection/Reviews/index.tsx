@@ -31,7 +31,7 @@ export default function Reviews() {
     useInfiniteReview(params);
   const { mutate: deleteLog } = useDeleteLog();
 
-  const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null): void => {
+  const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null) => () => {
     setActiveTag((prevTag) => (prevTag === tag ? null : tag));
   };
 
@@ -63,14 +63,14 @@ export default function Reviews() {
           <Tag
             size="large"
             className={formatTagClassName('REVISITED')}
-            onClick={() => handleTagClick('REVISITED')}
+            onClick={handleTagClick('REVISITED')}
           >
             재방문만
           </Tag>
           <Tag
             size="large"
             className={formatTagClassName('PHOTO')}
-            onClick={() => handleTagClick('PHOTO')}
+            onClick={handleTagClick('PHOTO')}
           >
             사진 리뷰만
           </Tag>
