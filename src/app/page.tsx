@@ -36,7 +36,6 @@ export default function Home() {
     setScreenCoordinate,
   } = useCoordinate({
     runInit: true,
-    onInitSuccess: () => getPinList(),
   });
   //TODO: runinit을 검색에서 넘어오는 경우에만 false로 만들기
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
@@ -44,33 +43,30 @@ export default function Home() {
   const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
     null,
   );
+  const [currentLevel, setCurrentLevel] = useState<number | null>(null);
 
   const { refetch: getPinList, data: PinList } = useGetPinList({
     type: selectedTag,
     screenCoordinate,
-    level: mapRef.current?.getLevel() ?? 1,
+    level: currentLevel,
   });
 
   useDidUpdate(() => {
-    if (!currentUserCoordinate || !screenCoordinate) return;
+    if (!currentUserCoordinate || !screenCoordinate || !currentLevel) return;
     getPinList();
   }, [selectedTag]);
 
   useEffect(() => {
     const map = mapRef.current;
     if (currentUserCoordinate && map) {
-      console.log('?', {
-        leftTopLatitude: map.getBounds().getNorthEast().getLat(),
-        leftTopLongitude: map.getBounds().getNorthEast().getLng(),
-        rightBottomLatitude: map.getBounds().getSouthWest().getLat(),
-        rightBottomLongitude: map.getBounds().getSouthWest().getLat(),
-      });
       setScreenCoordinate({
         leftTopLatitude: map.getBounds().getNorthEast().getLat(),
         leftTopLongitude: map.getBounds().getNorthEast().getLng(),
         rightBottomLatitude: map.getBounds().getSouthWest().getLat(),
         rightBottomLongitude: map.getBounds().getSouthWest().getLat(),
       });
+
+      setCurrentLevel(map.getLevel());
     }
   }, [currentUserCoordinate, setScreenCoordinate]);
 

@@ -12,13 +12,7 @@ const GANGNAM_STATION: CoordinateWithIds = {
   lng: 127.02761,
 } as const;
 
-const useCoordinate = ({
-  runInit,
-  onInitSuccess,
-}: {
-  runInit: boolean;
-  onInitSuccess?: () => void;
-}) => {
+const useCoordinate = ({ runInit }: { runInit: boolean }) => {
   const [center, setCenter] = useState<CoordinateWithIds>(GANGNAM_STATION);
   const [screenCoordinate, setScreenCoordinate] =
     useState<ScreenCoordinate | null>(null);
@@ -36,14 +30,10 @@ const useCoordinate = ({
     [],
   );
 
-  const onSuccessInit = useCallback(
-    (pos: GeolocationPosition) => {
-      const { latitude: lat, longitude: lng } = pos.coords;
-      setCenter({ lat, lng });
-      onInitSuccess?.();
-    },
-    [onInitSuccess],
-  );
+  const onSuccessInit = useCallback((pos: GeolocationPosition) => {
+    const { latitude: lat, longitude: lng } = pos.coords;
+    setCenter({ lat, lng });
+  }, []);
 
   const onError = () => {
     throw new Error('현재 위치를 가져올 수 없습니다.');

@@ -15,7 +15,7 @@ export interface ScreenCoordinate {
 interface PinListRequest {
   type: Categories | null;
   screenCoordinate: ScreenCoordinate | null;
-  level: number;
+  level: number | null;
 }
 
 export interface Pin {
@@ -65,7 +65,7 @@ const useGetPinList = ({
   return useQuery({
     queryKey: ['get-pin-list', type],
     queryFn: () => getPinList({ type, screenCoordinate, level }),
-    enabled: false,
+    enabled: !!screenCoordinate && !!level,
   });
 };
 
