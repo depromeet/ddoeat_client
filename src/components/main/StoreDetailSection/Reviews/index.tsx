@@ -11,6 +11,7 @@ import {
   useInfiniteReview,
 } from '@hooks/api/useInfiniteReview';
 import useObserver from '@hooks/useObserver';
+import { useDeleteLog } from '@hooks/api/useDeleteLog';
 
 export default function Reviews() {
   const [activeTag, setActiveTag] = useState<'REVISITED' | 'PHOTO' | null>(
@@ -28,6 +29,7 @@ export default function Reviews() {
 
   const { data, fetchNextPage, isLoading, hasNextPage } =
     useInfiniteReview(params);
+  const { mutate: deleteLog } = useDeleteLog();
 
   const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null): void => {
     setActiveTag((prevTag) => (prevTag === tag ? null : tag));
@@ -41,6 +43,10 @@ export default function Reviews() {
     onIntersect,
     threshold: 1,
   });
+
+  const handleDeleteLog = (id: number) => {
+    deleteLog(id);
+  };
 
   const formatTagClassName = (tag: 'REVISITED' | 'PHOTO') => {
     return cn({
@@ -78,7 +84,6 @@ export default function Reviews() {
               return (
                 <StoreDetailLog
                   key={item.reviewId}
-                  reviewId={item.reviewId}
                   date={item.visitedAt}
                   score={item.rating}
                   log={item.description}
@@ -87,6 +92,7 @@ export default function Reviews() {
                   visitNum={item.visitTimes}
                   hasDeleteOption={item.isMine}
                   isLast={true}
+                  onClick={() => handleDeleteLog(item.reviewId)}
                 />
               );
             });
