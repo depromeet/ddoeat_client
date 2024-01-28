@@ -1,14 +1,14 @@
 import Header from '@components/common/Header';
 
-interface TermsLayoutProps {
+interface ServiceTermsLayoutProps {
   children: React.ReactNode;
 }
 
-export default function layout({ children }: TermsLayoutProps) {
+export default function layout({ children }: ServiceTermsLayoutProps) {
   return (
     <div>
       <Header className="bg-white" />
-      {children}
+      <div className="px-[16px]">{children}</div>
     </div>
   );
 }

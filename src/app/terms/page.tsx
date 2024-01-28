@@ -53,11 +53,12 @@ export default function Page() {
           onChange={handleCheckAll}
         />
       </div>
-      <ul>
+      <ul className="pb-[112px]">
         {TERMS.map((term, index) => (
           <TermsItem
             key={term.id}
             title={term.title}
+            termsType={term.termsType}
             checked={termsState[index].isChecked}
             onChange={handleClickTermsItem(term.id)}
           />
