@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useCallback, ChangeEvent, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-import { usePostLog } from '@hooks/api/usePostLog';
+import { NewStore, usePostLog } from '@hooks/api/usePostLog';
 import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
 import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
@@ -11,7 +12,8 @@ import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
 import VisitDate from '@components/review/VisitDate';
 import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
 
-export default function Page({ params }: { params: { storeId: string[] } }) {
+export default function Page() {
+  const searchParams = useSearchParams();
   const { mutate: postLog } = usePostLog();
   const { mutate: uploadImageToNCloud } = useUploadImageToNCloud();
   const [visitedAt, setVisitedAt] = useState(
@@ -36,9 +38,6 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
     },
     [imageUrl, refetch],
   );
-
-  // NOTE: 첫 방문 가게면 null
-  const storeId = params?.storeId ? params.storeId[0] : null;
 
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVisitedAt(e.target.value.replaceAll('-', '.'));
@@ -71,10 +70,22 @@ export default function Page({ params }: { params: { storeId: string[] } }) {
       presignedUrl: presignedUrl?.presignedUrl as string,
       file,
     });
+
+    const storeId = searchParams.get('storeId') ?? null;
+    const newStore = {
+      storeName: searchParams.get('storeName'),
+      latitude: Number(searchParams.get('latitude')),
+      longitude: Number(searchParams.get('longitude')),
+      categoryType: searchParams.get('categoryType'),
+      kakaoStoreId: Number(searchParams.get('kakaoStoreId')),
+      kakaoCategoryName: searchParams.get('kakaoCategoryName'),
+      address: searchParams.get('address'),
+    } as NewStore;
+
     // TODO: storeId 유무에 따른 분기 처리
     postLog({
       storeId,
-      newStore: null,
+      newStore: storeId ? null : newStore,
       rating,
       visitedAt,
       imageUrl: presignedUrl?.presignedUrl as string,
