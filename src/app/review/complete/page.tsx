@@ -1,14 +1,19 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import DdobabWritingLogo from 'public/assets/ddobab/ddobab_writing.svg';
 import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
 
 export default function Page() {
+  const { push } = useRouter();
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName');
   const totalRevisitedCount = searchParams.get('totalRevisitedCount');
+
+  const handleClickConfirmButton = () => {
+    push('/mypage');
+  };
   return (
     <div className="text-black h-[100dvh] w-full bg-gray-100 flex flex-col gap-[32px] justify-center items-center">
       <div>
@@ -24,7 +29,9 @@ export default function Page() {
         </p>
       </div>
       <DdobabWritingLogo />
-      <FixedBottomCTAButton>확인</FixedBottomCTAButton>
+      <FixedBottomCTAButton onClick={handleClickConfirmButton}>
+        확인
+      </FixedBottomCTAButton>
     </div>
   );
 }
