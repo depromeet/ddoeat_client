@@ -4,8 +4,8 @@ import Tag from '@components/common/Tag';
 
 interface SearchItemProps extends Omit<BasicListItem, 'hasDeleteOption'> {
   storeName: string;
-  categoryName: string;
-  revisitedCount: number;
+  categoryType: string;
+  totalRevisitedCount: number;
   distance: string;
   address: string;
 }
@@ -13,8 +13,8 @@ interface SearchItemProps extends Omit<BasicListItem, 'hasDeleteOption'> {
 export default function SearchItem({
   isLast,
   storeName,
-  categoryName,
-  revisitedCount,
+  categoryType,
+  totalRevisitedCount,
   distance,
   address,
 }: SearchItemProps) {
@@ -22,10 +22,10 @@ export default function SearchItem({
     <ListItem isLast={isLast} hasDeleteOption={false}>
       <div className="flex items-center gap-[4px]">
         <p className="body-16-bold">{storeName}</p>
-        <p className="caption-12-bold text-gray-500">{categoryName}</p>
-        {revisitedCount > 0 && (
+        <p className="caption-12-bold text-gray-500">{categoryType}</p>
+        {totalRevisitedCount > 0 && (
           <Tag size={'small'} className="bg-primary-100 text-primary-500">
-            {revisitedCount}명 재방문
+            {totalRevisitedCount}명 재방문
           </Tag>
         )}
       </div>
