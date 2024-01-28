@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, ChangeEvent, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import { NewStore, usePostLog } from '@hooks/api/usePostLog';
 import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
@@ -11,10 +11,20 @@ import TextArea from '@components/review/TextArea';
 import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
 import VisitDate from '@components/review/VisitDate';
 import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
+import Header from '@components/common/Header';
 
 export default function Page() {
+  const { push } = useRouter();
   const searchParams = useSearchParams();
-  const { mutate: postLog } = usePostLog();
+  const storeName = searchParams.get('storeName');
+  const totalRevisitedCount = searchParams.get('totalRevisitedCount') ?? '첫';
+  const { mutate: postLog } = usePostLog({
+    onSuccess: () => {
+      push(
+        `/review/complete?storeName=${storeName}&totalRevisitedCount=${totalRevisitedCount}`,
+      );
+    },
+  });
   const { mutate: uploadImageToNCloud } = useUploadImageToNCloud();
   const [visitedAt, setVisitedAt] = useState(
     new Date().toISOString().substring(0, 10).replaceAll('-', '.'),
@@ -94,31 +104,39 @@ export default function Page() {
   };
 
   return (
-    <div className="h-[100dvh] pt-[56px] pb-[104px] overflow-y-scroll">
-      <h1 className="header-22 py-[16px]">
-        가게 이름에 <br />
-        <strong className="text-primary-500">NN번째</strong> 방문이에요!
-      </h1>
-      <div className="flex flex-col py-[8px] gap-[16px]">
-        <ImageUploader
-          onChange={handleChangeImage}
-          imageUrl={imageUrl}
-          deleteImage={handleDeleteImage}
-        />
-        <VisitDate onChange={handleChangeDate} />
-        <StarRating rating={rating} onClick={handleRating} />
-        <TextArea
-          value={description}
-          onChange={handleChangeDescription}
-          placeholder="방문한 맛집에 대한 기록을 남겨주세요. 음식의 맛, 매장의 분위기, 서비스 등 어떤 내용이든 좋아요! (최소 10자)"
-        />
+    <div className="bg-gray-100">
+      <Header className="w-full bg-gray-100">
+        <p className="body-16-bold">로그 작성</p>
+      </Header>
+      <div className="h-[100dvh] pt-[56px] pb-[104px] overflow-y-scroll px-[16px]">
+        <h1 className="header-22 py-[16px]">
+          {storeName}에 <br />
+          <strong className="text-primary-500">
+            {totalRevisitedCount}번째
+          </strong>{' '}
+          방문이에요!
+        </h1>
+        <div className="flex flex-col py-[8px] gap-[16px]">
+          <ImageUploader
+            onChange={handleChangeImage}
+            imageUrl={imageUrl}
+            deleteImage={handleDeleteImage}
+          />
+          <VisitDate onChange={handleChangeDate} />
+          <StarRating rating={rating} onClick={handleRating} />
+          <TextArea
+            value={description}
+            onChange={handleChangeDescription}
+            placeholder="방문한 맛집에 대한 기록을 남겨주세요. 음식의 맛, 매장의 분위기, 서비스 등 어떤 내용이든 좋아요! (최소 10자)"
+          />
+        </div>
+        <FixedBottomCTAButton
+          disabled={!rating || !description || description.length < 10}
+          onClick={handleClickSubmitButton}
+        >
+          작성완료
+        </FixedBottomCTAButton>
       </div>
-      <FixedBottomCTAButton
-        disabled={!rating || !description || description.length < 10}
-        onClick={handleClickSubmitButton}
-      >
-        작성완료
-      </FixedBottomCTAButton>
     </div>
   );
 }

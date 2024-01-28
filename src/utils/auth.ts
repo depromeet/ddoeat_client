@@ -10,3 +10,7 @@ export const getTokenRefresh = async (): Promise<
 > => {
   return await axiosRequest('post', '/api/v1/auth/token/reissue');
 };
+
+export const logout = async (): Promise<void> => {
+  return axiosRequest('post', '/api/v1/auth/logout');
+};

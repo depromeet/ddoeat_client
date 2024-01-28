@@ -17,6 +17,8 @@ export function middleware(request: NextRequest) {
       url.pathname = '/login';
     }
 
+    url.search = '';
+
     const response = NextResponse.redirect(url);
 
     return response;
