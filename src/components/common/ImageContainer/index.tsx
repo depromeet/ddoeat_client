@@ -8,20 +8,38 @@ interface ImageContainerProps extends ImageProps {
   type: ImageType;
 }
 
-interface ImageAttributes extends Pick<ImageProps, 'width' | 'height'> {
+interface ImageAttributes {
+  width: string;
+  height: string;
   radius: string;
 }
 
 const getImageAttributes = (type: ImageType): ImageAttributes => {
   switch (type) {
     case 'profile':
-      return { width: 100, height: 100, radius: 'rounded-full' };
+      return {
+        width: 'w-[100px]',
+        height: 'h-[100px]',
+        radius: 'rounded-full',
+      };
     case 'small':
-      return { width: 100, height: 100, radius: 'rounded-[20px]' };
+      return {
+        width: 'w-[100px]',
+        height: 'h-[100px]',
+        radius: 'rounded-[20px]',
+      };
     case 'medium':
-      return { width: 343, height: 150, radius: 'rounded-[20px]' };
+      return {
+        width: 'w-[343px]',
+        height: 'h-[150px]',
+        radius: 'rounded-[20px]',
+      };
     case 'full':
-      return { width: 375, height: 280, radius: 'rounded-none' };
+      return {
+        width: 'w-full',
+        height: 'h-[280px]',
+        radius: 'rounded-none',
+      };
   }
 };
 
@@ -33,11 +51,8 @@ export default function ImageContainer({
   const { width, height, radius } = getImageAttributes(type);
 
   return (
-    <Image
-      width={width}
-      height={height}
-      className={cn(radius, className)}
-      {...restProps}
-    />
+    <div className={cn(`relative ${width} ${height} ${radius}`, className)}>
+      <Image fill className="object-cover" {...restProps} />
+    </div>
   );
 }

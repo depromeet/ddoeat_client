@@ -1,16 +1,15 @@
+import SectionTitle from '../SectionTitle';
 import ReVisit from './ReVisit';
 import TopVisit from './TopVisit';
 
-interface ReportProps {
-  topVisitCount: number;
-  reVisitCount: number;
-}
-
-export default function Report({ topVisitCount, reVisitCount }: ReportProps) {
+export default function Report() {
   return (
-    <div className="flex gap-[8px] mx-[16px] my-[4px]">
-      <TopVisit topVisitCount={topVisitCount} />
-      <ReVisit reVisitCount={reVisitCount} />
+    <div className="px-[16px]  pb-[8px]">
+      <SectionTitle>또잇또잇 리포트</SectionTitle>
+      <div className="flex gap-[8px] mx-[16px] my-[4px]">
+        <TopVisit />
+        <ReVisit />
+      </div>
     </div>
   );
 }

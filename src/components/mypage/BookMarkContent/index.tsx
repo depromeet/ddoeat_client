@@ -65,7 +65,7 @@ export default function BookMarkContent() {
     }, 0);
   };
 
-  const handleDeleteItem = (id: string) => {
+  const handleDeleteItem = (id: number) => {
     deleteBookmark(id);
   };
 

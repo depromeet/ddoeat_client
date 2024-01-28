@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 
+import { HANDLE_HEIGHT } from '../components/BottomSheetWrapper';
 import { BottomSheetProps, BottomSheetStatus } from '../types/types';
 
 import AnimatePortal from '@components/common/AnimatePortal';
@@ -53,7 +54,7 @@ export function BottomSheetProvider({
           status,
           setStatus,
           showStatusChildrenHeight: Math.min(
-            showStatusChildrenHeight,
+            showStatusChildrenHeight + HANDLE_HEIGHT,
             deviceHeight,
             defaultShowHeight,
           ),

@@ -8,6 +8,7 @@ interface LogItemProps extends BasicListItem {
   userName: string;
   visitNum: number;
   score: number;
+  onClick: () => void;
 }
 
 export default function LogItem({
@@ -17,11 +18,16 @@ export default function LogItem({
   date,
   visitNum,
   score,
+  onClick,
 }: LogItemProps) {
   return (
     <div>
       <p className="body-14-extraBold px-[16px] py-[10px]">{date}</p>
-      <ListItem isLast={isLast} hasDeleteOption={hasDeleteOption}>
+      <ListItem
+        isLast={isLast}
+        hasDeleteOption={hasDeleteOption}
+        onClick={onClick}
+      >
         <div className="flex items-center gap-[4px]">
           <p className="body-16-bold">{userName}</p>
           {visitNum > 0 && (
