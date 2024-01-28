@@ -67,9 +67,7 @@ export default function Home() {
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
   // const [selectedTag, setSelectedTag] = useState<Categories | null>(null);
 
-  const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
-    null,
-  );
+  const [, setSelectedPin] = useState<CoordinateWithIds | null>(null);
 
   // const [currentLevel, setCurrentLevel] = useState<number | null>(null);
 
