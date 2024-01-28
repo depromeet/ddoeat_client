@@ -2,7 +2,6 @@
 
 // import { motion } from 'framer-motion';
 // import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
 // import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
@@ -22,14 +21,13 @@ import BottomSheet from '@components/main/BottomSheet';
 // import useGetPinList from '@hooks/api/useGetPinList';
 // import useCoordinate from '@hooks/useCoordinate';
 // import useDidUpdate from '@hooks/useDidUpdate';
-import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 // import { Categories } from 'src/types/tag';
 
 export default function Home() {
   // const mapRef = useRef<kakao.maps.Map>(null);
-  const searchParams = useSearchParams();
-  const isSearchType = searchParams.get('type') === 'search';
+  // const searchParams = useSearchParams();
+  // const isSearchType = searchParams.get('type') === 'search';
   // const {
   //   center,
   //   setCenter,
@@ -46,23 +44,23 @@ export default function Home() {
 
   // const router = useRouter();
 
-  const searchedPinFromSearchParams = isSearchType
-    ? {
-        position: {
-          lat: Number(searchParams.get('latitude')),
-          lng: Number(searchParams.get('longitude')),
-          storeId: Number(searchParams.get('storeId')) || null,
-          kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
-        } as CoordinateWithIds,
-        storeName: searchParams.get('storeName') || '',
-        isBookmarked: Boolean(searchParams.get('isBookmarked')),
-        totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
-        address: searchParams.get('address') || '',
-        categoryType: searchParams.get('categoryType') || '',
-        distance: Number(searchParams.get('distance')),
-        kakaoCategoryName: searchParams.get('kakaoCategoryName') || '',
-      }
-    : null;
+  // const searchedPinFromSearchParams = isSearchType
+  //   ? {
+  //       position: {
+  //         lat: Number(searchParams.get('latitude')),
+  //         lng: Number(searchParams.get('longitude')),
+  //         storeId: Number(searchParams.get('storeId')) || null,
+  //         kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
+  //       } as CoordinateWithIds,
+  //       storeName: searchParams.get('storeName') || '',
+  //       isBookmarked: Boolean(searchParams.get('isBookmarked')),
+  //       totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
+  //       address: searchParams.get('address') || '',
+  //       categoryType: searchParams.get('categoryType') || '',
+  //       distance: Number(searchParams.get('distance')),
+  //       kakaoCategoryName: searchParams.get('kakaoCategoryName') || '',
+  //     }
+  //   : null;
 
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
   // const [selectedTag, setSelectedTag] = useState<Categories | null>(null);
@@ -146,9 +144,9 @@ export default function Home() {
   const onCloseBottomSheet = () => {
     setSelectedPin(null);
     setIsBottomSheetShowing(false);
-    if (isSearchType) {
-      switchUrl('/');
-    }
+    // if (isSearchType) {
+    //   switchUrl('/');
+    // }
   };
 
   const GANGNAM_STATION: CoordinateWithIds = {
@@ -226,7 +224,7 @@ export default function Home() {
 
       <BottomSheet
         onCloseBottomSheet={onCloseBottomSheet}
-        isShowing={isBottomSheetShowing || Boolean(searchedPinFromSearchParams)}
+        isShowing={isBottomSheetShowing}
       >
         {/* <BottomSheet.ShowContent
           onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
