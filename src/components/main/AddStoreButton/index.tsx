@@ -1,12 +1,14 @@
 import { useRouter } from 'next/navigation';
 
+import useCoordinate from '@hooks/useCoordinate';
 import PlusIcon from 'public/assets/icon16/plus_16.svg';
 
 export default function AddStoreButton() {
   const { push } = useRouter();
+  const { center } = useCoordinate({ runInit: true });
 
   const handleClickAddStoreButton = () => {
-    push('/search');
+    push(`/search?latitude=${center.lat}&longitude=${center.lng}`);
   };
 
   return (

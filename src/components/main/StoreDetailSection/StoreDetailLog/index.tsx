@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 
 import LogItem from '@components/main/LogItem';
@@ -13,6 +11,7 @@ interface StoreDetailLogProps {
   log: string;
   hasDeleteOption: boolean;
   isLast: boolean;
+  onClick: () => void;
 }
 
 export default function StoreDetailLog({
@@ -24,10 +23,10 @@ export default function StoreDetailLog({
   visitNum,
   hasDeleteOption,
   isLast,
+  onClick,
 }: StoreDetailLogProps) {
   return (
     <div className="flex flex-col">
-      <p className="px-[16px] py-[10px] text-gray-700 body-14-bold">{date}</p>
       <LogItem
         userName={name}
         visitNum={visitNum}
@@ -35,6 +34,7 @@ export default function StoreDetailLog({
         isLast={isLast}
         hasDeleteOption={hasDeleteOption}
         date={date}
+        onClick={onClick}
       />
       <div className="flex flex-col justify-center">
         <div className="px-[16px] py-[8px]">

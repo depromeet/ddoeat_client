@@ -114,7 +114,7 @@ export default function Page() {
                     pathname: '/',
                     query: { type: 'search', ...store },
                   }}
-                  key={storeId}
+                  key={String(storeId) + String(rest.kakaoStoreId)}
                 >
                   <SearchItem
                     {...rest}
