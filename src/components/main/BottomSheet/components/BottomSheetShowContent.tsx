@@ -1,18 +1,36 @@
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { PropsWithChildren, useCallback, useEffect, useRef } from 'react';
 
 import { useBottomSheet } from '../contexts/BottomSheetContext';
 
+import CurrentLocationButton from '@components/main/CurrentLocationButton';
+import { currentLocationButtonFadeInOutVariants } from '@constants/motions';
+import useResizeObserver from '@hooks/useResizeObserver';
+import mergeRefs from '@utils/mergeRefs';
+
+interface BottonSheetShowContent {
+  onCurrentLocationButtonClick: () => void;
+}
+
 export default function BottonSheetShowContent({
+  onCurrentLocationButtonClick,
   children,
-}: PropsWithChildren) {
+}: PropsWithChildren<BottonSheetShowContent>) {
   const showStatusChildrenRef = useRef<HTMLDivElement>(null);
   const { status, setShowStatusChildrenHeight } = useBottomSheet();
 
+  const onResize = useCallback(
+    (target: HTMLDivElement) => {
+      setShowStatusChildrenHeight(target.offsetHeight);
+    },
+    [setShowStatusChildrenHeight],
+  );
+
+  const resizeRef = useResizeObserver(onResize);
+
   useEffect(() => {
     if (showStatusChildrenRef.current) {
-      setShowStatusChildrenHeight(
-        showStatusChildrenRef.current.getBoundingClientRect().height,
-      );
+      setShowStatusChildrenHeight(showStatusChildrenRef.current.offsetHeight);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -24,5 +42,18 @@ export default function BottonSheetShowContent({
 
   const isShow = status === 'show';
 
-  return isShow ? <div ref={showStatusChildrenRef}>{children}</div> : null;
+  return isShow ? (
+    <div className="relative" ref={mergeRefs(showStatusChildrenRef, resizeRef)}>
+      <motion.div
+        className="absolute top-[-98px] left-[16px]"
+        variants={currentLocationButtonFadeInOutVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <CurrentLocationButton onClick={onCurrentLocationButtonClick} />
+      </motion.div>
+      {children}
+    </div>
+  ) : null;
 }

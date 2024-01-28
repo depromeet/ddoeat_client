@@ -1,21 +1,26 @@
-import PinBowlOneIcon from '/public/assets/icon56/pin_bowl1_56.svg';
-import PinBowlTwoIcon from '/public/assets/icon56/pin_bowl2_56.svg';
-import PinBowlThreeIcon from '/public/assets/icon56/pin_bowl3_56.svg';
-import BookmarkIcon from '/public/assets/icon56/bookmark_56.svg';
+import PinBowlOneIcon from '/public/assets/icon44/pin_bowl1_44.svg';
+import PinBowlTwoIcon from '/public/assets/icon44/pin_bowl2_44.svg';
+import PinBowlThreeIcon from '/public/assets/icon44/pin_bowl3_44.svg';
+import BookmarkIcon from '/public/assets/icon44/bookmark_44.svg';
 
 interface PinIconProps {
   isBookmarked: boolean;
-  totalVisitCount: number;
+  totalRevisitedCount: number;
 }
 
-export const PinIcon = ({ isBookmarked, totalVisitCount }: PinIconProps) => {
+export const PinIcon = ({
+  isBookmarked,
+  totalRevisitedCount,
+}: PinIconProps) => {
   if (isBookmarked) return <BookmarkIcon />;
 
   return (
     <>
-      {totalVisitCount >= 15 && <PinBowlThreeIcon />}
-      {totalVisitCount >= 5 && totalVisitCount < 15 && <PinBowlTwoIcon />}
-      {totalVisitCount < 5 && <PinBowlOneIcon />}
+      {totalRevisitedCount >= 15 && <PinBowlThreeIcon />}
+      {totalRevisitedCount >= 5 && totalRevisitedCount < 15 && (
+        <PinBowlTwoIcon />
+      )}
+      {totalRevisitedCount < 5 && <PinBowlOneIcon />}
     </>
   );
 };

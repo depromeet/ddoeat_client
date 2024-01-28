@@ -8,9 +8,12 @@ import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
 import { bottomSheetAnimationVariants } from 'src/constants/motions';
 
+export const HANDLE_HEIGHT = 24;
+const DRAG_SAFE_DISTANCE = 50;
+
 export default function BottomSheetWrapper({
   isShowing,
-  handleCloseBottomSheet,
+  onCloseBottomSheet,
 
   hasHandleBar = true,
   children,
@@ -41,6 +44,7 @@ export default function BottomSheetWrapper({
   const changeStatus = useCallback(
     async (willChange: BottomSheetStatus) => {
       setStatus(willChange);
+      //TODO: shallow route
       await controls.start(willChange);
     },
     [controls, setStatus],
@@ -68,8 +72,9 @@ export default function BottomSheetWrapper({
     const dragDown = velocityY > 0;
     const dragUp = velocityY < 0;
 
-    const lowerThanStartY = distanceFromStartY > 0;
-    const higherThanStartY = distanceFromStartY < 0;
+    const lowerThanStartY =
+      distanceFromStartY > (isFull ? 0 : DRAG_SAFE_DISTANCE);
+    const higherThanStartY = distanceFromStartY < -DRAG_SAFE_DISTANCE;
 
     const shouldDown = dragDown && lowerThanStartY;
     const shouldUp = dragUp && higherThanStartY;
@@ -97,7 +102,7 @@ export default function BottomSheetWrapper({
       }
 
       if (shouldDown) {
-        handleCloseBottomSheet();
+        onCloseBottomSheet();
         return;
       }
     }
@@ -108,13 +113,13 @@ export default function BottomSheetWrapper({
   return (
     isShowing &&
     deviceHeight && (
-      <div className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none">
+      <div className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none z-overlay">
         <motion.div
           variants={bottomSheetAnimationVariants}
           drag={'y'}
           onDragEnd={handleDragEnd}
           dragConstraints={{
-            top: isFull ? -fullStatusChildrenHeight + deviceHeight : 0,
+            top: isFull ? deviceHeight - fullStatusChildrenHeight : 0,
             bottom: isOverScrolled ? 0 : deviceHeight,
           }}
           animate={controls}
@@ -122,14 +127,16 @@ export default function BottomSheetWrapper({
           exit="hidden"
           custom={deviceHeight - showStatusChildrenHeight}
           className={cn(
-            'pointer-events-auto absolute left-0 top-0 overflow-hidden h-[100dvh] w-full bg-white rounded-t-[24px]',
+            'pointer-events-auto absolute left-0 top-0 h-[100dvh] w-full bg-white rounded-t-[24px]',
             {
               'rounded-none h-fit': isFull,
             },
           )}
         >
           {hasHandleBar && isShow && (
-            <div className="flex items-center justify-center h-[24px]">
+            <div
+              className={`flex items-center justify-center h-[${HANDLE_HEIGHT}px]`}
+            >
               <div className="w-[56px] h-[6px] rounded-[32px] shrink-0 bg-gray-300" />
             </div>
           )}
