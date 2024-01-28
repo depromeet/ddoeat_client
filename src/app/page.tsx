@@ -23,6 +23,7 @@ import useDidUpdate from '@hooks/useDidUpdate';
 import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
+import StoreDetailSection from '@components/main/StoreDetailSection';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -245,7 +246,12 @@ export default function Home() {
           ) : null}
         </BottomSheet.ShowContent>
 
-        <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent>
+        <BottomSheet.FullContent>
+          <StoreDetailSection
+            storeId={selectedPin?.storeId}
+            searchedPinFromSearchParams={searchedPinFromSearchParams}
+          />
+        </BottomSheet.FullContent>
       </BottomSheet>
     </main>
   );

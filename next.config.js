@@ -8,6 +8,13 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'ddoeatimg.kr.object.ncloudstorage.com',
+      },
+    ],
+  },
   async headers() {
     return [
       {

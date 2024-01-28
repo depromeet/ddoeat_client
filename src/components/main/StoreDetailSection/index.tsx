@@ -1,21 +1,31 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import Report from '../Report';
-import Reviews from '../Reviews';
+import Report from './Report';
+import Reviews from './Reviews';
+import StoreInformation from '../StoreInformation';
+import { SearchedPinFromSearchParams } from '../StorePreviewSection';
 
 import Header from '@components/common/Header';
 import ImageContainer from '@components/common/ImageContainer';
 import { useGetReport } from '@hooks/api/useGetReport';
 import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
+import useGetStore from '@hooks/api/useGetStore';
 
-export default function StoreDetailContent() {
+export default function StoreDetailSection({
+  storeId,
+  searchedPinFromSearchParams,
+}: {
+  storeId?: number;
+  searchedPinFromSearchParams: SearchedPinFromSearchParams | null;
+}) {
   const searchParams = useSearchParams();
+  const { data: storeData } = useGetStore({
+    storeId: storeId ?? (Number(searchParams.get('storeId')) || undefined),
+  });
 
-  const storeId = searchParams.get('storeId');
-
-  const { data: reportData } = useGetReport(storeId ?? '');
+  const { data: reportData } = useGetReport(storeId ?? null);
 
   const [isScrollDown, setIsScrollDown] = useState(false);
 
@@ -38,7 +48,6 @@ export default function StoreDetailContent() {
           {isScrollDown && <span>{'음식점 이름 들어가는 자리입니다.'}</span>}
         </Header>
       </div>
-
       {reportData?.storeMainImageUrl && (
         <ImageContainer
           type="medium"
@@ -46,15 +55,28 @@ export default function StoreDetailContent() {
           alt="음식점 이미지"
         />
       )}
-
       <div
         className={cn('w-full', {
           'h-[24px] rounded-t-[24px]': reportData?.storeMainImageUrl,
           'h-[56px]': !reportData?.storeMainImageUrl,
         })}
       />
-
-      {/* TODO: 상조님 음식점 정보 컴포넌트 넣기 */}
+      <StoreInformation
+        categoryName={
+          storeData?.categoryName ??
+          searchedPinFromSearchParams?.kakaoCategoryName ??
+          ''
+        }
+        storeName={
+          storeData?.storeName ?? searchedPinFromSearchParams?.storeName ?? ''
+        }
+        address={
+          storeData?.address ?? searchedPinFromSearchParams?.address ?? ''
+        }
+        totalRating={storeData?.totalRating ?? 0}
+        totalReviewCount={storeData?.totalReviewCount ?? 0}
+        myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+      />
       <div className="w-full h-[8px] bg-gray-100" />
       <Report />
       <Reviews />
