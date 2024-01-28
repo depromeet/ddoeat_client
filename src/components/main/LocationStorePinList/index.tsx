@@ -36,9 +36,10 @@ function LocationStorePinList({
           }
           position={{ lat: store.latitude, lng: store.longitude }}
           storeName={store.storeName}
-          isBookmarked={false}
+          isBookmarked={store.isBookMarked}
           totalRevisitedCount={store.totalRevisitedCount}
           onClick={handlePinClick({
+            storeName: store.storeName,
             lat: store.latitude,
             lng: store.longitude,
             storeId: store.storeId,

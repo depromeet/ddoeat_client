@@ -4,12 +4,15 @@ import { useRouter } from 'next/navigation';
 
 import { axiosRequest } from '@api/api-config';
 
-interface NewStore {
+export interface NewStore {
   storeName: string;
   latitude: number;
   longitude: number;
   categoryId: number;
   address: string;
+  categoryType: string;
+  kakaoStoreId: number;
+  kakaoCategoryName: string;
 }
 
 // TODO: api spec 확정되면 변경
