@@ -1,15 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
+import { usePostSignUp } from '@hooks/api/usePostSignUp';
 import { TERMS } from '@constants/terms';
 import AllTermsCheckBox from '@components/terms/AllTermsCheckBox';
 import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
 import TermsItem from '@components/terms/TermsItem';
 
 export default function Page() {
-  const { push } = useRouter();
+  const { mutate: postSignUp } = usePostSignUp();
 
   const [termsState, setTermsState] = useState(
     TERMS.map((term) => ({ ...term, isChecked: false })),
@@ -38,7 +38,7 @@ export default function Page() {
   };
 
   const handleClickConfirmButton = () => {
-    push('/');
+    postSignUp();
   };
 
   return (
