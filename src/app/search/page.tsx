@@ -18,6 +18,10 @@ import useStorageState from '@utils/useStorageState';
 import useIsMounted from '@hooks/useIsMounted';
 
 export default function Page() {
+  const type = useSearchParams().get('type');
+  const latitude = useSearchParams().get('latitude') as string;
+  const longitude = useSearchParams().get('longitude') as string;
+
   const isMounted = useIsMounted();
   const [text, onTextChange, setValue, resetText] = useInput('');
   const debouncedText = useDebounce(text, 500);
@@ -29,15 +33,13 @@ export default function Page() {
   // TODO: 추후 위, 경도 추가
   const { data, refetch } = useGetStoreList({
     keyword: debouncedText,
-    longitude: '127.0628310',
-    latitude: '37.51432257',
+    longitude,
+    latitude,
   });
 
   const storeList = data?.storeSearchResult;
 
   const isStoreListNone = storeList?.length === 0;
-
-  const type = useSearchParams().get('type');
 
   const handleClickSearchButton = () => {
     setRecentSearchKeywords((prev) => {
@@ -103,18 +105,15 @@ export default function Page() {
             <NoSearchResult />
           ) : (
             storeList?.map((store, index) => {
-              // NOTE: 위, 경도는 추후 페이지 간 넘겨주는 데이터에 사용될 예정
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const { storeId, latitude, longitude, distance, ...rest } = store;
+              const { storeId, distance, ...rest } = store;
 
               return (
                 // TODO: 클릭 시 이동 url 확정되면 수정
                 <Link
                   href={{
-                    pathname: `/?storeId=${storeId}`,
-                    query: { ...store },
+                    pathname: '/',
+                    query: { type: 'search', ...store },
                   }}
-                  as={`/?storeId=${storeId}`}
                   key={storeId}
                 >
                   <SearchItem
