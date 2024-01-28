@@ -11,6 +11,13 @@ const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'ddoeatimg.kr.object.ncloudstorage.com',
+      },
+    ],
+  },
   async headers() {
     return [
       {
