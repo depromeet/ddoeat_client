@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 
+import Script from 'next/script';
+
 import QueryClientProviders from '@components/common/QueryClientProvider';
 
 export const metadata: Metadata = {
@@ -44,9 +46,9 @@ export default function RootLayout({
       <html lang="en" className={`${nanumSquareRound.variable}`}>
         <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto scrollbar-hide">
           {children}
-          <script
-            type="text/javascript"
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&libraries=services,clusterer`}
+          <Script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
+            strategy="beforeInteractive"
           />
         </body>
       </html>
