@@ -6,10 +6,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
-import BookMarkPinList from '@components/main/BookMarkPinList';
 import BottomNavigation from '@components/main/BottomNavigation';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
+import CustomOverlayPin from '@components/main/CustomOverlayPin';
 import FilterTagList from '@components/main/FilterTagList';
 import LoadPinListButton from '@components/main/LoadPinListButton';
 import LocationStorePinList from '@components/main/LocationStorePinList';
@@ -17,13 +17,12 @@ import SearchField from '@components/main/SearchField';
 import StorePreviewSection from '@components/main/StorePreviewSection';
 import { mapTranslateYAnimationVariants } from '@constants/motions';
 import { TAGS } from '@constants/tags';
-import useDidUpdate from '@hooks/useDidUpdate';
 import useGetPinList from '@hooks/api/useGetPinList';
 import useCoordinate from '@hooks/useCoordinate';
+import useDidUpdate from '@hooks/useDidUpdate';
+import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
-import CustomOverlayPin from '@components/main/CustomOverlayPin';
-import switchUrl from '@utils/switchUrl';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -48,14 +47,18 @@ export default function Home() {
   const searchedPinFromSearchParams = isSearchType
     ? {
         position: {
-          lat: Number(searchParams.get('lat')),
-          lng: Number(searchParams.get('lng')),
+          lat: Number(searchParams.get('latitude')),
+          lng: Number(searchParams.get('longitude')),
           storeId: Number(searchParams.get('storeId')) || null,
           kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
         } as CoordinateWithIds,
         storeName: searchParams.get('storeName') || '',
         isBookmarked: Boolean(searchParams.get('isBookmarked')),
         totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
+        address: searchParams.get('address') || '',
+        categoryType: searchParams.get('categoryType') || '',
+        distance: Number(searchParams.get('distance')),
+        kakaoCategoryName: searchParams.get('kakaoCategoryName') || '',
       }
     : null;
 
@@ -86,6 +89,10 @@ export default function Home() {
     if (selectedPin) {
       setCenter(selectedPin);
       setIsBottomSheetShowing(true);
+      return;
+    }
+    if (!selectedPin && !searchedPinFromSearchParams) {
+      switchUrl('/');
     }
   }, [selectedPin]);
 
@@ -167,20 +174,12 @@ export default function Home() {
           )}
 
           {!isSearchType && PinList && (
-            <>
-              <LocationStorePinList
-                locationStoreList={PinList.locationStoreList}
-                isBottomSheetShowing={isBottomSheetShowing}
-                onPinClick={onPinClick}
-                selectedPin={selectedPin}
-              />
-              <BookMarkPinList
-                BookmarkList={PinList.bookMarkList}
-                isBottomSheetShowing={isBottomSheetShowing}
-                onPinClick={onPinClick}
-                selectedPin={selectedPin}
-              />
-            </>
+            <LocationStorePinList
+              locationStoreList={PinList.locationStoreList}
+              isBottomSheetShowing={isBottomSheetShowing}
+              onPinClick={onPinClick}
+              selectedPin={selectedPin}
+            />
           )}
           <BottomNavigation
             onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
@@ -229,6 +228,7 @@ export default function Home() {
         >
           {selectedPin ? (
             <StorePreviewSection
+              storeName={selectedPin.storeName}
               lat={selectedPin.lat}
               lng={selectedPin.lng}
               storeId={selectedPin.storeId}
@@ -240,6 +240,7 @@ export default function Home() {
               lng={searchedPinFromSearchParams.position.lng}
               storeId={searchedPinFromSearchParams.position.storeId}
               kakaoStoreId={searchedPinFromSearchParams.position.kakaoStoreId}
+              searchedPinFromSearchParams={searchedPinFromSearchParams}
             />
           ) : null}
         </BottomSheet.ShowContent>

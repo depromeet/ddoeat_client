@@ -8,4 +8,8 @@ export interface StoreIds {
   kakaoStoreId?: number;
 }
 
-export type CoordinateWithIds = Coordinate & StoreIds;
+interface StoreName {
+  storeName?: string;
+}
+
+export type CoordinateWithIds = Coordinate & StoreIds & StoreName;
