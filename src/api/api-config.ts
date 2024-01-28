@@ -108,7 +108,10 @@ export const axiosRequest = async <T>(
     method,
     url,
     data,
-    headers,
+    headers: {
+      Authorization:
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsInVzZXJJZCI6MiwiZXhwIjoxNzA3NTgyOTA3fQ.0SODJI18HNR2XCWMMvxXIcjVfGGAmc01H-4oXXjbd8cuVgHLZcLlVa5P4Mvm11WGWPT-iSImyWRAMCjO8wL-TQ',
+    },
     params,
   });
 
