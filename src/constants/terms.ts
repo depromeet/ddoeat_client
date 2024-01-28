@@ -28,7 +28,7 @@ export const TERMS: Terms[] = [
   },
   {
     id: '정보제공',
-    title: '제 3자 정보제공 동의',
+    title: '개인정보처리방침',
     termsType: 'PRIVACY_POLICY',
     required: false,
   },
