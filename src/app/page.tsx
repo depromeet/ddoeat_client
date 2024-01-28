@@ -2,12 +2,14 @@
 
 // import { motion } from 'framer-motion';
 // import Image from 'next/image';
-// import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 // import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
 // import BottomNavigation from '@components/main/BottomNavigation';
-// import BottomSheet from '@components/main/BottomSheet';
+import { useState } from 'react';
+
+import BottomSheet from '@components/main/BottomSheet';
 // import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 // import CustomOverlayPin from '@components/main/CustomOverlayPin';
 // import FilterTagList from '@components/main/FilterTagList';
@@ -20,14 +22,14 @@ import { Map } from 'react-kakao-maps-sdk';
 // import useGetPinList from '@hooks/api/useGetPinList';
 // import useCoordinate from '@hooks/useCoordinate';
 // import useDidUpdate from '@hooks/useDidUpdate';
-// import switchUrl from '@utils/switchUrl';
+import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 // import { Categories } from 'src/types/tag';
 
 export default function Home() {
   // const mapRef = useRef<kakao.maps.Map>(null);
-  // const searchParams = useSearchParams();
-  // const isSearchType = searchParams.get('type') === 'search';
+  const searchParams = useSearchParams();
+  const isSearchType = searchParams.get('type') === 'search';
   // const {
   //   center,
   //   setCenter,
@@ -44,30 +46,30 @@ export default function Home() {
 
   // const router = useRouter();
 
-  // const searchedPinFromSearchParams = isSearchType
-  //   ? {
-  //       position: {
-  //         lat: Number(searchParams.get('latitude')),
-  //         lng: Number(searchParams.get('longitude')),
-  //         storeId: Number(searchParams.get('storeId')) || null,
-  //         kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
-  //       } as CoordinateWithIds,
-  //       storeName: searchParams.get('storeName') || '',
-  //       isBookmarked: Boolean(searchParams.get('isBookmarked')),
-  //       totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
-  //       address: searchParams.get('address') || '',
-  //       categoryType: searchParams.get('categoryType') || '',
-  //       distance: Number(searchParams.get('distance')),
-  //       kakaoCategoryName: searchParams.get('kakaoCategoryName') || '',
-  //     }
-  //   : null;
+  const searchedPinFromSearchParams = isSearchType
+    ? {
+        position: {
+          lat: Number(searchParams.get('latitude')),
+          lng: Number(searchParams.get('longitude')),
+          storeId: Number(searchParams.get('storeId')) || null,
+          kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
+        } as CoordinateWithIds,
+        storeName: searchParams.get('storeName') || '',
+        isBookmarked: Boolean(searchParams.get('isBookmarked')),
+        totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
+        address: searchParams.get('address') || '',
+        categoryType: searchParams.get('categoryType') || '',
+        distance: Number(searchParams.get('distance')),
+        kakaoCategoryName: searchParams.get('kakaoCategoryName') || '',
+      }
+    : null;
 
-  // const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
+  const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
   // const [selectedTag, setSelectedTag] = useState<Categories | null>(null);
 
-  // const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
-  //   null,
-  // );
+  const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
+    null,
+  );
 
   // const [currentLevel, setCurrentLevel] = useState<number | null>(null);
 
@@ -143,13 +145,13 @@ export default function Home() {
   //   setShowLoadPinListButton(false);
   // };
 
-  // const onCloseBottomSheet = () => {
-  //   setSelectedPin(null);
-  //   setIsBottomSheetShowing(false);
-  //   if (isSearchType) {
-  //     switchUrl('/');
-  //   }
-  // };
+  const onCloseBottomSheet = () => {
+    setSelectedPin(null);
+    setIsBottomSheetShowing(false);
+    if (isSearchType) {
+      switchUrl('/');
+    }
+  };
 
   const GANGNAM_STATION: CoordinateWithIds = {
     storeId: 0,
@@ -222,13 +224,13 @@ export default function Home() {
             onClick={handleLoadPinListButtonClick}
           />
         )}
-      </div>
+      </div> */}
 
       <BottomSheet
         onCloseBottomSheet={onCloseBottomSheet}
         isShowing={isBottomSheetShowing || Boolean(searchedPinFromSearchParams)}
       >
-        <BottomSheet.ShowContent
+        {/* <BottomSheet.ShowContent
           onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
         >
           {selectedPin ? (
@@ -250,8 +252,8 @@ export default function Home() {
           ) : null}
         </BottomSheet.ShowContent>
 
-        <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent>
-      </BottomSheet> */}
+        <BottomSheet.FullContent>asdfasdfasdfasdfsdf</BottomSheet.FullContent> */}
+      </BottomSheet>
     </main>
   );
 }
