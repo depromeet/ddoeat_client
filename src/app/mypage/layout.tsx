@@ -11,7 +11,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
 
-  const handleClickSettingButton = () => router.push('/setting');
+  const handleClickSettingButton = () => router.push('/settings');
 
   return (
     <main className='bg-[url("/assets/image/mypage/background.png")] bg-cover w-full max-w-[480px] h-[100dvh]'>
