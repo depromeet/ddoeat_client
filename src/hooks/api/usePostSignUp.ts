@@ -14,7 +14,7 @@ export const usePostSignUp = (): UseMutationResult<void, AxiosError, void> => {
     mutationKey: ['sign-up'],
     mutationFn: postSignUp,
     onSuccess: () => {
-      push('/');
+      push('/onboarding');
     },
   });
 };

@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent, RefCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 import PenIcon from 'public/assets/icon24/pen_24.svg';
 import Tab from '@components/mypage/Tab';
@@ -13,17 +14,15 @@ import { useGetUserProfile } from '@hooks/api/useGetUserProfile';
 import { usePutUserName } from '@hooks/api/usePutUserName';
 import MyLogContent from '@components/mypage/MyLogContent';
 import BookMarkContent from '@components/mypage/BookMarkContent';
-import useInput from '@hooks/useInput';
 
 export default function Page() {
   const [isInputActive, setIsInputActive] = useState(false);
-  const [showtoast, setShowToast] = useState(false);
 
   const { data: userProfile } = useGetUserProfile();
   const { mutate: putUserName } = usePutUserName({
     onError: (error) => {
       if (error?.response?.status === 400) {
-        setShowToast(true);
+        toast('중복된 이름입니다.');
       }
     },
   });
@@ -31,17 +30,11 @@ export default function Page() {
   const userLevel = userProfile?.level || DEFAULT_DDOBAP_LEVEL;
   const StatusImage = DDOBAP_LEVEL_IMAGE[userLevel];
 
-  const [nickName, , setNickName] = useInput(userProfile?.nickname ?? '');
+  const [nickName, setNickName] = useState(userProfile?.nickname);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (showtoast) {
-      timer = setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-    }
-    return () => clearTimeout(timer);
-  }, [showtoast]);
+    setNickName(userProfile?.nickname);
+  }, [userProfile?.nickname]);
 
   const handleUserNameClick = () => setIsInputActive(true);
 
@@ -57,17 +50,12 @@ export default function Page() {
 
   const handleInputBlur = () => {
     setIsInputActive(false);
-    if (!nickName.trim().length) setNickName(userProfile?.nickname || '');
+    if (!nickName?.trim().length) setNickName(userProfile?.nickname || '');
     else putUserName(nickName || '');
   };
 
   return (
     <div className="overflow-hidden">
-      {showtoast && (
-        <div className="fixed bottom-[61px] left-1/2 transform -translate-x-1/2 z-toast w-[343px] h-[56px]  flex items-center justify-center rounded-[16px] text-white bg-black bg-opacity-60">
-          중복된 이름입니다.
-        </div>
-      )}
       <div className="h-[282px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
@@ -78,7 +66,7 @@ export default function Page() {
                   <input
                     ref={handleInputRefCallback}
                     type="text"
-                    defaultValue={userProfile?.nickname}
+                    value={nickName}
                     onChange={handleInputValue}
                     onBlur={handleInputBlur}
                     className={`w-[170px] h-[29px] bg-transparent text-white header-22 outline-none border-b-[1px] border-b-transparent focus:outline-none focus:border-b-[1px] focus:border-b-white `}

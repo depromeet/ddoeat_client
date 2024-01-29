@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import DdobabWritingLogo from 'public/assets/ddobab/ddobab_writing.svg';
 import FixedBottomCTAButton from '@components/common/FixedBottomCTAButton';
@@ -9,7 +9,7 @@ export default function Page() {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName');
-  const totalRevisitedCount = searchParams.get('totalRevisitedCount');
+  const myRevisitedCount = searchParams.get('myRevisitedCount');
 
   const handleClickConfirmButton = () => {
     push('/mypage');
@@ -19,9 +19,7 @@ export default function Page() {
       <div>
         <h2 className="header-22 text-gray-900 text-center">
           {storeName}에 <br />{' '}
-          <strong className="text-primary-500">
-            {totalRevisitedCount}번째
-          </strong>{' '}
+          <strong className="text-primary-500">{myRevisitedCount}번째</strong>{' '}
           기록을 작성했어요!
         </h2>
         <p className="body-14-regular text-gray-700 mt-[8px]">
