@@ -2,20 +2,8 @@ import { MouseEvent } from 'react';
 
 import AnimatePortal from '../AnimatePortal';
 
+import type { ModalProps } from 'src/types/modal';
 import cn from '@utils/cn';
-
-interface Control {
-  buttonText: string;
-  buttonHandler: () => void;
-}
-
-interface Modal {
-  isShowing: boolean;
-  text: string;
-  subText: string;
-  controls: Control[];
-  onCancel: () => void;
-}
 
 export default function Modal({
   isShowing,
@@ -23,7 +11,7 @@ export default function Modal({
   subText,
   controls,
   onCancel,
-}: Modal) {
+}: ModalProps) {
   const handleOutsideClick = (event: MouseEvent) => {
     if (event.target === event.currentTarget) {
       onCancel();
