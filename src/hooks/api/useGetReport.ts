@@ -5,7 +5,7 @@ import { ApiResponse, axiosRequest } from '@api/api-config';
 
 interface ReportData {
   storeId: number;
-  storeMainImageUrl: string;
+  thumbnailUrl: string;
   mostVisitedCount: number;
   totalRevisitedCount: number;
 }
