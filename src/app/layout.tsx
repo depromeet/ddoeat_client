@@ -8,6 +8,7 @@ import './globals.css';
 import { Toaster } from 'sonner';
 
 import QueryClientProviders from '@components/common/QueryClientProvider';
+import WebViewContainer from '@components/common/WebViewContainer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -45,6 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <QueryClientProviders>
+      <WebViewContainer />
       <html lang="en" className={`${nanumSquareRound.variable}`}>
         <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto scrollbar-hide">
           <Suspense>{children}</Suspense>
