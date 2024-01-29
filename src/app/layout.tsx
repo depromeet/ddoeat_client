@@ -7,6 +7,7 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 
 import QueryClientProviders from '@components/common/QueryClientProvider';
+import useWebView from '@hooks/useWebView';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -42,6 +43,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  useWebView();
+
   return (
     <QueryClientProviders>
       <html lang="en" className={`${nanumSquareRound.variable}`}>

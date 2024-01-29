@@ -23,7 +23,6 @@ import useDidUpdate from '@hooks/useDidUpdate';
 import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
-import useWebView from '@hooks/useWebView';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -78,8 +77,6 @@ export default function Home() {
     level: currentLevel,
     isSearchType,
   });
-
-  useWebView();
 
   useDidUpdate(() => {
     if (!currentUserCoordinate || !screenCoordinate || !currentLevel) return;
