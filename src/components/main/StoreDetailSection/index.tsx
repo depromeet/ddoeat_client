@@ -5,6 +5,7 @@ import Report from './Report';
 import Reviews from './Reviews';
 import StoreInformation from '../StoreInformation';
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
+import WriteLogButton from '../WriteLogButton';
 
 import Header from '@components/common/Header';
 import ImageContainer from '@components/common/ImageContainer';
@@ -12,13 +13,14 @@ import { useGetReport } from '@hooks/api/useGetReport';
 import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
 import useGetStore from '@hooks/api/useGetStore';
+import BookmarkButton from '@components/common/BookmarkButton';
 
 export default function StoreDetailSection({
   storeId,
   searchedPinFromSearchParams,
 }: {
   storeId?: number;
-  searchedPinFromSearchParams: SearchedPinFromSearchParams | null;
+  searchedPinFromSearchParams?: SearchedPinFromSearchParams;
 }) {
   const searchParams = useSearchParams();
   const { data: storeData } = useGetStore({
@@ -77,6 +79,22 @@ export default function StoreDetailSection({
         totalReviewCount={storeData?.totalReviewCount ?? 0}
         myRevisitedCount={storeData?.myRevisitedCount ?? 0}
       />
+      <div className="flex gap-[8px] p-[16px]">
+        <WriteLogButton
+          storeName={
+            storeData?.storeName ?? searchedPinFromSearchParams?.storeName ?? ''
+          }
+          storeId={storeData?.storeId ?? null}
+          myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+          searchedPinFromSearchParams={searchedPinFromSearchParams}
+        />
+        {storeData && (
+          <BookmarkButton
+            isBookmarked={storeData.isBookmarked}
+            storeId={storeData.storeId}
+          />
+        )}
+      </div>
       <div className="w-full h-[8px] bg-gray-100" />
       <Report />
       <Reviews />

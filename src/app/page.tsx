@@ -249,7 +249,9 @@ export default function Home() {
         <BottomSheet.FullContent>
           <StoreDetailSection
             storeId={selectedPin?.storeId}
-            searchedPinFromSearchParams={searchedPinFromSearchParams}
+            searchedPinFromSearchParams={
+              searchedPinFromSearchParams ?? undefined
+            }
           />
         </BottomSheet.FullContent>
       </BottomSheet>

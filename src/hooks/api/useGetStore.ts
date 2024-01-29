@@ -18,6 +18,7 @@ interface StoreResponse {
   userId: number;
   myRevisitedCount: number;
   totalRevisitedCount: number;
+  isBookmarked: boolean;
 }
 
 const getStore = async ({ storeId }: StoreRequest) => {
