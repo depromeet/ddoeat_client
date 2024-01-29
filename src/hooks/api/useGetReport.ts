@@ -22,6 +22,7 @@ export const useGetReport = (
   return useQuery({
     queryKey: ['get-report', storeId],
     queryFn: () => getReport(storeId),
+    select: (data) => data.data,
     enabled: !!storeId,
   });
 };
