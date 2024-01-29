@@ -48,7 +48,7 @@ export default function StoreDetailSection({
       <AnimatePortal isShowing={!isDragging}>
         <Header
           className={cn('absolute bg-white z-toast', {
-            '[&>*>*]:fill-white': reportData?.thumbnailUrl,
+            '[&>*>*]:fill-white bg-transparent': reportData?.thumbnailUrl,
           })}
         >
           {isScrollDown && <span>{storeData?.storeName}</span>}
@@ -57,7 +57,7 @@ export default function StoreDetailSection({
 
       {reportData?.thumbnailUrl && (
         <ImageContainer
-          type="medium"
+          type="full"
           src={reportData.thumbnailUrl}
           alt="음식점 이미지"
         />
