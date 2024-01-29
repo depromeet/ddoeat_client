@@ -24,6 +24,7 @@ export default function BottomSheetWrapper({
     deviceHeight,
     showStatusChildrenHeight,
     fullStatusChildrenHeight,
+    setIsDragging,
   } = useBottomSheet();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,6 +90,7 @@ export default function BottomSheetWrapper({
 
       if (lowerThanStartY) {
         changeStatus('full');
+        setIsDragging(false);
         return;
       }
 
@@ -98,6 +100,7 @@ export default function BottomSheetWrapper({
     if (isShow) {
       if (shouldUp) {
         changeStatus('full');
+        setIsDragging(false);
         return;
       }
 
@@ -116,6 +119,14 @@ export default function BottomSheetWrapper({
       <div className="absolute left-0 top-0 h-full w-full overflow-hidden pointer-events-none z-overlay">
         <motion.div
           variants={bottomSheetAnimationVariants}
+          onDragStart={(e: PointerEvent, info: PanInfo) => {
+            if (!isFull) return;
+            if (isScrolled) return;
+
+            if (info.delta.y > 0) {
+              setIsDragging(true);
+            }
+          }}
           drag={'y'}
           onDragEnd={handleDragEnd}
           dragConstraints={{

@@ -1,19 +1,21 @@
-import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-import Report from './Report';
-import Reviews from './Reviews';
+import { useBottomSheet } from '../BottomSheet/contexts/BottomSheetContext';
 import StoreInformation from '../StoreInformation';
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
 import WriteLogButton from '../WriteLogButton';
+import Report from './Report';
+import Reviews from './Reviews';
 
+import AnimatePortal from '@components/common/AnimatePortal';
+import BookmarkButton from '@components/common/BookmarkButton';
 import Header from '@components/common/Header';
 import ImageContainer from '@components/common/ImageContainer';
 import { useGetReport } from '@hooks/api/useGetReport';
+import useGetStore from '@hooks/api/useGetStore';
 import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
-import useGetStore from '@hooks/api/useGetStore';
-import BookmarkButton from '@components/common/BookmarkButton';
 
 export default function StoreDetailSection({
   storeId,
@@ -22,6 +24,7 @@ export default function StoreDetailSection({
   storeId?: number;
   searchedPinFromSearchParams?: SearchedPinFromSearchParams;
 }) {
+  const { isDragging } = useBottomSheet();
   const searchParams = useSearchParams();
   const { data: storeData } = useGetStore({
     storeId: storeId ?? (Number(searchParams.get('storeId')) || undefined),
@@ -41,15 +44,17 @@ export default function StoreDetailSection({
 
   return (
     <div>
-      <div ref={setTarget}>
+      <div ref={setTarget} />
+      <AnimatePortal isShowing={!isDragging}>
         <Header
-          className={cn('fixed bg-white', {
+          className={cn('absolute bg-white z-toast', {
             '[&>*>*]:fill-white': reportData?.storeMainImageUrl,
           })}
         >
-          {isScrollDown && <span>{'음식점 이름 들어가는 자리입니다.'}</span>}
+          {isScrollDown && <span>{storeData?.storeName}</span>}
         </Header>
-      </div>
+      </AnimatePortal>
+
       {reportData?.storeMainImageUrl && (
         <ImageContainer
           type="medium"
