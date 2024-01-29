@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import PinVisitorIcon from '/public/assets/icon20/pin_visitor_20.svg';
 import ArrowIcon from '/public/assets/icon30/polygon_30.svg';
 
+import { useSearchParams } from 'next/navigation';
+
 import { bounceAnimationVariants } from '@constants/motions';
 
 interface PinBubbleProps {
@@ -12,6 +14,9 @@ interface PinBubbleProps {
 }
 
 export default function PinBubble({ totalRevisitedCount }: PinBubbleProps) {
+  const searchParams = useSearchParams();
+  const storeId = searchParams.get('storeId');
+
   return (
     <motion.div
       variants={bounceAnimationVariants}
@@ -21,9 +26,11 @@ export default function PinBubble({ totalRevisitedCount }: PinBubbleProps) {
       className="absolute top-[-60px] flex flex-col justify-center items-center z-floating"
     >
       <div className="h-[36px] flex justify-center items-center bg-primary-500 px-[12px] py-[8px] rounded-[16px] mb-[-8px]">
-        <PinVisitorIcon />
+        {storeId && <PinVisitorIcon />}
         <p className="body-14-extraBold text-white">
-          {totalRevisitedCount}명이 재방문했어요!
+          {storeId
+            ? `${totalRevisitedCount}명이 재방문했어요!`
+            : '첫 방문 기록을 남겨주세요!'}
         </p>
       </div>
       <ArrowIcon />
