@@ -7,7 +7,7 @@ interface TermsLayoutProps {
 export default function layout({ children }: TermsLayoutProps) {
   return (
     <div>
-      <Header />
+      <Header className="bg-white" />
       {children}
     </div>
   );

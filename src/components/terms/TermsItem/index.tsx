@@ -1,16 +1,20 @@
 import { InputHTMLAttributes, useState } from 'react';
 
+import { TermsType } from '@constants/terms';
 import CheckDefault from 'public/assets/icon24/check_default_24.svg';
 import CheckFill from 'public/assets/icon24/check_fill_24.svg';
 import DownArrow from 'public/assets/icon24/down_arrow_24.svg';
 import UpArrow from 'public/assets/icon24/up_arrow_24.svg';
+import Description from '@components/terms/Description';
 
 interface TermsItemProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
+  termsType: TermsType;
 }
 
 export default function TermsItem({
   title,
+  termsType,
   checked,
   onChange,
   ...restProps
@@ -40,7 +44,17 @@ export default function TermsItem({
         </button>
       </div>
       {/* TODO: 추후 약관 확정 시 추가 */}
-      {isOpenTermsItem && <p className="pl-[16px] pt-[4px]">description</p>}
+      {isOpenTermsItem && termsType !== 'PRIVACY_POLICY' && (
+        <Description type={termsType} />
+      )}
+      {isOpenTermsItem && termsType === 'PRIVACY_POLICY' && (
+        <iframe
+          className="w-full h-[calc(100dvh-482px)]"
+          src="https://plip.kr/pcc/15a1d059-78a0-46c3-b9f7-33dc5685f9a5/privacy/1.html"
+        >
+          해당 앱은 iframe을 지원하지 않습니다.
+        </iframe>
+      )}
     </li>
   );
 }
