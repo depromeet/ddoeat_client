@@ -33,7 +33,7 @@ export interface Pin {
   latitude: number;
   totalRevisitedCount: number;
   totalReviewCount: number;
-  isBookMarked: boolean;
+  isBookmarked: boolean;
 }
 
 interface PinListResponse {

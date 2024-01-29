@@ -9,6 +9,7 @@ import LeftArrow from 'public/assets/icon24/left_arrow_24.svg';
 export default function Header({
   className,
   children,
+  ...restProps
 }: HTMLAttributes<HTMLHeadElement>) {
   const { back } = useRouter();
 
@@ -22,6 +23,7 @@ export default function Header({
         'fixed top-0 flex items-center px-[16px] py-[8px] w-full max-w-[480px]',
         className,
       )}
+      {...restProps}
     >
       <button className="w-[40px] h-[40px]" onClick={handleClickBackButton}>
         <LeftArrow />

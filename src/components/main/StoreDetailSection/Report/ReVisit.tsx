@@ -8,7 +8,7 @@ import DdobabReportTwoIcon from 'public/assets/ddobab/ddobab_report_2.svg';
 export default function ReVisit() {
   const searchParams = useSearchParams();
 
-  const storeId = searchParams.get('storeId') ?? '';
+  const storeId = Number(searchParams.get('storeId'));
 
   const { data } = useGetReport(storeId);
 

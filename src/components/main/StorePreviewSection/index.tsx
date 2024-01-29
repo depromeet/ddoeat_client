@@ -58,7 +58,7 @@ function StorePreviewSection({
     switchUrl(url);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [storeId]);
 
   return (
     <>
@@ -91,9 +91,7 @@ function StorePreviewSection({
           />
           {storeData && (
             <BookmarkButton
-              isBookmarked
-              //TODO: 서버 인터페이스 변경 예정
-              // isBookmarked={storeData.isBookmarked}
+              isBookmarked={storeData.isBookmarked}
               storeId={storeData.storeId}
             />
           )}

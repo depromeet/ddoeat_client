@@ -8,7 +8,7 @@ import { useGetReport } from '@hooks/api/useGetReport';
 export default function TopVisit() {
   const searchParams = useSearchParams();
 
-  const storeId = searchParams.get('storeId') ?? '';
+  const storeId = Number(searchParams.get('storeId'));
 
   const { data } = useGetReport(storeId);
 
