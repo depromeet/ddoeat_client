@@ -84,7 +84,11 @@ function StorePreviewSection({
         )}
         <div className="flex gap-[8px] p-[16px]">
           <WriteLogButton
-            storeName={storeName}
+            storeName={
+              storeData?.storeName ??
+              searchedPinFromSearchParams?.storeName ??
+              ''
+            }
             storeId={storeData?.storeId ?? null}
             myRevisitedCount={storeData?.myRevisitedCount ?? 0}
             searchedPinFromSearchParams={searchedPinFromSearchParams}
