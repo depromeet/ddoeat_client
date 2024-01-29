@@ -48,24 +48,24 @@ export default function StoreDetailSection({
       <AnimatePortal isShowing={!isDragging}>
         <Header
           className={cn('absolute bg-white z-toast', {
-            '[&>*>*]:fill-white': reportData?.storeMainImageUrl,
+            '[&>*>*]:fill-white bg-transparent': reportData?.thumbnailUrl,
           })}
         >
           {isScrollDown && <span>{storeData?.storeName}</span>}
         </Header>
       </AnimatePortal>
 
-      {reportData?.storeMainImageUrl && (
+      {reportData?.thumbnailUrl && (
         <ImageContainer
-          type="medium"
-          src={reportData.storeMainImageUrl}
+          type="full"
+          src={reportData.thumbnailUrl}
           alt="음식점 이미지"
         />
       )}
       <div
         className={cn('w-full', {
-          'h-[24px] rounded-t-[24px]': reportData?.storeMainImageUrl,
-          'h-[56px]': !reportData?.storeMainImageUrl,
+          'h-[24px] rounded-t-[24px]': reportData?.thumbnailUrl,
+          'h-[56px]': !reportData?.thumbnailUrl,
         })}
       />
       <StoreInformation
