@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 
 import { TermsType } from '@constants/terms';
 import CheckDefault from 'public/assets/icon24/check_default_24.svg';
