@@ -77,7 +77,6 @@ export default function Page() {
   };
 
   const handleClickSubmitButton = () => {
-    // NOTE:
     uploadImageToNCloud({
       presignedUrl: presignedUrl?.presignedUrl as string,
       file,
@@ -100,7 +99,7 @@ export default function Page() {
       newStore: storeId ? null : newStore,
       rating,
       visitedAt,
-      imageUrl: presignedUrl?.presignedUrl as string,
+      imageUrl: presignedUrl?.presignedUrl.split('?')[0] as string,
       description,
     });
   };

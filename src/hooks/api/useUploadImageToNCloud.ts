@@ -12,13 +12,11 @@ const uploadImageToNCloud = ({
   presignedUrl,
   file,
 }: UploadImageRequest): Promise<void> => {
-  const formData = new FormData();
-  formData.append('image', file as File);
   const headers = {
-    'Content-type': file?.type as string,
+    'Content-Type': file?.type as string,
   };
 
-  return axiosRequest('put', presignedUrl, formData, headers);
+  return axiosRequest('put', presignedUrl, file as File, headers);
 };
 
 export const useUploadImageToNCloud = (): UseMutationResult<
