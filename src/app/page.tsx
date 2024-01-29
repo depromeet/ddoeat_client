@@ -229,7 +229,6 @@ export default function Home() {
         >
           {selectedPin ? (
             <StorePreviewSection
-              storeName={selectedPin.storeName}
               lat={selectedPin.lat}
               lng={selectedPin.lng}
               storeId={selectedPin.storeId}
