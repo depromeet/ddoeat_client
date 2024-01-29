@@ -36,14 +36,7 @@ export default function WriteLogButton({
     storeId: storeId ?? undefined,
   });
 
-  useEffect(() => {
-    if (!isSuccess) return;
-
-    if (!data.isAvailable) {
-      toast('같은 곳은 하루에 3번만 기록 가능해요!');
-      return;
-    }
-
+  const goToReview = () => {
     const url = new URL(`${window.location.origin}/review`);
 
     if (!storeId && searchedPinFromSearchParams) {
@@ -84,9 +77,24 @@ export default function WriteLogButton({
     url.searchParams.set('myRevisitedCount', String(myRevisitedCount));
 
     router.push(String(url));
+  };
+
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    if (!data.isAvailable) {
+      toast('같은 곳은 하루에 3번만 기록 가능해요!');
+      return;
+    }
+
+    goToReview();
   }, [isSuccess]);
 
   const handleWriteLogButtonClick = () => {
+    if (!storeId) {
+      goToReview();
+      return;
+    }
     getReviewAvailable();
   };
 
