@@ -1,13 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, useEffect } from 'react';
 
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
 
 import PenIcon from 'public/assets/icon20/pen_20.svg';
 import cn from '@utils/cn';
 import Button from '@components/common/Button';
+import useGetReviewAvailable from '@hooks/api/useGetReviewAvailable';
 
 interface WriteLogButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   storeName?: string;
@@ -26,7 +27,21 @@ export default function WriteLogButton({
 }: WriteLogButtonProps) {
   const router = useRouter();
 
-  const handleWriteLogButtonClick = () => {
+  const {
+    refetch: getReviewAvailable,
+    isSuccess,
+    data,
+  } = useGetReviewAvailable({
+    storeId: storeId ?? undefined,
+  });
+
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    if (!data.isAvailable) {
+      return;
+    }
+
     const url = new URL(`${window.location.origin}/review`);
 
     if (!storeId && searchedPinFromSearchParams) {
@@ -67,6 +82,10 @@ export default function WriteLogButton({
     url.searchParams.set('myRevisitedCount', String(myRevisitedCount));
 
     router.push(String(url));
+  }, [isSuccess]);
+
+  const handleWriteLogButtonClick = () => {
+    getReviewAvailable();
   };
 
   return (
