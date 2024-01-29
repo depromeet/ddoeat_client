@@ -7,7 +7,7 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 
 import QueryClientProviders from '@components/common/QueryClientProvider';
-import useWebView from '@hooks/useWebView';
+import WebViewContainer from '@components/common/WebViewContainer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -43,10 +43,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  useWebView();
-
   return (
     <QueryClientProviders>
+      <WebViewContainer />
       <html lang="en" className={`${nanumSquareRound.variable}`}>
         <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto scrollbar-hide">
           <Suspense>{children}</Suspense>
