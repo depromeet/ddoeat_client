@@ -75,6 +75,7 @@ export default function WriteLogButton({
 
     url.searchParams.set('storeName', String(storeName));
     url.searchParams.set('myRevisitedCount', String(myRevisitedCount));
+    url.searchParams.set('storeId', String(storeId));
 
     router.push(String(url));
   };
