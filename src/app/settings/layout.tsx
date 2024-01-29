@@ -7,7 +7,7 @@ interface TermsLayoutProps {
 export default function layout({ children }: TermsLayoutProps) {
   return (
     <div>
-      <Header>
+      <Header className="z-header">
         <p className="body-16-bold">설정</p>
       </Header>
       {children}
