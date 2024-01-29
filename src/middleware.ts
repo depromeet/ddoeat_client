@@ -24,6 +24,7 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
+  // 웹
   const url = request.nextUrl.clone();
 
   if (isFirstLogin === 'true') {

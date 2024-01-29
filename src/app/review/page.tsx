@@ -97,7 +97,7 @@ export default function Page() {
     // TODO: storeId 유무에 따른 분기 처리
     postLog({
       storeId,
-      newStore: storeId ? null : newStore,
+      newStore: storeId ? newStore : null,
       rating,
       visitedAt,
       imageUrl: presignedUrl?.presignedUrl as string,
