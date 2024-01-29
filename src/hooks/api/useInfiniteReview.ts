@@ -68,5 +68,6 @@ export const useInfiniteReview = (
       return undefined;
     },
     select: (data) => data.pages,
+    enabled: !!params.storeId,
   });
 };
