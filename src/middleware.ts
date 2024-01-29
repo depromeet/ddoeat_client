@@ -7,10 +7,10 @@ export function middleware(request: NextRequest) {
   const isFirstLogin = request.nextUrl.searchParams.get('isFirst') as string;
   const isFromApp = request.nextUrl.searchParams.get('fromApp');
 
+  const url = request.nextUrl.clone();
+
   // NOTE: splash 화면으로 넘어왔을 때 쿠키 내의 토큰 여부에 따른 리다이렉트 로직
   if (isFromApp === 'true') {
-    const url = request.nextUrl.clone();
-
     if (accessToken && refreshToken) {
       url.pathname = '/';
     } else {
@@ -18,24 +18,19 @@ export function middleware(request: NextRequest) {
     }
 
     url.search = '';
-
-    const response = NextResponse.redirect(url);
-
-    return response;
-  }
-
-  // 웹
-  const url = request.nextUrl.clone();
-
-  if (isFirstLogin === 'true') {
-    url.pathname = '/terms';
   } else {
-    url.pathname = '/';
-  }
+    // 웹
+    if (isFirstLogin === 'true') {
+      url.pathname = '/terms';
+    } else {
+      url.pathname = '/';
+    }
 
-  url.search = '';
+    url.search = '';
+  }
 
   const response = NextResponse.redirect(url);
+
   if (accessToken && refreshToken) {
     response.cookies.set('accessToken', accessToken, { path: '/' });
     response.cookies.set('refreshToken', refreshToken, { path: '/' });
