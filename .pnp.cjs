@@ -58,6 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:18.2.0"],\
             ["react-kakao-maps-sdk", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:1.1.24"],\
+            ["sonner", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:1.4.0"],\
             ["storybook", "npm:7.6.4"],\
             ["tailwind-merge", "npm:2.1.0"],\
             ["tailwindcss", "npm:3.3.6"],\
@@ -6586,6 +6587,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:18.2.0"],\
             ["react-kakao-maps-sdk", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:1.1.24"],\
+            ["sonner", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:1.4.0"],\
             ["storybook", "npm:7.6.4"],\
             ["tailwind-merge", "npm:2.1.0"],\
             ["tailwindcss", "npm:3.3.6"],\
@@ -12786,6 +12788,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["agent-base", "npm:7.1.0"],\
             ["debug", "virtual:2f4f5d4be0c4271f81a756602d102e02c292a5b30d8b7f5dd19d5368d75df8bb2f1bf516e3f835c2b5501d1663eb437d4f00d6d057bcaee770b46e87267a0fa3#npm:4.3.4"],\
             ["socks", "npm:2.7.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["sonner", [\
+        ["npm:1.4.0", {\
+          "packageLocation": "./.yarn/cache/sonner-npm-1.4.0-5d25eab81b-6dc8e84c16.zip/node_modules/sonner/",\
+          "packageDependencies": [\
+            ["sonner", "npm:1.4.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:1.4.0", {\
+          "packageLocation": "./.yarn/__virtual__/sonner-virtual-7176e856cf/0/cache/sonner-npm-1.4.0-5d25eab81b-6dc8e84c16.zip/node_modules/sonner/",\
+          "packageDependencies": [\
+            ["sonner", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:1.4.0"],\
+            ["@types/react", "npm:18.2.43"],\
+            ["@types/react-dom", "npm:18.2.17"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

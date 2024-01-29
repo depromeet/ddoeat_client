@@ -4643,6 +4643,7 @@ __metadata:
     react: ^18
     react-dom: ^18
     react-kakao-maps-sdk: ^1.1.24
+    sonner: ^1.4.0
     storybook: ^7.6.4
     tailwind-merge: ^2.1.0
     tailwindcss: ^3.3.0
@@ -10085,6 +10086,16 @@ __metadata:
     ip: ^2.0.0
     smart-buffer: ^4.2.0
   checksum: 259d9e3e8e1c9809a7f5c32238c3d4d2a36b39b83851d0f573bfde5f21c4b1288417ce1af06af1452569cd1eb0841169afd4998f0e04ba04656f6b7f0e46d748
+  languageName: node
+  linkType: hard
+
+"sonner@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "sonner@npm:1.4.0"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 6dc8e84c16ea911074355ed073d0534b551832fe6fc65fdcfd1d8c07d19a60fd370e96d4fd3e42de7bdc33d0e197d685becc1ade2d1a080e3996a054269611cf
   languageName: node
   linkType: hard
 

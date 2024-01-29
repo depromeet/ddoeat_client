@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ButtonHTMLAttributes, useEffect } from 'react';
+import { toast } from 'sonner';
 
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
 
@@ -39,6 +40,7 @@ export default function WriteLogButton({
     if (!isSuccess) return;
 
     if (!data.isAvailable) {
+      toast('같은 곳은 하루에 3번만 기록 가능해요!');
       return;
     }
 

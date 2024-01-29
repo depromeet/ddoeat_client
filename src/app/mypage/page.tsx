@@ -16,13 +16,12 @@ import BookMarkContent from '@components/mypage/BookMarkContent';
 
 export default function Page() {
   const [isInputActive, setIsInputActive] = useState(false);
-  const [showtoast, setShowToast] = useState(false);
 
   const { data: userProfile } = useGetUserProfile();
   const { mutate: putUserName } = usePutUserName({
     onError: (error) => {
       if (error?.response?.status === 400) {
-        setShowToast(true);
+        toast('중복된 이름입니다.');
       }
     },
   });
@@ -35,16 +34,6 @@ export default function Page() {
   useEffect(() => {
     setNickName(userProfile?.nickname);
   }, [userProfile?.nickname]);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (showtoast) {
-      timer = setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-    }
-    return () => clearTimeout(timer);
-  }, [showtoast]);
 
   const handleUserNameClick = () => setIsInputActive(true);
 
@@ -66,11 +55,6 @@ export default function Page() {
 
   return (
     <div className="overflow-hidden">
-      {showtoast && (
-        <div className="fixed bottom-[61px] left-1/2 transform -translate-x-1/2 z-toast w-[343px] h-[56px]  flex items-center justify-center rounded-[16px] text-white bg-black bg-opacity-60">
-          중복된 이름입니다.
-        </div>
-      )}
       <div className="h-[282px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
@@ -124,4 +108,7 @@ export default function Page() {
       </div>
     </div>
   );
+}
+function toast(arg0: string) {
+  throw new Error('Function not implemented.');
 }

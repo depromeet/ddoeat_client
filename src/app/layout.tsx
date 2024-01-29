@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
-
+import localFont from 'next/font/local';
 import Script from 'next/script';
 import { Suspense } from 'react';
+import { Toaster } from 'sonner';
 
 import QueryClientProviders from '@components/common/QueryClientProvider';
 
@@ -51,6 +51,7 @@ export default function RootLayout({
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
             strategy="beforeInteractive"
           />
+          <Toaster duration={2000} />
         </body>
       </html>
     </QueryClientProviders>
