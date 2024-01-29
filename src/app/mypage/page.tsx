@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent, RefCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 import PenIcon from 'public/assets/icon24/pen_24.svg';
 import Tab from '@components/mypage/Tab';
@@ -108,7 +109,4 @@ export default function Page() {
       </div>
     </div>
   );
-}
-function toast(arg0: string) {
-  throw new Error('Function not implemented.');
 }
