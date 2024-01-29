@@ -19,7 +19,4 @@ export const SETTINGS: Setting[] = [
   {
     title: '로그아웃',
   },
-  {
-    title: '회원탈퇴',
-  },
 ];

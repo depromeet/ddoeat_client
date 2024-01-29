@@ -2,13 +2,13 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // NOTE: splash 화면으로 넘어왔을 때 쿠키 내의 토큰 여부에 따른 리다이렉트 로직
+  const accessToken = request.nextUrl.searchParams.get('accessToken');
+  const refreshToken = request.nextUrl.searchParams.get('refreshToken');
+  const isFirstLogin = request.nextUrl.searchParams.get('isFirst') as string;
   const isFromApp = request.nextUrl.searchParams.get('fromApp');
 
+  // NOTE: splash 화면으로 넘어왔을 때 쿠키 내의 토큰 여부에 따른 리다이렉트 로직
   if (isFromApp === 'true') {
-    const accessToken = request.cookies.get('accessToken');
-    const refreshToken = request.cookies.get('refreshToken');
-
     const url = request.nextUrl.clone();
 
     if (accessToken && refreshToken) {
@@ -23,10 +23,6 @@ export function middleware(request: NextRequest) {
 
     return response;
   }
-
-  const accessToken = request.nextUrl.searchParams.get('accessToken');
-  const refreshToken = request.nextUrl.searchParams.get('refreshToken');
-  const isFirstLogin = request.nextUrl.searchParams.get('isFirst') as string;
 
   const url = request.nextUrl.clone();
 

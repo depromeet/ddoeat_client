@@ -17,11 +17,13 @@ export default function Page() {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName');
-  const totalRevisitedCount = searchParams.get('totalRevisitedCount') ?? '첫';
+  const myRevisitedCount = searchParams.get('myRevisitedCount') ?? 0;
   const { mutate: postLog } = usePostLog({
     onSuccess: () => {
       push(
-        `/review/complete?storeName=${storeName}&totalRevisitedCount=${totalRevisitedCount}`,
+        `/review/complete?storeName=${storeName}&myRevisitedCount=${
+          Number(myRevisitedCount) + 1
+        }`,
       );
     },
   });
@@ -112,7 +114,7 @@ export default function Page() {
         <h1 className="header-22 py-[16px]">
           {storeName}에 <br />
           <strong className="text-primary-500">
-            {totalRevisitedCount}번째
+            {Number(myRevisitedCount) + 1}번째
           </strong>{' '}
           방문이에요!
         </h1>
