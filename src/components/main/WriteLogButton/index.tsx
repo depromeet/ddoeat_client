@@ -30,6 +30,7 @@ export default function WriteLogButton({
 
   const {
     refetch: getReviewAvailable,
+    isRefetching,
     isSuccess,
     data,
   } = useGetReviewAvailable({
@@ -81,7 +82,7 @@ export default function WriteLogButton({
   };
 
   useEffect(() => {
-    if (!isSuccess) return;
+    if (!isRefetching || !isSuccess) return;
 
     if (!data.isAvailable) {
       toast('같은 곳은 하루에 3번만 기록 가능해요!');
@@ -89,7 +90,7 @@ export default function WriteLogButton({
     }
 
     goToReview();
-  }, [isSuccess]);
+  }, [isRefetching, isSuccess]);
 
   const handleWriteLogButtonClick = () => {
     if (!storeId) {

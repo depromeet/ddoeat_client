@@ -52,6 +52,9 @@
 }
 
 @layer base {
+  * {
+    -webkit-user-drag: none;
+  }
   li {
     @apply list-none;
   }

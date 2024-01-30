@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import ImageContainer from '@components/common/ImageContainer';
 
 function StoreLogPhotoPreview({
   reviewImageUrls,
@@ -9,7 +9,13 @@ function StoreLogPhotoPreview({
     <div className="flex w-full overflow-x-scroll p-[16px]">
       <div className="min-w-max flex gap-[8px]">
         {reviewImageUrls.map((url) => (
-          <Image key={url} width={100} height={100} alt="" src={url} />
+          <ImageContainer
+            key={url}
+            type="small"
+            src={url}
+            alt=""
+            className="overflow-hidden"
+          />
         ))}
       </div>
     </div>
