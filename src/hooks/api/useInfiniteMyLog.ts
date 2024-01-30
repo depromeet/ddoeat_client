@@ -52,8 +52,8 @@ export const useInfiniteGetMyLog = (
 ): UseInfiniteQueryResult<ApiResponse<MyLog>[], Error> => {
   return useInfiniteQuery({
     queryKey: ['get-myLog', params],
-    queryFn: ({ pageParam = 1 }) => getMyLog({ ...params, page: pageParam }),
-    initialPageParam: 1,
+    queryFn: ({ pageParam = 0 }) => getMyLog({ ...params, page: pageParam }),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.data.last) {
         return lastPage.data.number + 1;
