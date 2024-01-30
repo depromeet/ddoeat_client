@@ -106,7 +106,7 @@ export default function Page() {
 
   return (
     <div className="bg-gray-100">
-      <Header className="w-full bg-gray-100">
+      <Header className="w-full bg-gray-100 z-header">
         <p className="body-16-bold">로그 작성</p>
       </Header>
       <div className="h-[100dvh] pt-[56px] pb-[104px] overflow-y-scroll px-[16px]">
