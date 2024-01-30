@@ -46,7 +46,8 @@ export default function StoreDetailLog({
               width={343}
               height={150}
               layout="responsive"
-              objectFit="cover"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             />
           </div>
         )}
