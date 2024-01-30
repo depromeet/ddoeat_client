@@ -2,7 +2,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import { TOKEN_REFRESH_URL, LOGOUT_URL } from '@constants/endpoint';
-import { getTokenRefresh, logout } from '@utils/auth';
+import {
+  getTokenRefresh,
+  logout,
+  removeTokenAndMoveToLogin,
+} from '@utils/auth';
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
@@ -37,11 +41,9 @@ axiosInstance.interceptors.request.use(
     const refreshToken = Cookies.get('refreshToken');
 
     // 쿠키에 토큰 전부 없을 시 로그인 페이지로 이동
-    // if (!accessToken && !refreshToken) {
-    //   logout();
-
-    //   return config;
-    // }
+    if (!accessToken && !refreshToken) {
+      removeTokenAndMoveToLogin();
+    }
 
     // NOTE: 토큰 재발급 요청 시 accessToken 헤더 삭제, refreshToken 헤더 추가
     if (config.url === TOKEN_REFRESH_URL && refreshToken) {
@@ -87,6 +89,9 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const { config, response } = error;
+
+    const refreshToken = Cookies.get('refreshToken');
+
     // NOTE: 토큰 재발급 요청이고, 401에러가 아니면 에러 던지기
     if (
       config.url === TOKEN_REFRESH_URL ||
@@ -97,7 +102,6 @@ axiosInstance.interceptors.response.use(
     }
 
     config.sent = true;
-    const refreshToken = Cookies.get('refreshToken');
 
     // NOTE: 401 에러인데, refreshToken이 존재하지 않으면 로그아웃
     // NOTE: 토큰 재발급 요청

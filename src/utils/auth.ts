@@ -7,6 +7,13 @@ interface TokenRefreshResponse {
   refreshToken: string;
 }
 
+export const removeTokenAndMoveToLogin = () => {
+  Cookies.remove('accessToken');
+  Cookies.remove('refreshToken');
+
+  window.location.href = '/login';
+};
+
 export const getTokenRefresh = async (): Promise<
   ApiResponse<TokenRefreshResponse>
 > => {
@@ -15,9 +22,6 @@ export const getTokenRefresh = async (): Promise<
 
 export const logout = async (): Promise<void> => {
   return axiosRequest('post', '/api/v1/auth/logout').then(() => {
-    Cookies.remove('accessToken');
-    Cookies.remove('refreshToken');
-
-    window.location.href = '/login';
+    removeTokenAndMoveToLogin();
   });
 };
