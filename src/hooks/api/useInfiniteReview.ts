@@ -59,8 +59,8 @@ export const useInfiniteReview = (
 ): UseInfiniteQueryResult<ApiResponse<ReviewProps>[], Error> => {
   return useInfiniteQuery({
     queryKey: ['get-review', params],
-    queryFn: ({ pageParam = 1 }) => getReview({ ...params, page: pageParam }),
-    initialPageParam: 1,
+    queryFn: ({ pageParam = 0 }) => getReview({ ...params, page: pageParam }),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.data.last) {
         return lastPage.data.number + 1;
