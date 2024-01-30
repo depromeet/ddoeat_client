@@ -30,6 +30,7 @@ const useGetReviewAvailable = ({
     queryKey: ['get-isAvailable', storeId],
     queryFn: () => getReviewAvailable({ storeId }),
     enabled: false,
+    staleTime: 0,
   });
 };
 
