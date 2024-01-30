@@ -72,7 +72,7 @@ export default function Home() {
 
   const [currentLevel, setCurrentLevel] = useState<number>(3);
 
-  const { refetch: getPinList, data: PinList } = useGetPinList({
+  const { mutate: getPinList, data: PinList } = useGetPinList({
     type: selectedTag,
     screenCoordinate,
     level: currentLevel,
