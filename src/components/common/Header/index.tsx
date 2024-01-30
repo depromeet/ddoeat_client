@@ -6,15 +6,24 @@ import { HTMLAttributes } from 'react';
 import cn from '@utils/cn';
 import LeftArrow from 'public/assets/icon24/left_arrow_24.svg';
 
+interface HeaderProps extends HTMLAttributes<HTMLButtonElement> {
+  onClick?: () => void;
+}
+
 export default function Header({
   className,
   children,
+  onClick,
   ...restProps
-}: HTMLAttributes<HTMLHeadElement>) {
+}: HeaderProps) {
   const { back } = useRouter();
 
   const handleClickBackButton = () => {
-    back();
+    if (onClick) {
+      onClick();
+    } else {
+      back();
+    }
   };
 
   return (
