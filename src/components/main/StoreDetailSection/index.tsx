@@ -47,8 +47,9 @@ export default function StoreDetailSection({
       <div ref={setTarget} />
       <AnimatePortal isShowing={!isDragging}>
         <Header
-          className={cn('absolute bg-white z-toast', {
+          className={cn('absolute z-toast', {
             '[&>*>*]:fill-white bg-transparent': reportData?.thumbnailUrl,
+            '[&>*>*]:fill-black bg-white': isScrollDown,
           })}
         >
           {isScrollDown && <span>{storeData?.storeName}</span>}
