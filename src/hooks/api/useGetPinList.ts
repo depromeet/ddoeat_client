@@ -1,4 +1,7 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import {
+  UseSuspenseQueryResult,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { axiosRequest } from '../../api/api-config';
@@ -65,12 +68,13 @@ const useGetPinList = ({
   type,
   screenCoordinate,
   level,
-  isSearchType,
-}: UseGetPinListParams): UseQueryResult<PinListResponse, AxiosError> => {
-  return useQuery({
+}: UseGetPinListParams): UseSuspenseQueryResult<
+  PinListResponse,
+  AxiosError
+> => {
+  return useSuspenseQuery({
     queryKey: ['get-pin-list', type],
     queryFn: () => getPinList({ type, screenCoordinate, level }),
-    enabled: !!screenCoordinate && !!level && !isSearchType,
   });
 };
 

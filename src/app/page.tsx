@@ -118,8 +118,6 @@ export default function Home() {
         rightBottomLatitude: map.getBounds().getSouthWest().getLat(),
         rightBottomLongitude: map.getBounds().getSouthWest().getLat(),
       });
-
-      setCurrentLevel(map.getLevel());
     }
   }, [currentUserCoordinate, setScreenCoordinate]);
 

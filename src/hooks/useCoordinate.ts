@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useThrottle from './useThrottle';
 import { ScreenCoordinate } from './api/useGetPinList';
@@ -13,6 +13,7 @@ const GANGNAM_STATION: CoordinateWithIds = {
 } as const;
 
 const useCoordinate = ({ runInit }: { runInit: boolean }) => {
+  const isFirstLoadRef = useRef(true);
   const [center, setCenter] = useState<CoordinateWithIds>(GANGNAM_STATION);
   const [screenCoordinate, setScreenCoordinate] =
     useState<ScreenCoordinate | null>(null);
@@ -21,45 +22,20 @@ const useCoordinate = ({ runInit }: { runInit: boolean }) => {
     useState<Coordinate | null>(null);
 
   const onSuccess = useCallback(
-    (addtionalCallback?: (pos: GeolocationPosition) => void) =>
-      (pos: GeolocationPosition) => {
-        const { latitude: lat, longitude: lng } = pos.coords;
-        setCurrentUserCoordinate({ lat, lng });
-        addtionalCallback?.(pos);
-      },
-    [],
+    (pos: GeolocationPosition) => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      setCurrentUserCoordinate({ lat, lng });
+      if (isFirstLoadRef.current && runInit) {
+        setCenter({ lat, lng });
+        isFirstLoadRef.current = false;
+      }
+    },
+    [runInit],
   );
-
-  const onSuccessInit = useCallback((pos: GeolocationPosition) => {
-    const { latitude: lat, longitude: lng } = pos.coords;
-    setCenter({ lat, lng });
-  }, []);
 
   const onError = () => {
     throw new Error('현재 위치를 가져올 수 없습니다.');
   };
-
-  const getCurrentUserCoordinate = useCallback(
-    (onSuccess: PositionCallback, onError: PositionErrorCallback) =>
-      navigator.geolocation.getCurrentPosition(onSuccess, onError),
-    [],
-  );
-
-  const getCurrentUserCoordinateInterval = useCallback(
-    ({ ms, runInit }: { ms: number; runInit: boolean }) => {
-      getCurrentUserCoordinate(
-        onSuccess(runInit ? onSuccessInit : undefined),
-        onError,
-      );
-      const intervalId = setInterval(
-        () => getCurrentUserCoordinate(onSuccess(), onError),
-        ms,
-      );
-
-      return () => clearInterval(intervalId);
-    },
-    [getCurrentUserCoordinate, onSuccess, onSuccessInit],
-  );
 
   const handleCenterChanged = (map?: kakao.maps.Map) => {
     if (!map) return;
@@ -91,7 +67,13 @@ const useCoordinate = ({ runInit }: { runInit: boolean }) => {
   const throttledBoundChanged = useThrottle(handleBoundChanged, 1000);
 
   useEffect(() => {
-    getCurrentUserCoordinateInterval({ ms: 5000, runInit });
+    const watch = navigator.geolocation.watchPosition(onSuccess, onError, {
+      timeout: 10000,
+    });
+
+    return () => {
+      navigator.geolocation.clearWatch(watch);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
