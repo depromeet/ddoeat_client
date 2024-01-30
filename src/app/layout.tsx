@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import Script from 'next/script';
 import { Suspense } from 'react';
-import './globals.css';
-
+import Script from 'next/script';
 import { Toaster } from 'sonner';
+import './globals.css';
 
 import QueryClientProviders from '@components/common/QueryClientProvider';
 import WebViewContainer from '@components/common/WebViewContainer';
