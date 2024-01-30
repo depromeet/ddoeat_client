@@ -2,6 +2,7 @@
 
 import { useState, useCallback, ChangeEvent, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { NewStore, usePostLog } from '@hooks/api/usePostLog';
 import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
@@ -14,12 +15,14 @@ import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
 import Header from '@components/common/Header';
 
 export default function Page() {
+  const queryClient = useQueryClient();
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName');
   const myRevisitedCount = searchParams.get('myRevisitedCount') ?? 0;
   const { mutate: postLog } = usePostLog({
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-myLog'] });
       push(
         `/review/complete?storeName=${storeName}&myRevisitedCount=${
           Number(myRevisitedCount) + 1

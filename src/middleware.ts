@@ -11,7 +11,6 @@ export function middleware(request: NextRequest) {
 
   // NOTE: splash 화면으로 넘어왔을 때 쿠키 내의 토큰 여부에 따른 리다이렉트 로직
   if (isFromApp === 'true') {
-    console.log(accessToken, refreshToken);
     if (accessToken && refreshToken) {
       url.pathname = '/';
     } else {

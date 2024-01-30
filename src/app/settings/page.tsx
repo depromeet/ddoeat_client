@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { SETTINGS, Setting } from '@constants/settings';
 import RightArrowIcon from 'public/assets/icon24/right_arrow_24.svg';
 import ArrowSquareIcon from 'public/assets/icon16/arrow_square_16.svg';
-import { useLogout } from '@hooks/api/useLogout';
+import { logout } from '@utils/auth';
 import Modal from '@components/common/Modal';
 import useControlModal from '@utils/useControlModal';
 import cn from '@utils/cn';
@@ -23,7 +23,6 @@ export default function Page() {
     onCancel: () => {},
   });
   const { push } = useRouter();
-  const { mutate: logout } = useLogout();
   const { mutate: postWithDraw } = usePostWithdraw();
 
   const handleClickSettingItem = (setting: Setting) => () => {
@@ -42,7 +41,7 @@ export default function Page() {
             buttonHandler: handleCloseModal,
           },
           {
-            buttonText: '삭제',
+            buttonText: '확인',
             buttonHandler: handleClickLogoutButton,
           },
         ],
