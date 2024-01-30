@@ -40,7 +40,6 @@ export interface Pin {
 }
 
 interface PinListResponse {
-  bookMarkList: Pin[];
   locationStoreList: Pin[];
 }
 
