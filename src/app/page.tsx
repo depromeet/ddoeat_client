@@ -70,7 +70,7 @@ export default function Home() {
     null,
   );
 
-  const [currentLevel, setCurrentLevel] = useState<number | null>(null);
+  const [currentLevel, setCurrentLevel] = useState<number>(3);
 
   const { refetch: getPinList, data: PinList } = useGetPinList({
     type: selectedTag,
@@ -152,6 +152,10 @@ export default function Home() {
     }
   };
 
+  const handleZoomChanged = (map: kakao.maps.Map) => {
+    setCurrentLevel(map.getLevel());
+  };
+
   return (
     <main className="flex h-[100dvh] flex-col items-center overflow-hidden">
       <motion.div
@@ -162,10 +166,12 @@ export default function Home() {
         <Map
           ref={mapRef}
           center={center}
+          level={currentLevel}
           className="w-full h-full"
           isPanto={true}
           onCenterChanged={throttledCenterChanged}
           onBoundsChanged={throttledBoundChanged}
+          onZoomChanged={handleZoomChanged}
         >
           <CurrentLocationMarker
             currentUserCoordinate={currentUserCoordinate}
