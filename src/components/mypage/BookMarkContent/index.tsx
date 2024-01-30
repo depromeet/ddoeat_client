@@ -98,11 +98,12 @@ export default function BookMarkContent() {
                   <BookmarkItem
                     key={item.bookmarkId}
                     isLast={false}
+                    storeId={item.storeId}
                     location={item.address}
                     menuType={item.categoryName}
                     revisitNum={item.totalRevisitedCount}
                     storeName={item.storeName}
-                    onClick={() => handleDeleteItem(item.bookmarkId)}
+                    onClick={() => handleDeleteItem(item.storeId)}
                   />
                 );
               });

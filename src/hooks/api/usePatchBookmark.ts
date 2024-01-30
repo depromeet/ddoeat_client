@@ -7,8 +7,8 @@ import { AxiosError } from 'axios';
 
 import { axiosRequest } from '@api/api-config';
 
-const patchBookmark = (bookmarkId: number): Promise<void> => {
-  return axiosRequest('patch', `/api/v1/bookmarks/${bookmarkId}`);
+const patchBookmark = (storeId: number): Promise<void> => {
+  return axiosRequest('patch', `/api/v1/bookmarks/${storeId}`);
 };
 
 const usePatchBookmark = (): UseMutationResult<void, AxiosError, number> => {
