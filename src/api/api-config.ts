@@ -36,6 +36,13 @@ axiosInstance.interceptors.request.use(
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
+    // 쿠키에 토큰 전부 없을 시 로그인 페이지로 이동
+    // if (!accessToken && !refreshToken) {
+    //   logout();
+
+    //   return config;
+    // }
+
     // NOTE: 토큰 재발급 요청 시 accessToken 헤더 삭제, refreshToken 헤더 추가
     if (config.url === TOKEN_REFRESH_URL && refreshToken) {
       delete config.headers['Authorization'];

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, { HTMLAttributes } from 'react';
 
 import StarRating from '@components/common/StarScore';
@@ -7,6 +6,7 @@ import Tag from '@components/common/Tag';
 import DotIcon from '/public/assets/icon20/dot_20.svg';
 
 import DeleteTrashButton from '@components/common/DeleteTrashButton';
+import ImageContainer from '@components/common/ImageContainer';
 
 interface MyLogProps extends HTMLAttributes<HTMLLIElement> {
   visitedAt: string;
@@ -63,12 +63,11 @@ export default function MyLog({
                 </div>
               </div>
               {imageUrl && (
-                <Image
+                <ImageContainer
+                  className="overflow-hidden"
                   src={imageUrl}
                   alt={storeName}
-                  width={100}
-                  height={100}
-                  objectFit="cover"
+                  type="small"
                 />
               )}
             </div>
