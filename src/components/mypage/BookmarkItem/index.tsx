@@ -4,6 +4,7 @@ import Tag from '@components/common/Tag';
 
 interface BookmarkListProps extends Omit<BasicListItem, 'hasDeleteOption'> {
   storeName: string;
+  storeId: number;
   revisitNum: number;
   menuType: string;
   location: string;
