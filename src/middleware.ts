@@ -16,18 +16,17 @@ export function middleware(request: NextRequest) {
     } else {
       url.pathname = '/login';
     }
-
-    url.search = '';
   } else {
+    console.log(isFirstLogin);
     // 웹
     if (isFirstLogin === 'true') {
       url.pathname = '/terms';
     } else {
       url.pathname = '/';
     }
-
-    url.search = '';
   }
+
+  url.search = '';
 
   const response = NextResponse.redirect(url);
 
