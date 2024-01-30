@@ -50,8 +50,8 @@ export const useInfiniteGetBookMark = (
 ): UseInfiniteQueryResult<ApiResponse<BookMark>[], Error> => {
   return useInfiniteQuery({
     queryKey: ['get-bookMark', params],
-    queryFn: ({ pageParam = 1 }) => getBookMark({ ...params, page: pageParam }),
-    initialPageParam: 1,
+    queryFn: ({ pageParam = 0 }) => getBookMark({ ...params, page: pageParam }),
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.data.last) {
         return lastPage.data.number + 1;
