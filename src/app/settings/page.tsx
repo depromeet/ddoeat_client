@@ -42,7 +42,7 @@ export default function Page() {
             buttonHandler: handleCloseModal,
           },
           {
-            buttonText: '삭제',
+            buttonText: '확인',
             buttonHandler: handleClickLogoutButton,
           },
         ],
