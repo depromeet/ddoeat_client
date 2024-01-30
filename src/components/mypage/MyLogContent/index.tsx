@@ -24,7 +24,7 @@ export default function MyLogContent() {
 
   const { setTarget } = useObserver({
     onIntersect,
-    threshold: 1,
+    threshold: 0.5,
   });
 
   const handleDeleteLog = (id: number) => {
@@ -46,7 +46,7 @@ export default function MyLogContent() {
             );
           });
         })}
-      {!isLoading && hasNextPage && <div ref={setTarget} />}
+      {!isLoading && hasNextPage && <div ref={setTarget} className="h-1" />}
     </div>
   );
 }

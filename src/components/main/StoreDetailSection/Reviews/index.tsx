@@ -41,7 +41,7 @@ export default function Reviews() {
 
   const { setTarget } = useObserver({
     onIntersect,
-    threshold: 1,
+    threshold: 0.5,
   });
 
   const handleDeleteLog = (id: number) => {
@@ -105,7 +105,7 @@ export default function Reviews() {
             </p>
           </div>
         )}
-        {!isLoading && hasNextPage && <div ref={setTarget} />}
+        {!isLoading && hasNextPage && <div ref={setTarget} className="h-1" />}
       </div>
     </div>
   );
