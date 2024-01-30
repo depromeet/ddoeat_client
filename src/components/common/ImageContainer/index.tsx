@@ -52,7 +52,7 @@ export default function ImageContainer({
 
   return (
     <div className={cn(`relative ${width} ${height} ${radius}`, className)}>
-      <Image fill className="object-cover select-none" {...restProps} />
+      <Image priority fill className="object-cover" {...restProps} />
     </div>
   );
 }
