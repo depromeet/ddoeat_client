@@ -1,4 +1,4 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { axiosRequest } from '../../api/api-config';
@@ -64,14 +64,12 @@ const useGetPinList = ({
   type,
   screenCoordinate,
   level,
-}: UseGetPinListParams): UseMutationResult<
-  PinListResponse,
-  AxiosError,
-  void
-> => {
-  return useMutation({
-    mutationKey: ['get-pin-list', type],
-    mutationFn: () => getPinList({ type, screenCoordinate, level }),
+  isSearchType,
+}: UseGetPinListParams): UseQueryResult<PinListResponse, AxiosError> => {
+  return useQuery({
+    queryKey: ['get-pin-list', type],
+    queryFn: () => getPinList({ type, screenCoordinate, level }),
+    enabled: !!screenCoordinate && !!level && !isSearchType,
   });
 };
 
