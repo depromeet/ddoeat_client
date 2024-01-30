@@ -1,26 +1,20 @@
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { PropsWithChildren, useCallback, useEffect, useRef } from 'react';
 
 import { useBottomSheet } from '../contexts/BottomSheetContext';
 
+import useMutationObserver from '@hooks/useMutationObserver';
 import useResizeObserver from '@hooks/useResizeObserver';
 import mergeRefs from '@utils/mergeRefs';
-import useMutationObserver from '@hooks/useMutationObserver';
 
 export default function BottonSheetFullContent({
   children,
 }: PropsWithChildren) {
   const fullStatusChildrenRef = useRef<HTMLDivElement>(null);
   const { status, setFullStatusChildrenHeight } = useBottomSheet();
-  const [, forceUpdate] = useState({});
 
   useMutationObserver(fullStatusChildrenRef, () => {
-    forceUpdate({});
+    fullStatusChildrenRef.current &&
+      setFullStatusChildrenHeight(fullStatusChildrenRef.current.offsetHeight);
   });
 
   const onResize = useCallback(
