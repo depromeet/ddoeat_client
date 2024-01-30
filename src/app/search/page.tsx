@@ -42,6 +42,7 @@ export default function Page() {
   const isStoreListNone = storeList?.length === 0;
 
   const handleClickSearchButton = () => {
+    if (!text) return;
     setRecentSearchKeywords((prev) => {
       const updatedKeywords = prev.includes(text)
         ? [text, ...prev.filter((item) => item !== text)]

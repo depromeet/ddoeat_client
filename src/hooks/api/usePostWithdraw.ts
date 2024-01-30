@@ -1,7 +1,7 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
 
+import { removeTokenAndMoveToLogin } from '@utils/auth';
 import { axiosRequest } from '@api/api-config';
 
 const postWithdraw = (): Promise<void> => {
@@ -13,12 +13,11 @@ export const usePostWithdraw = (): UseMutationResult<
   AxiosError,
   void
 > => {
-  const { push } = useRouter();
   return useMutation({
     mutationKey: ['post-withdraw'],
     mutationFn: postWithdraw,
     onSuccess: () => {
-      push('/login');
+      removeTokenAndMoveToLogin();
     },
   });
 };
