@@ -54,7 +54,9 @@
 @layer base {
   * {
     -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
   }
+
   li {
     @apply list-none;
   }
