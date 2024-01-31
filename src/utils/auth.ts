@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 
 import { ApiResponse, axiosRequest } from '@api/api-config';
+import { TOKEN_NULL_MESSAGE } from '@constants/postmessage';
 
 interface TokenRefreshResponse {
   accessToken: string;
@@ -10,7 +11,7 @@ interface TokenRefreshResponse {
 export const removeTokenAndMoveToLogin = () => {
   Cookies.remove('accessToken');
   Cookies.remove('refreshToken');
-
+  window.ReactNativeWebView.postMessage(TOKEN_NULL_MESSAGE);
   window.location.href = '/login';
 };
 
