@@ -20,9 +20,8 @@ export default function BottonSheetFullContent({
   useMutationObserver(fullStatusChildrenRef, () => {
     if (fullStatusChildrenRef.current) {
       setFullStatusChildrenHeight(fullStatusChildrenRef.current.offsetHeight);
-
       if (
-        fullStatusChildrenRef.current.offsetHeight > fullStatusChildrenHeight
+        fullStatusChildrenRef.current.offsetHeight < fullStatusChildrenHeight
       ) {
         setShouldResize(true);
       }
