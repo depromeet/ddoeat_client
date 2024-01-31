@@ -93,7 +93,7 @@ export default function Page() {
         <Tab.Group initialTab="mylog">
           <div className="h-[76px] flex px-[24px]">
             <Tab.Header>
-              <Tab.Item value="mylog">내 로그</Tab.Item>
+              <Tab.Item value="mylog">내 기록</Tab.Item>
               <Tab.Item value="bookmark">북마크</Tab.Item>
             </Tab.Header>
           </div>
