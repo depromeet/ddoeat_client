@@ -34,7 +34,7 @@ export default function CurrentLocationButton({
     <Button
       ref={buttonRef}
       {...props}
-      className="w-[50px] h-[50px] rounded-[16px] p-0 bg-white shadow-floating active:bg-white"
+      className="w-[50px] h-[50px] rounded-[24px] p-0 bg-white shadow-floating active:bg-white"
       onClick={handleClick}
     >
       <LocationDefaultIcon
