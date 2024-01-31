@@ -11,6 +11,7 @@ export default function VisitDate({
       <input
         placeholder="방문 날짜"
         defaultValue={today}
+        max={today}
         type="date"
         className="text-gray-500"
         onChange={onChange}
