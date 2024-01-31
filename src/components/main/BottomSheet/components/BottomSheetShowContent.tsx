@@ -7,6 +7,7 @@ import CurrentLocationButton from '@components/main/CurrentLocationButton';
 import { currentLocationButtonFadeInOutVariants } from '@constants/motions';
 import useResizeObserver from '@hooks/useResizeObserver';
 import mergeRefs from '@utils/mergeRefs';
+import useMutationObserver from '@hooks/useMutationObserver';
 
 interface BottonSheetShowContent {
   onCurrentLocationButtonClick: () => void;
@@ -18,6 +19,11 @@ export default function BottonSheetShowContent({
 }: PropsWithChildren<BottonSheetShowContent>) {
   const showStatusChildrenRef = useRef<HTMLDivElement>(null);
   const { status, setShowStatusChildrenHeight } = useBottomSheet();
+
+  useMutationObserver(showStatusChildrenRef, () => {
+    showStatusChildrenRef.current &&
+      setShowStatusChildrenHeight(showStatusChildrenRef.current.offsetHeight);
+  });
 
   const onResize = useCallback(
     (target: HTMLDivElement) => {
