@@ -1,4 +1,9 @@
-import { PanInfo, motion, useAnimationControls } from 'framer-motion';
+import {
+  PanInfo,
+  motion,
+  useAnimationControls,
+  useMotionValue,
+} from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useBottomSheet } from '../contexts/BottomSheetContext';
@@ -25,7 +30,10 @@ export default function BottomSheetWrapper({
     showStatusChildrenHeight,
     fullStatusChildrenHeight,
     setIsDragging,
+    shouldResize,
+    setShouldResize,
   } = useBottomSheet();
+  const y = useMotionValue(0);
 
   const [isScrolled, setIsScrolled] = useState(false);
   const controls = useAnimationControls();
@@ -113,6 +121,13 @@ export default function BottomSheetWrapper({
     changeStatus(status);
   };
 
+  useEffect(() => {
+    if (shouldResize) {
+      y.set(deviceHeight - fullStatusChildrenHeight);
+      setShouldResize(false);
+    }
+  }, [shouldResize]);
+
   return (
     isShowing &&
     deviceHeight && (
@@ -128,6 +143,7 @@ export default function BottomSheetWrapper({
             }
           }}
           drag={'y'}
+          style={{ y }}
           dragElastic={0}
           onDragEnd={handleDragEnd}
           dragConstraints={{
