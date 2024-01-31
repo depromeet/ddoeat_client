@@ -11,7 +11,9 @@ interface TokenRefreshResponse {
 export const removeTokenAndMoveToLogin = () => {
   Cookies.remove('accessToken');
   Cookies.remove('refreshToken');
-  window.ReactNativeWebView.postMessage(TOKEN_NULL_MESSAGE);
+  if (window?.ReactNativeWebView) {
+    window.ReactNativeWebView.postMessage(TOKEN_NULL_MESSAGE);
+  }
   window.location.href = '/login';
 };
 
