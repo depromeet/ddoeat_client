@@ -9,7 +9,7 @@ const useWebView = () => {
     const refreshToken = Cookies.get('refreshToken');
 
     //NOTE: 사용자가 앱을 껐다가 다시 접속할 때는 브라우저 토큰 보낼 필요 없음
-    if (accessToken != null && refreshToken != null) {
+    if (accessToken && refreshToken) {
       const message = JSON.stringify({ accessToken, refreshToken });
       window.ReactNativeWebView.postMessage(message);
     }
