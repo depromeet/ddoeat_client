@@ -1,10 +1,4 @@
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { PropsWithChildren, useCallback, useEffect, useRef } from 'react';
 
 import { useBottomSheet } from '../contexts/BottomSheetContext';
 
@@ -16,19 +10,20 @@ export default function BottonSheetFullContent({
   children,
 }: PropsWithChildren) {
   const fullStatusChildrenRef = useRef<HTMLDivElement>(null);
-  const { status, setFullStatusChildrenHeight } = useBottomSheet();
-  const [, forceUpdate] = useState({});
+  const { status, setFullStatusChildrenHeight, fullStatusChildrenHeight } =
+    useBottomSheet();
 
   useMutationObserver(fullStatusChildrenRef, () => {
-    console.log('mutate');
-    forceUpdate({});
-    fullStatusChildrenRef.current &&
+    if (
+      fullStatusChildrenRef.current &&
+      fullStatusChildrenRef.current.offsetHeight > fullStatusChildrenHeight
+    ) {
       setFullStatusChildrenHeight(fullStatusChildrenRef.current.offsetHeight);
+    }
   });
 
   const onResize = useCallback(
     (target: HTMLDivElement) => {
-      console.log('resize');
       setFullStatusChildrenHeight(target.offsetHeight);
     },
     [setFullStatusChildrenHeight],
