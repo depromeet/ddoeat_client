@@ -10,13 +10,23 @@ export default function BottonSheetFullContent({
   children,
 }: PropsWithChildren) {
   const fullStatusChildrenRef = useRef<HTMLDivElement>(null);
-  const { status, setFullStatusChildrenHeight, setShouldResize } =
-    useBottomSheet();
+  const {
+    status,
+    setFullStatusChildrenHeight,
+    fullStatusChildrenHeight,
+    setShouldResize,
+  } = useBottomSheet();
 
   useMutationObserver(fullStatusChildrenRef, () => {
-    setShouldResize(true);
-    fullStatusChildrenRef.current &&
+    if (fullStatusChildrenRef.current) {
       setFullStatusChildrenHeight(fullStatusChildrenRef.current.offsetHeight);
+
+      if (
+        fullStatusChildrenRef.current.offsetHeight > fullStatusChildrenHeight
+      ) {
+        setShouldResize(true);
+      }
+    }
   });
 
   const onResize = useCallback(
