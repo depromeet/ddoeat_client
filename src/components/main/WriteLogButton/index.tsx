@@ -82,7 +82,7 @@ export default function WriteLogButton({
   };
 
   useEffect(() => {
-    if (!isRefetching || !isSuccess) return;
+    if (isRefetching || !isSuccess) return;
 
     if (!data.isAvailable) {
       toast('같은 곳은 하루에 3번만 기록 가능해요!');
