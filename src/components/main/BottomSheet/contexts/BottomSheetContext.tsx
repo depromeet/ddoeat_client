@@ -24,6 +24,8 @@ interface State {
   setFullStatusChildrenHeight: Dispatch<SetStateAction<number>>;
   isDragging: boolean;
   setIsDragging: Dispatch<SetStateAction<boolean>>;
+  shouldResize: boolean;
+  setShouldResize: Dispatch<SetStateAction<boolean>>;
 }
 
 const BottomSheetContext = createContext<State | null>(null);
@@ -41,6 +43,7 @@ export function BottomSheetProvider({
   const [status, setStatus] = useState<BottomSheetStatus>('show');
   const [showStatusChildrenHeight, setShowStatusChildrenHeight] = useState(0);
   const [fullStatusChildrenHeight, setFullStatusChildrenHeight] = useState(0);
+  const [shouldResize, setShouldResize] = useState(false);
 
   const [deviceHeight, setDeviceHeight] = useState(0);
 
@@ -69,6 +72,8 @@ export function BottomSheetProvider({
           setFullStatusChildrenHeight,
           isDragging,
           setIsDragging,
+          shouldResize,
+          setShouldResize,
         }}
       >
         {children}
