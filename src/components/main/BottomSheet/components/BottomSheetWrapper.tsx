@@ -128,6 +128,7 @@ export default function BottomSheetWrapper({
             }
           }}
           drag={'y'}
+          dragElastic={0}
           onDragEnd={handleDragEnd}
           dragConstraints={{
             top: isFull ? deviceHeight - fullStatusChildrenHeight : 0,
