@@ -22,7 +22,9 @@ export default function Page() {
   const myRevisitedCount = searchParams.get('myRevisitedCount') ?? 0;
   const { mutate: postLog } = usePostLog({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['get-myLog'] });
+      queryClient.refetchQueries({
+        queryKey: ['get-myLog'],
+      });
       push(
         `/review/complete?storeName=${storeName}&myRevisitedCount=${
           Number(myRevisitedCount) + 1
