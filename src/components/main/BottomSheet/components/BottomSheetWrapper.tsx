@@ -123,7 +123,7 @@ export default function BottomSheetWrapper({
 
   useEffect(() => {
     if (shouldResize) {
-      y.set(deviceHeight - fullStatusChildrenHeight);
+      y.set(Math.max(y.getPrevious(), deviceHeight - fullStatusChildrenHeight));
       setShouldResize(false);
     }
   }, [shouldResize]);
