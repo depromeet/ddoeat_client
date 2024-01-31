@@ -109,7 +109,7 @@ export default function WriteLogButton({
       )}
       {...restProps}
     >
-      <span className="group-disabled:text-gray-500">로그 작성</span>
+      <span className="group-disabled:text-gray-500">맛집 기록 작성</span>
       <PenIcon />
     </Button>
   );
