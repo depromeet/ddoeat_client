@@ -23,7 +23,7 @@ export default function ProfileButton({
     <Button
       {...props}
       onClick={handleClickProfileButton}
-      className="w-[50px] h-[50px] rounded-[24px] p-0 bg-white shadow-floating active:bg-white flex items-center justify-center"
+      className="w-[56px] h-[56px] rounded-[24px] p-0 bg-white shadow-floating active:bg-white flex items-center justify-center"
     >
       <ProfileIcon />
     </Button>

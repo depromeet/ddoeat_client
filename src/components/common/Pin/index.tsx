@@ -47,7 +47,6 @@ export default function Pin({
             <span className="caption-12-extraBold text-gray-50">
               {totalRevisitedCount}
             </span>
-            명
           </Tag>
         )}
       </button>

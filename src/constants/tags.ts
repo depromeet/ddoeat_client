@@ -40,13 +40,7 @@ export const TAGS: Tag[] = [
   {
     value: 'SCHOOLFOOD',
     text: '분식',
-    defaultIcon: '/assets/icon20/food_beer_default_20.svg',
-    selectedIcon: '/assets/icon20/food_beer_active_20.svg',
-  },
-  {
-    value: 'ETC',
-    text: '기타',
-    defaultIcon: '/assets/icon20/food_beer_default_20.svg',
-    selectedIcon: '/assets/icon20/food_beer_active_20.svg',
+    defaultIcon: '/assets/icon20/food_bunsik_default_20.svg',
+    selectedIcon: '/assets/icon20/food_bunsik_active_20.svg',
   },
 ];
