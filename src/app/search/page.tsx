@@ -87,7 +87,7 @@ export default function Page() {
           resetText={resetText}
         />
       </Header>
-      <div className="h-[100dvh] pt-[68px] overflow-y-scroll">
+      <div className="h-[100dvh] pt-[68px] overflow-y-scroll text-gray-900">
         {!storeList && isMounted && (
           <RecentSearchKeyword
             recentSearchKeywords={recentSearchKeywords}

@@ -4,43 +4,43 @@
 
 @layer utilities {
   .header-22 {
-    @apply text-[22px]/[130%] tracking-[-0.44px] font-extrabold;
+    @apply text-[22px]/[130%] tracking-[-0.44px] font-semibold;
   }
   .header-20 {
-    @apply text-[20px]/[130%] tracking-[-0.4px] font-extrabold;
+    @apply text-[20px]/[130%] tracking-[-0.4px] font-semibold;
   }
   .header-18 {
-    @apply text-[18px]/[130%] tracking-[-0.36px] font-extrabold;
+    @apply text-[18px]/[130%] tracking-[-0.36px] font-semibold;
   }
   .body-16-bold {
-    @apply text-[16px]/[140%] tracking-[-0.48px] font-bold;
+    @apply text-[16px]/[140%] tracking-[-0.48px] font-medium;
   }
   .body-16-regular {
-    @apply text-[16px]/[140%] tracking-[-0.48px] font-normal;
+    @apply text-[16px]/[140%] tracking-[-0.48px] font-extralight;
   }
   .body-14-extraBold {
-    @apply text-[14px]/[140%] tracking-[-0.42px] font-extrabold;
+    @apply text-[14px]/[140%] tracking-[-0.42px] font-semibold;
   }
   .body-14-bold {
-    @apply text-[14px]/[140%] tracking-[-0.42px] font-bold;
+    @apply text-[14px]/[140%] tracking-[-0.42px] font-medium;
   }
   .body-14-regular {
-    @apply text-[14px]/[140%] tracking-[-0.42px] font-normal;
+    @apply text-[14px]/[140%] tracking-[-0.42px] font-extralight;
   }
   .caption-12-extraBold {
-    @apply text-[12px]/[140%] tracking-[-0.36px] font-extrabold;
+    @apply text-[12px]/[140%] tracking-[-0.36px] font-semibold;
   }
   .caption-12-bold {
-    @apply text-[12px]/[140%] tracking-[-0.36px] font-bold;
+    @apply text-[12px]/[140%] tracking-[-0.36px] font-medium;
   }
   .caption-12-regular {
-    @apply text-[12px]/[140%] tracking-[-0.36px] font-normal;
+    @apply text-[12px]/[140%] tracking-[-0.36px] font-extralight;
   }
   .caption-10-bold {
-    @apply text-[10px]/[140%] tracking-[-0.3px] font-bold;
+    @apply text-[10px]/[140%] tracking-[-0.3px] font-medium;
   }
   .caption-10-regular {
-    @apply text-[10px]/[140%] tracking-[-0.3px] font-normal;
+    @apply text-[10px]/[140%] tracking-[-0.3px] font-extralight;
   }
   .scrollbar-hide {
     -ms-overflow-style: none;

@@ -65,6 +65,7 @@ export default function Page() {
         ))}
       </ul>
       <FixedBottomCTAButton
+        className="bg-white"
         disabled={!isRequiredTermsAllChecked}
         onClick={handleClickConfirmButton}
       >

@@ -37,7 +37,7 @@ export default function TermsItem({
             {...restProps}
           />
           {checked ? <CheckFill /> : <CheckDefault />}
-          <p className="body-14-extraBold">{title}</p>
+          <p className="body-14-extraBold text-gray-900">{title}</p>
         </label>
         <button onClick={handleClickArrowButton}>
           {isOpenTermsItem ? <UpArrow /> : <DownArrow />}

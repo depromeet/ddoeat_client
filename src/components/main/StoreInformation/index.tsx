@@ -21,7 +21,7 @@ function StoreInformation({
   return (
     <div className="flex flex-col p-[16px] gap-[8px]">
       <div className="flex flex-col gap-[4px] items-center">
-        <span className="header-20">{storeName}</span>
+        <span className="header-20 text-gray-900">{storeName}</span>
         <div className="flex gap-[4px]">
           <Tag size="small" className="bg-primary-100 text-primary-500">
             내방문 {myRevisitedCount}번
@@ -32,11 +32,13 @@ function StoreInformation({
         </div>
       </div>
       <div className="flex flex-col gap-[4px] items-center">
-        <span className="caption-12-bold">{address}</span>
+        <span className="caption-12-bold text-gray-900">{address}</span>
         <div className="flex gap-[8px] items-center">
           <StarScore rating={totalRating} />
           <hr className="w-[1px] h-[10px] bg-gray-300" />
-          <span className="body-14-bold">방문기록 {totalReviewCount}</span>
+          <span className="body-14-bold text-gray-900">
+            방문기록 {totalReviewCount}
+          </span>
         </div>
       </div>
     </div>
