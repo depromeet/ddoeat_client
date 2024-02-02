@@ -18,6 +18,7 @@ export const useDeleteLog = (): UseMutationResult<void, AxiosError, number> => {
     mutationFn: (storeId) => deleteLog(storeId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['get-myLog'] });
+      queryClient.invalidateQueries({ queryKey: ['get-store'] });
     },
   });
 };
