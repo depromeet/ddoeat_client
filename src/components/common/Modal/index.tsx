@@ -31,15 +31,16 @@ export default function Modal({
               <p className="body-16-bold mb-[12px]">{text}</p>
               <p className="caption-12-regular">{subText}</p>
             </div>
-            <div className="flex gap-[12px]">
+            <div className="flex gap-[12px] text-gray-900">
               {controls.map(({ buttonText, buttonHandler }, index) => (
                 <button
                   key={index}
                   className={cn(
-                    'w-[120px] h-[49px] bg-gray-300 rounded-[24px]',
+                    'w-[120px] h-[40px] bg-gray-300 rounded-[24px]',
                     {
                       'bg-gray-300': index !== controls.length - 1,
-                      'bg-primary-300': index === controls.length - 1,
+                      'bg-primary-300 text-white':
+                        index === controls.length - 1,
                     },
                   )}
                   onClick={buttonHandler}
