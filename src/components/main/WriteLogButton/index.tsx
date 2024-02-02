@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ButtonHTMLAttributes, useEffect } from 'react';
+import { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
@@ -27,13 +27,8 @@ export default function WriteLogButton({
   ...restProps
 }: WriteLogButtonProps) {
   const router = useRouter();
-
-  const {
-    refetch: getReviewAvailable,
-    isRefetching,
-    isSuccess,
-    data,
-  } = useGetReviewAvailable({
+  const [isFetched, setIsFetched] = useState(false);
+  const { refetch: getReviewAvailable, data } = useGetReviewAvailable({
     storeId: storeId ?? undefined,
   });
 
@@ -81,24 +76,32 @@ export default function WriteLogButton({
     router.push(String(url));
   };
 
-  useEffect(() => {
-    if (isRefetching || !isSuccess) return;
+  const handleWriteLogButtonClick = async () => {
+    if (!storeId) {
+      goToReview();
+      return;
+    }
 
-    if (!data.isAvailable) {
+    try {
+      await getReviewAvailable();
+
+      setIsFetched(true);
+    } catch (error) {
+      toast('에러 발생! 다시 시도해주세요.');
+    }
+  };
+
+  useEffect(() => {
+    if (!isFetched) return;
+    setIsFetched(false);
+
+    if (data?.isAvailable === false) {
       toast('같은 곳은 하루에 3번만 기록 가능해요!');
       return;
     }
 
     goToReview();
-  }, [isRefetching, isSuccess]);
-
-  const handleWriteLogButtonClick = () => {
-    if (!storeId) {
-      goToReview();
-      return;
-    }
-    getReviewAvailable();
-  };
+  }, [isFetched]);
 
   return (
     <Button

@@ -194,7 +194,7 @@ export default function Home() {
           />
         </Map>
       </motion.div>
-      <div className="absolute top-[54px] z-above w-full px-[16px]">
+      <div className="absolute top-[8px] z-above w-full px-[16px]">
         <SearchField onClick={handleSearchFieldClick} />
         <FilterTagList
           selectedTag={selectedTag}
