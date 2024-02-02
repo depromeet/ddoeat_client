@@ -110,7 +110,7 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 text-gray-900">
       <Header className="w-full bg-gray-100 z-header">
         <p className="body-16-bold">맛집 기록 작성</p>
       </Header>
