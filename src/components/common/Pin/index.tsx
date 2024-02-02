@@ -41,7 +41,7 @@ export default function Pin({
         {!isActive && (
           <Tag
             size={'small'}
-            className="absolute top-[100%] caption-12-bold px-[4px] rounded-[20px] bg-gray-700 text-gray-50 gap-0"
+            className="absolute top-[100%] caption-12-bold px-[6px] py-[2px] rounded-[20px] bg-gray-700 text-gray-50 gap-[2px]"
           >
             <PinVisitorIcon />
             <span className="caption-12-extraBold text-gray-50">
