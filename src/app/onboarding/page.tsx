@@ -9,7 +9,7 @@ export default function Page() {
   const [step, setStep] = useState(ONBOARDING_CONTENT[0].step);
 
   return (
-    <div>
+    <div className="relative h-screen w-full overflow-hidden">
       {ONBOARDING_CONTENT.map(
         (content) =>
           step >= content.step && (
