@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 import OnboardingModal from '@components/onboarding/Modal';
 import { pageTransitionVariant } from '@constants/motions';
@@ -10,6 +11,7 @@ interface SceneProps {
   title: string;
   content: string;
   videoUrl: string;
+  gifUrl: string;
   icon: string;
   onNextStep: () => void;
 }
@@ -18,15 +20,23 @@ export default function Scene({
   step,
   title,
   content,
-  videoUrl,
+  // videoUrl,
+  gifUrl,
   onNextStep,
 }: SceneProps) {
   const router = useRouter();
   const [buttonActive, setButtonActive] = useState(false);
 
-  const handleVideoEnd = () => {
-    setButtonActive(true);
-  };
+  /* TODO: IOS 영상 이슈 대응 필요 */
+  // const handleVideoEnd = () => {
+  // setButtonActive(true);
+  // };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setButtonActive(true);
+    }, 2000);
+  }, [router, step]);
 
   const handleClickNext = () => {
     onNextStep();
@@ -42,7 +52,7 @@ export default function Scene({
       initial="initial"
       animate={['animate', 'opacity']}
     >
-      <video
+      {/* <video
         src={videoUrl}
         autoPlay
         className="absolute object-cover top-0 h-full w-full"
@@ -50,6 +60,13 @@ export default function Scene({
         muted
         key={videoUrl}
         onEnded={handleVideoEnd}
+      /> */}
+      <Image
+        src={gifUrl}
+        alt="onboarding_gif"
+        fill
+        unoptimized={true}
+        priority
       />
       <OnboardingModal
         title={title}

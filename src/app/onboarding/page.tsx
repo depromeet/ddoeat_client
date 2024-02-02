@@ -18,6 +18,7 @@ export default function Page() {
               title={content.title}
               content={content.content}
               videoUrl={content.videoUrl}
+              gifUrl={content.gifUrl}
               icon={content.icon}
               onNextStep={() => setStep((prev) => prev + 1)}
               key={content.step}
