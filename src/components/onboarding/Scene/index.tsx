@@ -45,7 +45,7 @@ export default function Scene({
       <video
         src={videoUrl}
         autoPlay
-        className="absolute object-cover top-0 h-full w-full ?"
+        className="absolute object-cover top-0 h-full w-full"
         playsInline
         muted
         key={videoUrl}
