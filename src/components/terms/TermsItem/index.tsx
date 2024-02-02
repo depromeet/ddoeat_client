@@ -26,7 +26,7 @@ export default function TermsItem({
   };
 
   return (
-    <li className="pl-[32px] pr-[16px]">
+    <li className="pl-[32px] pr-[16px] text-gray-900">
       <div className="flex justify-between py-[12px]">
         <label className="flex gap-[4px] items-center pl-[8px]">
           <input
@@ -37,7 +37,7 @@ export default function TermsItem({
             {...restProps}
           />
           {checked ? <CheckFill /> : <CheckDefault />}
-          <p className="body-14-extraBold text-gray-900">{title}</p>
+          <p className="body-14-extraBold">{title}</p>
         </label>
         <button onClick={handleClickArrowButton}>
           {isOpenTermsItem ? <UpArrow /> : <DownArrow />}
