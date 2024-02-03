@@ -26,6 +26,7 @@ export default function Scene({
 }: SceneProps) {
   const router = useRouter();
   const [buttonActive, setButtonActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   /* TODO: IOS 영상 이슈 대응 필요 */
   // const handleVideoEnd = () => {
@@ -42,6 +43,10 @@ export default function Scene({
     onNextStep();
     setButtonActive(false);
     if (step + 1 === 4) return router.push('/');
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
   };
 
   return (
@@ -67,14 +72,17 @@ export default function Scene({
         fill
         unoptimized={true}
         priority
+        onLoad={handleImageLoad}
       />
-      <OnboardingModal
-        title={title}
-        content={content}
-        step={step}
-        isButtonActive={buttonActive}
-        onNextStep={handleClickNext}
-      />
+      {imageLoaded && (
+        <OnboardingModal
+          title={title}
+          content={content}
+          step={step}
+          isButtonActive={buttonActive}
+          onNextStep={handleClickNext}
+        />
+      )}
     </motion.div>
   );
 }
