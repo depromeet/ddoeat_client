@@ -2,11 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import { TOKEN_REFRESH_URL, LOGOUT_URL } from '@constants/endpoint';
-import {
-  getTokenRefresh,
-  logout,
-  removeTokenAndMoveToLogin,
-} from '@utils/auth';
+import { getTokenRefresh, removeTokenAndMoveToLogin } from '@utils/auth';
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
@@ -117,8 +113,8 @@ axiosInstance.interceptors.response.use(
     }
 
     // NOTE: 토큰 재발급 요청이 유효하지 않으면, 쿠키의 토큰을 삭제하고 로그아웃 처리. 로그인 페이지로 이동
-    if (config.url === TOKEN_REFRESH_URL && response.data.code === 401) {
-      logout();
+    if (config.url === TOKEN_REFRESH_URL && response.data.code === 400) {
+      removeTokenAndMoveToLogin();
     }
   },
 );
