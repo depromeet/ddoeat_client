@@ -9,7 +9,7 @@ export default function Page() {
   const [step, setStep] = useState(ONBOARDING_CONTENT[0].step);
 
   return (
-    <div>
+    <div className="relative h-screen w-full overflow-hidden">
       {ONBOARDING_CONTENT.map(
         (content) =>
           step >= content.step && (
@@ -18,6 +18,7 @@ export default function Page() {
               title={content.title}
               content={content.content}
               videoUrl={content.videoUrl}
+              gifUrl={content.gifUrl}
               icon={content.icon}
               onNextStep={() => setStep((prev) => prev + 1)}
               key={content.step}
