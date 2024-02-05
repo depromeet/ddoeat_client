@@ -62,7 +62,7 @@ export default function Page() {
           <div className={`flex pb-[32px]`}>
             <div>
               {isInputActive ? (
-                <div className="flex">
+                <div className="flex gap-[4px]">
                   <input
                     ref={handleInputRefCallback}
                     type="text"
@@ -74,7 +74,7 @@ export default function Page() {
                   <PenIcon />
                 </div>
               ) : (
-                <div onClick={handleUserNameClick} className="flex">
+                <div onClick={handleUserNameClick} className="flex  gap-[4px]">
                   <button className="flex h-[29px] text-white header-22 gap-[4px]">
                     {userProfile?.nickname}
                   </button>
