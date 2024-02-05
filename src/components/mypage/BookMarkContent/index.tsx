@@ -76,7 +76,7 @@ export default function BookMarkContent() {
           <Tag
             key={tag.id}
             size="large"
-            className={cn({
+            className={cn('py-[8px] px-[16px]', {
               'bg-gray-500 text-white': selectedTag === tag.id,
               'bg-gray-100 text-gray-500': selectedTag !== tag.id,
             })}
