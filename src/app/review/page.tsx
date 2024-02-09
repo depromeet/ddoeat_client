@@ -43,7 +43,7 @@ export default function Page() {
 
   // NOTE: Presigned URL
   const { data: presignedUrl, refetch } = useGetPresignedUrl(
-    imageUrl.slice(27),
+    imageUrl.split('/')[imageUrl.split('/').length - 1],
   );
 
   // NOTE: 이미지 로드 시 presigned URL 권한 요청
