@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 
 import { convertMeterToKm } from '@utils/parser';
 import useDebounce from '@hooks/useDebounce';
@@ -24,7 +24,7 @@ export default function Page() {
 
   const isMounted = useIsMounted();
   const [text, onTextChange, setValue, resetText] = useInput('');
-  const debouncedText = useDebounce(text, 500);
+  const debouncedText = useDebounce(text, 100);
 
   const [recentSearchKeywords, setRecentSearchKeywords] = useStorageState<
     string[]
@@ -41,8 +41,7 @@ export default function Page() {
 
   const isStoreListNone = storeList?.length === 0;
 
-  const handleClickSearchButton = () => {
-    if (!text) return;
+  const updateRecentKeyword = () => {
     setRecentSearchKeywords((prev) => {
       const updatedKeywords = prev.includes(text)
         ? [text, ...prev.filter((item) => item !== text)]
@@ -54,9 +53,23 @@ export default function Page() {
 
       return updatedKeywords;
     });
-    if (text) {
-      refetch();
+  };
+
+  const searchStoreList = () => {
+    if (!text) return;
+
+    updateRecentKeyword();
+    refetch();
+  };
+
+  const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      searchStoreList();
     }
+  };
+
+  const handleClickSearchButton = () => {
+    searchStoreList();
   };
 
   const handleClickRecentSearchKeyword = (keyword: string) => () => {
@@ -84,6 +97,7 @@ export default function Page() {
           onClick={handleClickSearchButton}
           value={text}
           onChange={onTextChange}
+          onKeyDown={handleKeydown}
           resetText={resetText}
         />
       </Header>

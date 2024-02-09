@@ -14,6 +14,7 @@ export default function SearchTopBar({
   placeholder,
   value,
   onChange,
+  onKeyDown,
   resetText,
   onClick,
 }: SearchTopBarProps) {
@@ -36,6 +37,7 @@ export default function SearchTopBar({
         }
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </div>
   );
