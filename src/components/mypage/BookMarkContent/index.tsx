@@ -70,7 +70,7 @@ export default function BookMarkContent() {
   };
 
   return (
-    <div className="">
+    <div>
       <div className="flex gap-[8px] px-[16px] py-[12px] sticky top-[76px] bg-white z-above">
         {tags.map((tag) => (
           <Tag

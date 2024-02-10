@@ -55,7 +55,7 @@ export default function Page() {
   };
 
   return (
-    <div className="">
+    <div>
       <div className="h-[282px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
