@@ -4,8 +4,9 @@ import localFont from 'next/font/local';
 import Script from 'next/script';
 import { Suspense } from 'react';
 import { Toaster } from 'sonner';
-import './globals.css';
 
+import './globals.css';
+import AppleProvider from '@api/apple-config';
 import QueryClientProviders from '@components/common/QueryClientProvider';
 import WebViewContainer from '@components/common/WebViewContainer';
 
@@ -59,6 +60,11 @@ export default function RootLayout({
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
             strategy="beforeInteractive"
           />
+          <Script
+            type="text/javascript"
+            src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"
+          />
+          <AppleProvider />
           <Toaster
             duration={2000}
             position="bottom-center"
