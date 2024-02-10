@@ -7,7 +7,7 @@ import { Toaster } from 'sonner';
 
 import './globals.css';
 
-import AppleProvider from '@api/apple-config';
+import AppleProvider from '@components/common/AppleProvider';
 import QueryClientProviders from '@components/common/QueryClientProvider';
 import WebViewContainer from '@components/common/WebViewContainer';
 
