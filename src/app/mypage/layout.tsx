@@ -21,7 +21,7 @@ export default function Layout({ children }: LayoutProps) {
     <main className='bg-[url("/assets/image/mypage/background.png")] bg-cover w-full max-w-[480px] h-[100dvh]'>
       <Header
         onClick={handleClickBackButton}
-        className=" [&>*>*]:fill-white justify-between"
+        className=" [&>*>*]:fill-white justify-between relative"
       >
         <SettingIcon onClick={handleClickSettingButton} />
       </Header>
