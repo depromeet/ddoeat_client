@@ -32,7 +32,7 @@ export default function MyLogContent() {
   };
 
   return (
-    <div className="mx-[16px] overflow-y-auto h-[calc(100dvh-361px)]">
+    <div className="mx-[16px]">
       {myLog &&
         !myLog[0].data.empty &&
         myLog?.map((page) => {

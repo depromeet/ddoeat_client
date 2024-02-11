@@ -70,8 +70,8 @@ export default function BookMarkContent() {
   };
 
   return (
-    <>
-      <div className="flex gap-[8px] px-[16px] py-[12px]">
+    <div>
+      <div className="flex gap-[8px] px-[16px] py-[12px] sticky top-[76px] bg-white z-above">
         {tags.map((tag) => (
           <Tag
             key={tag.id}
@@ -87,7 +87,7 @@ export default function BookMarkContent() {
         ))}
       </div>
 
-      <div className="mx-[16px]  overflow-y-auto h-[calc(100dvh-418px)]">
+      <div className="mx-[16px]">
         {bookMark &&
           !bookMark[0].data.empty &&
           bookMark.map((page) => {
@@ -110,6 +110,6 @@ export default function BookMarkContent() {
           })}
         {!isLoading && hasNextPage && <div ref={setTarget} className="h-1" />}
       </div>
-    </>
+    </div>
   );
 }
