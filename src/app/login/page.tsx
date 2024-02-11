@@ -7,14 +7,18 @@ import DdoeatLogo from 'public/assets/ddoeat_logo.svg';
 import AppleLogo from 'public/assets/icon24/apple_logo_24.svg';
 import KakaoLogo from 'public/assets/icon24/kakao_logo_24.svg';
 
+const KAKAO_REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+const REDIRECT_URI =
+  process.env.NODE_ENV === 'production'
+    ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/auth?type=kakao`
+    : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/auth?type=kakao`;
+
 export default function Page() {
   const { push } = useRouter();
 
   const handleClickKakaoLoginButton = () => {
-    // TODO: 추후에 env=development, env=production으로 변경 요청
-    const env = process.env.NODE_ENV === 'development' ? 'local' : 'dev';
     push(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/oauth2/authorization/kakao?env=${env}`,
+      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`,
     );
   };
 
