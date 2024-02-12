@@ -8,10 +8,6 @@ export async function middleware(request: NextRequest) {
 
   // NOTE: 메인 페이지 진입 시 토큰이 존재하지 않으면 로그인 페이지로 리다이렉트
   if (request.nextUrl.pathname === '/') {
-    if (request.method === 'POST') {
-      return NextResponse.redirect(new URL('/', request.url), 303);
-    }
-
     const cookieAccessToken = request.cookies.get('accessToken');
     const cookieRefreshToken = request.cookies.get('refreshToken');
 
@@ -45,15 +41,20 @@ export async function middleware(request: NextRequest) {
 
   // NOTE: 카카오 로그인 > 로그인 api 호출 > 토큰 저장 후 메인페이지 이동
   if (request.nextUrl.pathname === '/auth') {
+    const body = await request.json();
+
     const provider = request.nextUrl.searchParams.get('type');
     const code = request.nextUrl.searchParams.get('code');
+    const id_token = body.id_token;
     const redirect_uri =
       process.env.NODE_ENV === 'production'
         ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/auth?type=${provider}`
         : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/auth?type=${provider}`;
 
     const res = await fetch(
-      `${process.env.API_BASE_URL}/api/v1/auth/login?code=${code}&provider=${provider}&redirect_uri=${redirect_uri}`,
+      `${process.env.API_BASE_URL}/api/v1/auth/login?code=${
+        provider === 'kakao' ? code : id_token
+      }&provider=${provider}&redirect_uri=${redirect_uri}`,
     );
 
     const responseData = await res.json();
@@ -92,5 +93,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/auth', '/'],
+  matcher: ['/', '/auth'],
 };
