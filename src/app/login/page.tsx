@@ -17,8 +17,8 @@ const REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/auth?type=kakao`;
 
 export default function Page() {
-  const [code, setCode] = useState('');
-  const { data, refetch } = useAppleLogin({
+  const [code] = useState('');
+  const { data } = useAppleLogin({
     code,
     redirect_uri: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/login`,
   });
@@ -28,9 +28,9 @@ export default function Page() {
     const handleAppleLoginSuccess = (event: Event) => {
       const customEvent = event as CustomEvent<AppleSigninResponse>;
       console.log(customEvent.detail); // 성공 응답 처리
-      setCode(customEvent.detail.authorization.id_token);
+      // setCode(customEvent.detail.authorization.id_token);
 
-      refetch();
+      // refetch();
     };
 
     // Apple 로그인 실패 이벤트 리스너 등록
