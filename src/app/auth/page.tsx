@@ -1,4 +1,4 @@
 export default function Page() {
-  console.log(window.location.href);
+  console.log(typeof window !== 'undefined' && window.location.href);
   return <></>;
 }
