@@ -86,7 +86,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (request.nextUrl.pathname === '/auth' && provider === 'apple') {
+  if (request.nextUrl.pathname === '/login') {
     // 이미 리다이렉트된 요청인지 확인
     if (request.nextUrl.searchParams.has('redirected')) {
       // 이미 리다이렉트된 경우, 추가 리다이렉트를 수행하지 않음
@@ -104,5 +104,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/auth'],
+  matcher: ['/', '/auth', '/login'],
 };
