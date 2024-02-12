@@ -24,7 +24,7 @@ export default function Page() {
 
   const handleClickAppleLoginButton = async () => {
     try {
-      await window.AppleID?.auth
+      const res = await window.AppleID?.auth
         .signIn()
         .then((response) => {
           localStorage.setItem('apple_login_info', JSON.stringify(response));
@@ -37,6 +37,7 @@ export default function Page() {
           const event = new CustomEvent('onAppleLoginFail', { detail: error });
           document.dispatchEvent(event);
         });
+      console.log(res);
     } catch (error) {
       console.log(error);
     }

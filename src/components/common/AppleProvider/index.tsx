@@ -12,7 +12,7 @@ export default function AppleProvider() {
         redirectURI: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/auth?type=apple`,
         state: 'origin:web',
         nonce: generateNonce(16),
-        usePopup: false,
+        usePopup: true,
       });
     }
   };
