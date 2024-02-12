@@ -8,9 +8,9 @@ export async function middleware(request: NextRequest) {
 
   // NOTE: 메인 페이지 진입 시 토큰이 존재하지 않으면 로그인 페이지로 리다이렉트
   if (request.nextUrl.pathname === '/') {
-    if (request.method === 'POST') {
-      return NextResponse.redirect(new URL('/', request.url), 303);
-    }
+    // if (request.method === 'POST') {
+    //   return NextResponse.redirect(new URL('/', request.url), 303);
+    // }
 
     const cookieAccessToken = request.cookies.get('accessToken');
     const cookieRefreshToken = request.cookies.get('refreshToken');
@@ -71,7 +71,10 @@ export async function middleware(request: NextRequest) {
       }
 
       url.search = '';
-      const response = NextResponse.redirect(url);
+      const response =
+        request.method === 'POST'
+          ? NextResponse.redirect(url, 303)
+          : NextResponse.redirect(url);
       if (accessToken && refreshToken) {
         response.cookies.set('accessToken', accessToken, { path: '/' });
         response.cookies.set('refreshToken', refreshToken, { path: '/' });
