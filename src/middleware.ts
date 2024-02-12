@@ -39,22 +39,17 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+  const provider = request.nextUrl.searchParams.get('type');
   // NOTE: 카카오 로그인 > 로그인 api 호출 > 토큰 저장 후 메인페이지 이동
-  if (request.nextUrl.pathname === '/auth') {
-    const body = await request.json();
-
-    const provider = request.nextUrl.searchParams.get('type');
+  if (request.nextUrl.pathname === '/auth' && provider === 'kakao') {
     const code = request.nextUrl.searchParams.get('code');
-    const id_token = body.id_token;
     const redirect_uri =
       process.env.NODE_ENV === 'production'
         ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/auth?type=${provider}`
         : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/auth?type=${provider}`;
 
     const res = await fetch(
-      `${process.env.API_BASE_URL}/api/v1/auth/login?code=${
-        provider === 'kakao' ? code : id_token
-      }&provider=${provider}&redirect_uri=${redirect_uri}`,
+      `${process.env.API_BASE_URL}/api/v1/auth/login?code=${code}&provider=${provider}&redirect_uri=${redirect_uri}`,
     );
 
     const responseData = await res.json();
