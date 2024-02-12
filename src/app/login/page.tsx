@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import CTAButton from '@components/common/CTAButton';
 import DdoeatLogo from 'public/assets/ddoeat_logo.svg';
@@ -14,6 +15,12 @@ const REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/auth?type=kakao`;
 
 export default function Page() {
+  useEffect(() => {
+    document.addEventListener('onAppleLoginSuccess', (e) => {
+      console.log(e);
+    });
+  }, []);
+
   const { push } = useRouter();
 
   const handleClickKakaoLoginButton = () => {
