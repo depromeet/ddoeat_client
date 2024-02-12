@@ -1,12 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+import useAppleLogin from '@hooks/api/useAppleLogin';
 import CTAButton from '@components/common/CTAButton';
 import DdoeatLogo from 'public/assets/ddoeat_logo.svg';
 import AppleLogo from 'public/assets/icon24/apple_logo_24.svg';
 import KakaoLogo from 'public/assets/icon24/kakao_logo_24.svg';
+import type { AppleSigninResponse } from 'src/types/apple';
 
 const KAKAO_REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 const REDIRECT_URI =
@@ -15,10 +17,19 @@ const REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/auth?type=kakao`;
 
 export default function Page() {
+  const [code, setCode] = useState('');
+  const { refetch } = useAppleLogin({
+    code,
+    redirect_uri: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/login`,
+  });
   useEffect(() => {
     // Apple 로그인 성공 이벤트 리스너 등록
-    const handleAppleLoginSuccess = (e: unknown) => {
-      console.log(e); // 성공 응답 처리
+    const handleAppleLoginSuccess = (event: Event) => {
+      const customEvent = event as CustomEvent<AppleSigninResponse>;
+      console.log(customEvent.detail); // 성공 응답 처리
+      setCode(customEvent.detail.authorization.id_token);
+
+      refetch();
     };
 
     // Apple 로그인 실패 이벤트 리스너 등록
@@ -43,6 +54,7 @@ export default function Page() {
         handleAppleLoginFail,
       );
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { push } = useRouter();
