@@ -37,7 +37,6 @@ interface AppleIDAuthSignInResponse {
     };
   };
 }
-
 export declare global {
   interface Window {
     ReactNativeWebView: {
