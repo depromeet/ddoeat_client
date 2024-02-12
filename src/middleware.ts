@@ -85,22 +85,6 @@ export async function middleware(request: NextRequest) {
         : NextResponse.redirect(url);
     }
   }
-
-  // if (request.nextUrl.pathname === '/login') {
-  //   // 이미 리다이렉트된 요청인지 확인
-  //   if (request.nextUrl.searchParams.has('redirected')) {
-  //     // 이미 리다이렉트된 경우, 추가 리다이렉트를 수행하지 않음
-  //     return NextResponse.next();
-  //   } else {
-  //     // 쿼리 파라미터를 포함한 완전한 URL 구성
-  //     const redirectUrl = request.nextUrl.clone();
-  //     redirectUrl.searchParams.set('type', 'apple');
-  //     redirectUrl.searchParams.set('redirected', 'true'); // 리다이렉트 플래그 설정
-
-  //     // 클라이언트에게 리다이렉트 요청
-  //     return NextResponse.redirect(redirectUrl, 303);
-  //   }
-  // }
 }
 
 export const config = {
