@@ -16,9 +16,33 @@ const REDIRECT_URI =
 
 export default function Page() {
   useEffect(() => {
-    document.addEventListener('onAppleLoginSuccess', (e) => {
-      console.log(e);
-    });
+    // Apple 로그인 성공 이벤트 리스너 등록
+    const handleAppleLoginSuccess = (e: unknown) => {
+      console.log(e); // 성공 응답 처리
+    };
+
+    // Apple 로그인 실패 이벤트 리스너 등록
+    const handleAppleLoginFail = (e: unknown) => {
+      console.error(e); // 실패 응답 처리
+    };
+
+    document.addEventListener(
+      'AppleIDSignInOnSuccess',
+      handleAppleLoginSuccess,
+    );
+    document.addEventListener('AppleIDSignInOnFailure', handleAppleLoginFail);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener(
+        'AppleIDSignInOnSuccess',
+        handleAppleLoginSuccess,
+      );
+      document.removeEventListener(
+        'AppleIDSignInOnFailure',
+        handleAppleLoginFail,
+      );
+    };
   }, []);
 
   const { push } = useRouter();
@@ -31,20 +55,7 @@ export default function Page() {
 
   const handleClickAppleLoginButton = async () => {
     try {
-      const res = await window.AppleID?.auth
-        .signIn()
-        .then((response) => {
-          localStorage.setItem('apple_login_info', JSON.stringify(response));
-          const event = new CustomEvent('onAppleLoginSuccess', {
-            detail: response,
-          });
-          document.dispatchEvent(event);
-        })
-        .catch((error) => {
-          const event = new CustomEvent('onAppleLoginFail', { detail: error });
-          document.dispatchEvent(event);
-        });
-      console.log(res);
+      await window.AppleID?.auth.signIn();
     } catch (error) {
       console.log(error);
     }
