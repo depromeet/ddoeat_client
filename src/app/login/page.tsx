@@ -18,10 +18,11 @@ const REDIRECT_URI =
 
 export default function Page() {
   const [code, setCode] = useState('');
-  const { refetch } = useAppleLogin({
+  const { data, refetch } = useAppleLogin({
     code,
     redirect_uri: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/login`,
   });
+  console.log(data);
   useEffect(() => {
     // Apple 로그인 성공 이벤트 리스너 등록
     const handleAppleLoginSuccess = (event: Event) => {
