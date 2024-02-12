@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { PanInfo, motion } from 'framer-motion';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -25,28 +25,22 @@ export default function Scene({
   onNextStep,
 }: SceneProps) {
   const router = useRouter();
-  const [buttonActive, setButtonActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  /* TODO: IOS 영상 이슈 대응 필요 */
-  // const handleVideoEnd = () => {
-  // setButtonActive(true);
-  // };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setButtonActive(true);
-    }, 2000);
-  }, [router, step]);
 
   const handleClickNext = () => {
     onNextStep();
-    setButtonActive(false);
     if (step + 1 === 4) return router.push('/');
   };
 
   const handleImageLoad = () => {
     setImageLoaded(true);
+  };
+
+  const handleDragEnd = (event: DragEvent, info: PanInfo) => {
+    if (info.offset.x < -50) {
+      if (step + 1 === 4) return router.push('/');
+      onNextStep();
+    }
   };
 
   return (
@@ -55,8 +49,15 @@ export default function Scene({
       variants={pageTransitionVariant}
       key={step}
       initial="initial"
-      animate={['animate', 'opacity']}
+      animate={['animate']}
+      drag="x"
+      dragDirectionLock
+      dragSnapToOrigin={true}
+      dragElastic={{ left: 0.1, right: 0 }}
+      dragConstraints={{ left: 0.8, right: 0 }}
+      onDragEnd={handleDragEnd}
     >
+      {/* TODO: IOS 영상 이슈 대응 필요 */}
       {/* <video
         src={videoUrl}
         autoPlay
@@ -79,7 +80,6 @@ export default function Scene({
           title={title}
           content={content}
           step={step}
-          isButtonActive={buttonActive}
           onNextStep={handleClickNext}
         />
       )}

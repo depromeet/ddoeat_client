@@ -29,12 +29,14 @@ export const bounceAnimationVariants: Variants = {
 export const pageTransitionVariant: Variants = {
   initial: {
     x: '100%',
+    opacity: 0,
+    transition: { duration: 0.5 },
   },
   animate: {
     x: 0,
+    opacity: 1,
     transition: { duration: 0.5 },
   },
-  opacity: { opacity: 1, transition: { duration: 0.2 } },
 };
 
 export const defaultFadeInUpVariants: Variants = {
