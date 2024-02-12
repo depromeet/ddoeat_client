@@ -1,8 +1,20 @@
-<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Pin Contents">
-<g id="Bookmark">
-<path d="M13.3572 12.8227C13.3572 11.816 14.1732 11 15.1799 11H28.8202C29.8269 11 30.6429 11.816 30.6429 12.8227V28.715H13.3572V12.8227Z" fill="white"/>
-<path d="M13.3572 28.715H30.6429V31.1737C30.6429 32.6056 29.0675 33.4783 27.8535 32.7189L22 29.057L16.1465 32.7189C14.9326 33.4783 13.3572 32.6056 13.3572 31.1737V28.715Z" fill="white"/>
+<svg width="47" height="52" viewBox="0 0 47 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_3634_1219)">
+<path d="M25.232 42.1699C24.4622 43.5033 22.5377 43.5033 21.7679 42.1699L18.3038 36.1699C17.534 34.8366 18.4963 33.1699 20.0359 33.1699L26.9641 33.1699C28.5037 33.1699 29.466 34.8366 28.6962 36.1699L25.232 42.1699Z" fill="white"/>
+<circle cx="23.5" cy="19.1699" r="17.6" fill="#FF896F" stroke="white" stroke-width="2.8"/>
 </g>
-</g>
+<path d="M17.5 12.4955C17.5 11.7634 18.0665 11.1699 18.7653 11.1699H28.2347C28.9335 11.1699 29.5 11.7634 29.5 12.4955V24.054H17.5V12.4955Z" fill="white"/>
+<path d="M17.5 24.054H29.5V25.8422C29.5 26.8836 28.4063 27.5183 27.5636 26.966L23.5 24.3027L19.4364 26.966C18.5937 27.5183 17.5 26.8836 17.5 25.8422V24.054Z" fill="white"/>
+<defs>
+<filter id="filter0_d_3634_1219" x="0.5" y="0.169922" width="46" height="52" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3634_1219"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3634_1219" result="shape"/>
+</filter>
+</defs>
 </svg>
