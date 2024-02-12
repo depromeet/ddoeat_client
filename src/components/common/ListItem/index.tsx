@@ -36,7 +36,10 @@ export default function ListItem({
         <div className="flex flex-col gap-[9px]">{children}</div>
         {hasDeleteOption && <DeleteTrashButton onClick={onClick} />}
         {hasReportOption && (
-          <div className="caption-12-bold" onClick={handleReviewReport}>
+          <div
+            className="caption-12-bold text-gray-500"
+            onClick={handleReviewReport}
+          >
             신고
           </div>
         )}
