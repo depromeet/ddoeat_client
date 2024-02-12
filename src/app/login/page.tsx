@@ -18,7 +18,7 @@ const REDIRECT_URI =
 
 export default function Page() {
   const [code] = useState('');
-  const { data } = useAppleLogin({
+  const { data, refetch } = useAppleLogin({
     code,
     redirect_uri: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/login`,
   });
@@ -30,7 +30,7 @@ export default function Page() {
       console.log(customEvent.detail); // 성공 응답 처리
       // setCode(customEvent.detail.authorization.id_token);
 
-      // refetch();
+      refetch();
     };
 
     // Apple 로그인 실패 이벤트 리스너 등록
