@@ -24,8 +24,18 @@ export default function Page() {
 
   const handleClickAppleLoginButton = async () => {
     try {
-      const res = await window.AppleID?.auth.signIn();
-      console.log(res);
+      await window.AppleID?.auth
+        .signIn()
+        .then((response) => {
+          const event = new CustomEvent('onAppleLoginSuccess', {
+            detail: response,
+          });
+          document.dispatchEvent(event);
+        })
+        .catch((error) => {
+          const event = new CustomEvent('onAppleLoginFail', { detail: error });
+          document.dispatchEvent(event);
+        });
     } catch (error) {
       console.log(error);
     }
