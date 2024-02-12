@@ -1,6 +1,6 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 import { axiosRequest, ApiResponse } from '@api/api-config';
