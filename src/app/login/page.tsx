@@ -27,6 +27,7 @@ export default function Page() {
       await window.AppleID?.auth
         .signIn()
         .then((response) => {
+          localStorage.setItem('apple_login_info', JSON.stringify(response));
           const event = new CustomEvent('onAppleLoginSuccess', {
             detail: response,
           });
