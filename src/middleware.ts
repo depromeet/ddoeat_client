@@ -87,6 +87,8 @@ export async function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname === '/auth' && provider === 'apple') {
+    const body = await request.json();
+    const { id_token } = body;
     // 이미 리다이렉트된 요청인지 확인
     if (request.nextUrl.searchParams.has('redirected')) {
       // 이미 리다이렉트된 경우, 추가 리다이렉트를 수행하지 않음
@@ -96,6 +98,7 @@ export async function middleware(request: NextRequest) {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.searchParams.set('type', 'apple');
       redirectUrl.searchParams.set('redirected', 'true'); // 리다이렉트 플래그 설정
+      redirectUrl.searchParams.set('code', id_token);
 
       // 클라이언트에게 리다이렉트 요청
       return NextResponse.redirect(redirectUrl, 303);
