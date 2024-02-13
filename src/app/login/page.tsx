@@ -22,7 +22,7 @@ const APPLE_REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/login`;
 
 export default function Page() {
-  const [code, setCode] = useState('');
+  const [code] = useState('');
   const { mutate: appleLogin } = useAppleLogin();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Page() {
       event.preventDefault();
       const customEvent = event as CustomEvent<AppleSigninResponse>;
       console.log(customEvent.detail);
-      setCode(customEvent.detail.authorization.id_token);
+      // setCode(customEvent.detail.authorization.id_token);
     };
 
     // Apple 로그인 실패 이벤트 리스너 등록
