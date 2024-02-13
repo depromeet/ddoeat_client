@@ -28,17 +28,20 @@ export default function Page() {
       console.log(customEvent.detail);
       const code = customEvent.detail.authorization.id_token;
 
-      const res = await fetch(`${process.env.API_BASE_URL}/api/v1/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            provider: 'apple',
+            code,
+            redirect_uri: APPLE_REDIRECT_URI,
+          }),
         },
-        body: JSON.stringify({
-          provider: 'apple',
-          code,
-          redirect_uri: APPLE_REDIRECT_URI,
-        }),
-      });
+      );
 
       console.log(res);
     };
