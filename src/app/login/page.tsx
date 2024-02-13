@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useAppleLogin from '@hooks/api/useAppleLogin';
 import CTAButton from '@components/common/CTAButton';
@@ -22,7 +22,17 @@ const APPLE_REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/login`;
 
 export default function Page() {
+  const [code, setCode] = useState('');
   const { mutate: appleLogin } = useAppleLogin();
+
+  useEffect(() => {
+    if (code) {
+      appleLogin({
+        code,
+        redirect_uri: APPLE_REDIRECT_URI,
+      });
+    }
+  }, [code]);
 
   useEffect(() => {
     // Apple 로그인 성공 이벤트 리스너 등록
@@ -30,6 +40,7 @@ export default function Page() {
       event.preventDefault();
       const customEvent = event as CustomEvent<AppleSigninResponse>;
       console.log(customEvent.detail);
+      setCode(customEvent.detail.authorization.id_token);
 
       appleLogin({
         code: customEvent.detail.authorization.id_token,
