@@ -9,6 +9,7 @@ interface LocationStorePinListProps {
   isBottomSheetShowing: boolean;
   selectedPin: CoordinateWithIds | null;
   onPinClick: (props: CoordinateWithIds) => void;
+  mapLevel: number;
 }
 
 function LocationStorePinList({
@@ -16,6 +17,7 @@ function LocationStorePinList({
   isBottomSheetShowing,
   selectedPin,
   onPinClick,
+  mapLevel,
 }: LocationStorePinListProps) {
   const handlePinClick = (props: CoordinateWithIds) => () => {
     onPinClick(props);
@@ -25,6 +27,7 @@ function LocationStorePinList({
       {locationStoreList.map((store) => (
         <CustomOverlayPin
           key={store.storeId}
+          mapLevel={mapLevel}
           isActive={
             isBottomSheetShowing &&
             getIsSameId({

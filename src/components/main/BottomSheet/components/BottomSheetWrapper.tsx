@@ -12,9 +12,10 @@ import { BottomSheetProps, BottomSheetStatus } from '../types/types';
 import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
 import { bottomSheetAnimationVariants } from 'src/constants/motions';
+import switchUrl from '@utils/switchUrl';
 
 export const HANDLE_HEIGHT = 24;
-const DRAG_SAFE_DISTANCE = 50;
+const DRAG_SAFE_DISTANCE = 20;
 
 export default function BottomSheetWrapper({
   isShowing,
@@ -52,12 +53,29 @@ export default function BottomSheetWrapper({
 
   const changeStatus = useCallback(
     async (willChange: BottomSheetStatus) => {
+      const url = new URL(window.location.href);
+      url.searchParams.set('bottomSheetStatus', willChange);
+      switchUrl(url);
       setStatus(willChange);
-      //TODO: shallow route
       await controls.start(willChange);
     },
     [controls, setStatus],
   );
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const bottomSheetStatus = searchParams.get('bottomSheetStatus');
+
+    if (bottomSheetStatus === 'full') {
+      changeStatus('full');
+      return;
+    }
+
+    if (bottomSheetStatus === 'show') {
+      changeStatus('show');
+      return;
+    }
+  }, [window.location.search]);
 
   useEffect(() => {
     if (isShowing && deviceHeight && showStatusChildrenHeight) {

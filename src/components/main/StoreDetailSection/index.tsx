@@ -42,15 +42,21 @@ export default function StoreDetailSection({
     onIntersect,
   });
 
+  const handleBackButtonClick = () => {};
+
   return (
-    <div>
-      <div ref={setTarget} />
+    <div className="relative">
+      <div
+        ref={setTarget}
+        className="absolute top-0 h-[20px] w-full bg-transparent"
+      />
       <AnimatePortal isShowing={!isDragging}>
         <Header
-          className={cn('absolute z-toast', {
+          className={cn('absolute z-toast transition-all', {
             '[&>*>*]:fill-white bg-transparent': reportData?.thumbnailUrl,
             '[&>*>*]:fill-black bg-white': isScrollDown,
           })}
+          onClick={handleBackButtonClick}
         >
           {isScrollDown && <span>{storeData?.storeName}</span>}
         </Header>
