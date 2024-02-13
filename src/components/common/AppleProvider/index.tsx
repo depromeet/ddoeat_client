@@ -9,10 +9,10 @@ export default function AppleProvider() {
       window.AppleID.auth.init({
         clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
         scope: 'name email',
-        redirectURI: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}`,
+        redirectURI: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/login`,
         state: 'origin:web',
         nonce: generateNonce(16),
-        usePopup: false,
+        usePopup: true,
       });
     }
   };
