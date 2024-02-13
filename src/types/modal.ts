@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface Control {
   buttonText: string;
   buttonHandler: () => void;
@@ -9,4 +11,5 @@ export interface ModalProps {
   subText: string;
   controls: Control[];
   onCancel: () => void;
+  children?: ReactNode;
 }

@@ -11,6 +11,7 @@ export default function Modal({
   subText,
   controls,
   onCancel,
+  children,
 }: ModalProps) {
   const handleOutsideClick = (event: MouseEvent) => {
     if (event.target === event.currentTarget) {
@@ -26,11 +27,12 @@ export default function Modal({
           onClick={handleOutsideClick}
         />
         <div className="flex items-center justify-center w-[100dvw] max-w-[480px] h-[100dvh]">
-          <div className="w-[300px] h-[188px] bg-white flex items-center justify-center flex-col p-[24px] rounded-[24px] z-toast">
+          <div className="w-[300px] bg-white flex items-center justify-center flex-col p-[24px] rounded-[24px] z-toast">
             <div className="mb-[32px]  text-center">
               <p className="body-16-bold mb-[12px]">{text}</p>
               <p className="caption-12-regular">{subText}</p>
             </div>
+            {children}
             <div className="flex gap-[12px] text-gray-900">
               {controls.map(({ buttonText, buttonHandler }, index) => (
                 <button
