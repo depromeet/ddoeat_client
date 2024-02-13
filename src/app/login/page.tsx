@@ -41,11 +41,6 @@ export default function Page() {
       const customEvent = event as CustomEvent<AppleSigninResponse>;
       console.log(customEvent.detail);
       setCode(customEvent.detail.authorization.id_token);
-
-      appleLogin({
-        code: customEvent.detail.authorization.id_token,
-        redirect_uri: APPLE_REDIRECT_URI,
-      });
     };
 
     // Apple 로그인 실패 이벤트 리스너 등록
