@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 import CTAButton from '@components/common/CTAButton';
 import DdoeatLogo from 'public/assets/ddoeat_logo.svg';
@@ -21,6 +22,7 @@ const APPLE_REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/login`;
 
 export default function Page() {
+  const { push } = useRouter();
   useEffect(() => {
     const handleAppleLoginSuccess = async (event: Event) => {
       event.preventDefault();
@@ -43,7 +45,22 @@ export default function Page() {
         },
       );
 
-      console.log(res);
+      const responseData = await res.json();
+
+      if (res.status === 200) {
+        const {
+          data: { accessToken, refreshToken, isFirst },
+        } = responseData;
+
+        Cookies.set('accesToken', accessToken);
+        Cookies.set('refreshToken', refreshToken);
+
+        if (isFirst) {
+          push('/terms');
+        } else {
+          push('/');
+        }
+      }
     };
 
     const handleAppleLoginFail = (e: unknown) => {
@@ -67,8 +84,6 @@ export default function Page() {
       );
     };
   }, []);
-
-  const { push } = useRouter();
 
   const handleClickKakaoLoginButton = () => {
     push(
