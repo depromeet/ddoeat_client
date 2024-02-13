@@ -27,6 +27,7 @@ export default function Page() {
   useEffect(() => {
     // Apple 로그인 성공 이벤트 리스너 등록
     const handleAppleLoginSuccess = (event: Event) => {
+      event.preventDefault();
       const customEvent = event as CustomEvent<AppleSigninResponse>;
       console.log(customEvent.detail);
 
