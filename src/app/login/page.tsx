@@ -52,7 +52,7 @@ export default function Page() {
           data: { accessToken, refreshToken, isFirst },
         } = responseData;
 
-        Cookies.set('accesToken', accessToken);
+        Cookies.set('accessToken', accessToken);
         Cookies.set('refreshToken', refreshToken);
 
         if (isFirst) {
