@@ -25,14 +25,10 @@ export default function Page() {
   const [code] = useState('');
   const { mutate: appleLogin } = useAppleLogin();
 
-  useEffect(() => {
-    if (code) {
-      appleLogin({
-        code,
-        redirect_uri: APPLE_REDIRECT_URI,
-      });
-    }
-  }, [code]);
+  appleLogin({
+    code,
+    redirect_uri: APPLE_REDIRECT_URI,
+  });
 
   useEffect(() => {
     // Apple 로그인 성공 이벤트 리스너 등록
@@ -65,7 +61,6 @@ export default function Page() {
         handleAppleLoginFail,
       );
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { push } = useRouter();
