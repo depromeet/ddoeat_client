@@ -40,10 +40,12 @@ axiosInstance.interceptors.request.use(
     if (
       accessToken &&
       !config.headers['Authorization'] &&
-      config.url !== TOKEN_REFRESH_URL
+      (config.url !== TOKEN_REFRESH_URL ||
+        !config.url?.includes(
+          process.env.NEXT_PUBLIC_NCLOUD_STORAGE_URL as string,
+        ))
     ) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
-      return config;
     }
 
     // 쿠키에 토큰 전부 없을 시 로그인 페이지로 이동
