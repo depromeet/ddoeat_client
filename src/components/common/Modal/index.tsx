@@ -21,7 +21,7 @@ export default function Modal({
 
   return (
     <AnimatePortal isShowing={isShowing}>
-      <div className="absolute top-0 z-overlay">
+      <div className="fixed top-0 z-overlay">
         <div
           className="w-[100dvw] max-w-[480px] h-[100dvh] bg-black bg-opacity-50 absolute top-0"
           onClick={handleOutsideClick}
