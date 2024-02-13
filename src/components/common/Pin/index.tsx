@@ -27,9 +27,10 @@ export default function Pin({
       </AnimatePresence>
       <button
         onClick={onClick}
-        className="relative h-fit flex flex-col items-center"
+        className="relative h-fit flex flex-col items-center transition-all"
       >
         <PinIcon
+          mapLevel={mapLevel}
           isBookmarked={isBookmarked}
           totalRevisitedCount={totalRevisitedCount}
         />

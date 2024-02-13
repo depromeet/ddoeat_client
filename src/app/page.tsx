@@ -128,9 +128,8 @@ export default function Home() {
     router.push(`/search?longitude=${center.lng}&latitude=${center.lat}`);
   };
 
-  const onPinClick = (props: CoordinateWithIds) => {
-    //TODO: 클릭시 지도 확대할지 협의 후 결정
-    // mapRef.current?.setLevel(3);
+  const onPinClick = async (props: CoordinateWithIds) => {
+    await mapRef.current?.setLevel(3);
     setSelectedPin(props);
     setCenter(props);
     setIsBottomSheetShowing(true);
