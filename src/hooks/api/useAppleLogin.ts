@@ -20,8 +20,8 @@ const appleLogin = ({
   code,
   redirect_uri,
 }: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
-  const path = '/api/v1/auth/login?provider=apple';
-  const body = { code, redirect_uri };
+  const path = '/api/v1/auth/login';
+  const body = { provider: 'apple', code, redirect_uri };
 
   return axiosRequest('post', path, body);
 };
