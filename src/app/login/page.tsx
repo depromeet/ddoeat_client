@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import useAppleLogin from '@hooks/api/useAppleLogin';
 import CTAButton from '@components/common/CTAButton';
 import DdoeatLogo from 'public/assets/ddoeat_logo.svg';
 import AppleLogo from 'public/assets/icon24/apple_logo_24.svg';
@@ -22,19 +21,26 @@ const APPLE_REDIRECT_URI =
     : `${process.env.NEXT_PUBLIC_LOCAL_DOMAIN}/login`;
 
 export default function Page() {
-  const { mutate: appleLogin } = useAppleLogin();
-
   useEffect(() => {
-    const handleAppleLoginSuccess = (event: Event) => {
+    const handleAppleLoginSuccess = async (event: Event) => {
       event.preventDefault();
       const customEvent = event as CustomEvent<AppleSigninResponse>;
       console.log(customEvent.detail);
       const code = customEvent.detail.authorization.id_token;
 
-      appleLogin({
-        code,
-        redirect_uri: APPLE_REDIRECT_URI,
+      const res = await fetch(`${process.env.API_BASE_URL}/api/v1/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          provider: 'apple',
+          code,
+          redirect_uri: APPLE_REDIRECT_URI,
+        }),
       });
+
+      console.log(res);
     };
 
     const handleAppleLoginFail = (e: unknown) => {
@@ -57,7 +63,7 @@ export default function Page() {
         handleAppleLoginFail,
       );
     };
-  }, [appleLogin]);
+  }, []);
 
   const { push } = useRouter();
 
