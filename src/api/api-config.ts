@@ -92,6 +92,12 @@ axiosInstance.interceptors.response.use(
 
     const refreshToken = Cookies.get('refreshToken');
 
+    // NOTE: 토큰 재발급 요청이 유효하지 않으면, 쿠키의 토큰을 삭제하고 로그아웃 처리. 로그인 페이지로 이동
+    if (config.url === TOKEN_REFRESH_URL && response.data.code === 401) {
+      removeTokenAndMoveToLogin();
+      return config;
+    }
+
     // NOTE: 토큰 재발급 요청이고, 401에러가 아니면 에러 던지기
     if (
       config.url === TOKEN_REFRESH_URL ||
@@ -114,12 +120,6 @@ axiosInstance.interceptors.response.use(
       Cookies.set('accessToken', data.accessToken);
       config.headers['Authorization'] = data.accessToken;
       return axios(config);
-    }
-
-    // NOTE: 토큰 재발급 요청이 유효하지 않으면, 쿠키의 토큰을 삭제하고 로그아웃 처리. 로그인 페이지로 이동
-    if (config.url === TOKEN_REFRESH_URL && response.data.code === 401) {
-      removeTokenAndMoveToLogin();
-      return config;
     }
   },
 );
