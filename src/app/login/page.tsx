@@ -105,14 +105,14 @@ export default function Page() {
         <DdoeatLogo />
         <div className="flex flex-col gap-[16px] w-full px-[24px] py-[16px]">
           <CTAButton
-            className="body-16-bold bg-system-kakaoYellow text-gray-900"
+            className="body-16-bold bg-system-kakaoYellow active:bg-system-kakaoYellow text-gray-900"
             onClick={handleClickKakaoLoginButton}
           >
             <KakaoLogo />
             카카오로 시작하기
           </CTAButton>
           <CTAButton
-            className="body-16-bold border-gray-900 border-[1px] bg-white text-gray-900"
+            className="body-16-bold border-gray-900 border-[1px] bg-white active:bg-white text-gray-900"
             onClick={handleClickAppleLoginButton}
           >
             <AppleLogo />
