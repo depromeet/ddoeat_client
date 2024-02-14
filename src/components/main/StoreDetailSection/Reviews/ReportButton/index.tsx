@@ -1,9 +1,13 @@
 import { toast } from 'sonner';
+import { ChangeEvent, useState } from 'react';
 
 import useControlModal from '@utils/useControlModal';
 import Modal from '@components/common/Modal';
+import TextArea from '@components/review/TextArea';
 
 export default function ReviewReportButton() {
+  const [reportContent, setReportContent] = useState('');
+
   const { isModalShowing, handleOpenModal, handleCloseModal } =
     useControlModal();
 
@@ -14,6 +18,10 @@ export default function ReviewReportButton() {
   const handleReportConfirm = () => {
     handleCloseModal();
     toast('신고가 완료되었습니다!');
+  };
+
+  const handleChangeReportContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setReportContent(e.target.value);
   };
 
   return (
@@ -40,9 +48,11 @@ export default function ReviewReportButton() {
         ]}
         onCancel={handleCloseModal}
       >
-        <textarea
-          className="h-[100px] w-full mb-[15px] outline-none border border-gray-500 rounded-[12px] p-[5px] resize-none"
-          rows={4}
+        <TextArea
+          value={reportContent}
+          onChange={handleChangeReportContent}
+          placeholder="신고내용 작성"
+          className="bg-gray-50 [&>*]:bg-gray-50"
         />
       </Modal>
     </>
