@@ -22,9 +22,9 @@ export default function DeleteTrashButton({ onClick }: TrashButtonProps) {
 
   return (
     <>
-      <div onClick={handleClickDeleteButton}>
+      <button onClick={handleClickDeleteButton}>
         <TrashIcon />
-      </div>
+      </button>
       <Modal
         isShowing={isModalShowing}
         text="정말 기록을 삭제할까요?"

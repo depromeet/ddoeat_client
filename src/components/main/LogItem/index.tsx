@@ -14,6 +14,7 @@ interface LogItemProps extends BasicListItem {
 export default function LogItem({
   isLast,
   hasDeleteOption,
+  hasReportOption,
   userName,
   date,
   visitNum,
@@ -26,6 +27,7 @@ export default function LogItem({
       <ListItem
         isLast={isLast}
         hasDeleteOption={hasDeleteOption}
+        hasReportOption={hasReportOption}
         onClick={onClick}
       >
         <div className="flex items-center gap-[4px]">

@@ -11,6 +11,7 @@ interface StoreDetailLogProps {
   log: string;
   hasDeleteOption: boolean;
   isLast: boolean;
+  hasReportOption?: boolean;
   onClick: () => void;
 }
 
@@ -23,6 +24,7 @@ export default function StoreDetailLog({
   visitNum,
   hasDeleteOption,
   isLast,
+  hasReportOption,
   onClick,
 }: StoreDetailLogProps) {
   return (
@@ -33,6 +35,7 @@ export default function StoreDetailLog({
         score={score}
         isLast={isLast}
         hasDeleteOption={hasDeleteOption}
+        hasReportOption={hasReportOption}
         date={date}
         onClick={onClick}
       />
