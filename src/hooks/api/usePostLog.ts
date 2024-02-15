@@ -2,6 +2,7 @@ import {
   UseMutationOptions,
   UseMutationResult,
   useMutation,
+  useQueryClient,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
@@ -43,9 +44,13 @@ const postLog = ({ ...props }: Log): Promise<ApiResponse<LogWriteResponse>> => {
 export const usePostLog = (
   options?: UseMutationOptions<ApiResponse<LogWriteResponse>, AxiosError, Log>,
 ): UseMutationResult<ApiResponse<LogWriteResponse>, AxiosError, Log> => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['post-log'],
     mutationFn: ({ ...props }) => postLog({ ...props }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-review'] });
+    },
     ...options,
   });
 };
