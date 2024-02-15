@@ -1,8 +1,20 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Pin Bowl1">
-<g id="Group 1000004481">
-<path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M22.6113 24.6544C27.2963 22.1167 30.5022 16.9664 30.5022 11.0264H1.49731C1.49731 16.967 4.70382 22.1176 9.38948 24.6551V27.6041H22.6113V24.6544Z" fill="black"/>
-<path id="Vector" d="M26.8312 12.6331H28.5865C28.5865 12.6331 28.3745 19.5686 22.6111 22.3981C22.6111 22.3981 26.8312 18.3034 26.8312 12.6331Z" fill="white"/>
+<svg width="46" height="51" viewBox="0 0 46 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_863_21033)">
+<path d="M24.732 42C23.9622 43.3333 22.0377 43.3333 21.2679 42L17.8038 36C17.034 34.6667 17.9963 33 19.5359 33L26.4641 33C28.0037 33 28.966 34.6667 28.1962 36L24.732 42Z" fill="white"/>
+<circle cx="23" cy="19" r="17.6" fill="#FF896F" stroke="white" stroke-width="2.8"/>
 </g>
-</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M27.6279 25.0582C30.9074 23.2818 33.1516 19.6766 33.1516 15.5186H12.8481C12.8481 19.677 15.0927 23.2824 18.3727 25.0586V27.123H27.6279V25.0582Z" fill="#F2F4F6"/>
+<path d="M30.582 16.6432H31.8107C31.8107 16.6432 31.6623 21.4981 27.6279 23.4787C27.6279 23.4787 30.582 20.6124 30.582 16.6432Z" fill="#CBD0D5"/>
+<defs>
+<filter id="filter0_d_863_21033" x="0" y="0" width="46" height="52" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_863_21033"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_863_21033" result="shape"/>
+</filter>
+</defs>
 </svg>

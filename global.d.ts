@@ -11,7 +11,7 @@ interface AppleIDAuth {
 interface AppleIDAuthInitConfig {
   clientId: string | undefined;
   scope: string;
-  redirectURI: string | undefined;
+  redirectURI: string;
   state: string;
   nonce: string;
   usePopup: boolean;
@@ -37,7 +37,6 @@ interface AppleIDAuthSignInResponse {
     };
   };
 }
-
 export declare global {
   interface Window {
     ReactNativeWebView: {

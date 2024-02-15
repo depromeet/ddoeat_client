@@ -55,7 +55,7 @@ export default function Page() {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div>
       <div className="h-[282px] flex justify-between items-end px-[32px]">
         <div className="flex flex-col">
           <div className="text-white body-16-bold">{userLevel}</div>
@@ -85,27 +85,29 @@ export default function Page() {
           </div>
         </div>
         <div>
-          <StatusImage className="z-above translate-y-[8px]" />
+          <StatusImage />
         </div>
       </div>
 
-      <div className="w-full bg-white rounded-t-[24px]">
-        <Tab.Group initialTab="mylog">
-          <div className="h-[76px] flex px-[24px]">
-            <Tab.Header>
-              <Tab.Item value="mylog">내 기록</Tab.Item>
-              <Tab.Item value="bookmark">북마크</Tab.Item>
-            </Tab.Header>
-          </div>
-          <div>
-            <Tab.Content value="mylog">
-              <MyLogContent />
-            </Tab.Content>
-            <Tab.Content value="bookmark">
-              <BookMarkContent />
-            </Tab.Content>
-          </div>
-        </Tab.Group>
+      <div className="w-full bg-white rounded-t-[24px] h-screen">
+        <div>
+          <Tab.Group initialTab="mylog">
+            <div className="h-[76px] flex px-[24px] sticky top-0 bg-white z-above rounded-t-[24px]">
+              <Tab.Header>
+                <Tab.Item value="mylog">내 기록</Tab.Item>
+                <Tab.Item value="bookmark">북마크</Tab.Item>
+              </Tab.Header>
+            </div>
+            <div>
+              <Tab.Content value="mylog">
+                <MyLogContent />
+              </Tab.Content>
+              <Tab.Content value="bookmark">
+                <BookMarkContent />
+              </Tab.Content>
+            </div>
+          </Tab.Group>
+        </div>
       </div>
     </div>
   );

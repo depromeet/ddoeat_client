@@ -31,6 +31,7 @@ const config: Config = {
         kakaoBrown: '#371D1E',
         error: '#FF2A2A',
         dim60: 'rgba(0, 0, 0, 0.60)',
+        dim80: 'rgba(0, 0, 0, 0.80)',
       },
     },
     zIndex: {

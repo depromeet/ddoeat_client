@@ -1,11 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 
-import Tag from '../Tag';
 import PinBubble from './PinBubble';
-
-import Marker from '@components/common/Pin/Marker';
-
-import PinVisitorIcon from '/public/assets/icon20/pin_visitor_20.svg';
+import { PinIcon } from './PinIcon';
 
 export interface PinProps {
   isActive: boolean;
@@ -13,6 +9,7 @@ export interface PinProps {
   isBookmarked: boolean;
   totalRevisitedCount: number;
   onClick?: (e: React.PointerEvent<HTMLButtonElement>) => void;
+  mapLevel: number;
 }
 
 export default function Pin({
@@ -21,6 +18,7 @@ export default function Pin({
   isBookmarked,
   totalRevisitedCount,
   onClick,
+  mapLevel,
 }: PinProps) {
   return (
     <div className="relative w-full flex flex-col justify-center items-center">
@@ -29,25 +27,17 @@ export default function Pin({
       </AnimatePresence>
       <button
         onClick={onClick}
-        className="relative h-fit flex flex-col items-center"
+        className="relative h-fit flex flex-col items-center transition-all"
       >
-        <Marker
+        <PinIcon
+          mapLevel={mapLevel}
           isBookmarked={isBookmarked}
           totalRevisitedCount={totalRevisitedCount}
         />
-        <p className="body-14-extraBold text-gray-900 text-shadow-stroke mt-[4px]">
-          {storeName}
-        </p>
-        {!isActive && (
-          <Tag
-            size={'small'}
-            className="absolute top-[100%] caption-12-bold px-[6px] py-[2px] rounded-[20px] bg-gray-700 text-gray-50 gap-[2px]"
-          >
-            <PinVisitorIcon />
-            <span className="caption-12-extraBold text-gray-50">
-              {totalRevisitedCount}
-            </span>
-          </Tag>
+        {mapLevel < 5 && (
+          <p className="body-14-extraBold text-gray-900 text-shadow-stroke absolute top-[90%]">
+            {storeName}
+          </p>
         )}
       </button>
     </div>

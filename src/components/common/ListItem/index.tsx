@@ -3,16 +3,19 @@ import { PropsWithChildren } from 'react';
 import DeleteTrashButton from '../DeleteTrashButton';
 
 import cn from '@utils/cn';
+import ReviewReportButton from '@components/main/StoreDetailSection/Reviews/ReportButton';
 
 export interface BasicListItem {
   isLast: boolean;
   hasDeleteOption: boolean;
+  hasReportOption?: boolean;
   onClick?: () => void;
 }
 
 export default function ListItem({
   isLast,
   hasDeleteOption,
+  hasReportOption,
   onClick,
   children,
 }: PropsWithChildren<BasicListItem>) {
@@ -28,6 +31,7 @@ export default function ListItem({
       >
         <div className="flex flex-col gap-[9px]">{children}</div>
         {hasDeleteOption && <DeleteTrashButton onClick={onClick} />}
+        {hasReportOption && <ReviewReportButton />}
       </div>
     </li>
   );

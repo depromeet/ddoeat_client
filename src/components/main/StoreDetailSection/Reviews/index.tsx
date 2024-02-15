@@ -91,6 +91,7 @@ export default function Reviews() {
                   name={item.nickName}
                   visitNum={item.visitTimes}
                   hasDeleteOption={item.isMine}
+                  hasReportOption={!item.isMine}
                   isLast={true}
                   onClick={() => handleDeleteLog(item.reviewId)}
                 />

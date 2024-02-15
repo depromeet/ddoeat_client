@@ -36,9 +36,22 @@ axiosInstance.interceptors.request.use(
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
+    // NOTE: 브라우저 쿠키에 accessToken이 있고, 요청 헤더에 토큰이 없다면 헤더에 accessToken 추가
+    if (
+      accessToken &&
+      !config.headers['Authorization'] &&
+      (config.url !== TOKEN_REFRESH_URL ||
+        !config.url?.includes(
+          process.env.NEXT_PUBLIC_NCLOUD_STORAGE_URL as string,
+        ))
+    ) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
     // 쿠키에 토큰 전부 없을 시 로그인 페이지로 이동
     if (!accessToken && !refreshToken) {
       removeTokenAndMoveToLogin();
+      return config;
     }
 
     // NOTE: 토큰 재발급 요청 시 accessToken 헤더 삭제, refreshToken 헤더 추가
@@ -48,15 +61,6 @@ axiosInstance.interceptors.request.use(
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
       return config;
-    }
-
-    // NOTE: 브라우저 쿠키에 accessToken이 있고, 요청 헤더에 토큰이 없다면 헤더에 accessToken 추가
-    if (
-      accessToken &&
-      !config.headers['Authorization'] &&
-      config.url !== TOKEN_REFRESH_URL
-    ) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
 
     // NOTE: 네이버 클라우드 이미지 업로드 요청 시 baseURL, accessToken 헤더 삭제
@@ -88,6 +92,12 @@ axiosInstance.interceptors.response.use(
 
     const refreshToken = Cookies.get('refreshToken');
 
+    // NOTE: 토큰 재발급 요청이 유효하지 않으면, 쿠키의 토큰을 삭제하고 로그아웃 처리. 로그인 페이지로 이동
+    if (config.url === TOKEN_REFRESH_URL && response.data.code === 401) {
+      removeTokenAndMoveToLogin();
+      return config;
+    }
+
     // NOTE: 토큰 재발급 요청이고, 401에러가 아니면 에러 던지기
     if (
       config.url === TOKEN_REFRESH_URL ||
@@ -110,11 +120,6 @@ axiosInstance.interceptors.response.use(
       Cookies.set('accessToken', data.accessToken);
       config.headers['Authorization'] = data.accessToken;
       return axios(config);
-    }
-
-    // NOTE: 토큰 재발급 요청이 유효하지 않으면, 쿠키의 토큰을 삭제하고 로그아웃 처리. 로그인 페이지로 이동
-    if (config.url === TOKEN_REFRESH_URL && response.data.code === 400) {
-      removeTokenAndMoveToLogin();
     }
   },
 );

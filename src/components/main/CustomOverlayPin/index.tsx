@@ -14,6 +14,7 @@ function CustomOverlayPin({
   totalRevisitedCount,
   isActive,
   onClick,
+  mapLevel,
 }: CustomOverlayPinProps) {
   return (
     <CustomOverlayMap
@@ -22,6 +23,7 @@ function CustomOverlayPin({
       key={String(position.storeId) + String(position.kakaoStoreId) + isActive}
     >
       <Pin
+        mapLevel={mapLevel}
         isActive={isActive}
         storeName={storeName}
         isBookmarked={isBookmarked}

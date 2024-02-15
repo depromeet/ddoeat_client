@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
@@ -10,20 +9,18 @@ import BottomNavigation from '@components/main/BottomNavigation';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 import CustomOverlayPin from '@components/main/CustomOverlayPin';
-import FilterTagList from '@components/main/FilterTagList';
 import LoadPinListButton from '@components/main/LoadPinListButton';
 import LocationStorePinList from '@components/main/LocationStorePinList';
 import SearchField from '@components/main/SearchField';
+import StoreDetailSection from '@components/main/StoreDetailSection';
 import StorePreviewSection from '@components/main/StorePreviewSection';
 import { mapTranslateYAnimationVariants } from '@constants/motions';
-import { TAGS } from '@constants/tags';
 import useGetPinList from '@hooks/api/useGetPinList';
 import useCoordinate from '@hooks/useCoordinate';
 import useDidUpdate from '@hooks/useDidUpdate';
 import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
-import StoreDetailSection from '@components/main/StoreDetailSection';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -64,7 +61,7 @@ export default function Home() {
     : null;
 
   const [isBottomSheetShowing, setIsBottomSheetShowing] = useState(false);
-  const [selectedTag, setSelectedTag] = useState<Categories | null>(null);
+  const [selectedTag] = useState<Categories | null>(null);
 
   const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
     null,
@@ -131,9 +128,8 @@ export default function Home() {
     router.push(`/search?longitude=${center.lng}&latitude=${center.lat}`);
   };
 
-  const onPinClick = (props: CoordinateWithIds) => {
-    //TODO: 클릭시 지도 확대할지 협의 후 결정
-    // mapRef.current?.setLevel(3);
+  const onPinClick = async (props: CoordinateWithIds) => {
+    await mapRef.current?.setLevel(3);
     setSelectedPin(props);
     setCenter(props);
     setIsBottomSheetShowing(true);
@@ -177,11 +173,16 @@ export default function Home() {
             currentUserCoordinate={currentUserCoordinate}
           />
           {isSearchType && searchedPinFromSearchParams && (
-            <CustomOverlayPin isActive {...searchedPinFromSearchParams} />
+            <CustomOverlayPin
+              isActive
+              mapLevel={currentLevel}
+              {...searchedPinFromSearchParams}
+            />
           )}
 
           {!isSearchType && PinList && (
             <LocationStorePinList
+              mapLevel={currentLevel}
               locationStoreList={PinList.locationStoreList}
               isBottomSheetShowing={isBottomSheetShowing}
               onPinClick={onPinClick}
@@ -196,31 +197,10 @@ export default function Home() {
       </motion.div>
       <div className="absolute top-[8px] z-above w-full px-[16px]">
         <SearchField onClick={handleSearchFieldClick} />
-        <FilterTagList
-          selectedTag={selectedTag}
-          setSelectedTag={setSelectedTag}
-          className="absolute left-0 px-[16px] top-[calc(100%+12px)]"
-        >
-          {TAGS.map(({ value, text, defaultIcon, selectedIcon }) => {
-            return (
-              <FilterTagList.Item value={value} key={value}>
-                {defaultIcon && selectedIcon && (
-                  <Image
-                    width={20}
-                    height={20}
-                    alt={value}
-                    src={selectedTag === value ? selectedIcon : defaultIcon}
-                  />
-                )}
-                {text}
-              </FilterTagList.Item>
-            );
-          })}
-        </FilterTagList>
         {!selectedPin && !searchedPinFromSearchParams && (
           <LoadPinListButton
             isShowing={showLoadPinListButton}
-            className="absolute top-[calc(100%+60px)] left-[50%] -translate-x-[50%] z-floating"
+            className="absolute top-[calc(100%+20px)] left-[50%] -translate-x-[50%] z-floating"
             onClick={handleLoadPinListButtonClick}
           />
         )}
