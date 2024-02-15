@@ -19,6 +19,9 @@ export const useDeleteLog = (): UseMutationResult<void, AxiosError, number> => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['get-myLog'] });
       queryClient.invalidateQueries({ queryKey: ['get-store'] });
+      queryClient.invalidateQueries({ queryKey: ['get-report'] });
+      queryClient.invalidateQueries({ queryKey: ['get-review'] });
+      queryClient.invalidateQueries({ queryKey: ['get-userProfile'] });
     },
   });
 };
