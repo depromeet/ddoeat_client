@@ -30,7 +30,9 @@ export default function StoreDetailSection({
     storeId: storeId ?? (Number(searchParams.get('storeId')) || undefined),
   });
 
-  const { data: reportData } = useGetReport(storeId ?? null);
+  const { data: reportData } = useGetReport(
+    storeId ?? Number(searchParams.get('storeId') || undefined),
+  );
 
   const [isScrollDown, setIsScrollDown] = useState(false);
 
