@@ -16,6 +16,7 @@ import { useGetReport } from '@hooks/api/useGetReport';
 import useGetStore from '@hooks/api/useGetStore';
 import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
+import switchUrl from '@utils/switchUrl';
 
 export default function StoreDetailSection({
   storeId,
@@ -42,7 +43,11 @@ export default function StoreDetailSection({
     onIntersect,
   });
 
-  const handleBackButtonClick = () => {};
+  const handleBackButtonClick = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('bottomSheetStatus', 'show');
+    switchUrl(url);
+  };
 
   return (
     <div className="relative">
