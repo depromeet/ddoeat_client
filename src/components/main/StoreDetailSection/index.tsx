@@ -52,7 +52,7 @@ export default function StoreDetailSection({
   };
 
   return (
-    <div className="relative">
+    <div className="relative pb-[32px]">
       <div
         ref={setTarget}
         className="absolute top-0 h-[20px] w-full bg-transparent"
