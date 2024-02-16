@@ -1,7 +1,11 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { TOKEN_REFRESH_URL, LOGOUT_URL } from '@constants/endpoint';
+import {
+  TOKEN_REFRESH_URL,
+  LOGOUT_URL,
+  SHARING_SPOT_URL,
+} from '@constants/endpoint';
 import { getTokenRefresh, removeTokenAndMoveToLogin } from '@utils/auth';
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
@@ -49,7 +53,11 @@ axiosInstance.interceptors.request.use(
     }
 
     // 쿠키에 토큰 전부 없을 시 로그인 페이지로 이동
-    if (!accessToken && !refreshToken) {
+    if (
+      !accessToken &&
+      !refreshToken &&
+      !config.url?.includes(SHARING_SPOT_URL)
+    ) {
       removeTokenAndMoveToLogin();
       return config;
     }

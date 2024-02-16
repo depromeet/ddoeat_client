@@ -10,7 +10,7 @@ import mergeRefs from '@utils/mergeRefs';
 import useMutationObserver from '@hooks/useMutationObserver';
 
 interface BottonSheetShowContent {
-  onCurrentLocationButtonClick: () => void;
+  onCurrentLocationButtonClick?: () => void;
 }
 
 export default function BottonSheetShowContent({

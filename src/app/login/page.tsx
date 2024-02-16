@@ -27,7 +27,6 @@ export default function Page() {
     const handleAppleLoginSuccess = async (event: Event) => {
       event.preventDefault();
       const customEvent = event as CustomEvent<AppleSigninResponse>;
-      console.log(customEvent.detail);
       const code = customEvent.detail.authorization.id_token;
 
       const res = await fetch(

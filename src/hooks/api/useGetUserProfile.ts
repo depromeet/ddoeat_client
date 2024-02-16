@@ -6,6 +6,7 @@ import { ApiResponse, axiosRequest } from '../../api/api-config';
 export interface UserInfo {
   nickname: string;
   level: '맨밥이' | '배고픈' | '또밥이' | '또또밥이';
+  userId: number;
 }
 
 const getUserProfile = (): Promise<ApiResponse<UserInfo>> => {
