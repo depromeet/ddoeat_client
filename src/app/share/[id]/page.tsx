@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
 import BottomSheet from '@components/main/BottomSheet';
@@ -69,6 +69,21 @@ export default function Page({ params }: { params: { id: string } }) {
   const handleZoomChanged = (map: kakao.maps.Map) => {
     setCurrentLevel(map.getLevel());
   };
+
+  useEffect(() => {
+    const bounds = () => {
+      const bounds = new kakao.maps.LatLngBounds();
+
+      PinList &&
+        PinList.locationStoreList.forEach((pin) => {
+          bounds.extend(new kakao.maps.LatLng(pin.latitude, pin.longitude));
+        });
+
+      return bounds;
+    };
+
+    mapRef.current?.setBounds(bounds());
+  }, [PinList, mapRef.current]);
 
   return (
     <main className="flex h-[100dvh] flex-col items-center overflow-hidden">
