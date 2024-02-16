@@ -64,7 +64,14 @@ export default function Home() {
   const [selectedTag] = useState<Categories | null>(null);
 
   const [selectedPin, setSelectedPin] = useState<CoordinateWithIds | null>(
-    null,
+    searchParams.get('lat') && searchParams.get('lng')
+      ? ({
+          lat: Number(searchParams.get('lat')),
+          lng: Number(searchParams.get('lng')),
+          storeId: Number(searchParams.get('storeId')) || null,
+          kakaoStoreId: Number(searchParams.get('kakaoStoreId')) || null,
+        } as CoordinateWithIds)
+      : null,
   );
 
   const [currentLevel, setCurrentLevel] = useState<number>(3);

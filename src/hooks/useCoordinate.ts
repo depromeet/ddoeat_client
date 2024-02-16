@@ -12,7 +12,13 @@ const GANGNAM_STATION: CoordinateWithIds = {
   lng: 127.02761,
 } as const;
 
-const useCoordinate = ({ runInit }: { runInit: boolean }) => {
+const useCoordinate = ({
+  noCurrentLocation = false,
+  runInit,
+}: {
+  noCurrentLocation?: boolean;
+  runInit: boolean;
+}) => {
   const [center, setCenter] = useState<CoordinateWithIds>(GANGNAM_STATION);
   const [screenCoordinate, setScreenCoordinate] =
     useState<ScreenCoordinate | null>(null);
@@ -91,7 +97,8 @@ const useCoordinate = ({ runInit }: { runInit: boolean }) => {
   const throttledBoundChanged = useThrottle(handleBoundChanged, 1000);
 
   useEffect(() => {
-    getCurrentUserCoordinateInterval({ ms: 5000, runInit });
+    !noCurrentLocation &&
+      getCurrentUserCoordinateInterval({ ms: 5000, runInit });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
