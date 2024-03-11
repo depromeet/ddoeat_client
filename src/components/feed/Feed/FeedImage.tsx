@@ -23,7 +23,7 @@ export default function FeedImage({
   return (
     <div
       className={cn(
-        'relative w-full aspect-[3/2] my-[12px] rounded-[16px] overflow-hidden',
+        'relative w-full aspect-[3/2] rounded-[16px] overflow-hidden',
         className,
       )}
     >

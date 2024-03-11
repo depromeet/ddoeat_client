@@ -1,7 +1,7 @@
-interface FeedContainerProps {
-  children: React.ReactElement[];
-}
+import { HTMLAttributes } from 'react';
 
-export default function FeedContainer({ children }: FeedContainerProps) {
-  return <div className="px-[12px]">{children}</div>;
+export default function FeedContainer({
+  children,
+}: HTMLAttributes<HTMLDivElement>) {
+  return <div className="flex flex-col gap-[12px] px-[12px]">{children}</div>;
 }

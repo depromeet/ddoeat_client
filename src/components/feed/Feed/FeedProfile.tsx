@@ -23,10 +23,10 @@ export default function FeedProfile({
     push(`/feed/detail/${id}`);
   };
   return (
-    <div className="flex justify-between items-center w-full h-[60px] body-14-bold">
+    <div className="flex justify-between items-center w-full body-14-bold">
       <div className="flex gap-[8px] items-center">
         <div
-          className="relative w-[50px] h-[50px] rounded-[50%] overflow-hidden"
+          className="relative w-[36px] h-[36px] rounded-[50%] overflow-hidden"
           onClick={handleClickProfile}
         >
           <Image alt={alt} src={src} fill {...props} />

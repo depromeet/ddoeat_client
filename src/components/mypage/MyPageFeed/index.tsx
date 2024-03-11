@@ -12,7 +12,7 @@ export default function MyPageFeed({
 }: MyPageFeedProps) {
   return (
     <div className={cn('relative aspect-square w-[calc(100%/3)]', className)}>
-      <Image src={src} alt={alt} fill {...props} className="shadow-feed" />
+      <Image src={src} alt={alt} fill {...props} />
     </div>
   );
 }
