@@ -54,11 +54,14 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'white-gradient':
           'linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+        'top-fade':
+          'linear-gradient(to bottom, rgba(0,0,0,0.7) 30%, transparent)',
       },
       boxShadow: {
         floating: '0px 4px 15.4px 0px rgba(0, 0, 0, 0.25);',
         pin: '0px 4px 4px rgba(0, 0, 0, 0.25);',
         search: '0px 4px 8px 0px rgba(0, 0, 0, 0.10);',
+        feed: '0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.25)',
       },
       textShadow: {
         stroke:
