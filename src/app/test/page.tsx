@@ -29,7 +29,11 @@ export default function page() {
           storeCategory="양식"
           storeLocation="서울 강남"
         />
-        <Feed.Description>Feed Description</Feed.Description>
+        <Feed.Description>
+          오픈 시간에 맞춰서 갔는데, 생각보다 줄이 길어서 깜짝 놀랐다. 그래도
+          빨리 빠져서 30분정도 대기하고 들어가서 먹을 수 있었다. 직원분들도
+          친절해서 상당히 기쁜 하루였다.
+        </Feed.Description>
       </Feed>
     </div>
   );
