@@ -1,7 +1,6 @@
 import MyPageFeed from '@components/mypage/MyPageFeed';
 import BackgroundImage from 'public/assets/image/mypage/background.png';
 import HamburgerImage from 'public/assets/image/hamburger.jpeg';
-import KimBabImage from 'public/assets/image/kimbab.jpeg';
 import { Feed } from '@components/feed/Feed';
 
 export default function page() {
@@ -10,7 +9,7 @@ export default function page() {
       <div className="flex mb-[24px]">
         <MyPageFeed alt="피드 이미지" src={HamburgerImage} />
         <MyPageFeed alt="피드 이미지" src={HamburgerImage} />
-        <MyPageFeed alt="피드 이미지" src={KimBabImage} />
+        <MyPageFeed alt="피드 이미지" src={HamburgerImage} />
       </div>
 
       <Feed>
@@ -29,11 +28,12 @@ export default function page() {
           storeCategory="양식"
           storeLocation="서울 강남"
         />
-        <Feed.Description>
-          오픈 시간에 맞춰서 갔는데, 생각보다 줄이 길어서 깜짝 놀랐다. 그래도
+        <Feed.Description
+          id={1}
+          description="오픈 시간에 맞춰서 갔는데, 생각보다 줄이 길어서 깜짝 놀랐다. 그래도
           빨리 빠져서 30분정도 대기하고 들어가서 먹을 수 있었다. 직원분들도
-          친절해서 상당히 기쁜 하루였다.
-        </Feed.Description>
+          친절해서 상당히 기쁜 하루였다."
+        />
       </Feed>
     </div>
   );
