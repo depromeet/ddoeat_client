@@ -32,7 +32,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          buildScriptName: storybook build
+          buildScriptName: build-storybook
 
       - name: Checking Chromatic at PR
         uses: thollander/actions-comment-pull-request@v1
