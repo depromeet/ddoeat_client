@@ -18,7 +18,14 @@ jobs:
           fetch-depth: 0
 
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: |
+            if [ ${{ env.yarn-cache-hit }} != 'true' ]; then
+                echo "Installing all dependencies..."
+                yarn install --immutable --immutable-cache --check-cache
+            else
+                echo "Restoring .yarn/cache from cache..."
+                yarn install --immutable
+            fi
 
       - name: Publish to Chromatic
         uses: chromaui/action@latest
