@@ -2,11 +2,12 @@ name: "Chromatic Deploy"
 run-name: ${{ github.actor }}의 스토리북 배포!
 
 on:
-  push:
-    branches: feat/#314
-  pull_request:
-    branches:
-      - main
+    push:
+      branches:
+        - feat/#314
+    pull_request:
+      branches:
+        - main
 
 jobs:
   chromatic:
@@ -25,6 +26,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          buildScriptName: storybook build
 
       - name: Checking Chromatic at PR
         uses: thollander/actions-comment-pull-request@v1
