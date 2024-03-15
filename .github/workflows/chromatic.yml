@@ -3,7 +3,7 @@ run-name: ${{ github.actor }}의 스토리북 배포!
 
 on:
   push:
-    branches: main
+    branches: feat/#314
   pull_request:
     branches:
       - main
