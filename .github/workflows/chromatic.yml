@@ -1,0 +1,34 @@
+name: "Chromatic Deploy"
+run-name: ${{ github.actor }}의 스토리북 배포!
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checking Chromatic at PR
+        uses: thollander/actions-comment-pull-request@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            message: "✨스토리북 확인하기: ${{ steps.chromatic.outputs.storybookUrl }}"
