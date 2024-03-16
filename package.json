@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.13.4",
@@ -18,11 +20,21 @@
     "react-dom": "^18",
     "react-kakao-maps-sdk": "^1.1.24",
     "sonner": "^1.4.0",
-    "storybook": "^7.6.4",
+    "storybook": "^8.0.0",
     "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "1.2.18",
     "@next/eslint-plugin-next": "^14.0.4",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
+    "@storybook/addon-onboarding": "^8.0.0",
+    "@storybook/blocks": "^8.0.0",
+    "@storybook/icons": "^1.2.9",
+    "@storybook/nextjs": "^8.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/test": "^8.0.0",
     "@svgr/webpack": "^8.1.0",
     "@types/js-cookie": "^3",
     "@types/node": "^20",
@@ -40,13 +52,15 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.8.0",
     "kakao.maps.d.ts": "^0.1.39",
     "postcss": "^8",
     "postcss-nesting": "^12.0.2",
     "prettier": "^3.1.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.3.3",
-    "vercel": "^32.7.2"
+    "vercel": "^32.7.2",
+    "webpack": "^5.90.3"
   },
   "packageManager": "yarn@3.7.0"
 }
