@@ -3,7 +3,7 @@ name: "Chromatic Deploy"
 on:
   push:
     branches:
-      - feat/#314
+      - main
   pull_request:
     branches:
       - main
