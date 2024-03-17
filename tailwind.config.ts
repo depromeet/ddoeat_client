@@ -96,7 +96,6 @@ const config: Config = {
         { values: theme('textShadow') },
       );
     }),
-    require('@tailwindcss/line-clamp'),
   ],
 };
 export default config;
