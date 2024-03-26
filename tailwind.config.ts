@@ -54,6 +54,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'white-gradient':
           'linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))',
+        'top-fade':
+          'linear-gradient(to bottom, rgba(0,0,0,0.6) 60%, transparent)',
       },
       boxShadow: {
         floating: '0px 4px 15.4px 0px rgba(0, 0, 0, 0.25);',
