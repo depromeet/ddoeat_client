@@ -20,7 +20,7 @@ export interface NewStore {
 }
 
 // TODO: api spec 확정되면 변경
-interface Log {
+interface Feed {
   storeId: string | null;
   newStore: NewStore | null;
   rating: number;
@@ -29,25 +29,31 @@ interface Log {
   description: string;
 }
 
-interface LogWriteResponse {
+interface FeedWriteResponse {
   reviewId: number;
   storeId: number;
 }
 
-const postLog = ({ ...props }: Log): Promise<ApiResponse<LogWriteResponse>> => {
+const postFeed = ({
+  ...props
+}: Feed): Promise<ApiResponse<FeedWriteResponse>> => {
   const body = {
     ...props,
   };
-  return axiosRequest('post', `/api/v1/stores/reviews`, body);
+  return axiosRequest('post', `/api/v1/feeds`, body);
 };
 
-export const usePostLog = (
-  options?: UseMutationOptions<ApiResponse<LogWriteResponse>, AxiosError, Log>,
-): UseMutationResult<ApiResponse<LogWriteResponse>, AxiosError, Log> => {
+export const usePostFeed = (
+  options?: UseMutationOptions<
+    ApiResponse<FeedWriteResponse>,
+    AxiosError,
+    Feed
+  >,
+): UseMutationResult<ApiResponse<FeedWriteResponse>, AxiosError, Feed> => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ['post-log'],
-    mutationFn: ({ ...props }) => postLog({ ...props }),
+    mutationKey: ['post-feed'],
+    mutationFn: ({ ...props }) => postFeed({ ...props }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['get-review'] });
     },

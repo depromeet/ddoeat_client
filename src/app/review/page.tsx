@@ -4,7 +4,7 @@ import { useState, useCallback, ChangeEvent, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { NewStore, usePostLog } from '@hooks/api/usePostLog';
+import { NewStore, usePostFeed } from '@hooks/api/usePostFeed';
 import { useGetPresignedUrl } from '@hooks/api/useGetPresignedUrl';
 import ImageUploader from '@components/review/ImageUploader';
 import StarRating from '@components/review/StarRating';
@@ -20,7 +20,7 @@ export default function Page() {
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName');
   const myRevisitedCount = searchParams.get('myRevisitedCount') ?? 0;
-  const { mutate: postLog } = usePostLog({
+  const { mutate: postLog } = usePostFeed({
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['get-myLog'],
@@ -137,7 +137,9 @@ export default function Page() {
           />
         </div>
         <FixedBottomCTAButton
-          disabled={!rating || !description || description.length < 10}
+          disabled={
+            !rating || !description || description.length < 10 || !imageUrl
+          }
           onClick={handleClickSubmitButton}
         >
           작성완료
