@@ -41,7 +41,14 @@ export default function FeedImage({
           <RightArrowLogo />
         </button>
       </div>
-      <Image src={src} alt={alt} fill {...props} />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        objectFit="cover"
+        objectPosition="center"
+        {...props}
+      />
     </div>
   );
 }
