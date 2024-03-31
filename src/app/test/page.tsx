@@ -6,7 +6,7 @@ import { Feed } from '@components/feed/Feed';
 export default function page() {
   return (
     <div>
-      <div className="w-full grid grid-cols-2 mb-[24px]">
+      <div className="w-full grid grid-cols-2 gap-[8px] mb-[24px]">
         <MyPageFeed>
           <MyPageFeed.StoreInfo
             storeName="쉑쉑버거"

@@ -9,7 +9,7 @@ export default function MyPageFeedContainer({
   return (
     <div
       className={cn(
-        'w-full flex flex-col gap-[8px] px-[20px] py-[12px]',
+        'w-full flex flex-col gap-[8px] px-[20px] py-[24px] bg-gray-50 rounded-[24px]',
         className,
       )}
     >
