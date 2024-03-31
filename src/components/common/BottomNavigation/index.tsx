@@ -9,7 +9,7 @@ import { NAVIGATION } from '@constants/navigation';
 export default function BottomNavigation({
   className,
   ...restProps
-}: HTMLAttributes<HTMLDivElement> & { currentPath: string }) {
+}: HTMLAttributes<HTMLDivElement>) {
   const currentPath = usePathname();
 
   return (
