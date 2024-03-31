@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
-import BottomNavigation from '@components/main/BottomNavigation';
+import BottomNavigation from '@components/common/BottomNavigation';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 import CustomOverlayPin from '@components/main/CustomOverlayPin';
@@ -196,12 +196,9 @@ export default function Home() {
               selectedPin={selectedPin}
             />
           )}
-          <BottomNavigation
-            onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
-            className="absolute bottom-[56px] z-above"
-          />
         </Map>
       </motion.div>
+      <BottomNavigation />
       <div className="absolute top-[8px] z-above w-full px-[16px]">
         <SearchField onClick={handleSearchFieldClick} />
         {!selectedPin && !searchedPinFromSearchParams && (
