@@ -21,6 +21,7 @@ import useDidUpdate from '@hooks/useDidUpdate';
 import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
+import CurrentLocationButton from '@components/main/CurrentLocationButton';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -196,9 +197,12 @@ export default function Home() {
               selectedPin={selectedPin}
             />
           )}
+          <CurrentLocationButton
+            className="absolute bottom-[85px] right-[15px] z-above"
+            onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
+          />
         </Map>
       </motion.div>
-      <BottomNavigation />
       <div className="absolute top-[8px] z-above w-full px-[16px]">
         <SearchField onClick={handleSearchFieldClick} />
         {!selectedPin && !searchedPinFromSearchParams && (
@@ -210,6 +214,7 @@ export default function Home() {
         )}
       </div>
 
+      <BottomNavigation />
       <BottomSheet
         onCloseBottomSheet={onCloseBottomSheet}
         isShowing={isBottomSheetShowing || Boolean(searchedPinFromSearchParams)}

@@ -6,10 +6,17 @@ import LocationDefaultIcon from 'public/assets/icon24/loction_default_24.svg';
 import cn from '@utils/cn';
 import Button from '@components/common/Button';
 
+interface CurrentLocationButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  onCurrentLocationButtonClick: () => void;
+}
+
 export default function CurrentLocationButton({
+  className,
   onClick,
+  onCurrentLocationButtonClick,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) {
+}: CurrentLocationButtonProps) {
   const [isActive, setIsActive] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -27,6 +34,7 @@ export default function CurrentLocationButton({
 
   const handleClick = (e: React.PointerEvent<HTMLButtonElement>) => {
     onClick?.(e);
+    onCurrentLocationButtonClick?.();
     setIsActive(true);
   };
 
@@ -34,7 +42,10 @@ export default function CurrentLocationButton({
     <Button
       ref={buttonRef}
       {...props}
-      className="w-[56px] h-[56px] rounded-[24px] p-0 bg-white shadow-floating active:bg-white"
+      className={cn(
+        'w-[56px] h-[56px] rounded-full p-0 bg-white shadow-floating active:bg-white',
+        className,
+      )}
       onClick={handleClick}
     >
       <LocationDefaultIcon
