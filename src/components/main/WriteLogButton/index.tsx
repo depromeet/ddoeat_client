@@ -33,7 +33,7 @@ export default function WriteLogButton({
   });
 
   const goToReview = () => {
-    const url = new URL(`${window.location.origin}/review`);
+    const url = new URL(`${window.location.origin}/feed/regist`);
 
     if (!storeId && searchedPinFromSearchParams) {
       url.searchParams.set(
