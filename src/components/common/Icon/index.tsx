@@ -12,7 +12,7 @@ interface IconProps {
 export default function Icon({ iconName }: IconProps) {
   const iconComponent = (() => {
     switch (iconName) {
-      case 'MyPage':
+      case 'Profile':
         return <ProfileIcon className={cn()} />;
       case 'FeedPage':
         return <FeedIcon className={cn()} />;

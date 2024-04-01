@@ -5,12 +5,14 @@ import { usePathname } from 'next/navigation';
 import Icon from '@components/common/Icon/index';
 import cn from '@utils/cn';
 import { NAVIGATION } from '@constants/navigation';
+import { useGetUserProfile } from '@hooks/api/useGetUserProfile';
 
 export default function BottomNavigation({
   className,
   ...restProps
 }: HTMLAttributes<HTMLDivElement>) {
   const currentPath = usePathname();
+  const { data: userProfile } = useGetUserProfile();
 
   return (
     <nav
@@ -21,7 +23,12 @@ export default function BottomNavigation({
       )}
     >
       {NAVIGATION.map((item) => (
-        <Link key={item.key} href={item.route}>
+        <Link
+          key={item.key}
+          href={
+            userProfile?.userId ? `/profile?${userProfile.userId}` : item.route
+          }
+        >
           <div
             className={cn(
               item.key === currentPath ? 'fill-primary-500' : 'fill-black',

@@ -5,6 +5,10 @@ import FeedIcon from 'public/assets/icon24/feed_24.svg';
 import HomeIcon from 'public/assets/icon24/home_24.svg';
 import AddFeedIcon from 'public/assets/icon24/add_feed_24.svg';
 
+const DEFAULT_LOCATION: { lat: number; lng: number } = {
+  lat: 37.498095,
+  lng: 127.02761,
+};
 export interface NavigationItemType {
   icon: ReactNode;
   key: string;
@@ -17,7 +21,7 @@ export const NAVIGATION: NavigationItemType[] = [
     icon: FeedIcon,
     key: '/feed',
     name: 'FeedPage',
-    route: '/feed',
+    route: `/feed`,
   },
 
   {
@@ -30,12 +34,12 @@ export const NAVIGATION: NavigationItemType[] = [
     icon: AddFeedIcon,
     key: '/search',
     name: 'Search',
-    route: '/search',
+    route: `/search?longitude=${DEFAULT_LOCATION.lng}&latitude=${DEFAULT_LOCATION.lat}`,
   },
   {
     icon: ProfileIcon,
-    key: '/mypage',
-    name: 'MyPage',
-    route: '/mypage',
+    key: '/profile',
+    name: 'Profile',
+    route: `/`,
   },
 ];
