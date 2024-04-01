@@ -30,6 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@next/eslint-plugin-next", "npm:14.0.4"],\
             ["@svgr/webpack", "npm:8.1.0"],\
+            ["@tailwindcss/line-clamp", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:0.4.4"],\
             ["@tanstack/react-query", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:5.13.4"],\
             ["@types/js-cookie", "npm:3.0.6"],\
             ["@types/node", "npm:20.10.4"],\
@@ -4131,6 +4132,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@tailwindcss/line-clamp", [\
+        ["npm:0.4.4", {\
+          "packageLocation": "./.yarn/cache/@tailwindcss-line-clamp-npm-0.4.4-23cb911440-3d2ad992aa.zip/node_modules/@tailwindcss/line-clamp/",\
+          "packageDependencies": [\
+            ["@tailwindcss/line-clamp", "npm:0.4.4"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:0.4.4", {\
+          "packageLocation": "./.yarn/__virtual__/@tailwindcss-line-clamp-virtual-8dafdc4c4d/0/cache/@tailwindcss-line-clamp-npm-0.4.4-23cb911440-3d2ad992aa.zip/node_modules/@tailwindcss/line-clamp/",\
+          "packageDependencies": [\
+            ["@tailwindcss/line-clamp", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:0.4.4"],\
+            ["@types/tailwindcss", null],\
+            ["tailwindcss", "npm:3.3.6"]\
+          ],\
+          "packagePeers": [\
+            "@types/tailwindcss",\
+            "tailwindcss"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@tanstack/query-core", [\
         ["npm:5.13.4", {\
           "packageLocation": "./.yarn/cache/@tanstack-query-core-npm-5.13.4-5a43c66e88-9ebda1325d.zip/node_modules/@tanstack/query-core/",\
@@ -6559,6 +6582,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ddoeatddoeat", "workspace:."],\
             ["@next/eslint-plugin-next", "npm:14.0.4"],\
             ["@svgr/webpack", "npm:8.1.0"],\
+            ["@tailwindcss/line-clamp", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:0.4.4"],\
             ["@tanstack/react-query", "virtual:400a91a61a8de7e8ebfccfd82833ea9d1797c226e12fd982902534ba09375c2166dadde6f984a1d9a45c91604c8977d897f5e5ab1337505c3ad1ae1a7012da45#npm:5.13.4"],\
             ["@types/js-cookie", "npm:3.0.6"],\
             ["@types/node", "npm:20.10.4"],\

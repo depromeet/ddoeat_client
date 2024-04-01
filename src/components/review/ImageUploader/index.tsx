@@ -43,7 +43,7 @@ export default function ImageUploader({
         </div>
       ) : (
         <>
-          <p className="body-16-bold">사진을 추가해주세요(선택)</p>
+          <p className="body-16-bold">사진을 추가해주세요</p>
           <p className="body-14-regular">*기록당 최대 1개 업로드가 가능해요.</p>
           <PlusIcon />
           <input

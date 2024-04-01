@@ -29,7 +29,7 @@ export default function Header({
   return (
     <header
       className={cn(
-        'fixed top-0 flex items-center px-[16px] py-[8px] w-full max-w-[480px]',
+        'fixed top-0 flex items-center px-[16px] py-[8px] w-full max-w-[480px] z-fixedBody',
         className,
       )}
       {...restProps}
