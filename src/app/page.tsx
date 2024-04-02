@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 
-import BottomNavigation from '@components/main/BottomNavigation';
+import BottomNavigation from '@components/common/BottomNavigation';
 import BottomSheet from '@components/main/BottomSheet';
 import CurrentLocationMarker from '@components/main/CurrentLocationMarker';
 import CustomOverlayPin from '@components/main/CustomOverlayPin';
@@ -21,6 +21,7 @@ import useDidUpdate from '@hooks/useDidUpdate';
 import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
+import CurrentLocationButton from '@components/main/CurrentLocationButton';
 
 export default function Home() {
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -196,9 +197,9 @@ export default function Home() {
               selectedPin={selectedPin}
             />
           )}
-          <BottomNavigation
+          <CurrentLocationButton
+            className="absolute bottom-[85px] right-[15px] z-above"
             onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
-            className="absolute bottom-[56px] z-above"
           />
         </Map>
       </motion.div>
@@ -213,6 +214,7 @@ export default function Home() {
         )}
       </div>
 
+      <BottomNavigation />
       <BottomSheet
         onCloseBottomSheet={onCloseBottomSheet}
         isShowing={isBottomSheetShowing || Boolean(searchedPinFromSearchParams)}

@@ -9,14 +9,14 @@ import useResizeObserver from '@hooks/useResizeObserver';
 import mergeRefs from '@utils/mergeRefs';
 import useMutationObserver from '@hooks/useMutationObserver';
 
-interface BottonSheetShowContent {
+interface BottomSheetShowContentProps {
   onCurrentLocationButtonClick?: () => void;
 }
 
-export default function BottonSheetShowContent({
+export default function BottomSheetShowContent({
   onCurrentLocationButtonClick,
   children,
-}: PropsWithChildren<BottonSheetShowContent>) {
+}: PropsWithChildren<BottomSheetShowContentProps>) {
   const showStatusChildrenRef = useRef<HTMLDivElement>(null);
   const { status, setShowStatusChildrenHeight } = useBottomSheet();
 
@@ -57,7 +57,11 @@ export default function BottonSheetShowContent({
         animate="animate"
         exit="exit"
       >
-        <CurrentLocationButton onClick={onCurrentLocationButtonClick} />
+        <CurrentLocationButton
+          onCurrentLocationButtonClick={
+            onCurrentLocationButtonClick || (() => {})
+          }
+        />
       </motion.div>
       {children}
     </div>
