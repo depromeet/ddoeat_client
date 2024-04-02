@@ -20,10 +20,27 @@ export default function Page({ params }: { params: { id: string } }) {
   const mapRef = useRef<kakao.maps.Map>(null);
   const searchParams = useSearchParams();
 
-  const { center, setCenter } = useCoordinate({
-    noCurrentLocation: true,
-    runInit: false,
-  });
+  const { center, setCenter, currentUserCoordinate, setScreenCoordinate } =
+    useCoordinate({
+      noCurrentLocation: true,
+      runInit: false,
+    });
+  useEffect(() => {
+    const map = mapRef.current;
+    if (currentUserCoordinate && map) {
+      setScreenCoordinate({
+        leftTopLatitude: map.getBounds().getNorthEast().getLat(),
+        leftTopLongitude: map.getBounds().getNorthEast().getLng(),
+        rightBottomLatitude: map.getBounds().getSouthWest().getLat(),
+        rightBottomLongitude: map.getBounds().getSouthWest().getLat(),
+      });
+
+      setCurrentLevel(map.getLevel());
+    }
+  }, [currentUserCoordinate, setScreenCoordinate]);
+  const handleCurrentLocationButtonClick = () => {
+    currentUserCoordinate && setCenter({ ...currentUserCoordinate });
+  };
 
   const { data: PinList } = useGetSharingSpot({ userId: params.id });
 
@@ -116,7 +133,9 @@ export default function Page({ params }: { params: { id: string } }) {
         onCloseBottomSheet={onCloseBottomSheet}
         isShowing={isBottomSheetShowing}
       >
-        <BottomSheet.ShowContent>
+        <BottomSheet.ShowContent
+          onCurrentLocationButtonClick={handleCurrentLocationButtonClick}
+        >
           {selectedPin && (
             <StorePreviewSection
               lat={selectedPin.lat}
