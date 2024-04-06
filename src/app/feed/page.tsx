@@ -33,7 +33,7 @@ export default function Page() {
               <Feed key={feed.feedId}>
                 <Feed.Date>{feed.createdAt}</Feed.Date>
                 <Feed.Profile
-                  id={feed.userId}
+                  userId={feed.userId}
                   src={feed.profileImageUrl}
                   nickName={feed.nickname}
                   alt={`${feed.userId} 프로필 이미지`}

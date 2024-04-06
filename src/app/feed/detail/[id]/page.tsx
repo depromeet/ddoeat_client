@@ -15,7 +15,7 @@ export default function Page() {
       {feedDetailData && (
         <Feed>
           <Feed.Profile
-            id={Number(feedId)}
+            userId={feedDetailData.userId}
             src={feedDetailData.profileImageUrl}
             nickName={feedDetailData.nickname}
             alt="프로필 이미지"

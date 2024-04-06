@@ -5,26 +5,34 @@ import { useRouter } from 'next/navigation';
 
 interface FeedProfileProps extends Omit<ImageProps, 'id'> {
   nickName: string;
-  onClickFollowButton?: () => void;
   isFollowed: boolean;
   isMyFeed: boolean;
-  id: number;
+  userId: number;
 }
 
 export default function FeedProfile({
-  id,
+  userId,
   src,
   alt,
   nickName,
   isFollowed,
   isMyFeed,
-  onClickFollowButton,
   ...props
 }: FeedProfileProps) {
   const { push } = useRouter();
+
   const handleClickProfile = () => {
-    push(`/feed/detail/${id}`);
+    push(`/profile/${userId}`);
   };
+
+  const handleClickFollowButton = () => {
+    if (isFollowed) {
+      console.log('팔로우');
+    } else {
+      console.log('팔로우 취소');
+    }
+  };
+
   return (
     <div className="flex justify-between items-center w-full body-14-bold">
       <div className="flex gap-[8px] items-center">
@@ -36,8 +44,10 @@ export default function FeedProfile({
         </div>
         <p>{nickName}</p>
       </div>
-      {!isMyFeed && !isFollowed && (
-        <button onClick={onClickFollowButton}>팔로우</button>
+      {!isMyFeed && (
+        <button onClick={handleClickFollowButton}>
+          {isFollowed ? '팔로우 취소' : '팔로우'}
+        </button>
       )}
     </div>
   );
