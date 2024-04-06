@@ -40,8 +40,8 @@ interface FeedListResponse {
 }
 
 const getFeedList = ({
-  lastIdxId = 0,
-  size = 10,
+  lastIdxId,
+  size,
 }: GetFeedListArgs): Promise<ApiResponse<FeedListResponse>> => {
   const queryString = `&lastIdxId=${lastIdxId}&size=${size}`;
   return axiosRequest('get', `/api/v1/feeds?type=ALL${queryString}`);
@@ -49,7 +49,7 @@ const getFeedList = ({
 
 export const useGetFeedList = (
   params: GetFeedListArgs = {},
-): UseInfiniteQueryResult<ApiResponse<FeedListResponse>, AxiosError> => {
+): UseInfiniteQueryResult<ApiResponse<FeedListResponse>[], AxiosError> => {
   return useInfiniteQuery({
     queryKey: ['get-feed-list', params],
     queryFn: (context) => {
@@ -64,5 +64,6 @@ export const useGetFeedList = (
       }
       return undefined;
     },
+    select: (data) => data.pages,
   });
 };

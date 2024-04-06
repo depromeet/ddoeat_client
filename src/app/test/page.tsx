@@ -44,11 +44,12 @@ export default function page() {
       <Feed>
         <Feed.Date>2023.04.01</Feed.Date>
         <Feed.Profile
-          id="1"
+          id={1}
           src={BackgroundImage}
           nickName="필환이"
           alt="프로필 이미지"
           isMyFeed={false}
+          isFollowed={false}
         />
         <Feed.Image
           src={HamburgerImage}

@@ -1,16 +1,26 @@
+export interface FeedStore {
+  address: string;
+  kakaoCategoryName: string;
+  kakaoStoreId: number;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  storeId: number | null;
+  storeName: string;
+  thumbnailUrl: string;
+  totalFeedCnt: number;
+  totalRating: number;
+}
 export interface Feed {
   userId: number;
-  profileImg: string;
+  profileImageUrl: string;
   nickname: string;
-  storeId: number;
-  storeName: string;
-  kakaoCategoryName: string;
-  address: string;
   feedId: number;
   description: string;
   feedImg: string;
   createdAt: string;
   isFollowed: boolean;
-  rating: number;
   isMine: boolean;
+  feedStoreResponse: FeedStore;
 }

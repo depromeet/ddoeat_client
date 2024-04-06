@@ -3,10 +3,12 @@
 import Image, { ImageProps } from 'next/image';
 import { useRouter } from 'next/navigation';
 
-interface FeedProfileProps extends ImageProps {
+interface FeedProfileProps extends Omit<ImageProps, 'id'> {
   nickName: string;
   onClickFollowButton?: () => void;
+  isFollowed: boolean;
   isMyFeed: boolean;
+  id: number;
 }
 
 export default function FeedProfile({
@@ -14,6 +16,7 @@ export default function FeedProfile({
   src,
   alt,
   nickName,
+  isFollowed,
   isMyFeed,
   onClickFollowButton,
   ...props
@@ -33,7 +36,9 @@ export default function FeedProfile({
         </div>
         <p>{nickName}</p>
       </div>
-      {!isMyFeed && <button onClick={onClickFollowButton}>팔로우</button>}
+      {!isMyFeed && !isFollowed && (
+        <button onClick={onClickFollowButton}>팔로우</button>
+      )}
     </div>
   );
 }
