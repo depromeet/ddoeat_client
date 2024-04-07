@@ -1,6 +1,8 @@
-import { HTMLAttributes } from 'react';
+interface LayoutProps {
+  children: React.ReactNode;
+}
 
-export default function layout({ children }: HTMLAttributes<HTMLDivElement>) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <div>
       <h1 className="flex top-0 items-center justify-center w-full h-[56px] body-16-bold border-b-[1px] border-gray-100">

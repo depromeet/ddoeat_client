@@ -7,7 +7,8 @@ export const convertMeterToKm = (distance: number): string => {
 
 // NOTE: 객체를 Query String으로 변환
 export const convertObjectToQueryString = (
-  object: Record<string, string>,
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  object: Record<string, any>,
 ): string => {
   const queryString = Object.keys(object)
     .map(

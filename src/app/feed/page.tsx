@@ -46,6 +46,7 @@ export default function Page() {
                   storeName={feed.feedStoreResponse.storeName}
                   storeCategory={feed.feedStoreResponse.kakaoCategoryName}
                   storeLocation={feed.feedStoreResponse.address}
+                  storeResponse={feed.feedStoreResponse}
                 />
                 <Feed.Description
                   id={feed.feedId}

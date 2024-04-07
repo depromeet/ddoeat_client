@@ -28,6 +28,7 @@ export default function Page() {
             storeName={feedDetailData.feedStoreResponse.storeName}
             storeCategory={feedDetailData.feedStoreResponse.kakaoCategoryName}
             storeLocation={feedDetailData.feedStoreResponse.address}
+            storeResponse={feedDetailData.feedStoreResponse}
           />
           <Feed.DetailDescription description={feedDetailData.description} />
           <Feed.Date className="text-black caption-12-regular -mt-[4px]">
