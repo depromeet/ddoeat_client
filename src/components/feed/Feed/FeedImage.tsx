@@ -1,12 +1,16 @@
 import Image, { ImageProps } from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import RightArrowLogo from 'public/assets/icon24/right_arrow_24.svg';
 import cn from '@utils/cn';
+import { FeedStore } from 'src/types/feed';
+import { convertObjectToQueryString } from '@utils/parser';
 
 interface FeedImageProps extends ImageProps {
   storeName: string;
   storeCategory?: string;
   storeLocation?: string;
+  storeResponse: FeedStore;
 }
 
 export default function FeedImage({
@@ -16,10 +20,16 @@ export default function FeedImage({
   storeName,
   storeCategory,
   storeLocation,
+  storeResponse,
   ...props
 }: FeedImageProps) {
-  // TODO: 음식점 클릭 시 음식점 상세 이동 로직 작성
-  // TODO: 피드 클릭 시 피드 상세 이동 로직 작성
+  const { push } = useRouter();
+
+  const handleClickStoreInfoButton = () => {
+    const queryString = convertObjectToQueryString(storeResponse);
+    push(`/?type=search&${queryString}&bottomSheetStatus=show`);
+  };
+
   return (
     <div
       className={cn(
@@ -37,7 +47,7 @@ export default function FeedImage({
             <p>{storeLocation}</p>
           </div>
         </div>
-        <button>
+        <button onClick={handleClickStoreInfoButton}>
           <RightArrowLogo />
         </button>
       </div>

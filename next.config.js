@@ -13,6 +13,9 @@ const nextConfig = {
       {
         hostname: 'ddoeatimg.kr.object.ncloudstorage.com',
       },
+      {
+        hostname: 'example.com',
+      },
     ],
   },
   async headers() {

@@ -77,8 +77,8 @@ function StorePreviewSection({
           totalReviewCount={storeData?.totalReviewCount ?? 0}
           myRevisitedCount={storeData?.myRevisitedCount ?? 0}
         />
-        {storeData && storeData.reviewImageUrls.length > 0 && (
-          <StoreLogPhotoPreview reviewImageUrls={storeData?.reviewImageUrls} />
+        {storeData && storeData.feedImageUrls.length > 0 && (
+          <StoreLogPhotoPreview feedImageUrls={storeData?.feedImageUrls} />
         )}
         <div className="flex gap-[8px] p-[16px]">
           <WriteLogButton

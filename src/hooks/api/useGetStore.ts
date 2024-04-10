@@ -14,7 +14,7 @@ interface StoreResponse {
   address: string;
   totalRating: number;
   totalReviewCount: number;
-  reviewImageUrls: string[];
+  feedImageUrls: string[];
   userId: number;
   myRevisitedCount: number;
   totalRevisitedCount: number;
