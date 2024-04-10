@@ -23,7 +23,7 @@ export const usePatchFollow = (): UseMutationResult<
     mutationFn: (userId) => patchFollow(userId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['get-follow'],
+        queryKey: ['get-following-list'],
         refetchType: 'all',
       });
     },

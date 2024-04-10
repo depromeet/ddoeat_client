@@ -23,12 +23,11 @@ export default function FollowerList({
 }: FollowerListProps) {
   const patchFollow = usePatchFollow();
   const handleFollowButton = () => {
-    // TO DO: 팔로우, 언팔 요청에 따른 UI 변경 적용하기
     patchFollow.mutate(userId);
   };
 
   return (
-    <li className="flex w-full p-[16px] gap-y-[8px] border-b-2 border-gray-100 justify-between items-center mt-[35px]">
+    <li className="flex w-full p-[16px] gap-y-[8px] border-b-2 border-gray-100 justify-between items-center">
       <div className="flex items-center gap-x-[15px]">
         {profileImgUrl ? (
           <ImageContainer
@@ -39,17 +38,18 @@ export default function FollowerList({
             className="w-[59px] h-[59px] overflow-hidden"
           />
         ) : (
+          // TO DO : null일 때 기본 svg 사용하기
           <div className="w-[59px] h-[59px] bg-gray-300 rounded-full"></div>
         )}
-        <div className="flex gap-x-[5px] items-center">
+        <div className="flex gap-x-[15px] justify-center items-center">
           <p className="body-14-extraBold">{nickName}</p>
           {!isFollowed && value == 'FOLLOWER' && (
-            <span
+            <p
               className="caption-12-bold text-primary-500"
               onClick={handleFollowButton}
             >
               팔로우
-            </span>
+            </p>
           )}
         </div>
       </div>
@@ -57,13 +57,13 @@ export default function FollowerList({
         <div>
           <Button
             className={`${
-              !isFollowed
+              isFollowed
                 ? 'bg-gray-100 active:bg-gray-100 text-black'
                 : 'bg-black active:bg-black text-gray-100'
-            } w-[60px] h-[34px] rounded-[20px] p-[10px] caption-12-bold`}
+            } w-[80px] h-[34px] rounded-[20px] p-[10px] caption-12-bold`}
             onClick={handleFollowButton}
           >
-            {!isFollowed ? '팔로잉' : '팔로우'}
+            {isFollowed ? '팔로잉' : '팔로우'}
           </Button>
         </div>
       )}

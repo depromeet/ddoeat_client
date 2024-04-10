@@ -13,8 +13,6 @@ export default function Page() {
   const { data: followerList } = useGetFollowingList(userId, 'FOLLOWER');
   const { data: followingList } = useGetFollowingList(userId, 'FOLLOWER');
 
-  console.log('di', followingList);
-
   return (
     <div>
       <Tab.Group initialTab="follower">
@@ -28,7 +26,7 @@ export default function Page() {
             </Tab.Item>
           </Tab.Header>
         </div>
-        <div>
+        <div className="mt-[30px]">
           <Tab.Content value="follower">
             {followerList &&
               followerList.data.map((item) => (
