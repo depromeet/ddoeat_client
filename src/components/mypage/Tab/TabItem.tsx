@@ -9,19 +9,21 @@ import cn from '@utils/cn';
 interface TabItemProps {
   value: string;
   children: ReactNode;
+  className?: string;
 }
 
-export default function TabItem({ value, children }: TabItemProps) {
+export default function TabItem({ value, children, className }: TabItemProps) {
   const { activeValue, setActiveValue } = useTab();
   const isActive = value === activeValue;
 
   const handleTabItemClick = () => setActiveValue(value);
 
   return (
-    <div>
+    <div className="w-full">
       <li
         className={cn(
           'header-18 text-gray-900 w-[72px] h-[32px] flex justify-center items-center border-b-[4px] border-transparent',
+          className,
         )}
         onClick={handleTabItemClick}
       >
