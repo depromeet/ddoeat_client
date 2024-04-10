@@ -22,22 +22,22 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-const nanumSquareRound = localFont({
+const pretendard = localFont({
   src: [
     {
-      path: './fonts/NanumSquareRoundL.woff2',
+      path: './fonts/PretendardLight.woff2',
       weight: '300',
     },
     {
-      path: './fonts/NanumSquareRoundR.woff2',
+      path: './fonts/PretendardRegular.woff2',
       weight: '400',
     },
     {
-      path: './fonts/NanumSquareRoundB.woff2',
+      path: './fonts/PretendardMedium.woff2',
       weight: '500',
     },
     {
-      path: './fonts/NanumSquareRoundEB.woff2',
+      path: './fonts/PretendardBold.woff2',
       weight: '700',
     },
   ],
@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <QueryClientProviders>
       <WebViewContainer />
-      <html lang="en" className={`${nanumSquareRound.variable}`}>
+      <html lang="en" className={`${pretendard.variable}`}>
         <head></head>
         <body className="relative overscroll-y-none min-h-[100dvh] w-full max-w-[480px] mx-auto scrollbar-hide">
           <Suspense>{children}</Suspense>

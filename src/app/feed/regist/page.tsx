@@ -26,7 +26,7 @@ export default function Page() {
         queryKey: ['get-myLog'],
       });
       push(
-        `/review/complete?storeName=${storeName}&myRevisitedCount=${
+        `/feed/regist/complete?storeName=${storeName}&myRevisitedCount=${
           Number(myRevisitedCount) + 1
         }`,
       );

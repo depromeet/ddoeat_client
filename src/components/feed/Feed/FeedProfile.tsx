@@ -3,6 +3,8 @@
 import Image, { ImageProps } from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import DefaultProfileImage from 'public/assets/image/default_profile.png';
+
 interface FeedProfileProps extends Omit<ImageProps, 'id'> {
   nickName: string;
   isFollowed: boolean;
@@ -40,7 +42,7 @@ export default function FeedProfile({
           className="relative w-[36px] h-[36px] rounded-[50%] overflow-hidden"
           onClick={handleClickProfile}
         >
-          <Image alt={alt} src={src} fill {...props} />
+          <Image alt={alt} src={src ?? DefaultProfileImage} fill {...props} />
         </div>
         <p>{nickName}</p>
       </div>
