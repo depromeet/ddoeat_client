@@ -1,4 +1,5 @@
 import { HTMLAttributes } from 'react';
+import { useRouter } from 'next/navigation';
 
 import ImageContainer from '@components/common/ImageContainer';
 import Button from '@components/common/Button';
@@ -26,21 +27,28 @@ export default function FollowerList({
     patchFollow.mutate(userId);
   };
 
+  const router = useRouter();
+  const handleProfileNavigate = () => {
+    router.push(`/profile/${userId}`);
+  };
+
   return (
     <li className="flex w-full p-[16px] gap-y-[8px] border-b-2 border-gray-100 justify-between items-center">
       <div className="flex items-center gap-x-[15px]">
-        {profileImgUrl ? (
-          <ImageContainer
-            type={'profile'}
-            src={profileImgUrl}
-            alt={nickName}
-            fill
-            className="w-[59px] h-[59px] overflow-hidden"
-          />
-        ) : (
-          // TO DO : null일 때 기본 svg 사용하기
-          <div className="w-[59px] h-[59px] bg-gray-300 rounded-full"></div>
-        )}
+        <div onClick={handleProfileNavigate}>
+          {profileImgUrl ? (
+            <ImageContainer
+              type={'profile'}
+              src={profileImgUrl}
+              alt={nickName}
+              fill
+              className="w-[59px] h-[59px] overflow-hidden"
+            />
+          ) : (
+            // TO DO : null일 때 기본 svg 사용하기
+            <div className="w-[59px] h-[59px] bg-gray-300 rounded-full"></div>
+          )}
+        </div>
         <div className="flex gap-x-[15px] justify-center items-center">
           <p className="body-14-extraBold">{nickName}</p>
           {!isFollowed && value == 'FOLLOWER' && (
