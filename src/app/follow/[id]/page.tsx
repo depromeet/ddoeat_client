@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import FollowerList from '@components/following/FollowerList';
 import Tab from '@components/mypage/Tab';
@@ -9,13 +9,16 @@ import { useGetFollowingList } from '@hooks/api/useGetFollowingList';
 export default function Page() {
   const pathname = usePathname();
   const userId = Number(pathname.split('/').pop());
+  const searchParams = useSearchParams();
+
+  const type = searchParams.get('type');
 
   const { data: followerList } = useGetFollowingList(userId, 'FOLLOWER');
   const { data: followingList } = useGetFollowingList(userId, 'FOLLOWER');
 
   return (
     <div>
-      <Tab.Group initialTab="follower">
+      <Tab.Group initialTab={type ? type : 'follower'}>
         <div className="h-[76px] w-full flex sticky top-[40px] bg-white z-above rounded-t-[24px]">
           <Tab.Header>
             <Tab.Item value="follower" className="w-[1/2] my-[10px]">
