@@ -21,12 +21,8 @@ export default function Page() {
       <Tab.Group initialTab={type ? type : 'follower'}>
         <div className="h-[76px] w-full flex sticky top-[40px] bg-white z-above rounded-t-[24px]">
           <Tab.Header>
-            <Tab.Item value="follower" className="w-[1/2] my-[10px]">
-              팔로워
-            </Tab.Item>
-            <Tab.Item value="following" className="w-[1/2] my-[10px]">
-              팔로잉
-            </Tab.Item>
+            <Tab.Item value="follower">팔로워</Tab.Item>
+            <Tab.Item value="following">팔로잉</Tab.Item>
           </Tab.Header>
         </div>
         <div className="mt-[30px]">
