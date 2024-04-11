@@ -5,39 +5,33 @@ import { usePathname } from 'next/navigation';
 import Icon from '@components/common/Icon/index';
 import cn from '@utils/cn';
 import { NAVIGATION } from '@constants/navigation';
-import { useGetUserProfile } from '@hooks/api/useGetUserProfile';
 
 export default function BottomNavigation({
   className,
   ...restProps
 }: HTMLAttributes<HTMLDivElement>) {
-  const currentPath = usePathname();
-  const { data: userProfile } = useGetUserProfile();
+  const pathname = usePathname();
+  const slicedPathname = pathname.slice(1).split('/')[0];
 
   return (
     <nav
       className={cn(
-        'h-[73px] w-full flex justify-evenly items-center gap-[20px] p-[12px]',
+        'h-[73px] w-full flex justify-evenly items-center gap-[20px] p-[12px] fixed bottom-0 bg-white z-nav',
         className,
         { ...restProps },
       )}
     >
       {NAVIGATION.map((item) => (
-        <Link
-          key={item.key}
-          href={
-            userProfile?.userId ? `/profile?${userProfile.userId}` : item.route
-          }
-        >
+        <Link key={item.key} href={item.route}>
           <div
             className={cn(
-              item.key === currentPath ? 'fill-primary-500' : 'fill-black',
+              slicedPathname === item.key ? 'fill-primary-500' : 'fill-black',
             )}
           >
             <Icon
               iconName={item.name}
               className={cn(
-                item.key === currentPath ? 'fill-primary-500' : 'fill-black',
+                slicedPathname === item.key ? 'fill-primary-500' : 'fill-black',
               )}
             />
           </div>
