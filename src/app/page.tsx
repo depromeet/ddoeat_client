@@ -22,8 +22,10 @@ import switchUrl from '@utils/switchUrl';
 import { CoordinateWithIds } from 'src/types/map';
 import { Categories } from 'src/types/tag';
 import CurrentLocationButton from '@components/main/CurrentLocationButton';
+import { useGetMyUserId } from '@hooks/api/useGetMyUserId';
 
 export default function Home() {
+  const { data: userIdData } = useGetMyUserId();
   const mapRef = useRef<kakao.maps.Map>(null);
   const searchParams = useSearchParams();
   const isSearchType = searchParams.get('type') === 'search';
@@ -82,6 +84,10 @@ export default function Home() {
     screenCoordinate,
     level: currentLevel,
     isSearchType,
+  });
+
+  useEffect(() => {
+    localStorage.setItem('userId', String(userIdData?.userId));
   });
 
   useDidUpdate(() => {
