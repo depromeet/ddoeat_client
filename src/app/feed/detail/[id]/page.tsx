@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { Feed } from '@components/feed/Feed';
 import { useGetFeedDetail } from '@hooks/api/useGetFeedDetail';
+import BottomNavigation from '@components/common/BottomNavigation';
 
 export default function Page() {
   const pathname = usePathname();
@@ -36,6 +37,7 @@ export default function Page() {
           </Feed.Date>
         </Feed>
       )}
+      <BottomNavigation />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 
 import ProfileIcon from 'public/assets/icon24/profile_default_24.svg';
@@ -16,30 +18,34 @@ export interface NavigationItemType {
   route: string;
 }
 
+let userId: string | null = null;
+if (typeof window !== 'undefined') {
+  userId = localStorage.getItem('userId');
+}
+
 export const NAVIGATION: NavigationItemType[] = [
   {
     icon: FeedIcon,
-    key: '/feed',
+    key: 'feed',
     name: 'FeedPage',
     route: `/feed`,
   },
-
   {
     icon: HomeIcon,
-    key: '/',
+    key: '',
     name: 'Home',
     route: '/',
   },
   {
     icon: AddFeedIcon,
-    key: '/search',
+    key: 'search',
     name: 'Search',
     route: `/search?longitude=${DEFAULT_LOCATION.lng}&latitude=${DEFAULT_LOCATION.lat}`,
   },
   {
     icon: ProfileIcon,
-    key: '/profile',
+    key: 'profile',
     name: 'Profile',
-    route: `/`,
+    route: `/profile/${userId}`,
   },
 ];
