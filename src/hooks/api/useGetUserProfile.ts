@@ -4,19 +4,26 @@ import { AxiosError } from 'axios';
 import { ApiResponse, axiosRequest } from '../../api/api-config';
 
 export interface UserInfo {
-  nickname: string;
-  level: '맨밥이' | '배고픈' | '또밥이' | '또또밥이';
+  isMine: boolean;
   userId: number;
+  profileImgUrl: string;
+  nickname: string;
+  feedCnt: number;
+  follwerCnt: number;
+  followingCnt: number;
+  isFollowed: boolean;
 }
 
-const getUserProfile = (): Promise<ApiResponse<UserInfo>> => {
-  return axiosRequest('get', '/api/v1/users/profile');
+const getUserProfile = (userId: number): Promise<ApiResponse<UserInfo>> => {
+  return axiosRequest('get', `/api/v1/profile/${userId}`);
 };
 
-export const useGetUserProfile = (): UseQueryResult<UserInfo, AxiosError> => {
+export const useGetUserProfile = (
+  userId: number,
+): UseQueryResult<UserInfo, AxiosError> => {
   return useQuery({
     queryKey: ['get-userProfile'],
-    queryFn: getUserProfile,
+    queryFn: () => getUserProfile(userId),
     select: (data) => data.data,
   });
 };
