@@ -8,8 +8,8 @@ interface TabHeaderProps {
 
 export default function TabHeader({ children }: TabHeaderProps) {
   return (
-    <div className="flex items-center justify-between">
-      <ul className="flex">{children}</ul>
+    <div className="flex items-center justify-between w-full">
+      <ul className="flex w-full">{children}</ul>
     </div>
   );
 }
