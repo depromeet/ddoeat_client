@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
 import Header from '@components/common/Header';
@@ -12,7 +12,10 @@ export default function Layout({ children }: { children: ReactNode }) {
     router.back();
   };
 
-  const { data: userProfile } = useGetUserProfile();
+  const pathname = usePathname();
+  const userId = Number(pathname.split('/').pop());
+
+  const { data: userProfile } = useGetUserProfile(Number(userId));
 
   return (
     <main className="w-full max-w-[480px] h-[100dvh]">

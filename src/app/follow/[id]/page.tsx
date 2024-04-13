@@ -14,7 +14,7 @@ export default function Page() {
   const type = searchParams.get('type');
 
   const { data: followerList } = useGetFollowingList(userId, 'FOLLOWER');
-  const { data: followingList } = useGetFollowingList(userId, 'FOLLOWER');
+  const { data: followingList } = useGetFollowingList(userId, 'FOLLOWING');
 
   return (
     <div>
