@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import FollowerList from '@components/following/FollowerList';
-import Tab from '@components/mypage/Tab';
+import Tab from '@components/profile/Tab';
 import { useGetFollowingList } from '@hooks/api/useGetFollowingList';
 
 export default function Page() {
