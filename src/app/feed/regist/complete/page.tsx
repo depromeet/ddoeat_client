@@ -12,8 +12,10 @@ export default function Page() {
   const myRevisitedCount = searchParams.get('myRevisitedCount');
 
   const handleClickConfirmButton = () => {
-    push('/mypage');
+    const userId = Number(localStorage.getItem('userId'));
+    push(`/profile/${userId}`);
   };
+
   return (
     <div className="text-black h-[100dvh] w-full bg-gray-100 flex flex-col gap-[32px] justify-center items-center">
       <div>

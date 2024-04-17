@@ -26,6 +26,9 @@ export const usePatchFollow = (): UseMutationResult<
         queryKey: ['get-following-list'],
         refetchType: 'all',
       });
+      queryClient.invalidateQueries({
+        queryKey: ['get-userProfile'],
+      });
     },
   });
 };

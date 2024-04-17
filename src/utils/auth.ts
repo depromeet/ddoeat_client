@@ -9,6 +9,7 @@ interface TokenRefreshResponse {
 }
 
 export const removeTokenAndMoveToLogin = () => {
+  localStorage.removeItem('userId');
   Cookies.remove('accessToken');
   Cookies.remove('refreshToken');
   if (window?.ReactNativeWebView) {

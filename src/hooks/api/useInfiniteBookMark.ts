@@ -42,7 +42,7 @@ const getBookMark = ({
 }: GetBookMarkParams): Promise<ApiResponse<BookMark>> => {
   const queryString = `page=${page}&size=${size}`;
 
-  return axiosRequest('get', `/api/v1/users/bookmarks?${queryString}`);
+  return axiosRequest('get', `/api/v1/profile/bookmarks?${queryString}`);
 };
 
 export const useInfiniteGetBookMark = (
