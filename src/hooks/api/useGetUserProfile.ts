@@ -22,7 +22,7 @@ export const useGetUserProfile = (
   userId: number,
 ): UseQueryResult<UserInfo, AxiosError> => {
   return useQuery({
-    queryKey: ['get-userProfile'],
+    queryKey: ['get-userProfile', userId],
     queryFn: () => getUserProfile(userId),
     select: (data) => data.data,
   });
