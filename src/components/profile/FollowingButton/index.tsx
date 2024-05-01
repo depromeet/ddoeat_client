@@ -13,7 +13,7 @@ export default function FollowingButton({
 }: FollowingButtonProps) {
   return (
     <button
-      onClick={() => onClick()}
+      onClick={onClick}
       className={cn(
         'w-[75px] h-[34px] bg-gray-100 rounded-[20px]',
         !isFollowing && 'bg-primary-500 text-white',
