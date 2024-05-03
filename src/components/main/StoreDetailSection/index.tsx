@@ -83,8 +83,8 @@ export default function StoreDetailSection({
         })}
       />
       <StoreInformation
-        categoryName={
-          storeData?.categoryName ??
+        kakaoCategoryName={
+          storeData?.kakaoCategoryName ??
           searchedPinFromSearchParams?.kakaoCategoryName ??
           ''
         }

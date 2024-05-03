@@ -9,7 +9,7 @@ interface StoreRequest {
 
 interface StoreResponse {
   storeId: number;
-  categoryName: string;
+  kakaoCategoryName: string;
   storeName: string;
   address: string;
   totalRating: number;

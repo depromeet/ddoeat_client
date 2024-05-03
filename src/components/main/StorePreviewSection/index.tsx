@@ -62,8 +62,8 @@ function StorePreviewSection({
     <>
       <div className="w-full h-fit pb-[12px]">
         <StoreInformation
-          categoryName={
-            storeData?.categoryName ??
+          kakaoCategoryName={
+            storeData?.kakaoCategoryName ??
             searchedPinFromSearchParams?.kakaoCategoryName ??
             ''
           }
