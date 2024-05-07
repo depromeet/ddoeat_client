@@ -19,6 +19,7 @@ import { useUploadImageToNCloud } from '@hooks/api/useUploadImageToNCloud';
 import { usePutProfileImage } from '@hooks/api/usePutProfileImage';
 import { usePatchFollow } from '@hooks/api/usePatchFollow';
 import ProfileFeedContent from '@components/profile/ProfileFeedContent';
+import BottomNavigation from '@components/common/BottomNavigation';
 
 export default function Page() {
   const pathname = usePathname();
@@ -210,6 +211,7 @@ export default function Page() {
           </Tab.Group>
         </div>
       </div>
+      <BottomNavigation />
     </div>
   );
 }
