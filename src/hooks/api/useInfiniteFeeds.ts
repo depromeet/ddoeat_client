@@ -17,7 +17,7 @@ interface ContentData {
   isMine: boolean;
 }
 
-interface ReviewProps {
+interface FeedsProps {
   content: ContentData[];
   pageable: string;
   size: number;
@@ -33,33 +33,30 @@ interface ReviewProps {
   empty: boolean;
 }
 
-export interface GetReviewParams {
+export interface GetFeedsParams {
   storeId: string;
   page?: number;
   type: 'REVISITED' | 'PHOTO' | null;
 }
 
-const getReview = ({
+const getFeeds = ({
   storeId,
   page,
   type,
-}: GetReviewParams): Promise<ApiResponse<ReviewProps>> => {
+}: GetFeedsParams): Promise<ApiResponse<FeedsProps>> => {
   let queryString = `page=${page}`;
 
   if (type) queryString += `&type=${type}`;
 
-  return axiosRequest(
-    'get',
-    `/api/v1/stores/${storeId}/reviews?${queryString}`,
-  );
+  return axiosRequest('get', `/api/v1/stores/${storeId}/feeds?${queryString}`);
 };
 
-export const useInfiniteReview = (
-  params: GetReviewParams,
-): UseInfiniteQueryResult<ApiResponse<ReviewProps>[], Error> => {
+export const useInfiniteFeeds = (
+  params: GetFeedsParams,
+): UseInfiniteQueryResult<ApiResponse<FeedsProps>[], Error> => {
   return useInfiniteQuery({
     queryKey: ['get-review', params],
-    queryFn: ({ pageParam = 0 }) => getReview({ ...params, page: pageParam }),
+    queryFn: ({ pageParam = 0 }) => getFeeds({ ...params, page: pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage.data.last) {

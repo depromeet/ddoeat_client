@@ -5,8 +5,6 @@ import { useBottomSheet } from '../BottomSheet/contexts/BottomSheetContext';
 import StoreInformation from '../StoreInformation';
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
 import WriteLogButton from '../WriteLogButton';
-import Report from './Report';
-import Reviews from './Reviews';
 
 import AnimatePortal from '@components/common/AnimatePortal';
 import BookmarkButton from '@components/common/BookmarkButton';
@@ -17,6 +15,8 @@ import useGetStore from '@hooks/api/useGetStore';
 import useObserver from '@hooks/useObserver';
 import cn from '@utils/cn';
 import switchUrl from '@utils/switchUrl';
+import { useGetStoreFeedList } from '@hooks/api/useGetFeedList';
+import { Feed } from '@components/feed/Feed';
 
 export default function StoreDetailSection({
   storeId,
@@ -34,6 +34,12 @@ export default function StoreDetailSection({
   const { data: reportData } = useGetReport(
     storeId ?? Number(searchParams.get('storeId') || null),
   );
+
+  const { data: storeFeedListData } = useGetStoreFeedList({
+    storeId: storeId ?? 0,
+  });
+
+  console.log(storeFeedListData);
 
   const [isScrollDown, setIsScrollDown] = useState(false);
 
@@ -95,8 +101,8 @@ export default function StoreDetailSection({
           storeData?.address ?? searchedPinFromSearchParams?.address ?? ''
         }
         totalRating={storeData?.totalRating ?? 0}
-        totalReviewCount={storeData?.totalReviewCount ?? 0}
-        myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+        totalReviewCount={storeData?.totalFeedCnt ?? 0}
+        myRevisitedCount={storeData?.userFeedCnt ?? 0}
       />
       <div className="flex gap-[8px] p-[16px]">
         <WriteLogButton
@@ -104,7 +110,7 @@ export default function StoreDetailSection({
             storeData?.storeName ?? searchedPinFromSearchParams?.storeName ?? ''
           }
           storeId={storeData?.storeId ?? null}
-          myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+          myRevisitedCount={storeData?.userFeedCnt ?? 0}
           searchedPinFromSearchParams={searchedPinFromSearchParams}
         />
         {storeData && (
@@ -114,9 +120,38 @@ export default function StoreDetailSection({
           />
         )}
       </div>
+      {storeFeedListData &&
+        !storeFeedListData[0].data.empty &&
+        storeFeedListData.map((feedList) =>
+          feedList.data.content.map((feed) => {
+            return (
+              <Feed key={feed.feedId}>
+                <Feed.Date>{feed.createdAt}</Feed.Date>
+                <Feed.Profile
+                  userId={feed.userId}
+                  src={feed.profileImageUrl}
+                  nickName={feed.nickname}
+                  alt={`${feed.userId} 프로필 이미지`}
+                  isMyFeed={feed.isMine}
+                  isFollowed={feed.isFollowed}
+                />
+                <Feed.Image
+                  src={feed.feedImg}
+                  alt={`${feed.feedStoreResponse.storeName} 이미지`}
+                  storeName={feed.feedStoreResponse.storeName}
+                  storeCategory={feed.feedStoreResponse.kakaoCategoryName}
+                  storeLocation={feed.feedStoreResponse.address}
+                  storeResponse={feed.feedStoreResponse}
+                />
+                <Feed.Description
+                  id={feed.feedId}
+                  description={feed.description}
+                />
+              </Feed>
+            );
+          }),
+        )}
       <div className="w-full h-[8px] bg-gray-100" />
-      <Report />
-      <Reviews />
     </div>
   );
 }

@@ -39,7 +39,7 @@ function SharingSpotPinList({
           position={{ lat: store.latitude, lng: store.longitude }}
           storeName={store.storeName}
           isBookmarked={false}
-          totalRevisitedCount={store.totalRevisitedCount}
+          totalRevisitedCnt={store.totalFeedCnt}
           onClick={handlePinClick({
             storeName: store.storeName,
             lat: store.latitude,

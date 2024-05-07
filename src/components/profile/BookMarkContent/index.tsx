@@ -101,7 +101,7 @@ export default function BookMarkContent() {
                     storeId={item.storeId}
                     location={item.address}
                     menuType={item.categoryName}
-                    revisitNum={item.totalRevisitedCount}
+                    revisitNum={item.totalRevisitedCnt}
                     storeName={item.storeName}
                     onClick={() => handleDeleteItem(item.storeId)}
                   />

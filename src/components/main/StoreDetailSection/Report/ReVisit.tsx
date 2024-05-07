@@ -15,7 +15,7 @@ export default function ReVisit() {
   return (
     <ReportContainer>
       <p className="caption-12-regular">재방문한 단골은</p>
-      <p className="header-20">{data?.totalRevisitedCount ?? 0}명</p>
+      <p className="header-20">{data?.totalRevisitedCnt ?? 0}명</p>
       <DdobabReportTwoIcon />
     </ReportContainer>
   );

@@ -10,7 +10,7 @@ export interface ContentData {
   storeId: number;
   storeName: string;
   address: string;
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
   categoryName: string;
   isVisited: boolean;
 }

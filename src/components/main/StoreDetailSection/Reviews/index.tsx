@@ -6,12 +6,9 @@ import StoreDetailLog from '../StoreDetailLog';
 
 import cn from '@utils/cn';
 import Tag from '@components/common/Tag';
-import {
-  type GetReviewParams,
-  useInfiniteReview,
-} from '@hooks/api/useInfiniteReview';
 import useObserver from '@hooks/useObserver';
 import { useDeleteLog } from '@hooks/api/useDeleteLog';
+import { useGetStoreFeedList } from '@hooks/api/useGetFeedList';
 
 export default function Reviews() {
   const [activeTag, setActiveTag] = useState<'REVISITED' | 'PHOTO' | null>(
@@ -22,13 +19,12 @@ export default function Reviews() {
 
   const storeId = searchParams.get('storeId');
 
-  const params: GetReviewParams = {
+  const params = {
     storeId: storeId ?? '',
-    type: activeTag,
   };
 
   const { data, fetchNextPage, isLoading, hasNextPage } =
-    useInfiniteReview(params);
+    useGetStoreFeedList(params);
   const { mutate: deleteLog } = useDeleteLog();
 
   const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null) => () => {
@@ -83,17 +79,17 @@ export default function Reviews() {
             return page.data.content.map((item) => {
               return (
                 <StoreDetailLog
-                  key={item.reviewId}
-                  date={item.visitedAt}
+                  key={item.feedId}
+                  date={item.createdAt}
                   score={item.rating}
                   log={item.description}
-                  storeImgUrl={item.imageUrl}
-                  name={item.nickName}
-                  visitNum={item.visitTimes}
+                  storeImgUrl={item.feedImg}
+                  name={item.nickname}
+                  visitNum={0}
                   hasDeleteOption={item.isMine}
                   hasReportOption={!item.isMine}
                   isLast={true}
-                  onClick={() => handleDeleteLog(item.reviewId)}
+                  onClick={() => handleDeleteLog(item.feedId)}
                 />
               );
             });
