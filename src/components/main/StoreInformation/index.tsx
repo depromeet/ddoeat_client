@@ -3,7 +3,7 @@ import Tag from '@components/common/Tag';
 import switchUrl from '@utils/switchUrl';
 
 interface StoreInformationProps {
-  categoryName: string;
+  kakaoCategoryName: string;
   storeName: string;
   address: string;
   totalRating: number;
@@ -12,7 +12,7 @@ interface StoreInformationProps {
 }
 
 function StoreInformation({
-  categoryName,
+  kakaoCategoryName,
   storeName,
   address,
   totalRating,
@@ -39,7 +39,7 @@ function StoreInformation({
             내방문 {myRevisitedCount}번
           </Tag>
           <Tag size="small" className=" bg-gray-50 text-gray-500">
-            {categoryName}
+            {kakaoCategoryName}
           </Tag>
         </div>
       </div>

@@ -10,10 +10,10 @@ import { useSearchParams } from 'next/navigation';
 import { bounceAnimationVariants } from '@constants/motions';
 
 interface PinBubbleProps {
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
 }
 
-export default function PinBubble({ totalRevisitedCount }: PinBubbleProps) {
+export default function PinBubble({ totalRevisitedCnt }: PinBubbleProps) {
   const searchParams = useSearchParams();
   const storeId = searchParams.get('storeId');
 
@@ -29,7 +29,7 @@ export default function PinBubble({ totalRevisitedCount }: PinBubbleProps) {
         {storeId && <PinVisitorIcon />}
         <p className="body-14-extraBold text-white">
           {storeId
-            ? `${totalRevisitedCount}명이 재방문했어요!`
+            ? `${totalRevisitedCnt}명이 재방문했어요!`
             : '첫 방문 기록을 남겨주세요!'}
         </p>
       </div>

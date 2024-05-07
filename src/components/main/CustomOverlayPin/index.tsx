@@ -11,7 +11,7 @@ function CustomOverlayPin({
   storeName,
   position,
   isBookmarked,
-  totalRevisitedCount,
+  totalRevisitedCnt,
   isActive,
   onClick,
   mapLevel,
@@ -27,7 +27,7 @@ function CustomOverlayPin({
         isActive={isActive}
         storeName={storeName}
         isBookmarked={isBookmarked}
-        totalRevisitedCount={totalRevisitedCount}
+        totalRevisitedCnt={totalRevisitedCnt}
         onClick={onClick}
       />
     </CustomOverlayMap>

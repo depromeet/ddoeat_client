@@ -22,18 +22,18 @@ interface PinListRequest {
 }
 
 export interface Pin {
-  storeId: number;
-  kakaoStoreId: number;
-  storeName: string;
-  categoryId: number;
-  categoryName: string;
-  categoryType: string;
   address: string;
-  longitude: number;
-  latitude: number;
-  totalRevisitedCount: number;
-  totalReviewCount: number;
   isBookmarked: boolean;
+  kakaoStoreId: number;
+  latitude: number;
+  longitude: number;
+  storeId: number;
+  storeName: string;
+  // categoryId: number;
+  // categoryName: string;
+  // categoryType: string;
+  // totalRevisitedCnt: number;
+  totalFeedCnt: number;
 }
 
 interface PinListResponse {

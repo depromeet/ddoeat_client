@@ -23,4 +23,5 @@ export interface Feed {
   isFollowed: boolean;
   isMine: boolean;
   feedStoreResponse: FeedStore;
+  rating: number;
 }

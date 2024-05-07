@@ -5,7 +5,7 @@ import Tag from '@components/common/Tag';
 interface SearchItemProps extends Omit<BasicListItem, 'hasDeleteOption'> {
   storeName: string;
   categoryType: string;
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
   distance: string;
   address: string;
 }
@@ -14,7 +14,7 @@ export default function SearchItem({
   isLast,
   storeName,
   categoryType,
-  totalRevisitedCount,
+  totalRevisitedCnt,
   distance,
   address,
 }: SearchItemProps) {
@@ -23,9 +23,9 @@ export default function SearchItem({
       <div className="flex items-center gap-[4px]">
         <p className="body-16-bold">{storeName}</p>
         <p className="caption-12-bold text-gray-500">{categoryType}</p>
-        {totalRevisitedCount > 0 && (
+        {totalRevisitedCnt > 0 && (
           <Tag size={'small'} className="bg-primary-100 text-primary-500">
-            {totalRevisitedCount}명 재방문
+            {totalRevisitedCnt}명 재방문
           </Tag>
         )}
       </div>

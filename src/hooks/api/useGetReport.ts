@@ -7,7 +7,7 @@ interface ReportData {
   storeId: number;
   thumbnailUrl: string;
   mostVisitedCount: number;
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
 }
 
 const getReport = (

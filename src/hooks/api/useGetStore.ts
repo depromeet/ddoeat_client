@@ -9,16 +9,16 @@ interface StoreRequest {
 
 interface StoreResponse {
   storeId: number;
-  categoryName: string;
+  kakaoCategoryName: string;
   storeName: string;
   address: string;
   totalRating: number;
-  totalReviewCount: number;
+  totalFeedCnt: number;
   feedImageUrls: string[];
   userId: number;
-  myRevisitedCount: number;
-  totalRevisitedCount: number;
   isBookmarked: boolean;
+  userFeedCnt: number;
+  totalRevisitedCnt: number;
 }
 
 const getStore = async ({ storeId }: StoreRequest) => {

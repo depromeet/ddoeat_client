@@ -5,7 +5,6 @@ import { useBottomSheet } from '../BottomSheet/contexts/BottomSheetContext';
 import StoreInformation from '../StoreInformation';
 import { SearchedPinFromSearchParams } from '../StorePreviewSection';
 import WriteLogButton from '../WriteLogButton';
-import Report from './Report';
 import Reviews from './Reviews';
 
 import AnimatePortal from '@components/common/AnimatePortal';
@@ -83,8 +82,8 @@ export default function StoreDetailSection({
         })}
       />
       <StoreInformation
-        categoryName={
-          storeData?.categoryName ??
+        kakaoCategoryName={
+          storeData?.kakaoCategoryName ??
           searchedPinFromSearchParams?.kakaoCategoryName ??
           ''
         }
@@ -95,8 +94,8 @@ export default function StoreDetailSection({
           storeData?.address ?? searchedPinFromSearchParams?.address ?? ''
         }
         totalRating={storeData?.totalRating ?? 0}
-        totalReviewCount={storeData?.totalReviewCount ?? 0}
-        myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+        totalReviewCount={storeData?.totalFeedCnt ?? 0}
+        myRevisitedCount={storeData?.userFeedCnt ?? 0}
       />
       <div className="flex gap-[8px] p-[16px]">
         <WriteLogButton
@@ -104,7 +103,7 @@ export default function StoreDetailSection({
             storeData?.storeName ?? searchedPinFromSearchParams?.storeName ?? ''
           }
           storeId={storeData?.storeId ?? null}
-          myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+          myRevisitedCount={storeData?.userFeedCnt ?? 0}
           searchedPinFromSearchParams={searchedPinFromSearchParams}
         />
         {storeData && (
@@ -115,7 +114,6 @@ export default function StoreDetailSection({
         )}
       </div>
       <div className="w-full h-[8px] bg-gray-100" />
-      <Report />
       <Reviews />
     </div>
   );

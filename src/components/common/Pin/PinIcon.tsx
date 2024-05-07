@@ -7,13 +7,13 @@ import PinBowlSamllIcon from '/public/assets/icon30/pin_bowl_30.svg';
 
 interface PinIconProps {
   isBookmarked: boolean;
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
   mapLevel: number;
 }
 
 export const PinIcon = ({
   isBookmarked,
-  totalRevisitedCount,
+  totalRevisitedCnt,
   mapLevel,
 }: PinIconProps) => {
   if (isBookmarked) {
@@ -26,11 +26,9 @@ export const PinIcon = ({
 
   return (
     <>
-      {totalRevisitedCount >= 15 && <PinBowlThreeIcon />}
-      {totalRevisitedCount >= 5 && totalRevisitedCount < 15 && (
-        <PinBowlTwoIcon />
-      )}
-      {totalRevisitedCount < 5 && <PinBowlOneIcon />}
+      {totalRevisitedCnt >= 15 && <PinBowlThreeIcon />}
+      {totalRevisitedCnt >= 5 && totalRevisitedCnt < 15 && <PinBowlTwoIcon />}
+      {totalRevisitedCnt < 5 && <PinBowlOneIcon />}
     </>
   );
 };

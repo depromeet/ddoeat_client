@@ -19,7 +19,7 @@ interface StoreSearch {
   longitude: number;
   storeId: number | null;
   storeName: string;
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
 }
 
 interface StoreListResponse {

@@ -55,7 +55,7 @@ export default function Home() {
         } as CoordinateWithIds,
         storeName: searchParams.get('storeName') || '',
         isBookmarked: Boolean(searchParams.get('isBookmarked')),
-        totalRevisitedCount: Number(searchParams.get('totalRevisitedCount')),
+        totalRevisitedCnt: Number(searchParams.get('totalRevisitedCnt')),
         address: searchParams.get('address') || '',
         categoryType: searchParams.get('categoryType') || '',
         distance: Number(searchParams.get('distance')),

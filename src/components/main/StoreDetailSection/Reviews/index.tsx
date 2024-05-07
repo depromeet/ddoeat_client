@@ -2,16 +2,12 @@ import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import SectionTitle from '../SectionTitle';
-import StoreDetailLog from '../StoreDetailLog';
 
 import cn from '@utils/cn';
-import Tag from '@components/common/Tag';
-import {
-  type GetReviewParams,
-  useInfiniteReview,
-} from '@hooks/api/useInfiniteReview';
 import useObserver from '@hooks/useObserver';
 import { useDeleteLog } from '@hooks/api/useDeleteLog';
+import { useGetStoreFeedList } from '@hooks/api/useGetFeedList';
+import { Feed } from '@components/feed/Feed';
 
 export default function Reviews() {
   const [activeTag, setActiveTag] = useState<'REVISITED' | 'PHOTO' | null>(
@@ -20,17 +16,17 @@ export default function Reviews() {
 
   const searchParams = useSearchParams();
 
-  const storeId = searchParams.get('storeId');
+  const storeId = Number(searchParams.get('storeId'));
 
-  const params: GetReviewParams = {
-    storeId: storeId ?? '',
-    type: activeTag,
+  const params = {
+    storeId: storeId ?? 0,
   };
 
   const { data, fetchNextPage, isLoading, hasNextPage } =
-    useInfiniteReview(params);
+    useGetStoreFeedList(params);
   const { mutate: deleteLog } = useDeleteLog();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleTagClick = (tag: 'REVISITED' | 'PHOTO' | null) => () => {
     setActiveTag((prevTag) => (prevTag === tag ? null : tag));
   };
@@ -44,10 +40,12 @@ export default function Reviews() {
     threshold: 0.5,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDeleteLog = (id: number) => {
     deleteLog(id);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const formatTagClassName = (tag: 'REVISITED' | 'PHOTO') => {
     return cn({
       'bg-gray-500 text-white': activeTag === tag,
@@ -59,7 +57,7 @@ export default function Reviews() {
     <div>
       <div className="px-[16px]  pb-[8px]">
         <SectionTitle>방문기록</SectionTitle>
-        <div className="flex gap-[8px]">
+        {/* <div className="flex gap-[8px]">
           <Tag
             size="large"
             className={formatTagClassName('REVISITED')}
@@ -74,27 +72,37 @@ export default function Reviews() {
           >
             사진 리뷰만
           </Tag>
-        </div>
+        </div> */}
       </div>
 
       <div className="mx-[16px]">
         {data && !data[0].data.empty ? (
           data?.map((page) => {
-            return page.data.content.map((item) => {
+            return page.data.content.map((feed) => {
               return (
-                <StoreDetailLog
-                  key={item.reviewId}
-                  date={item.visitedAt}
-                  score={item.rating}
-                  log={item.description}
-                  storeImgUrl={item.imageUrl}
-                  name={item.nickName}
-                  visitNum={item.visitTimes}
-                  hasDeleteOption={item.isMine}
-                  hasReportOption={!item.isMine}
-                  isLast={true}
-                  onClick={() => handleDeleteLog(item.reviewId)}
-                />
+                <Feed key={feed.feedId}>
+                  <Feed.Date>{feed.createdAt}</Feed.Date>
+                  <Feed.Profile
+                    userId={feed.userId}
+                    src={feed.profileImageUrl}
+                    nickName={feed.nickname}
+                    alt={`${feed.userId} 프로필 이미지`}
+                    isMyFeed={feed.isMine}
+                    isFollowed={feed.isFollowed}
+                  />
+                  <Feed.Image
+                    src={feed.feedImg}
+                    alt={`${feed.feedStoreResponse.storeName} 이미지`}
+                    storeName={feed.feedStoreResponse.storeName}
+                    storeCategory={feed.feedStoreResponse.kakaoCategoryName}
+                    storeLocation={feed.feedStoreResponse.address}
+                    storeResponse={feed.feedStoreResponse}
+                  />
+                  <Feed.Description
+                    id={feed.feedId}
+                    description={feed.description}
+                  />
+                </Feed>
               );
             });
           })

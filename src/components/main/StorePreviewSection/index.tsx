@@ -14,7 +14,7 @@ export interface SearchedPinFromSearchParams {
   position: CoordinateWithIds;
   storeName: string;
   isBookmarked: boolean;
-  totalRevisitedCount: number;
+  totalRevisitedCnt: number;
   address: string;
   categoryType: string;
   distance: number;
@@ -51,7 +51,7 @@ function StorePreviewSection({
     url.searchParams.set('lng', String(lng));
     url.searchParams.set(
       'myRevisitedCount',
-      String(storeData?.myRevisitedCount ?? 0),
+      String(storeData?.userFeedCnt ?? 0),
     );
     switchUrl(url);
 
@@ -62,8 +62,8 @@ function StorePreviewSection({
     <>
       <div className="w-full h-fit pb-[12px]">
         <StoreInformation
-          categoryName={
-            storeData?.categoryName ??
+          kakaoCategoryName={
+            storeData?.kakaoCategoryName ??
             searchedPinFromSearchParams?.kakaoCategoryName ??
             ''
           }
@@ -74,8 +74,8 @@ function StorePreviewSection({
             storeData?.address ?? searchedPinFromSearchParams?.address ?? ''
           }
           totalRating={storeData?.totalRating ?? 0}
-          totalReviewCount={storeData?.totalReviewCount ?? 0}
-          myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+          totalReviewCount={storeData?.totalFeedCnt ?? 0}
+          myRevisitedCount={storeData?.userFeedCnt ?? 0}
         />
         {storeData && storeData.feedImageUrls.length > 0 && (
           <StoreLogPhotoPreview feedImageUrls={storeData?.feedImageUrls} />
@@ -88,7 +88,7 @@ function StorePreviewSection({
               ''
             }
             storeId={storeData?.storeId ?? null}
-            myRevisitedCount={storeData?.myRevisitedCount ?? 0}
+            myRevisitedCount={storeData?.userFeedCnt ?? 0}
             searchedPinFromSearchParams={searchedPinFromSearchParams}
           />
           {storeData && (
