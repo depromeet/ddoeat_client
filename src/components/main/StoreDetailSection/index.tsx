@@ -39,8 +39,6 @@ export default function StoreDetailSection({
     storeId: storeId ?? 0,
   });
 
-  console.log(storeFeedListData);
-
   const [isScrollDown, setIsScrollDown] = useState(false);
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
