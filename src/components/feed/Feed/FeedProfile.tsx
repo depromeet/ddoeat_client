@@ -3,6 +3,7 @@
 import Image, { ImageProps } from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import { usePatchFollow } from '@hooks/api/usePatchFollow';
 import DefaultProfileImage from 'public/assets/image/default_profile.png';
 
 interface FeedProfileProps extends Omit<ImageProps, 'id'> {
@@ -22,17 +23,14 @@ export default function FeedProfile({
   ...props
 }: FeedProfileProps) {
   const { push } = useRouter();
+  const { mutate: patchFollow } = usePatchFollow();
 
   const handleClickProfile = () => {
     push(`/profile/${userId}`);
   };
 
   const handleClickFollowButton = () => {
-    if (isFollowed) {
-      console.log('팔로우');
-    } else {
-      console.log('팔로우 취소');
-    }
+    patchFollow(userId);
   };
 
   return (
