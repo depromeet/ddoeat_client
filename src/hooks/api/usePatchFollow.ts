@@ -26,6 +26,10 @@ export const usePatchFollow = (): UseMutationResult<
         queryKey: ['get-following-list'],
         refetchType: 'all',
       });
+      queryClient.invalidateQueries({
+        queryKey: ['get-feed-list', {}],
+        refetchType: 'all',
+      });
       if (userId !== undefined) {
         queryClient.invalidateQueries({
           queryKey: ['get-userProfile', userId],
