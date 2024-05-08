@@ -43,11 +43,11 @@ export default function Page() {
                     isFollowed={feed.isFollowed}
                   />
                   <Feed.Image
-                    src={feed.feedImg}
-                    alt={`${feed.feedStoreResponse.storeName} 이미지`}
-                    storeName={feed.feedStoreResponse.storeName}
-                    storeCategory={feed.feedStoreResponse.kakaoCategoryName}
-                    storeLocation={feed.feedStoreResponse.address}
+                    src={feed.feedImageUrl}
+                    alt={`${feed.feedStoreResponse?.storeName} 이미지`}
+                    storeName={feed.feedStoreResponse?.storeName}
+                    storeCategory={feed.feedStoreResponse?.kakaoCategoryName}
+                    storeLocation={feed.feedStoreResponse?.address}
                     storeResponse={feed.feedStoreResponse}
                   />
                   <Feed.Description

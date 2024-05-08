@@ -24,11 +24,11 @@ export default function Page() {
             isFollowed={feedDetailData.isFollowed}
           />
           <Feed.Image
-            src={feedDetailData.feedImg}
+            src={feedDetailData.feedImageUrl}
             alt="피드 음식 사진"
-            storeName={feedDetailData.feedStoreResponse.storeName}
-            storeCategory={feedDetailData.feedStoreResponse.kakaoCategoryName}
-            storeLocation={feedDetailData.feedStoreResponse.address}
+            storeName={feedDetailData.feedStoreResponse?.storeName}
+            storeCategory={feedDetailData.feedStoreResponse?.kakaoCategoryName}
+            storeLocation={feedDetailData.feedStoreResponse?.address}
             storeResponse={feedDetailData.feedStoreResponse}
           />
           <Feed.DetailDescription description={feedDetailData.description} />
