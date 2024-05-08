@@ -57,22 +57,6 @@ export default function Reviews() {
     <div>
       <div className="px-[16px]  pb-[8px]">
         <SectionTitle>방문기록</SectionTitle>
-        {/* <div className="flex gap-[8px]">
-          <Tag
-            size="large"
-            className={formatTagClassName('REVISITED')}
-            onClick={handleTagClick('REVISITED')}
-          >
-            재방문만
-          </Tag>
-          <Tag
-            size="large"
-            className={formatTagClassName('PHOTO')}
-            onClick={handleTagClick('PHOTO')}
-          >
-            사진 리뷰만
-          </Tag>
-        </div> */}
       </div>
 
       <div className="mx-[16px]">
@@ -91,11 +75,11 @@ export default function Reviews() {
                     isFollowed={feed.isFollowed}
                   />
                   <Feed.Image
-                    src={feed.feedImg}
-                    alt={`${feed.feedStoreResponse.storeName} 이미지`}
-                    storeName={feed.feedStoreResponse.storeName}
-                    storeCategory={feed.feedStoreResponse.kakaoCategoryName}
-                    storeLocation={feed.feedStoreResponse.address}
+                    src={feed.feedImageUrl}
+                    alt={`${feed.feedId} 이미지`}
+                    storeName={feed.feedStoreResponse?.storeName}
+                    storeCategory={feed.feedStoreResponse?.kakaoCategoryName}
+                    storeLocation={feed.feedStoreResponse?.address}
                     storeResponse={feed.feedStoreResponse}
                   />
                   <Feed.Description

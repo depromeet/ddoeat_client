@@ -7,10 +7,10 @@ import { FeedStore } from 'src/types/feed';
 import { convertObjectToQueryString } from '@utils/parser';
 
 interface FeedImageProps extends ImageProps {
-  storeName: string;
+  storeName?: string;
   storeCategory?: string;
   storeLocation?: string;
-  storeResponse: FeedStore;
+  storeResponse?: FeedStore;
 }
 
 export default function FeedImage({
@@ -26,8 +26,10 @@ export default function FeedImage({
   const { push } = useRouter();
 
   const handleClickStoreInfoButton = () => {
-    const queryString = convertObjectToQueryString(storeResponse);
-    push(`/?type=search&${queryString}&bottomSheetStatus=show`);
+    if (storeResponse) {
+      const queryString = convertObjectToQueryString(storeResponse);
+      push(`/?type=search&${queryString}&bottomSheetStatus=show`);
+    }
   };
 
   return (
@@ -37,20 +39,22 @@ export default function FeedImage({
         className,
       )}
     >
-      <div className="flex justify-between items-center absolute p-4 z-above top-0 left-0 right-0 bg-top-fade">
-        <div className="flex flex-col gap-[4px]">
-          <p className="text-gray-100 body-16-bold">{storeName}</p>
-          <div className="flex items-center text-gray-300 caption-12-regular">
-            <p className="after:inline-block after:w-[1px] after:h-[10px] after:align-middle after:bg-gray-300 after:mx-[4px]">
-              {storeCategory}
-            </p>
-            <p>{storeLocation}</p>
+      {storeResponse && (
+        <div className="flex justify-between items-center absolute p-4 z-above top-0 left-0 right-0 bg-top-fade">
+          <div className="flex flex-col gap-[4px]">
+            <p className="text-gray-100 body-16-bold">{storeName}</p>
+            <div className="flex items-center text-gray-300 caption-12-regular">
+              <p className="after:inline-block after:w-[1px] after:h-[10px] after:align-middle after:bg-gray-300 after:mx-[4px]">
+                {storeCategory}
+              </p>
+              <p>{storeLocation}</p>
+            </div>
           </div>
+          <button onClick={handleClickStoreInfoButton}>
+            <RightArrowLogo />
+          </button>
         </div>
-        <button onClick={handleClickStoreInfoButton}>
-          <RightArrowLogo />
-        </button>
-      </div>
+      )}
       <Image
         src={src}
         alt={alt}

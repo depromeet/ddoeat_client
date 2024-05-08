@@ -18,10 +18,10 @@ export interface Feed {
   nickname: string;
   feedId: number;
   description: string;
-  feedImg: string;
+  feedImageUrl: string;
   createdAt: string;
   isFollowed: boolean;
   isMine: boolean;
-  feedStoreResponse: FeedStore;
+  feedStoreResponse?: FeedStore;
   rating: number;
 }
